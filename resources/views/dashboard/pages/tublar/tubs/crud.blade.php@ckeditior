@@ -1,0 +1,112 @@
+@php
+    use App\Helper\TranslationHelper;
+@endphp
+@extends('dashboard.layouts.master')
+@section('title', TranslationHelper::translate(ucwords($type.' '.$examType)))
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/ckeditor/samples/css/samples.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('dashboard/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css')}}">
+@endsection
+
+@section('content')
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <x-dashboard.layouts.breadcrumb
+                    title1="{{ TranslationHelper::translate($type.'_'.ucwords($examType)) }}"
+                    title2="{{TranslationHelper::translate('tubs') }}" route=""
+                    title3="{{ TranslationHelper::translate($type.' '.ucwords($examType))  }}"/>
+                <div class="card-body">
+                    <div id="customerList">
+                        <x-dashboard.layouts.error-verify errors="{{$errors}}"></x-dashboard.layouts.error-verify>
+                        <form class="tablelist-form" action="{{ $action }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method($method)
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xxl-6">
+                                        {{-- <h5 class="mb-3">{{ TranslationHelper::translate('Dashboard/Tublar/tubs.'.$type.$examType."Details") }}</h5> --}}
+                                        <div class="card">
+                                            <div class="border">
+                                                <ul class="nav nav-pills custom-hover-nav-tabs">
+                                                    <li class="nav-item">
+                                                        <a href="#custom-hover-customere" data-bs-toggle="tab"
+                                                           aria-expanded="false" class="nav-link active">
+                                                            <i class="bx bx-notepad  nav-icon nav-tab-position"></i>
+                                                            <h5 class="nav-titl nav-tab-position m-0">{{ TranslationHelper::translate(ucwords('header')) }}</h5>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="#custom-hover-reviews" data-bs-toggle="tab"
+                                                           aria-expanded="false" class="nav-link">
+                                                            <i class="bx bx-align-justify nav-icon nav-tab-position"></i>
+                                                            <h5 class="nav-titl nav-tab-position m-0">{{ TranslationHelper::translate(ucwords('description')) }}</h5>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="tab-content text-muted">
+                                                    <div class="tab-pane show active" id="custom-hover-customere">
+                                                        <h6 style="text-align:center">{{ TranslationHelper::translate(ucwords($examType.' '.'Content')) }}</h6>
+                                                        <div class="">
+                                                            @include('dashboard.pages.tublar.tubs.modal.content')
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name='type' value="{{ $examType }}" required/>
+                                                    <div class="tab-pane" id="custom-hover-reviews">
+                                                        <h6 style="text-align:center">{{ TranslationHelper::translate(ucwords($examType.' '.'Table Description')) }}</h6>
+                                                        <div class="" style="width:100%">
+                                                            <div>
+                                                     <textarea name="description" id="editor" rows="50">
+                                                        {!! $tubs->description ?? '' !!}</textarea>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card-body -->
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
+                                    <div class="modal-footer">
+                                        <div class="hstack gap-2 justify-content-end">
+                                            <a type="button" style="color: black; font-weight:bold;"
+                                               class="btn btn-danger"
+                                               href="{{ route( 'tubs.reports.index', [ 'type' =>$examType ] ) }}">{{
+                                                    TranslationHelper::translate(ucwords('close')) }}</a>
+                                            <button style="color: black; font-weight:bold;" type="submit"
+                                                    class="btn btn-success" id="add-btn">{{
+                                                    TranslationHelper::translate(ucwords('save')) }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- end preloader-menu -->
+
+@endsection
+
+@section('js')
+    <script src="{{ asset('dashboard/assets/ckeditor/autoinstall.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/ckeditor/samples/js/sample.js') }}"></script>
+    <script src="{{asset('dashboard/assets/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{ asset('dashboard/layouts/formRepeater/js/js.js') }}"></script>
+    <script src="{{asset('dashboard/layouts/formRepeater/js/jquery.min.js')}}"></script>
+    <script src="{{asset('dashboard/layouts/formRepeater/js/jquery.repeater.min.js')}}"></script>
+    @if (Session::has('message'))
+        <script>
+            toastr.success("{{ Session::get('message') }}");
+        </script>
+    @endif
+@endsection

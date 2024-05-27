@@ -1,0 +1,3 @@
+                     <x-form.textarea_label class="col-12" span="enter Description" placeholder="Enter Report Description" value="{{ $examination->description ?? '' }}" label="Description :" name="description" id="description" rows='5' required />
+                     <x-form.input_label class="col-6" value="{{ $examination->swl ?? '' }}" placeholder="Examination SWL" label=" Enter Examination SWL  :" type="text" name="swl" id="swl" />
+                     <x-form.input_label class="col-6" value="{{ $examination->thorough_type ?? '' }}" placeholder="Examination Thorough Type" label=" Enter Thorough Examination Type  :" type="text" name="thorough_type" id="thorough_type" required />

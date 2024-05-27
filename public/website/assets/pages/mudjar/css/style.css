@@ -1,0 +1,102 @@
+.info-table {
+        font-size: 70%;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2%;
+    }
+
+    .info-table1 {
+        font-size: 70%;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2%;
+    }
+
+    .fixedBottom {
+        position: fixed;
+        bottom: 10%;
+        width: 100%;
+    }
+
+    .info-table1 td {
+        padding: 2px;
+        border: 1px solid black;
+        backdrop-filter: blur(5px);
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    .table1-label {
+        width: 30%;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .table1-content {
+        width: 65%;
+        text-align: center;
+    }
+
+    .centered {
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        padding-bottom: 4px;
+    }
+
+    .left {
+        position: fixed;
+        left: 0;
+        text-align: left;
+    }
+
+    .right {
+        position: fixed;
+        right: 0;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .frameless-table {
+        border-collapse: collapse;
+        border: none;
+        width: 100%;
+    }
+
+    .frameless-table td {
+        border: none;
+        padding: 0;
+    }
+
+    /*custom table */
+    .custom_row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+
+    .custom_column {
+        float: left;
+        width: 80%;
+        padding: 4px;
+    }
+
+    .col {
+        float: left;
+        width: 18%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .custom_row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }

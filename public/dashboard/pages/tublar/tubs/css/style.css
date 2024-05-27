@@ -1,0 +1,103 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px auto;
+}
+
+.left {
+    text-align: left;
+}
+
+.page_break {
+    page-break-before: always;
+}
+
+.center {
+    text-align: center;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: -30px;
+    text-align: center;
+    width: 30%;
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.table-desc {
+    font-size: 80%;
+    width: 100%;
+    margin-top: 1%;
+    overflow-x: auto;
+}
+
+.table-desc th,
+.table-desc td {
+    width: auto;
+    height: 0px;
+    max-width: 5px;
+    padding: 0px;
+    border: 1px solid black;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.frameless-table {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+}
+
+.frameless-table td {
+    border: none;
+    font-size: 80%;
+    padding: 0;
+}
+
+.abb {
+    font-size: 80%;
+    height: 0px;
+    margin-top: 1%;
+    text-align: left;
+    padding: 1px;
+    border: 0px solid black;
+}
+
+.abb-tx {
+    width: 1px;
+}
+
+.abb-ty {
+    width: 35px;
+}
+
+.contentTable {
+    font-size: 80%;
+    width: 100%;
+    margin-top: 1%;
+    overflow-x: auto;
+}
+
+.contentTable th {
+    text-transform: capitalize;
+    text-align: left;
+    width: 12%;
+}
+
+.contentTable td {
+    text-transform: capitalize;
+    text-align: left;
+    width: 23%;
+}
+
+.table-desc .description {
+    font-size: 100%;
+}

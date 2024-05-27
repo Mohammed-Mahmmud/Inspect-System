@@ -1,0 +1,102 @@
+.info-table1 {
+    font-size: 70%;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+.info-table1 td {
+    padding: 4px;
+    border: 1px solid black;
+}
+
+.table1-label {
+    width: 35%;
+    text-align: left;
+    font-weight: bold;
+}
+
+.table1-content {
+    width: 65%;
+    text-align: center;
+}
+
+.image_table {
+
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.centered {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 4px;
+}
+
+.frameless {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.frameless-table {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+}
+
+.frameless-table td {
+    border: none;
+    padding: 0;
+}
+
+/*custom table */
+.custom_row {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.custom_column {
+    float: left;
+    width: 80%;
+    padding: 4px;
+}
+
+.col {
+    float: left;
+    width: 18%;
+    padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.custom_row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}

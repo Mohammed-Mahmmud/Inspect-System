@@ -4,32 +4,18 @@ table {
     margin: 10px auto;
 }
 
-.left {
-    text-align: left;
-}
-
-.page_break {
-    page-break-before: always;
-}
-
 .center {
-    text-align: center;
+    text-align: center !important;
 }
 
 th,
 td {
     border: 1px solid black;
-    padding: -30px;
+    padding: 5px;
+    /* Adjust padding as needed */
     text-align: center;
-    width: 30%;
-}
-
-.center {
-    text-align: center;
-}
-
-.left {
-    text-align: left;
+    width: auto;
+    /* Ensure width is set to auto */
 }
 
 .table-desc {
@@ -89,15 +75,21 @@ td {
 .contentTable th {
     text-transform: capitalize;
     text-align: left;
-    width: 12%;
+    width: auto !important;
+    /* Ensure th width is set to auto */
 }
 
 .contentTable td {
     text-transform: capitalize;
     text-align: left;
-    width: 23%;
+    width: auto !important;
+    /* Ensure td width is set to auto */
 }
 
 .table-desc .description {
     font-size: 100%;
+}
+
+.hidden {
+    border: none;
 }

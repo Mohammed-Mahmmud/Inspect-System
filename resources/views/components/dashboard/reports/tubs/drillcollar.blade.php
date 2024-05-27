@@ -1,3 +1,3 @@
 <div>
-
- </div>
+{{ dd('drillcollar') }}
+</div>

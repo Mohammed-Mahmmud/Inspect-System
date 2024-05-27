@@ -33,9 +33,9 @@
                                             class="btn btn-success" id="add-btn">{{
                                                 TranslationHelper::translate(ucwords('save')) }}</button>
                                 </div>
-                            </div>
+                            </div><br>
                         </form>
-                    </div>
+                        </div>
                 </div>
             </div>
             <!-- end row -->

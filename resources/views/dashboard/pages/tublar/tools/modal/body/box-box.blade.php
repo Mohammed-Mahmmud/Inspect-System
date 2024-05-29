@@ -45,15 +45,11 @@
             <x-form.input_label class="col-4" placeholder="Enter Description" label="Description" value="" type="text" name="desc[0][description]" id="desc" />
             <x-form.input_label class="col-2" placeholder="Enter box1 conn" label="box1 conn" value="" type="text" name="desc[0][box1_conn]" id="box1_conn" />
             <x-form.input_label class="col-2" placeholder="Enter box2 conn" label="box2 conn" value="" type="text" name="desc[0][box2_conn]" id="box2_conn" />
-            
+
             <x-dashboard.reports.tools.extensions  :name="'desc[0][box1_cond]'" class='col-4' label="box1 cond" />
             <x-dashboard.reports.tools.extensions  :name="'desc[0][box2_cond]'" class='col-4' label="box2 cond" />
             <x-dashboard.reports.tools.extensions  :name="'desc[0][body_cond]'" class='col-4' label="body cond" />
-          
-            {{--  <x-form.input_label class="col-2" placeholder="Enter box1 cond" label="box1 cond" value="" type="text" name="desc[0][box1_cond]" id="box1_cond" />  --}}
-            {{--  <x-form.input_label class="col-2" placeholder="Enter box2 cond" label="box2 cond" value="" type="text" name="desc[0][box2_cond]" id="box2_cond" />  --}}
-            {{--  <x-form.input_label class="col-2" placeholder="Enter body cond" label="body cond" value="" type="text" name="desc[0][body_cond]" id="body_cond" />  --}}
-          
+
             <x-form.input_label class="col-2" placeholder="Enter box1 od " label="box1 od " value="" type="text" name="desc[0][box1_od]" id="box1_od" />
             <x-form.input_label class="col-2" placeholder="Enter box1 cb Diameter" label="box1 cb Diameter" value="" type="text" name="desc[0][box1_cb]" id="box1_cb" />
             <x-form.input_label class="col-2" placeholder="Enter box1 bb Diameter" label="box1 bb Diameter" value="" type="text" name="desc[0][box1_bb_diameter]" id="box1_bb_diameter" />

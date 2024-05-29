@@ -49,7 +49,7 @@ td {
 }
 
 .abb {
-    font-size: 80%;
+    font-size: 60%;
     height: 0px;
     margin-top: 1%;
     text-align: left;
@@ -58,7 +58,7 @@ td {
 }
 
 .abb-tx {
-    width: 1px;
+    width: 1px !important;
 }
 
 .abb-ty {
@@ -92,4 +92,20 @@ td {
 
 .hidden {
     border: none;
+}
+
+
+.reportTable {
+    font-size: 70%;
+    width: 100%;
+    margin-top: 1%;
+    overflow-x: auto;
+}
+
+.reportTable th,
+.reportTable td {
+    text-transform: capitalize;
+    text-align: left;
+    width: auto !important;
+    /* Ensure th width is set to auto */
 }

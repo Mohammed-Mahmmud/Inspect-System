@@ -5,16 +5,16 @@
 <table style="margin-top:-35px;">
     <tbody>
     <tr>
-        <td style="text-align: center;">
-            <img src="{{ $image }}" alt="" height="100" width="80%">
+        <td style="text-align: center; width: 30%">
+            <img src="{{ $image }}" alt="" height="80" width="100%">
         </td>
-        <td>
-            <h4 style="text-align: center; font-size: 100%">{{ ucwords($title) }}
+        <td style="width: 35%">
+            <h4 style="text-align: center; font-size: 100%;">{{ ucwords($title) }}
                 <br>
                 {{ $reportTitle }}
             </h4>
         </td>
-        <td style="font-size: 70% " width="auto">
+        <td style="font-size: 70%; width: 35%" >
            <div> {{ ucwords($address) }}- Phone: {{ $phone1 }}, </div>
             <div>{{ $phone2 }} - Emails: khaled.soliman@stc-eg.com, abbas@stc-eg.com</div>
             <div>Website: www.stc-eg.com   -   Commercial Registration No: 76451</div>

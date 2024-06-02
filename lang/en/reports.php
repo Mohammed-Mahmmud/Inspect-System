@@ -155,4 +155,13 @@
   'Inspector Signature :' => 'Inspector Signature :',
   'Inspector :' => 'Inspector :',
   'Supervisor :' => 'Supervisor :',
+  ' Comns' => ' Comns',
+  'remove' => 'Remove',
+  'close' => 'Close',
+  'delete_message' => 'Delete message',
+  'customer' => 'Customer',
+  'Edit Drillpipe' => 'Edit Drillpipe',
+  'Edit_Drillpipe' => 'Edit Drillpipe',
+  'Edit Drillcollar' => 'Edit Drillcollar',
+  'Edit_Drillcollar' => 'Edit Drillcollar',
 );

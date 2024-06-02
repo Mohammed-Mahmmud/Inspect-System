@@ -20,40 +20,40 @@ class TubsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request )
-     {
+    public function index(Request $request)
+    {
         try {
-             $tubs= Tubs::where( 'type', $request->type )->paginate( '20' )->withQueryString();
+            $tubs = Tubs::where('type', $request->type)->paginate('20')->withQueryString();
             $orders = Order::get();
             $type = $request->type;
-
-            return view( 'dashboard.pages.tublar.tubs.view', compact( 'tubs', 'orders', 'type' ) );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            return view('dashboard.pages.tublar.tubs.view', compact('tubs', 'orders', 'type'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create( Request $request ) {
+    public function create(Request $request)
+    {
         try {
-            return view( 'dashboard.pages.tublar.tubs.crud', new TubsViewModel( $request->type ) );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            return view('dashboard.pages.tublar.tubs.crud', new TubsViewModel($request->type));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store( TubsStoreRequest $request ) {
+    public function store(TubsStoreRequest $request)
+    {
         try {
-            dd($request->all());
-            app( StoreTubsAction::class )->handle( $request->validated() );
-            return redirect()->route( 'tubs.reports.create', [ 'type' => $request->type ] );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            app(StoreTubsAction::class)->handle($request->validated());
+            return redirect()->route('tubs.reports.create', ['type' => $request->type]);
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -61,13 +61,14 @@ class TubsController extends Controller
      * Display the specified resource.
      */
 
-    public function show( string $id ) {
+    public function show(string $id)
+    {
         try {
-            $tubs = Tubs::findorfail( $id );
-            $pdf = PDF::loadView( 'website.reports.pages.Tublar.Tubs.tubs', compact( 'tubs' ) )->setPaper( 'a4', 'landscape' );
-            return $pdf->stream( $tubs->report_num.'.pdf' );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            $tubs = Tubs::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.tubs', compact('tubs'))->setPaper('a4', 'landscape');
+            return $pdf->stream($tubs->report_num . '.pdf');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -75,33 +76,36 @@ class TubsController extends Controller
      * Show the form for editing the specified resource.
      */
 
-    public function edit( string $id ) {
+    public function edit(string $id)
+    {
         try {
-            $tubs = Tubs::findorfail( $id );
-            return view( 'dashboard.pages.tublar.tubs.crud', new TubsViewModel( $tubs->type, $tubs ) );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            $tubs = Tubs::FindOrFail($id);
+            return view('dashboard.pages.tublar.tubs.crud', new TubsViewModel($tubs->type, $tubs));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function repeat( string $id ) {
+    public function repeat(string $id)
+    {
         try {
-            $tubs = Tubs::findorfail( $id );
-            return view( 'dashboard.pages.tublar.tubs.crud', new TubsViewModel( $tubs->type, $tubs ) );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            $tubs = Tubs::FindOrFail($id);
+            return view('dashboard.pages.tublar.tubs.crud', new TubsViewModel($tubs->type, $tubs));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
     /**
      * Update the specified resource in storage.
      */
 
-    public function update( TubsUpdateRequest $request, string $id ) {
+    public function update(TubsUpdateRequest $request, string $id)
+    {
         try {
-            $tubs = Tubs::findorfail( $id );
-            app( UpdateTubsAction::class )->handle( $tubs, $request->validated() );
-            return redirect()->route( 'tubs.reports.index', [ 'type' => $tubs->type ] );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            $tubs = Tubs::FindOrFail($id);
+            app(UpdateTubsAction::class)->handle($tubs, $request->validated());
+            return redirect()->route('tubs.reports.index', ['type' => $tubs->type]);
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -109,25 +113,25 @@ class TubsController extends Controller
      * Remove the specified resource from storage.
      */
 
-    public function destroy( string $id ) {
+    public function destroy(string $id)
+    {
         try {
-            $tubs = Tubs::findorfail( $id );
-            app( DeleteTubsAction::class )->handle( $tubs );
-            return redirect()->route( 'tubs.reports.index', [ 'type' => $tubs->type ] );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            $tubs = Tubs::FindOrFail($id);
+            app(DeleteTubsAction::class)->handle($tubs);
+            return redirect()->route('tubs.reports.index', ['type' => $tubs->type]);
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function download( $id ) {
+    public function download($id)
+    {
         try {
-            $tubs = Tubs::findorfail( $id );
-            $pdf = PDF::loadView( 'website.reports.pages.Tublar.Tubs.tubs', compact( 'tubs' ) )->setPaper( 'a4', 'landscape' );
-            return $pdf->download( $tubs->report_num.'.pdf' );
-        } catch ( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            $tubs = Tubs::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.tubs', compact('tubs'))->setPaper('a4', 'landscape');
+            return $pdf->download($tubs->report_num . '.pdf');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-
 }

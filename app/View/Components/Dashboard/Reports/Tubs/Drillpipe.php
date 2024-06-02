@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Dashboard\Reports\Tubs;
 
+use App\Models\Dashboard\Tublar\Tubs\Tubs;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -11,9 +12,11 @@ class Drillpipe extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $count;
+    public function __construct(public Tubs $tubs)
     {
-        //
+        $this->tubs = $tubs;
+        $this->count = $this->tubs->getDesc()->count() > 0 ? $this->tubs->getDesc()->count() : 10;
     }
 
     /**

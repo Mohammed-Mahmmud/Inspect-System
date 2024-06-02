@@ -92,8 +92,8 @@ td {
 
 .hidden {
     border: none;
+    border-collapse: collapse;
 }
-
 
 .reportTable {
     font-size: 70%;

@@ -22,7 +22,25 @@ class TubsUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'customer' => ['required'],
+            'order' => ['nullable'],
+            'date' => ['required'],
+            'location' => ['nullable'],
+            'order_id' => ['required'],
+            'magnetizing' => ['required'],
+            'magnetic_particles' => ['required'],
+            'other_methods' => ['required'],
+            'specification' => ['required'],
+            'equipment' => ['required'],
+            'tool_desc' => ['required'],
+            'desc' => ['required'],
+            'remarks' => ['nullable'],
+            'supervisor' => ['nullable'],
+            'type' => ['required'],
+            'user_id' => ['required'],
+            'conn_inspected' => ['nullable'],
+            'pin_conn' => ['nullable'],
+            'box_conn' => ['nullable'],
         ];
     }
 }

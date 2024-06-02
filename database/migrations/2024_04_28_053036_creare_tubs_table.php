@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,27 +14,30 @@ return new class extends Migration {
         Schema::create('tubs', function (Blueprint $table) {
             $table->id();
             $table->string('report_num')->nullable();
-            $table->string('order_num')->naullable();
+            $table->string('customer')->nullable();
+            $table->string('order')->nullable();
+            $table->string('location')->nullable();
+            $table->string('order_num')->nullable();
             $table->date('date')->nullable();
-            $table->longText('desc')->naullable();
+            $table->longText('remarks')->nullable();
             $table->string('type');
-            $table->json('methods')->naullable();
-            $table->json('magnetic_particles')->naullable();
-            $table->json('equipment')->naullable();
-            $table->string('remarks')->naullable();
-            $table->string('supervisor')->naullable();
-            $table->string('pin_conn')->naullable();
-            $table->string('box_conn')->naullable();
-            $table->integer('accepted_conn')->naullable();
-            $table->integer('defective_conn')->naullable();
-            $table->integer('repaired_conn')->naullable();
-            $table->integer('total_conn')->naullable();
+            $table->json('magnetizing');
+            $table->json('magnetic_particles');
+            $table->json('other_methods');
+            $table->json('specification');
+            $table->json('equipment');
+            $table->longText('tool_desc')->nullable();
+            $table->string('supervisor')->nullable();
+            $table->string('pin_conn')->nullable();
+            $table->string('box_conn')->nullable();
+            $table->json('conn_inspected')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('accept')->naullable();
+            $table->unsignedBigInteger('accept')->nullable();
             $table->unsignedBigInteger('order_id');
             $table->foreign('accept')->references('id')->on('acceptance')->onUpdate('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 

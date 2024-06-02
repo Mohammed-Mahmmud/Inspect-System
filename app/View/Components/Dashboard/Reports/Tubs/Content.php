@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Dashboard\Reports\Tubs;
 
-use App\Models\Dashboard\Order;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -17,7 +16,7 @@ class Content extends Component
     public $examType;
     public $orders;
     public $accept;
-    public function __construct($type,$examType,$tubs,$orders,$accept)
+    public function __construct($type, $examType, $tubs, $orders, $accept)
     {
         $this->type = $type;
         $this->examType = $examType;

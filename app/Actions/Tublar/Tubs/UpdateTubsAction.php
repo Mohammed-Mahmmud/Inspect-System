@@ -1,33 +1,37 @@
 <?php
+
 namespace App\Actions\Tublar\Tubs;
 
-use App\Models\Dashboard\Tublar\Tools\Tools;
+use App\Models\Dashboard\Tublar\Tubs\tubs;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 
 class UpdateTubsAction
- {
-     public function handle( Tools $tools, array $data )
-     {
-        $tools->update( array_merge( Arr::except( $data, [ 'desc','methods' ] ), [
-            'user_id' => Auth::user()->id,
-            'methods' => json_encode( $data[ 'methods' ] ),
-        ] ) );
-        if(!empty($data['desc'])){
-            $tools->getDesc()->delete();
-            foreach($data['desc'] as $item){
-                $tools->getDesc()->create([
+{
+    public function handle(tubs $tubs, array $data)
+    {
+        // dd($data);
+        $exceptedItems = ['magnetizing', 'magnetic_particles', 'other_methods', 'specification', 'equipment', 'desc', 'conn_inspected'];
+        $methods = [];
+        foreach (array_diff($exceptedItems, ['desc']) as $method) {
+            if (isset($data[$method])) {
+                $methods[$method] = json_encode($data[$method]);
+            }
+        }
+        $tubs->update(array_merge(Arr::except($data, $exceptedItems), $methods));
+        if (!empty($data['desc'])) {
+            foreach ($data['desc'] as $item) {
+                $tubs->getDesc()->create([
                     'description' => json_encode($item),
                 ]);
             }
         }
-        $toolsCount = Tools::where( 'order_id', $tools->order_id )->where( 'type', $data[ 'type' ] )->count();
-        $tools->update( [
-            'report_num' =>  $tools->getOrders->number.'-'.strtoupper( $tools->type ).'-'.( $toolsCount ),
-        ] );
-        toastr( trans( 'Dashboard/toastr.info' ), 'info', trans( 'Dashboard/toastr.updated' ) );
-        return $tools;
 
+        $tubsCount = tubs::where('order_id', $tubs->order_id)->where('type', $data['type'])->count();
+        $tubs->update([
+            'report_num' =>  $tubs->getOrders->number . '-' . strtoupper($tubs->type) . '-' . ($tubsCount),
+        ]);
+        toastr(trans('Dashboard/toastr.info'), 'info', trans('Dashboard/toastr.updated'));
+        return $tubs;
     }
 }

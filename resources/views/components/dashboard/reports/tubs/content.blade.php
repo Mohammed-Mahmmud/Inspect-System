@@ -5,7 +5,7 @@
             <x-dashboard.reports.layouts.header reportTitle="{{ ucwords('tublar inspection system') }}" />
             <div class="center">
                 <b>{{ strtoupper($examType) . ucwords(' subs Inspection Reports') }}</b><br>
-                <img src="{{ asset('dashboard/pages/tublar/tubs/' . $examType . '.png') }}">
+                <img src="{{ asset('dashboard/pages/tublar/tubs/' . $examType . '.png') }}" width="50%">
             </div>
             <input type='hidden' name='type' value='{{ $examType }}' required>
             <input type='hidden' name='user_id' value='{{ Auth::user()->id }}' required>

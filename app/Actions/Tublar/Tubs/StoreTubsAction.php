@@ -11,7 +11,7 @@ class StoreTubsAction
 {
     public function handle(array $data)
     {
-        $exceptedItems = ['magnetizing', 'magnetic_particles', 'other_methods', 'specification', 'equipment', 'desc', 'conn_inspected'];
+        $exceptedItems = ['magnetizing', 'magnetic_particles', 'other_methods', 'specification', 'equipment', 'desc', 'conn_inspected', 'drill_pipe_details'];
         $methods = [];
         foreach (array_diff($exceptedItems, ['desc']) as $method) {
             if (isset($data[$method])) {

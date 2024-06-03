@@ -74,9 +74,9 @@ td {
 
 .contentTable th {
     text-transform: capitalize;
-    text-align: left;
+    text-align: center;
     width: auto !important;
-    /* Ensure th width is set to auto */
+    background-color: azure;
 }
 
 .contentTable td {

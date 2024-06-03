@@ -41,6 +41,7 @@ class TubsUpdateRequest extends FormRequest
             'conn_inspected' => ['nullable'],
             'pin_conn' => ['nullable'],
             'box_conn' => ['nullable'],
+            'drill_pipe_details' => ['nullable'],
         ];
     }
 }

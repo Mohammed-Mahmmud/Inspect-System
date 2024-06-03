@@ -9,13 +9,13 @@
 .table-desc {
     font-size: 68%;
     width: 100%;
-    margin-top: 1%;
+    margin-top: 0%;
     overflow-x: auto;
 }
 
 .frameLess-table {
     position: fixed !important;
-    bottom: 10% !important;
+    bottom: 11% !important;
     border-collapse: collapse;
     width: 100%;
 }
@@ -56,16 +56,18 @@
 }
 
 .contentTable {
-    font-size: 69%;
+    font-size: 65%;
     width: 100%;
-    margin-top: 1%;
+    margin-top: 0%;
     overflow-x: auto;
 }
 
 .contentTable th {
+    height: 0%;
     text-transform: capitalize;
-    text-align: left;
+    text-align: center;
     width: 12%;
+    background-color: azure;
 }
 
 .table-desc .description {
@@ -78,22 +80,14 @@
 }
 
 .reportTable {
-    font-size: 70%;
+    font-size: 0.4em;
     width: 100%;
-    margin-top: 1%;
-    overflow-x: auto;
+    margin-top: 0%;
 }
 
 .reportTable th,
 .reportTable td {
     text-transform: capitalize;
-    text-align: left;
-    width: auto !important;
-    /* Ensure th width is set to auto */
-}
-
-.clear {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
+    text-align: center;
+    width: auto;
 }

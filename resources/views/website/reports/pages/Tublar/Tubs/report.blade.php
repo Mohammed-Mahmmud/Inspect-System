@@ -8,46 +8,40 @@
     {{-- conent --}}
     <div class="center">
         <b>{{ strtoupper($tubs->type) . ucwords(' subs Inspection Reports') }}</b><br>
-        <img src="{{ public_path('dashboard/pages/tublar/tubs/' . $tubs->type . '.png') }}">
+        <img src="{{ public_path('dashboard/pages/tublar/tubs/' . $tubs->type . '.png') }}" height="30px"><br>
     </div>
     <table class="contentTable">
         <tbody>
             <tr>
                 <th>
-                    <x-default.input-label for="customer" value="{{ TranslationHelper::translate(ucwords('customer')) }}">
-                    </x-default.input-label>
+                    {{ TranslationHelper::translate(ucwords('customer')) }}
                 </th>
 
-                <td>welcome</td>
+                <td>{{ $tubs->customer ?? '' }}</td>
 
-                <th><x-default.input-label for="order"
-                        value="{{ TranslationHelper::translate(ucwords('Purchase Order No')) }}"></x-default.input-label>
+                <th>{{ TranslationHelper::translate(ucwords('Purchase Order No')) }}
                 </th>
 
-                <td>welcome</td>
+                <td>{{ $tubs->order ?? '' }}</td>
 
-                <th><x-default.input-label for="date"
-                        value="{{ TranslationHelper::translate(ucwords('Date of Insp')) }}"></x-default.input-label>
+                <th>{{ TranslationHelper::translate(ucwords('Date of Insp')) }}
                 </th>
 
-                <td>welcome</td>
+                <td>{{ $tubs->date ?? '' }}</td>
             </tr>
             <tr>
-                <th><x-default.input-label for="location"
-                        value="{{ TranslationHelper::translate(ucwords('Insp Location')) }}"></x-default.input-label>
+                <th>{{ TranslationHelper::translate(ucwords('Insp Location')) }}
                 </th>
 
-                <td>welcome</td>
+                <td>{{ $tubs->location ?? '' }}</td>
 
-                <th><x-default.input-label for="order_id"
-                        value="{{ TranslationHelper::translate(ucwords('Job Ticket No')) }}"></x-default.input-label>
+                <th>{{ TranslationHelper::translate(ucwords('Job Ticket No')) }}
                 </th>
-                <td>welcome
+                <td>{{ $tubs->getOrders->name ?? '' }}
                 </td>
-                <th><x-default.input-label for="order_id"
-                        value="{{ TranslationHelper::translate(ucwords('Report No')) }}"></x-default.input-label>
+                <th>{{ TranslationHelper::translate(ucwords('Report No')) }}
                 </th>
-                <td>welcome</td>
+                <td>{{ $tubs->report_num ?? '' }}</td>
             </tr>
         </tbody>
     </table>
@@ -170,7 +164,6 @@
             </table>
         </div>
     </div>
-
     <div class="row">
         <div class="col-8" style="width: 69%; display:inline-flex">
             <table class="contentTable">
@@ -183,8 +176,7 @@
                 <tbody>
                     <tr>
                         <td class="center" style="width: auto;">
-                            <x-default.checkbox style="display: inline;" name="equipment[equip_ac_yoke]"
-                                id="equip_ac_yoke"
+                            <x-default.checkbox style="display: inline;" name="equipment[equip_ac_yoke]" id="equip_ac_yoke"
                                 value="{{ isset(getDeCode($tubs->equipment)['equip_ac_yoke']) ? getDeCode($tubs->equipment)['equip_ac_yoke'] : '---------------' }}" />
                             {{ TranslationHelper::translate(ucwords('ac yoke')) }}
                         </td>
@@ -271,19 +263,20 @@
     </div>
 
     {{-- description table --}}
-    {{-- @switch($tubs->type)
+    @switch($tubs->type)
         @case('heavyweight')
-            <x-dashboard.reports.tubs.heavyweight :tubs="$tubs" />
+            <x-website.reports.pages.tubs.heavyweight :tubs="$tubs" />
         @break
 
         @case('drillcollar')
-            <x-dashboard.reports.tubs.drillcollar :tubs="$tubs" />
+            <x-website.reports.pages.tubs.drillcollar :tubs="$tubs" />
         @break
 
         @default
-            <x-dashboard.reports.tubs.drillpipe :tubs="$tubs" />
-    @endswitch --}}
+            <x-website.reports.pages.tubs.drillpipe :tubs="$tubs" />
+    @endswitch
     {{-- end description table --}}
+
     {{-- remarks --}}
     <div class="row">
         <div style="{{ $tubs->type !== 'drillpipe' ? 'width:49% ; display:inline-flex' : 'width:100%' }}">
@@ -291,8 +284,7 @@
                 <thead>
                     <tr>
                         <th class="center" style="width:5%;">
-                            <x-default.input-label for="remarks"
-                                value="{{ TranslationHelper::translate(ucwords('remarks')) }}"></x-default.input-label>
+                            {{ TranslationHelper::translate(ucwords('remarks')) }}
                         </th>
                         <td>
                             <textarea rows="3" class="hidden form-control" name="remarks" id="remarks"
@@ -308,23 +300,19 @@
                     <tbody>
                         <tr>
                             <td class="left">
-                                <x-default.input-label style="font-weight: bold" for="accepted_conn"
-                                    value="{{ TranslationHelper::translate(ucwords('connection accepted (white)')) }}"></x-default.input-label>
+                                <b>{{ TranslationHelper::translate(ucwords('connection accepted (white)')) }}</b>
                                 <div style="display: inline">
                                     {{ isset(getDeCode($tubs->conn_inspected)['accepted']) ? getDeCode($tubs->conn_inspected)['accepted'] : null }}
                                 </div>
                                 {{ TranslationHelper::translate(ucwords('comns')) }}
                                 <br>
-                                <x-default.input-label style="font-weight: bold" for="defective_conn"
-                                    value="{{ TranslationHelper::translate(ucwords('connection defective (red)')) }}"></x-default.input-label>
+                                <b>{{ TranslationHelper::translate(ucwords('connection defective (red)')) }}</b>
                                 <div style="display: inline;color:red">
                                     {{ isset(getDeCode($tubs->conn_inspected)['defected']) ? getDeCode($tubs->conn_inspected)['defected'] : null }}
                                 </div>
                                 {{ TranslationHelper::translate(ucwords('comns')) }}
                                 <br>
-
-                                <x-default.input-label style="font-weight: bold" for="repaired_conn"
-                                    value="{{ TranslationHelper::translate(ucwords('connection repaired')) }}"></x-default.input-label>
+                                <b>{{ TranslationHelper::translate(ucwords('connection repaired')) }}</b>
                                 <div style="display: inline;color:blue">
                                     {{ isset(getDeCode($tubs->conn_inspected)['repaired']) ? getDeCode($tubs->conn_inspected)['repaired'] : null }}
                                 </div>
@@ -332,11 +320,8 @@
                                 <br>
                             </td>
                             <th>
-                                <x-default.input-label for="total"
-                                    value="{{ TranslationHelper::translate(ucwords('total connection inspected')) }}"></x-default.input-label>
-
+                                {{ TranslationHelper::translate(ucwords('total connection inspected')) }}
                                 {{ isset(getDeCode($tubs->conn_inspected)['total']) ? getDeCode($tubs->conn_inspected)['total'] : null }}
-
                                 {{ TranslationHelper::translate(ucwords('comns')) }}
                             </th>
                         </tr>
@@ -346,6 +331,7 @@
         @endunless
     </div>
     {{-- end remarks --}}
+
     {{-- inspector --}}
     <table class="frameLess-table">
         <tbody>

@@ -25,8 +25,18 @@
                                 {{-- end content --}}
                             </div>
                             <br>
-                            <div class="modal-footer">
-                                <div class="hstack gap-2 justify-content-end">
+                            <div class="modal-footer row">
+                                @if ($type == 'Edit')
+                                    <div class="col-8">
+                                        <a type="button" style="color: black; font-weight:bold;"
+                                            class="btn btn-outline-primary"
+                                            href="{{ route('tubs.reports.create', ['type' => $tubs->type]) }}">{{ TranslationHelper::translate(ucwords('new report')) }}</a>
+                                        <a type="button" style="color: black; font-weight:bold;"
+                                            class="btn btn-outline-primary"
+                                            href="{{ route('tubs.reports.repeat', $tubs->id) }}">{{ TranslationHelper::translate(ucwords('repeat report')) }}</a>
+                                    </div>
+                                @endif
+                                <div class="col-4 hstack gap-2 justify-content-end">
                                     <a type="button" style="color: black; font-weight:bold;" class="btn btn-danger"
                                         href="{{ route('tubs.reports.index', ['type' => $examType]) }}">{{ TranslationHelper::translate(ucwords('close')) }}</a>
                                     <button style="color: black; font-weight:bold;" type="submit" class="btn btn-success"

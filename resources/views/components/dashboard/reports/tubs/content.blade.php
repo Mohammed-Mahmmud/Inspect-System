@@ -329,7 +329,6 @@
                     <x-dashboard.reports.tubs.drillpipe :tubs="$tubs" />
             @endswitch
             {{-- end description table --}}
-
             <div class="row">
                 <div class="{{ $examType !== 'drillpipe' ? 'col-6' : 'col-12' }}">
                     <table class="contentTable">

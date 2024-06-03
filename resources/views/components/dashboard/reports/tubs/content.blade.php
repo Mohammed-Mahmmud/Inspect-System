@@ -54,7 +54,7 @@
                 </tbody>
             </table>
             <div class="row">
-                <div class="col-9">
+                <div class="col-8">
                     <table class="contentTable">
                         <thead>
                             <tr>
@@ -66,26 +66,26 @@
                             <tr>
                                 <th>{{ TranslationHelper::translate(ucwords('magnetizing')) }}</th>
                                 <td>
-                                    {{-- {{ dd(getDeCode($tubs->magnetizing)['ac_yoke']) }} --}}
                                     <x-default.checkbox name="magnetizing[ac_yoke]" id="ac_yoke"
-                                        value="{{ isset(getDeCode($tubs->magnetizing)['ac_yoke']) ? getDeCode($tubs->magnetizing)['ac_yoke'] : '' }}" />
-                                    <x-default.input-label for="ac_yoke" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->magnetizing)['ac_yoke']) ? getDeCode($tubs->magnetizing)['ac_yoke'] : null }}" />
+                                    <x-default.input-label for="ac_yoke"
                                         value="{{ TranslationHelper::translate(ucwords('ac yoke')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="magnetizing[permanent]" id="permanent"
-                                        value="{{ isset(getDeCode($tubs->magnetizing)['permanent']) ? getDeCode($tubs->magnetizing)['permanent'] : '' }}" />
-                                    <x-default.input-label for="permanent" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->magnetizing)['permanent']) ? getDeCode($tubs->magnetizing)['permanent'] : null }}" />
+                                    <x-default.input-label for="permanent"
                                         value="{{ TranslationHelper::translate(ucwords('permanent')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="magnetizing[dc_coil]" id="dc_coil"
-                                        value="{{ isset(getDeCode($tubs->magnetizing)['dc_coil']) ? getDeCode($tubs->magnetizing)['dc_coil'] : '' }}" />
-                                    <x-default.input-label for="dc_coil" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->magnetizing)['dc_coil']) ? getDeCode($tubs->magnetizing)['dc_coil'] : null }}" />
+                                    <x-default.input-label for="dc_coil"
                                         value="{{ TranslationHelper::translate(ucwords('dc coil')) }}"></x-default.input-label>
 
                                     @if ($examType == 'drillpipe')
                                         <x-default.checkbox name="magnetizing[emi]" id="emi"
-                                            value="{{ isset(getDeCode($tubs->magnetizing)['emi']) ? getDeCode($tubs->magnetizing)['emi'] : '' }}" />
-                                        <x-default.input-label for="emi" style="padding-right: 10px"
+                                            style="margin-left: 40%"
+                                            value="{{ isset(getDeCode($tubs->magnetizing)['emi']) ? getDeCode($tubs->magnetizing)['emi'] : null }}" />
+                                        <x-default.input-label for="emi"
                                             value="{{ TranslationHelper::translate(ucwords('emi')) }}"></x-default.input-label>
                                     @endif
                                 </td>
@@ -93,57 +93,60 @@
                                 <th>{{ TranslationHelper::translate(ucwords('magnetic particles')) }}</th>
                                 <td>
                                     <x-default.checkbox name="magnetic_particles[dry]" id="dry"
-                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['dry']) ? getDeCode($tubs->magnetic_particles)['dry'] : '' }}" />
-                                    <x-default.input-label style="padding-right: 10px" for="dry"
+                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['dry']) ? getDeCode($tubs->magnetic_particles)['dry'] : null }}" />
+                                    <x-default.input-label for="dry"
                                         value="{{ TranslationHelper::translate(ucwords('dry')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="magnetic_particles[wet]" id="wet"
-                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['wet']) ? getDeCode($tubs->magnetic_particles)['wet'] : '' }}" />
-                                    <x-default.input-label for="wet" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['wet']) ? getDeCode($tubs->magnetic_particles)['wet'] : null }}" />
+                                    <x-default.input-label for="wet"
                                         value="{{ TranslationHelper::translate(ucwords('wet')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="magnetic_particles[visible]" id="visible"
-                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['visible']) ? getDeCode($tubs->magnetic_particles)['visible'] : '' }}" />
-                                    <x-default.input-label for="visible" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['visible']) ? getDeCode($tubs->magnetic_particles)['visible'] : null }}" />
+                                    <x-default.input-label for="visible"
                                         value="{{ TranslationHelper::translate(ucwords('visible')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="magnetic_particles[fluorescent]" id="fluorescent"
-                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['fluorescent']) ? getDeCode($tubs->magnetic_particles)['fluorescent'] : '' }}" />
-                                    <x-default.input-label for="fluorescent" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->magnetic_particles)['fluorescent']) ? getDeCode($tubs->magnetic_particles)['fluorescent'] : null }}" />
+                                    <x-default.input-label for="fluorescent"
                                         value="{{ TranslationHelper::translate(ucwords('fluorescent')) }}"></x-default.input-label>
                                 </td>
                             </tr>
                             <tr>
-                                <th>{{ TranslationHelper::translate(ucwords('other methods')) }}</th>
+                                <th>
+                                    <x-default.input-label for="fluorescent"
+                                        value="{{ TranslationHelper::translate(ucwords('other methods')) }}"></x-default.input-label>
+                                </th>
                                 <td colspan="3">
                                     <x-default.checkbox name="other_methods[eai]" id="eai"
-                                        value="{{ isset(getDeCode($tubs->other_methods)['eai']) ? getDeCode($tubs->other_methods)['eai'] : '' }}" />
-                                    <x-default.input-label style="padding-right: 10px" for="eai"
+                                        value="{{ isset(getDeCode($tubs->other_methods)['eai']) ? getDeCode($tubs->other_methods)['eai'] : null }}" />
+                                    <x-default.input-label style="padding-right:5px" for="eai"
                                         value="{{ TranslationHelper::translate(StrToUpper('eai')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="other_methods[vti]" id="vti"
-                                        value="{{ isset(getDeCode($tubs->other_methods)['vti']) ? getDeCode($tubs->other_methods)['vti'] : '' }}" />
-                                    <x-default.input-label for="vti" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->other_methods)['vti']) ? getDeCode($tubs->other_methods)['vti'] : null }}" />
+                                    <x-default.input-label style="padding-right:5px" for="vti"
                                         value="{{ TranslationHelper::translate(StrToUpper('vti')) }}"></x-default.input-label>
 
                                     @if ($examType == 'drillpipe')
                                         <x-default.checkbox name="other_methods[wt]" id="wt"
-                                            value="{{ isset(getDeCode($tubs->other_methods)['wt']) ? getDeCode($tubs->other_methods)['wt'] : '' }}" />
-                                        <x-default.input-label for="wt" style="padding-right: 10px"
+                                            value="{{ isset(getDeCode($tubs->other_methods)['wt']) ? getDeCode($tubs->other_methods)['wt'] : null }}" />
+                                        <x-default.input-label style="padding-right:5px" for="wt"
                                             value="{{ TranslationHelper::translate(StrToUpper('wt')) }}"></x-default.input-label>
                                     @endif
 
                                     <x-default.checkbox name="other_methods[tgi]" id="tgi"
-                                        value="{{ isset(getDeCode($tubs->other_methods)['tgi']) ? getDeCode($tubs->other_methods)['tgi'] : '' }}" />
-                                    <x-default.input-label for="tgi" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->other_methods)['tgi']) ? getDeCode($tubs->other_methods)['tgi'] : null }}" />
+                                    <x-default.input-label style="padding-right:5px" for="tgi"
                                         value="{{ TranslationHelper::translate(StrToUpper('tgi')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="" id="method_other"
                                         value="{{ isset(getDeCode($tubs->other_methods)['other']) ? '1' : '' }}" />
-                                    <x-default.input-label for="method_other" style="padding-right: 10px"
-                                        value="{{ TranslationHelper::translate(ucfirst('other')) }}"></x-default.input-label>
-                                    <x-default.input style="width: 400px" class="hidden" type="text"
-                                        value="{{ isset(getDeCode($tubs->other_methods)['other']) ? getDeCode($tubs->other_methods)['other'] : '' }}"
+                                    <x-default.input-label for="method_other"
+                                        value="{{ TranslationHelper::translate(ucfirst('other :')) }}"></x-default.input-label>
+                                    <x-default.input important class="hidden w-50" type="text"
+                                        value="{{ isset(getDeCode($tubs->other_methods)['other']) ? getDeCode($tubs->other_methods)['other'] : null }}"
                                         name="other_methods[other]"
                                         placeholder="----------------------------------" />
                                 </td>
@@ -151,7 +154,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <table class="contentTable">
                         <thead>
                             <tr>
@@ -162,21 +165,22 @@
                         <tbody>
                             <tr>
                                 <td colspan="2">
-                                    <x-default.checkbox name="specification[api]" id="api" />
-                                    <x-default.input-label style="padding-right: 10px" for="api"
+                                    <x-default.checkbox name="specification[api]" id="api"
+                                        value="{{ isset(getDeCode($tubs->specification)['api']) ? getDeCode($tubs->specification)['api'] : null }}" />
+                                    <x-default.input-label style="padding-right: 7px" for="api"
                                         value="{{ TranslationHelper::translate(StrToUpper('api')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="specification[dsi]" id="dsi"
-                                        value="{{ isset(getDeCode($tubs->specification)['dsi']) ? getDeCode($tubs->specification)['dsi'] : '' }}" />
-                                    <x-default.input-label for="dsi" style="padding-right: 10px"
+                                        value="{{ isset(getDeCode($tubs->specification)['dsi']) ? getDeCode($tubs->specification)['dsi'] : null }}" />
+                                    <x-default.input-label for="dsi" style="padding-right: 7px"
                                         value="{{ TranslationHelper::translate(StrToUpper('dsi')) }}"></x-default.input-label>
 
                                     <x-default.checkbox name="" id="spec_other"
                                         value="{{ isset(getDeCode($tubs->specification)['other']) ? '1' : '' }}" />
-                                    <x-default.input-label for="spec_other" style="padding-right: 10px"
-                                        value="{{ TranslationHelper::translate(ucfirst('other')) }}"></x-default.input-label>
-                                    <x-default.input type="text" style="width: 100%" name="specification[other]"
-                                        value="{{ isset(getDeCode($tubs->specification)['other']) ? getDeCode($tubs->specification)['other'] : '' }}"
+                                    <x-default.input-label for="spec_other" style="padding-right: 7px"
+                                        value="{{ TranslationHelper::translate(ucfirst('other :')) }}"></x-default.input-label>
+                                    <x-default.input type="text" style="width:50%" name="specification[other]"
+                                        value="{{ isset(getDeCode($tubs->specification)['other']) ? getDeCode($tubs->specification)['other'] : null }}"
                                         placeholder="--------------------------------------" />
                                 </td>
                             </tr>
@@ -184,9 +188,9 @@
                                 <th><x-default.input-label for="edition"
                                         value="{{ TranslationHelper::translate(ucwords('edition')) }}"></x-default.input-label>
                                 </th>
-                                <td><x-default.input type="text" class="hidden" style="width:200 "
+                                <td><x-default.input type="text" class="hidden" style="width:100%"
                                         name="specification[edition]" id="edition"
-                                        value="{{ isset(getDeCode($tubs->specification)['edition']) ? getDeCode($tubs->specification)['edition'] : '' }}"
+                                        value="{{ isset(getDeCode($tubs->specification)['edition']) ? getDeCode($tubs->specification)['edition'] : null }}"
                                         placeholder="--------------------------------------" /></td>
                             </tr>
                         </tbody>
@@ -207,40 +211,40 @@
                             <tr>
                                 <td class="center" style="width: auto;">
                                     <x-default.checkbox name="equipment[equip_ac_yoke]" id="equip_ac_yoke"
-                                        value="{{ isset(getDeCode($tubs->equipment)['equip_ac_yoke']) ? getDeCode($tubs->equipment)['equip_ac_yoke'] : '' }}" />
+                                        value="{{ isset(getDeCode($tubs->equipment)['equip_ac_yoke']) ? getDeCode($tubs->equipment)['equip_ac_yoke'] : null }}" />
                                     <x-default.input-label for="equip_ac_yoke"
                                         value="{{ TranslationHelper::translate(ucwords('ac yoke')) }}"></x-default.input-label>
                                 </td>
                                 <td class="center" style="width: auto;">
                                     <x-default.checkbox name="equipment[equip_dc_coil]" id="equip_dc_coil"
-                                        value="{{ isset(getDeCode($tubs->equipment)['equip_dc_coil']) ? getDeCode($tubs->equipment)['equip_dc_coil'] : '' }}" />
+                                        value="{{ isset(getDeCode($tubs->equipment)['equip_dc_coil']) ? getDeCode($tubs->equipment)['equip_dc_coil'] : null }}" />
                                     <x-default.input-label for="equip_dc_coil"
                                         value="{{ TranslationHelper::translate(ucwords('dc coil')) }}"></x-default.input-label>
                                 </td>
                                 <td class="center" style="width: auto;">
                                     <x-default.checkbox name="equipment[equip_permanent_magnet]"
                                         id="equip_permanent_magnet"
-                                        value="{{ isset(getDeCode($tubs->equipment)['equip_permanent_magnet']) ? getDeCode($tubs->equipment)['equip_permanent_magnet'] : '' }}" />
+                                        value="{{ isset(getDeCode($tubs->equipment)['equip_permanent_magnet']) ? getDeCode($tubs->equipment)['equip_permanent_magnet'] : null }}" />
                                     <x-default.input-label for="equip_permanent_magnet"
                                         value="{{ TranslationHelper::translate(ucwords('permanent magnet')) }}"></x-default.input-label>
                                 </td>
                                 <td class="center" style="width: auto;">
                                     <x-default.checkbox name="equipment[equip_uv_light]" id="equip_uv_light"
-                                        value="{{ isset(getDeCode($tubs->equipment)['equip_uv_light']) ? getDeCode($tubs->equipment)['equip_uv_light'] : '' }}" />
+                                        value="{{ isset(getDeCode($tubs->equipment)['equip_uv_light']) ? getDeCode($tubs->equipment)['equip_uv_light'] : null }}" />
                                     <x-default.input-label for="equip_uv_light"
                                         value="{{ TranslationHelper::translate(ucwords('uv light')) }}"></x-default.input-label>
                                 </td>
 
                                 @if ($examType == 'drillpipe')
-                                    <td class="center" style="width: auto;">
+                                    <td class="center" style="width: auto ">
                                         <x-default.checkbox name="equipment[equip_emi]" id="equip_emi"
-                                            value="{{ isset(getDeCode($tubs->equipment)['equip_emi']) ? getDeCode($tubs->equipment)['equip_emi'] : '' }}" />
+                                            value="{{ isset(getDeCode($tubs->equipment)['equip_emi']) ? getDeCode($tubs->equipment)['equip_emi'] : null }}" />
                                         <x-default.input-label for="equip_emi"
                                             value="{{ TranslationHelper::translate(ucwords('emi')) }}"></x-default.input-label>
                                     </td>
                                     <td class="center" style="width: auto;">
                                         <x-default.checkbox name="equipment[equip_wt]" id="equip_wt"
-                                            value="{{ isset(getDeCode($tubs->equipment)['equip_wt']) ? getDeCode($tubs->equipment)['equip_wt'] : '' }}" />
+                                            value="{{ isset(getDeCode($tubs->equipment)['equip_wt']) ? getDeCode($tubs->equipment)['equip_wt'] : null }}" />
                                         <x-default.input-label for="equip_wt"
                                             value="{{ TranslationHelper::translate(ucwords('wt')) }}"></x-default.input-label>
                                     </td>
@@ -249,41 +253,41 @@
                                     <x-default.checkbox name="" id="equip_other"
                                         value="{{ isset(getDeCode($tubs->equipment)['other']) ? '1' : '0' }}" />
                                     <x-default.input-label for="equip_other"
-                                        value="{{ TranslationHelper::translate(ucfirst('other')) }}"></x-default.input-label>
+                                        value="{{ TranslationHelper::translate(ucfirst('other :')) }}"></x-default.input-label>
                                     <x-default.input type="text" class="hidden form-control"
-                                        value="{{ isset(getDeCode($tubs->equipment)['other']) ? getDeCode($tubs->equipment)['other'] : '' }}"
+                                        value="{{ isset(getDeCode($tubs->equipment)['other']) ? getDeCode($tubs->equipment)['other'] : null }}"
                                         placeholder="----------------------------------" name="equipment[other]" />
                                 </td>
                             </tr>
                             <tr>
                                 <td style="width: auto;"><x-default.input type="text" class="hidden form-control"
-                                        value="{{ isset(getDeCode($tubs->equipment)['ac_ypke_serial']) ? getDeCode($tubs->equipment)['ac_ypke_serial'] : '' }}"
+                                        value="{{ isset(getDeCode($tubs->equipment)['ac_ypke_serial']) ? getDeCode($tubs->equipment)['ac_ypke_serial'] : null }}"
                                         name="equipment[ac_ypke_serial]" placeholder="No.-------------------------" />
                                 </td>
                                 <td style="width: auto;"><x-default.input type="text" class="hidden form-control"
-                                        value="{{ isset(getDeCode($tubs->equipment)['dc_coil_serial']) ? getDeCode($tubs->equipment)['dc_coil_serial'] : '' }}"
+                                        value="{{ isset(getDeCode($tubs->equipment)['dc_coil_serial']) ? getDeCode($tubs->equipment)['dc_coil_serial'] : null }}"
                                         name="equipment[dc_coil_serial]" placeholder="No.-------------------------" />
                                 </td>
                                 <td style="width: auto;"><x-default.input type="text" class="hidden form-control"
-                                        value="{{ isset(getDeCode($tubs->equipment)['permanent_magnet_serial']) ? getDeCode($tubs->equipment)['permanent_magnet_serial'] : '' }}"
+                                        value="{{ isset(getDeCode($tubs->equipment)['permanent_magnet_serial']) ? getDeCode($tubs->equipment)['permanent_magnet_serial'] : null }}"
                                         name="equipment[permanent_magnet_serial]"
                                         placeholder="No.-------------------------" /></td>
                                 <td style="width: auto;"><x-default.input type="text" class="hidden form-control"
-                                        value="{{ isset(getDeCode($tubs->equipment)['uv_light_serial']) ? getDeCode($tubs->equipment)['uv_light_serial'] : '' }}"
+                                        value="{{ isset(getDeCode($tubs->equipment)['uv_light_serial']) ? getDeCode($tubs->equipment)['uv_light_serial'] : null }}"
                                         name="equipment[uv_light_serial]"
                                         placeholder="No.-------------------------" /></td>
                                 @if ($examType == 'drillpipe')
                                     <td style="width: auto;"><x-default.input type="text"
                                             class="hidden form-control" name="equipment[emi_serial]"
-                                            value="{{ isset(getDeCode($tubs->equipment)['emi_serial']) ? getDeCode($tubs->equipment)['emi_serial'] : '' }}"
+                                            value="{{ isset(getDeCode($tubs->equipment)['emi_serial']) ? getDeCode($tubs->equipment)['emi_serial'] : null }}"
                                             placeholder="No.-------------------------" /></td>
                                     <td style="width: auto;"><x-default.input type="text"
                                             class="hidden form-control" name="equipment[wt_serial]"
-                                            value="{{ isset(getDeCode($tubs->equipment)['wt_serial']) ? getDeCode($tubs->equipment)['wt_serial'] : '' }}"
+                                            value="{{ isset(getDeCode($tubs->equipment)['wt_serial']) ? getDeCode($tubs->equipment)['wt_serial'] : null }}"
                                             placeholder="No.-------------------------" /></td>
                                 @endif
                                 <td style="width: auto;"><x-default.input type="text" class="hidden form-control"
-                                        value="{{ isset(getDeCode($tubs->equipment)['other_serial']) ? getDeCode($tubs->equipment)['other_serial'] : '' }}"
+                                        value="{{ isset(getDeCode($tubs->equipment)['other_serial']) ? getDeCode($tubs->equipment)['other_serial'] : null }}"
                                         name="equipment[other_serial]" placeholder="No.-------------------------" />
                                 </td>
                             </tr>
@@ -352,13 +356,12 @@
                         <table class="contentTable">
                             <thead>
                                 <tr>
-                                    {{-- {{ dd(getDeCode($tubs->conn_inspected)['total']) }} --}}
                                     <th colspan="2">
                                         <x-default.input-label for="total"
                                             value="{{ TranslationHelper::translate(ucwords('total connection inspected')) }}"></x-default.input-label>
                                         <x-default.input type="text" class="hidden w-50 center"
                                             name="conn_inspected[total]" id="total"
-                                            value="{{ isset(getDeCode($tubs->conn_inspected)['total']) ? getDeCode($tubs->conn_inspected)['total'] : '' }}"
+                                            value="{{ isset(getDeCode($tubs->conn_inspected)['total']) ? getDeCode($tubs->conn_inspected)['total'] : null }}"
                                             placeholder="----------------------------------" />
                                         {{ TranslationHelper::translate(ucwords('comns')) }}
                                     </th>
@@ -373,7 +376,7 @@
                                     <td>
                                         <x-default.input type="text" class="hidden w-50 center"
                                             name="conn_inspected[accepted]" id="accepted_conn"
-                                            value="{{ isset(getDeCode($tubs->conn_inspected)['accepted']) ? getDeCode($tubs->conn_inspected)['accepted'] : '' }}"
+                                            value="{{ isset(getDeCode($tubs->conn_inspected)['accepted']) ? getDeCode($tubs->conn_inspected)['accepted'] : null }}"
                                             placeholder="----------------------------------" />
                                         {{ TranslationHelper::translate(ucwords('comns')) }}
                                     </td>
@@ -387,7 +390,7 @@
                                     <td>
                                         <x-default.input type="text" class="hidden w-50 center" style="color: red"
                                             name="conn_inspected[defected]" id="defective_conn"
-                                            value="{{ isset(getDeCode($tubs->conn_inspected)['defected']) ? getDeCode($tubs->conn_inspected)['defected'] : '' }}"
+                                            value="{{ isset(getDeCode($tubs->conn_inspected)['defected']) ? getDeCode($tubs->conn_inspected)['defected'] : null }}"
                                             placeholder="----------------------------------" />
                                         {{ TranslationHelper::translate(ucwords('comns')) }}
                                     </td>
@@ -400,7 +403,7 @@
                                     <td>
                                         <x-default.input type="text" class="hidden w-50 center" style="color: blue"
                                             name="conn_inspected[repaired]" id="repaired_conn"
-                                            value="{{ isset(getDeCode($tubs->conn_inspected)['repaired']) ? getDeCode($tubs->conn_inspected)['repaired'] : '' }}"
+                                            value="{{ isset(getDeCode($tubs->conn_inspected)['repaired']) ? getDeCode($tubs->conn_inspected)['repaired'] : null }}"
                                             placeholder="----------------------------------" />
                                         {{ TranslationHelper::translate(ucwords('comns')) }}
                                     </td>

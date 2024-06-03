@@ -164,4 +164,11 @@
   'Edit_Drillpipe' => 'Edit Drillpipe',
   'Edit Drillcollar' => 'Edit Drillcollar',
   'Edit_Drillcollar' => 'Edit Drillcollar',
+  'Other:' => 'Other:',
+  'Other : ' => 'Other : ',
+  'Other :' => 'Other :',
+  'Report No' => 'Report No',
+  'Equip Uv Light' => 'Equip Uv Light',
+  'Equip Permanent Magnet' => 'Equip Permanent Magnet',
+  'Equip Dc Coil' => 'Equip Dc Coil',
 );

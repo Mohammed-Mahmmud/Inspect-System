@@ -10,7 +10,7 @@ class UpdateTubsAction
 {
     public function handle(tubs $tubs, array $data)
     {
-        // dd($data);
+        // dd($data['desc']);
         $exceptedItems = ['magnetizing', 'magnetic_particles', 'other_methods', 'specification', 'equipment', 'desc', 'conn_inspected'];
         $methods = [];
         foreach (array_diff($exceptedItems, ['desc']) as $method) {
@@ -20,6 +20,7 @@ class UpdateTubsAction
         }
         $tubs->update(array_merge(Arr::except($data, $exceptedItems), $methods));
         if (!empty($data['desc'])) {
+            $tubs->getDesc()->delete();
             foreach ($data['desc'] as $item) {
                 $tubs->getDesc()->create([
                     'description' => json_encode($item),

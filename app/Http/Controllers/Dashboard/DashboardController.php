@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
-use App\Models\Dashboard\Section;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
@@ -12,9 +11,9 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    { 
+    {
         return view('dashboard.pages.home');
-            }
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -1,8 +1,8 @@
-@extends('dashboard.layouts.master')
-@section('title', 'Inspection System')
-@section('css')
+
+<?php $__env->startSection('title', 'Inspection System'); ?>
+<?php $__env->startSection('css'); ?>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('dashboard') }}/assets/s/images/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo e(asset('dashboard')); ?>/assets/s/images/favicon.ico">
 
     <!-- Fonts css load -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,21 +10,21 @@
     <link id="fontsLink" href="../../css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- jsvectormap css -->
-    <link href="{{ asset('dashboard') }}/assets/s/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet"
+    <link href="<?php echo e(asset('dashboard')); ?>/assets/s/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet"
         type="text/css">
 
     <!-- Layout config Js -->
     <script src="assets/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="{{ asset('dashboard') }}/assets/s/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo e(asset('dashboard')); ?>/assets/s/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!-- Icons Css -->
-    <link href="{{ asset('dashboard') }}/assets/s/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo e(asset('dashboard')); ?>/assets/s/css/icons.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
-    <link href="{{ asset('dashboard') }}/assets/s/css/app.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo e(asset('dashboard')); ?>/assets/s/css/app.min.css" rel="stylesheet" type="text/css">
     <!-- custom Css-->
-    <link href="{{ asset('dashboard') }}/assets/s/css/custom.min.css" rel="stylesheet" type="text/css">
-@endsection
-@section('content')
+    <link href="<?php echo e(asset('dashboard')); ?>/assets/s/css/custom.min.css" rel="stylesheet" type="text/css">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="main-content">
 
         <div class="page-content">
@@ -250,7 +250,7 @@
                                         <tbody class="list">
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('dashboard') }}/assets/images/brands/chrome.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/brands/chrome.png"
                                                         alt="" class="avatar-xxs">
                                                     <span class="ms-1 browsers">Google Chrome</span>
                                                 </td>
@@ -263,7 +263,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('dashboard') }}/assets/images/brands/firefox.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/brands/firefox.png"
                                                         alt="" class="avatar-xxs">
                                                     <span class="ms-1 browsers">Firefox</span>
                                                 </td>
@@ -276,7 +276,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('dashboard') }}/assets/images/brands/safari.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/brands/safari.png"
                                                         alt="" class="avatar-xxs">
                                                     <span class="ms-1 browsers">Safari</span>
                                                 </td>
@@ -289,7 +289,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('dashboard') }}/assets/images/brands/opera.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/brands/opera.png"
                                                         alt="" class="avatar-xxs">
                                                     <span class="ms-1 browsers">Opera</span>
                                                 </td>
@@ -302,7 +302,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('dashboard') }}/assets/images/brands/microsoft.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/brands/microsoft.png"
                                                         alt="" class="avatar-xxs">
                                                     <span class="ms-1 browsers">Microsoft Edge</span>
                                                 </td>
@@ -315,7 +315,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('dashboard') }}/assets/images/brands/microsoft2.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/brands/microsoft2.png"
                                                         alt="" class="avatar-xxs">
                                                     <span class="ms-1 browsers">Internet Explorer</span>
                                                 </td>
@@ -328,7 +328,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('dashboard') }}/assets/images/brands/chromium.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/brands/chromium.png"
                                                         alt="" class="avatar-xxs">
                                                     <span class="ms-1 browsers">Chromium</span>
                                                 </td>
@@ -672,27 +672,29 @@
             </div>
         </footer>
     </div>
-@endsection
-@section('js')
-    <script src="{{ asset('dashboard') }}/assets/s/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('dashboard') }}/assets/s/libs/simplebar/simplebar.min.js"></script>
-    <script src="{{ asset('dashboard') }}/assets/s/js/plugins.js"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/libs/simplebar/simplebar.min.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/js/plugins.js"></script>
 
     <!-- apexcharts -->
-    <script src="{{ asset('dashboard') }}/assets/s/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/libs/apexcharts/apexcharts.min.js"></script>
 
     <!-- Echarts -->
-    <script src="{{ asset('dashboard') }}/assets/s/libs/echarts/echarts.min.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/libs/echarts/echarts.min.js"></script>
 
     <!-- Vector map-->
-    <script src="{{ asset('dashboard') }}/assets/s/libs/jsvectormap/js/jsvectormap.min.js"></script>
-    <script src="{{ asset('dashboard') }}/assets/s/libs/jsvectormap/maps/world-merc.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/libs/jsvectormap/js/jsvectormap.min.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/libs/jsvectormap/maps/world-merc.js"></script>
 
-    <script src="{{ asset('dashboard') }}/assets/s/libs/list.js/list.min.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/libs/list.js/list.min.js"></script>
 
     <!-- dashboard-analytics init js -->
-    <script src="{{ asset('dashboard') }}/assets/s/js/pages/dashboard-analytics.init.js"></script>
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/js/pages/dashboard-analytics.init.js"></script>
 
     <!-- App js -->
-    <script src="{{ asset('dashboard') }}/assets/s/js/app.js"></script>
-@endsection
+    <script src="<?php echo e(asset('dashboard')); ?>/assets/s/js/app.js"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('dashboard.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/mohamed-khater/Documents/projects/inspection-system/resources/views/dashboard/pages/home.blade.php ENDPATH**/ ?>

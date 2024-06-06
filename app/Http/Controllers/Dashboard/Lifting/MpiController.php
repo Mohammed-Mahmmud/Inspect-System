@@ -124,7 +124,7 @@ class MpiController extends Controller
      * Remove the specified resource from storage.
      */
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         try {
             Mpi::FindOrFail($id)->delete();
@@ -133,13 +133,6 @@ class MpiController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-    }
-
-    public function download(string $id)
-    {
-        $mpi = Mpi::FindOrFail($id);
-        $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('mpi'));
-        return $pdf->download("$mpi->date" . '-' . 'reports.pdf');
     }
 
     public function filter(Request $request)
@@ -153,28 +146,6 @@ class MpiController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-    }
-
-    public function deleteAll(Request $request)
-    {
-        try {
-            $ids = json_decode($request->data[0], true);
-            if (isset($ids)) {
-                foreach ($ids as $id) {
-                    try {
-                        Mpi::FindOrFail($id)->delete();
-                    } catch (ModelNotFoundException $e) {
-                        continue;
-                    }
-                }
-                toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
-            } else {
-                toastr(trans('Dashboard/toastr.unCheckedMessage'), 'warning', trans('Dashboard/toastr.unChecked'));
-            }
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-        return redirect()->route('mpi.reports.index');
     }
 
     public function search(Request $request)

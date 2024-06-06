@@ -24,7 +24,6 @@ class ExaminationController extends Controller
     public function index(Request $request)
     {
         try {
-
             $examinations = Examination::where('type', $request->type)->paginate('20')->withQueryString();
             $orders = Order::get();
             $type = $request->type;
@@ -145,9 +144,9 @@ class ExaminationController extends Controller
         try {
 
 
-                $examinations = Examination::where('type', $request->type)->where(function ($query) use ($request) {
-                    $query->where('order_id', $request->order_id)->orWhere('exam_date', $request->exam_date);
-                })->paginate(20);
+            $examinations = Examination::where('type', $request->type)->where(function ($query) use ($request) {
+                $query->where('order_id', $request->order_id)->orWhere('exam_date', $request->exam_date);
+            })->paginate(20);
 
             $orders = Order::get();
             $type = $request->type;

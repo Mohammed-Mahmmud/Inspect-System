@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\Tublar\Tools;
 
 use App\Http\Requests\Dashboard\Tublar;
@@ -9,29 +10,29 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class StoreToolsAction
- {
-    public function handle( array $data )
- {
+{
+    public function handle(array $data)
+    {
 
-    
-     $tools = Tools::create( array_merge( Arr::except( $data, [ 'desc','methods' ] ), [
+
+        $tools = Tools::create(array_merge(Arr::except($data, ['desc', 'methods']), [
             'user_id' => Auth::user()->id,
-            'methods' => json_encode( $data[ 'methods' ] ),
-            ] ) );
+            'methods' => json_encode($data['methods']),
+        ]));
 
-            if(!empty($data['desc'])){
-                foreach($data['desc'] as $item){
-                    $tools->getDesc()->create([
-                        'description' => json_encode($item),
-                    ]);  
-                }
+        if (!empty($data['desc'])) {
+            foreach ($data['desc'] as $item) {
+                $tools->getDesc()->create([
+                    'description' => json_encode($item),
+                ]);
             }
+        }
 
-        $toolsCount = Tools::where( 'order_id', $tools->order_id )->where( 'type', $data[ 'type' ] )->count();
-        $tools->update( [
-            'report_num' =>  $tools->getOrders->number.'-'.strtoupper( $tools->type ).'-'.( $toolsCount + 1 ),
-        ] );
-        toastr( trans( 'Dashboard/toastr.succes' ) );
+        $toolsCount = Tools::where('order_id', $tools->order_id)->where('type', $data['type'])->count();
+        $tools->update([
+            'report_num' =>  $tools->getOrders->number . '-' . strtoupper($tools->type) . '-' . ($toolsCount),
+        ]);
+        toastr(trans('Dashboard/toastr.succes'));
         return $tools;
     }
 }

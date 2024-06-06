@@ -22,17 +22,18 @@ class JobTicketUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "order_id" => [ 'required' ],
-            "work_number"    => [ 'nullable' ],
-            "address"        => [ 'nullable' ],
-            "ispr"           => [ 'nullable' ],
-            "start_date"     => [ 'nullable' ],
-            "end_date"       => [ 'nullable' ],
-            "well_name"      => [ 'nullable' ],
-            "ref_number"     => [ 'nullable' ],
-            "approval"       => [ 'nullable' ],
-            "job_price"      => [ 'nullable' ],
-            "content"        => [ 'nullable' ],
+            "order_id" => ['required'],
+            "work_number"    => ['nullable'],
+            "address"        => ['nullable'],
+            "ispr"           => ['nullable'],
+            "start_date"     => ['nullable'],
+            "end_date"       => ['nullable'],
+            "well_name"      => ['nullable'],
+            "ref_number"     => ['nullable'],
+            "approval"       => ['nullable'],
+            "job_price"      => ['nullable'],
+            "content"        => ['nullable'],
+            "user_id"        => ['required'],
         ];
     }
 }

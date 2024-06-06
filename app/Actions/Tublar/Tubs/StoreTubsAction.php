@@ -18,7 +18,6 @@ class StoreTubsAction
                 $methods[$method] = json_encode($data[$method]);
             }
         }
-        // dd($methods);
         $tubs = Tubs::create(array_merge(Arr::except($data, $exceptedItems), $methods));
         if (!empty($data['desc'])) {
             foreach ($data['desc'] as $item) {
@@ -30,7 +29,7 @@ class StoreTubsAction
 
         $tubsCount = Tubs::where('order_id', $tubs->order_id)->where('type', $data['type'])->count();
         $tubs->update([
-            'report_num' =>  $tubs->getOrders->number . '-' . strtoupper($tubs->type) . '-' . ($tubsCount + 1),
+            'report_num' =>  $tubs->getOrders->number . '-' . strtoupper($tubs->type) . '-' . ($tubsCount),
         ]);
         toastr(trans('Dashboard/toastr.succes'));
         return $tubs;

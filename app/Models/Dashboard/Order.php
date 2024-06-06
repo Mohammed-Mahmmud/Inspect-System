@@ -15,32 +15,44 @@ class Order extends Model
     protected $table = 'orders';
     protected $guarded = [];
     public $timestamps = true;
-  
-      
+
+    public function getDesc()
+    {
+        return $this->morphMany(ReportDescription::class, 'model');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($tubs) {
+            $tubs->getDesc()->delete();
+        });
+    }
+
     public function Users()
     {
-        return $this->belongsTo(User::class, 'user_id')->where('role',2);
+        return $this->belongsTo(User::class, 'user_id')->where('role', 2);
     }
     public function Companies()
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
-     
+
     public function Rigs()
     {
         return $this->belongsTo(Rig::class, 'rig_id');
     }
-    public function ReportType()
+    // public function ReportType()
+    // {
+    //     return $this->belongsTo(ReportType::class, 'report_id');
+    // }
+    public function userStatus($id)
     {
-        return $this->belongsTo(ReportType::class, 'report_id');
+        $user = User::where('id', $id)->first();
+
+        if ($user->trash == 1) {
+            return $user->name . " ( Deleted )";
+        }
+        return $user->name;
     }
-    public function userStatus($id){
-        $user =User::where('id',$id)->first();
-        
-      if($user->trash == 1){
-        return $user->name." ( Deleted )";
-      }  
-      return $user->name ;
-    }
-   
 }

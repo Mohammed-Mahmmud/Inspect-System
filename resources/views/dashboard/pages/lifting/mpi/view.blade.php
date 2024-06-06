@@ -4,9 +4,8 @@
 @section('css')
     <style>
         .right {
-            text-align = right;
+            text-align=right;
         }
-
     </style>
     {{-- for edit icons --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -14,8 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     @if (Session::has('message'))
         <script>
-            toastr.success("{{Session::get('message')}}");
-
+            toastr.success("{{ Session::get('message') }}");
         </script>
     @endif
     <!-- Sweet Alert css-->
@@ -60,14 +58,16 @@
                                         <div class="col-sm-auto">
                                             <div>
                                                 <a class="btn btn-success add-btn"
-                                                   href="{{ route('mpi.reports.create') }}">{{ trans('Dashboard/Lifting/mpi.addmpi') }}</a>
+                                                    href="{{ route('mpi.reports.create') }}">{{ trans('Dashboard/Lifting/mpi.addmpi') }}</a>
                                             </div>
                                         </div>
                                         <div class="col-sm-auto">
-                                            <x-dashboard.layouts.deleteAll route="mpi.reports.deleteAll"></x-dashboard.layouts.deleteAll>
+                                            <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
+                                                :model="$mpis"></x-dashboard.layouts.delete-selected>
                                         </div>
                                         <div class="col-sm-auto">
-                                            <x-dashboard.layouts.downloadAll route="mpi.reports.downloadAll"></x-dashboard.layouts.downloadAll>
+                                            <x-dashboard.layouts.download-selected
+                                                :route="route('mpi.reports.downloadAll')"></x-dashboard.layouts.download-selected>
                                         </div>
 
                                         <div class="col-sm right">
@@ -79,18 +79,7 @@
                                                 {{-- filter  --}}
                                                 {{-- search  --}}
                                                 <div class="search-box ms-2">
-                                                    <form class="tablelist-form" action="{{ route('mpi.reports.search') }}"
-                                                          method="POST" enctype="multipart/form-data" id="submitForm">
-                                                        @csrf
-                                                        <div class="input-group">
-                                                            <input name="search" type="search" class="form-control"
-                                                                   placeholder="SearchBy serial or RepNum"
-                                                                   aria-label="by serial or RepNum"
-                                                                   aria-describedby="basic-addon2">
-                                                            <button class="input-group-text btn btn-primary"><i
-                                                                    class=" bx bx-search"></i></button>
-                                                        </div>
-                                                    </form>
+                                                    {{-- <x-dashboard.layouts.search></x-dashboard.layouts.search> --}}
                                                 </div>
                                                 {{-- search  --}}
                                             </div>
@@ -98,133 +87,134 @@
                                     </div>
 
                                 </div>
-                                <x-dashboard.layouts.error-verify errors="{{$errors}}"></x-dashboard.layouts.error-verify>
+                                <x-dashboard.layouts.error-verify
+                                    errors="{{ $errors }}"></x-dashboard.layouts.error-verify>
                                 <div class="table-responsive">
                                     <table class="table align-middle mb-0">
                                         <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col" style="width: 50px;">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkAll"
-                                                           value="option">
-                                                </div>
-                                            </th>
-                                            <th class="" data-sort="customer_id">#</th>
-                                            <th class="" data-sort="">
-                                            {{ trans('Dashboard/Lifting/mpi.report_number') }}
-                                            <th class="" data-sort="">
-                                                {{ trans('Dashboard/Lifting/mpi.date') }}</th>
-                                            <th class="" data-sort="">
-                                                {{ trans('Dashboard/Lifting/mpi.user') }}</th>
-                                            <th class="" data-sort="">
-                                                {{ trans('Dashboard/Lifting/mpi.serial') }}</th>
-                                            </th>
-                                            <th class="" data-sort="action">
-                                                {{ trans('Dashboard/Lifting/mpi.acceptance') }}</th>
-                                            <th class="" data-sort="action">
-                                                {{ trans('Dashboard/Lifting/mpi.action') }}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody class="list form-check-all">
-                                        {{-- index fn --}}
-                                        @php
-                                            $i = 1;
-                                        @endphp
-                                        @foreach ($mpis as $item)
                                             <tr>
-                                                <th scope="row">
+                                                <th scope="col" style="width: 50px;">
                                                     <div class="form-check">
-                                                        <input class="form-check-input chk_child" type="checkbox"
-                                                               id="chk_child_{{ $item->id }}" name="chk_child[]"
-                                                               value="{{ $item->id }}">
+                                                        <input class="form-check-input" type="checkbox" id="checkAll"
+                                                            value="option">
                                                     </div>
                                                 </th>
+                                                <th class="" data-sort="customer_id">#</th>
+                                                <th class="" data-sort="">
+                                                    {{ trans('Dashboard/Lifting/mpi.report_number') }}
+                                                <th class="" data-sort="">
+                                                    {{ trans('Dashboard/Lifting/mpi.date') }}</th>
+                                                <th class="" data-sort="">
+                                                    {{ trans('Dashboard/Lifting/mpi.user') }}</th>
+                                                <th class="" data-sort="">
+                                                    {{ trans('Dashboard/Lifting/mpi.serial') }}</th>
+                                                </th>
+                                                <th class="" data-sort="action">
+                                                    {{ trans('Dashboard/Lifting/mpi.acceptance') }}</th>
+                                                <th class="" data-sort="action">
+                                                    {{ trans('Dashboard/Lifting/mpi.action') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="list form-check-all">
+                                            {{-- index fn --}}
+                                            @php
+                                                $i = 1;
+                                            @endphp
+                                            @foreach ($mpis as $item)
+                                                <tr>
+                                                    <th scope="row">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input chk_child" type="checkbox"
+                                                                id="chk_child_{{ $item->id }}" name="chk_child[]"
+                                                                value="{{ $item->id }}">
+                                                        </div>
+                                                    </th>
 
-                                                <td class="id">{{ $i++ }}</td>
-                                                <td class="customer_full_name">{{ $item->report_number }}</td>
-                                                <td class="customer_full_name">{{ $item->date }}</td>
-                                                <td class="customer_full_name">{{ $item->getUser->name }}</td>
-                                                <td class="customer_full_name">{{ $item->serial }}</td>
+                                                    <td class="id">{{ $i++ }}</td>
+                                                    <td class="customer_full_name">{{ $item->report_number }}</td>
+                                                    <td class="customer_full_name">{{ $item->date }}</td>
+                                                    <td class="customer_full_name">{{ $item->getUser->name }}</td>
+                                                    <td class="customer_full_name">{{ $item->serial }}</td>
 
-                                                @if( $item->acceptance == 1)
-                                                    <td class="customer_full_name" style="color: green">Accepted</td>
-                                                @else
-                                                    <td class="customer_full_name" style="color: red"> Rejected</td>
-                                                @endif
-                                                <td>
-                                                    <div class="dropdown position-static">
-                                                        <button class="btn btn-subtle-secondary btn-sm btn-icon"
+                                                    @if ($item->acceptance == 1)
+                                                        <td class="customer_full_name" style="color: green">Accepted</td>
+                                                    @else
+                                                        <td class="customer_full_name" style="color: red"> Rejected</td>
+                                                    @endif
+                                                    <td>
+                                                        <div class="dropdown position-static">
+                                                            <button class="btn btn-subtle-secondary btn-sm btn-icon"
                                                                 role="button" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                            <i class="bi bi-three-dots-vertical"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end">
-                                                            <li><a class="dropdown-item" target="_blank"
-                                                                   href="{{ route('mpi.reports.show', $item->id) }}"><i
-                                                                        class="ph-eye align-middle me-1"></i>
-                                                                    View</a></li>
-                                                            <li><a class="dropdown-item" target="_blank"
-                                                                   href="{{ route('mpi.reports.repeat', $item->id) }}"><i
-                                                                        class=" bx bx-repeat me-1"></i>
-                                                                    Repeat</a></li>
-                                                            @if(auth()->user()->id == $item->user_id)
-                                                            <li><a class="dropdown-item edit-item-btn"
-                                                                   target="_blank"
-                                                                   href="{{ route('mpi.reports.edit', $item->id) }}"><i
-                                                                        class=" ph-pencil align-middle me-1"></i>
-                                                                    Edit</a></li>
-                                                            <li><a class="dropdown-item remove-item-btn" href=""
-                                                                   data-bs-toggle="modal"
-                                                                   data-bs-target="#delete{{ $item->id }}"><i
-                                                                        class="ph-trash align-middle me-1"></i>
-                                                                    Remove</a></li>
-                                                            @endif
-                                                            <li><a class="dropdown-item download-item-btn"
-                                                                   target="_blank"
-                                                                   href="{{ route('mpi.reports.download',$item->id) }}"><i
-                                                                        class="bx bx-download align-middle me-1"></i>
-                                                                    Download</a></li>
-                                                        </ul>
-                                                        <!-- Modal -->
-                                                        <form action="{{ route('mpi.reports.destroy', $item->id) }}"
-                                                              method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <div class="modal fade" id="delete{{ $item->id }}"
-                                                                 tabindex="-1" role="dialog"
-                                                                 aria-labelledby="exampleModalCenterTitle"
-                                                                 aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered"
-                                                                     role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="exampleModalLongTitle">
-                                                                                {{ trans('Dashboard/Lifting/mpi.remove') }}
-                                                                                {{ $item->report_number }}</h5>
-                                                                            <button type="button" class="btn-close"
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                                <li><a class="dropdown-item" target="_blank"
+                                                                        href="{{ route('mpi.reports.show', $item->id) }}"><i
+                                                                            class="ph-eye align-middle me-1"></i>
+                                                                        View</a></li>
+                                                                <li><a class="dropdown-item" target="_blank"
+                                                                        href="{{ route('mpi.reports.repeat', $item->id) }}"><i
+                                                                            class=" bx bx-repeat me-1"></i>
+                                                                        Repeat</a></li>
+                                                                @if (auth()->user()->id == $item->user_id)
+                                                                    <li><a class="dropdown-item edit-item-btn"
+                                                                            target="_blank"
+                                                                            href="{{ route('mpi.reports.edit', $item->id) }}"><i
+                                                                                class=" ph-pencil align-middle me-1"></i>
+                                                                            Edit</a></li>
+                                                                    <li><a class="dropdown-item remove-item-btn"
+                                                                            href="" data-bs-toggle="modal"
+                                                                            data-bs-target="#delete{{ $item->id }}"><i
+                                                                                class="ph-trash align-middle me-1"></i>
+                                                                            Remove</a></li>
+                                                                @endif
+                                                                <li><a class="dropdown-item download-item-btn"
+                                                                        target="_blank"
+                                                                        href="{{ route('mpi.reports.download', $item->id) }}"><i
+                                                                            class="bx bx-download align-middle me-1"></i>
+                                                                        Download</a></li>
+                                                            </ul>
+                                                            <!-- Modal -->
+                                                            <form action="{{ route('mpi.reports.destroy', $item->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <div class="modal fade" id="delete{{ $item->id }}"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="exampleModalCenterTitle"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered"
+                                                                        role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLongTitle">
+                                                                                    {{ trans('Dashboard/Lifting/mpi.remove') }}
+                                                                                    {{ $item->report_number }}</h5>
+                                                                                <button type="button" class="btn-close"
                                                                                     data-bs-dismiss="modal"
                                                                                     aria-label="Close"
                                                                                     id="close-modal"></button>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            {{ trans('Dashboard/Lifting/mpi.delete_message')}}
-                                                                            <br>{{$item->report_number }}
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                {{ trans('Dashboard/Lifting/mpi.delete_message') }}
+                                                                                <br>{{ $item->report_number }}
 
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div
-                                                                                class="hstack gap-2 justify-content-end">
-                                                                                <button type="button"
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div
+                                                                                    class="hstack gap-2 justify-content-end">
+                                                                                    <button type="button"
                                                                                         class="btn btn-info"
                                                                                         data-bs-dismiss="modal">{{ trans('Dashboard/Lifting/mpi.close') }}</button>
 
-                                                                                <button type="submit"
+                                                                                    <button type="submit"
                                                                                         class="btn btn-danger"
                                                                                         id="add-btn">{{ trans('Dashboard/Lifting/mpi.delete_mpi') }}</button>
-                                                        </form>
-                                                    </div>
+                                                            </form>
+                                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -264,8 +254,7 @@
 @section('js')
     @if (Session::has('message'))
         <script>
-            toastr.success("{{Session::get('message')}}");
-
+            toastr.success("{{ Session::get('message') }}");
         </script>
     @endif
     <!-- prismjs plugin -->
@@ -274,6 +263,6 @@
     <!-- listjs init -->
     <!-- Sweet Alerts js -->
     <script src="{{ asset('dashboard/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('dashboard/pages/lifting/mpi/js/script.js')}}"></script>
+    <script src="{{ asset('dashboard/pages/lifting/mpi/js/script.js') }}"></script>
 
 @endsection

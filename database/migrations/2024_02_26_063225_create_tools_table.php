@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('tools', function (Blueprint $table) {
             $table->id();
             $table->string('report_num')->nullable();
-            $table->string('work_order')->naullable();
+            $table->string('work_order')->nullable();
             $table->string('status')->nullable();
             $table->date('st_date')->nullable();
-            $table->date('fin_date')->nullable();           
-            $table->string('spec')->naullable();
-            $table->string('procedure')->naullable();
-            $table->string('type')->naullable();
-            $table->json('methods')->naullable();
-            $table->string('summary')->naullable();
-            $table->unsignedBigInteger('accept')->naullable();
+            $table->date('fin_date')->nullable();
+            $table->string('spec')->nullable();
+            $table->string('procedure')->nullable();
+            $table->string('type')->nullable();
+            $table->json('methods')->nullable();
+            $table->string('summary')->nullable();
+            $table->unsignedBigInteger('accept')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
             $table->foreign('accept')->references('id')->on('acceptance')->onUpdate('cascade');

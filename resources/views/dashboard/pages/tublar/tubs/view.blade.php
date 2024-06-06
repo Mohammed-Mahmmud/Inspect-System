@@ -2,14 +2,8 @@
     use App\Helper\TranslationHelper;
 @endphp
 @extends('dashboard.layouts.master')
-@section('title', TranslationHelper::translate('viewTitle'))
+@section('title', ucwords(TranslationHelper::translate('view' . ' ' . $type)))
 @section('css')
-
-    @if (Session::has('message'))
-        <script>
-            toastr.success("{{ Session::get('message') }}");
-        </script>
-    @endif
 @endsection
 @section('content')
     <div class="main-content">
@@ -36,12 +30,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <div id="customerList">
-                                    <div class="row g-4 mb-3">
+                                    <div class="row g-1 mb-3">
                                         <div class="col-sm-auto">
                                             <div>
                                                 <a class="btn btn-success add-btn"
                                                     href="{{ route('tubs.reports.create', ['type' => $type]) }}">{{ TranslationHelper::translate('new' . ' ' . $type) }}</a>
                                             </div>
+                                        </div>
+                                        <div class="col-sm-auto">
+                                            <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
+                                                :model="$tubs"></x-dashboard.layouts.delete-selected>
                                         </div>
                                         <div class="col-sm">
                                             <div class="d-flex justify-content-sm-end">
@@ -57,7 +55,12 @@
                                         <table class="table align-middle mb-0">
                                             <thead class="table-dark">
                                                 <tr>
-
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="checkAll"
+                                                                value="option">
+                                                        </div>
+                                                    </th>
                                                     <th class="" data-sort="customer_id">#</th>
                                                     <th class="" data-sort="">
                                                         {{ TranslationHelper::translate('report_number') }}</th>
@@ -86,7 +89,13 @@
                                                 @endphp
                                                 @foreach ($tubs as $item)
                                                     <tr>
-
+                                                        <th scope="row">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input chk_child" type="checkbox"
+                                                                    id="chk_child_{{ $item->id }}" name="chk_child[]"
+                                                                    value="{{ $item->id }}">
+                                                            </div>
+                                                        </th>
                                                         <td class="id">{{ $i++ }}</td>
                                                         <td class="customer_name ">{{ $item->report_num }}</td>
                                                         <td class="customer_full_name">{{ $item->date }}</td>
@@ -144,8 +153,9 @@
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <div class="modal fade" id="delete{{ $item->id }}"
-                                                                        tabindex="-1" role="dialog"
+                                                                    <div class="modal fade"
+                                                                        id="delete{{ $item->id }}" tabindex="-1"
+                                                                        role="dialog"
                                                                         aria-labelledby="exampleModalCenterTitle"
                                                                         aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered"
@@ -156,7 +166,8 @@
                                                                                         id="exampleModalLongTitle">
                                                                                         {{ TranslationHelper::translate('remove') }}
                                                                                         {{ $item->name }}</h5>
-                                                                                    <button type="button" class="btn-close"
+                                                                                    <button type="button"
+                                                                                        class="btn-close"
                                                                                         data-bs-dismiss="modal"
                                                                                         aria-label="Close"
                                                                                         id="close-modal"></button>

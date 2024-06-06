@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -17,48 +19,25 @@ class DashboardController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function deleteAll(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $ids = json_decode($request->data[0], true);
+            if (isset($ids)) {
+                foreach ($ids as $id) {
+                    try {
+                        $request->model::FindOrFail($id)->delete();
+                    } catch (ModelNotFoundException $e) {
+                        continue;
+                    }
+                }
+                toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
+            } else {
+                toastr(trans('Dashboard/toastr.unCheckedMessage'), 'warning', trans('Dashboard/toastr.unChecked'));
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+        return redirect()->back();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\JobTicket;
 
 use Illuminate\Support\Arr;
@@ -8,23 +9,20 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Dashboard\JobTicketContent;
 
 class StoreJobTicketAction
- {
+{
 
-    public function handle( array $data )
- {
-        $jobticket = JobTicket::create( array_merge( Arr::except( $data, [ 'content' ] ), [
-            'user_id' => Auth::user()->id
-        ] ) );
+    public function handle(array $data)
+    {
+        $jobticket = JobTicket::create(Arr::except($data, ['content']));
 
-        if ( !empty( $data[ 'content' ] ) ) {
-            foreach ( $data['content'] as $content ) {
-           JobTicketContent::create( array_merge( $content, [
-                'job_ticket_id' => $jobticket->id
-            ] ) );
+        if (!empty($data['content'])) {
+            foreach ($data['content'] as $item) {
+                $jobticket->getDesc()->create([
+                    'description' => json_encode($item),
+                ]);
+            }
         }
-        }
-
-        toastr( trans( 'Dashboard/toastr.succes' ) );
+        toastr(trans('Dashboard/toastr.succes'));
         return $jobticket;
     }
 }

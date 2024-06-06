@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('comment')->nullable();
             $table->string('type');
             $table->unsignedBigInteger('thorough_examination_id'); // Correct column name
-            $table->foreign('thorough_examination_id')->references('id')->on('thorough_examination');
+            $table->foreign('thorough_examination_id')->references('id')->on('thorough_examination')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
 
         });

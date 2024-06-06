@@ -26,11 +26,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Relation::MorphMap([
-            'Tools'=>Tools::class,
-            'media'=>media::class,
-            'User'=>User::class,
-            'Order'=>Order::class,
-            'Mpi'=>Mpi::class,
+            'Tools' => Tools::class,
+            'media' => media::class,
+            'User' => User::class,
+            'Order' => Order::class,
+            'Mpi' => Mpi::class,
 
         ]);
     }

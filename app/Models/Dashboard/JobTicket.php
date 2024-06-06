@@ -6,21 +6,38 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class JobTicket extends Model {
+class JobTicket extends Model
+{
     use HasFactory;
     protected $table = 'job_ticket';
     protected $guarded = [];
     public $timestamps = true;
 
-    public function getOrders() {
-        return $this->belongsTo( Order::class, 'order_id' );
+    public function getDesc()
+    {
+        return $this->morphMany(ReportDescription::class, 'model');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($tubs) {
+            $tubs->getDesc()->delete();
+        });
     }
 
-    public function getUsers() {
-        return $this->belongsTo( User::class, 'user_id' );
+    public function getOrders()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
-    public function jobTicketContents() {
-        return $this->hasMany( JobTicketContent::class,'job_ticket_id');
+    public function getUsers()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function jobTicketContents()
+    {
+        return $this->hasMany(JobTicketContent::class, 'job_ticket_id');
     }
 }

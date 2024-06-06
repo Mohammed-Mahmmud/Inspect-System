@@ -157,7 +157,8 @@
                     <tr>
                         <th>{{ TranslationHelper::translate(ucwords('edition')) }}
                         </th>
-                        <td>{{ isset(getDeCode($tubs->specification)['other']) ? ucwords(getDeCode($tubs->specification)['other']) : '---------------' }}
+                        <td style="height:4%;">
+                            {{ isset(getDeCode($tubs->specification)['other']) ? ucwords(getDeCode($tubs->specification)['other']) : '---------------' }}
                         </td>
                     </tr>
                 </tbody>

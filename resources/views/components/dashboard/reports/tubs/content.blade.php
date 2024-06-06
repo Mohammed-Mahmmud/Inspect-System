@@ -188,7 +188,7 @@
                                 <th><x-default.input-label for="edition"
                                         value="{{ TranslationHelper::translate(ucwords('edition')) }}"></x-default.input-label>
                                 </th>
-                                <td><x-default.input type="text" class="hidden" style="width:100%"
+                                <td><x-default.input type="text" class="hidden" style="width:100%;"
                                         name="specification[edition]" id="edition"
                                         value="{{ isset(getDeCode($tubs->specification)['edition']) ? getDeCode($tubs->specification)['edition'] : null }}"
                                         placeholder="--------------------------------------" /></td>

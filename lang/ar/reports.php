@@ -187,4 +187,7 @@
   'Weight' => 'Weight',
   'Nom W.t' => 'Nom W.t',
   'Od' => 'Od',
+  'view' => 'View',
+  'viewheavyweight' => 'Viewheavyweight',
+  'view heavyweight' => 'View heavyweight',
 );

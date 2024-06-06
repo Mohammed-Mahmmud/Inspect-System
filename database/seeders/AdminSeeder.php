@@ -14,15 +14,14 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        
-    // \App\Models\User::factory(10)->create();
 
-    DB::table('users')->insert([
-        'name' => "Admin",
-        'email' => 'admin@stc.com',
-        'role' => '1',
-        'password' => Hash::make('123456789'),
-    ]);
+        // \App\Models\User::factory(10)->create();
 
+        DB::table('users')->insert([
+            'name' => "Admin",
+            'email' => 'admin@stc.com',
+            'status' => 'Active',
+            'password' => Hash::make('123456789'),
+        ]);
     }
 }

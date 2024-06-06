@@ -89,8 +89,10 @@ class PermissionsSeeder extends Seeder
         // Create admin User and assign the role to him.
         $user = User::create([
             'name' => 'owner',
+            'full_name' => 'owner',
+            'status' => 'Active',
             'email' => 'owner@stc.eg.com',
-            'password' => Hash::make(123456789)
+            'password' => Hash::make('123456789')
         ]);
 
         $role = Role::create(['name' => 'owner']);

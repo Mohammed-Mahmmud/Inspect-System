@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,17 +9,25 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * name,
+     * full_name,
+     * status,
+     * email,
+     * password,
+     * created_by,
+     * updated_by
      */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('full_name');
+            $table->enum('status', User::STATUS)->default('Active');
             $table->string('email')->unique();
-            $table->integer('role');
+            $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->softDeletes();
-            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });

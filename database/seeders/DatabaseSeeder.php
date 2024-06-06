@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\PermissionsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,12 +20,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            // AdminSeeder::class,
+            AdminSeeder::class,
             // UserSeeder::class,
             // ModeratorSeeder::class,
             // CompanySeeder::class,
             // RigSeeder::class,
             // orderSeeder::class,
+            PermissionsSeeder::class,
         ]);
     }
 }

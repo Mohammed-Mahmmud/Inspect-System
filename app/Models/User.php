@@ -20,10 +20,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'full_name',
+        'status',
         'email',
         'password',
+        'created_by',
+        'updated_by',
     ];
-
+    const STATUS = ['Active', 'Not Active'];
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\JobTicket\JobTicketStoreRequest;
 use App\Http\Requests\Dashboard\JobTicket\JobTicketUpdateRequest;
 use App\Models\Dashboard\JobTicket;
-use App\Models\Dashboard\JobTicketContent;
-use App\Models\User;
 use App\ViewModels\Dashboard\JobTicketView\JobTicketViewModel;
 use Exception;
 use PDF;

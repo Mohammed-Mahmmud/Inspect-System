@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('reports.')->prefix('Reports')->group(
     function () {
         Route::post('Delete-All', [DashboardController::class, 'deleteAll'])->name('deleteAll');
-        Route::post('Search', [DashboardController::class, 'search'])->name('search');
+        Route::post('Search/{type?}', [DashboardController::class, 'search'])->name('search');
     }
 );
 // lifting reports 1)MPI

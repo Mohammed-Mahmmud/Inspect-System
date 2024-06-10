@@ -194,4 +194,8 @@
   'Password' => 'Password',
   'Report Number' => 'Report Number',
   'view drillpipe' => 'View drillpipe',
+  'view drillcollar' => 'View drillcollar',
+  'new mpi' => 'New mpi',
+  'mpi_reports' => 'Mpi reports',
+  'view mpi' => 'View mpi',
 );

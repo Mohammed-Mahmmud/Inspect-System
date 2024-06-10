@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('reports.')->prefix('Reports')->group(
     function () {
         Route::post('Delete-All', [DashboardController::class, 'deleteAll'])->name('deleteAll');
+        Route::post('Search', [DashboardController::class, 'search'])->name('search');
     }
 );
 // lifting reports 1)MPI
@@ -23,7 +24,6 @@ Route::name('mpi.')->prefix('MPI')->group(function () {
     Route::get('Download/{id}', [MpiController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [MpiController::class, 'repeat'])->name('reports.repeat');
     Route::post('Download-All', [MpiController::class, 'downloadAll'])->name('reports.downloadAll');
-    Route::post('Search', [MpiController::class, 'search'])->name('reports.search');
     Route::resource('Reports', MpiController::class)->names('reports');
 });
 
@@ -31,14 +31,14 @@ Route::name('mpi.')->prefix('MPI')->group(function () {
 Route::name('examination.')->prefix('Thorough-Examination')->group(function () {
     Route::get('Download/{id}', [ExaminationController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [ExaminationController::class, 'repeat'])->name('reports.repeat');
-    Route::post('Search', [ExaminationController::class, 'search'])->name('reports.search');
+    Route::post('Filter', [ExaminationController::class, 'filter'])->name('reports.filter');
     Route::resource('Shakle-Size', ShakleSizeController::class)->names('shaklesize');
     Route::resource('Reports', ExaminationController::class)->names('reports');
 });
 
 //   mud jar
 Route::name('mud-jar.')->prefix('Mud-Jar')->group(function () {
-    Route::post('Search', [MudJarController::class, 'search'])->name('reports.search');
+    Route::post('Filter', [MudJarController::class, 'filter'])->name('reports.filter');
     Route::get('Download/{id}', [MudJarController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [MudJarController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Reports', MudJarController::class)->names('reports');
@@ -48,7 +48,7 @@ Route::name('mud-jar.')->prefix('Mud-Jar')->group(function () {
 Route::name('tools.')->prefix('Tools')->group(function () {
     Route::get('Download/{id}', [ToolsController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [ToolsController::class, 'repeat'])->name('reports.repeat');
-    Route::post('Search', [ToolsController::class, 'search'])->name('reports.search');
+    Route::post('Filter', [ToolsController::class, 'filter'])->name('reports.filter');
     Route::resource('Reports', ToolsController::class)->names('reports');
 });
 
@@ -56,7 +56,7 @@ Route::name('tools.')->prefix('Tools')->group(function () {
 Route::name('tubs.')->prefix('Tubs')->group(function () {
     Route::get('Download/{id}', [TubsController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [TubsController::class, 'repeat'])->name('reports.repeat');
-    Route::post('Search', [TubsController::class, 'search'])->name('reports.search');
+    Route::post('Filter', [TubsController::class, 'filter'])->name('reports.filter');
     Route::resource('Reports', TubsController::class)->names('reports');
 });
 

@@ -9,90 +9,96 @@ use App\Http\Requests\Dashboard\Lifting\ShakleSize\ShakleSizeStoreRequest;
 use App\Http\Requests\Dashboard\Lifting\ShakleSize\ShakleSizeUpdateRequest;
 use App\Models\Dashboard\Lifting\ShakleSize;
 use Exception;
-use Illuminate\Http\Request;
 
-class ShakleSizeController extends Controller {
+class ShakleSizeController extends Controller
+{
     /**
-    * Display a listing of the resource.
-    */
+     * Display a listing of the resource.
+     */
 
-    public function index() {
+    public function index()
+    {
         try {
-            $shaklesizes  = ShakleSize::paginate( 15 );
-            return view( 'dashboard.pages.lifting.ShakleSize.view', compact( 'shaklesizes' ) );
-
-        } catch( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            $shaklesizes  = ShakleSize::paginate(15);
+            return view('dashboard.pages.lifting.ShakleSize.view', compact('shaklesizes'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     /**
-    * Show the form for creating a new resource.
-    */
+     * Show the form for creating a new resource.
+     */
 
-    public function create() {
-        return redirect()->route( 'examination.shaklesize.index' );
+    public function create()
+    {
+        return redirect()->route('examination.shaklesize.index');
     }
 
     /**
-    * Store a newly created resource in storage.
-    */
+     * Store a newly created resource in storage.
+     */
 
-    public function store( ShakleSizeStoreRequest $request ) {
+    public function store(ShakleSizeStoreRequest $request)
+    {
         try {
-            app( StoreShakleSizeAction::class )->handle( $request->validated() );
-            return redirect()->route( 'examination.shaklesize.index' );
-        } catch( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            app(StoreShakleSizeAction::class)->handle($request->validated());
+            return redirect()->route('examination.shaklesize.index');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     /**
-    * Display the specified resource.
-    */
+     * Display the specified resource.
+     */
 
-    public function show( string $id ) {
+    public function show(string $id)
+    {
         //
     }
 
     /**
-    * Show the form for editing the specified resource.
-    */
+     * Show the form for editing the specified resource.
+     */
 
-    public function edit( string $id ) {
+    public function edit(string $id)
+    {
         try {
-            $shaklesize = ShakleSize::findorfail( $id );
-            return view( 'dashboard.pages.lifting.ShakleSize.view', compact( 'shaklesize' ) );
-        } catch( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error'=>$e->getMessage() ] );
+            $shaklesize = ShakleSize::findorfail($id);
+            return view('dashboard.pages.lifting.ShakleSize.view', compact('shaklesize'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     /**
-    * Update the specified resource in storage.
-    */
+     * Update the specified resource in storage.
+     */
 
-    public function update( ShakleSizeUpdateRequest $request, $id ) {
+    public function update(ShakleSizeUpdateRequest $request, $id)
+    {
         try {
-            app( UpdateShakleSizeAction::class )->handle( ShakleSize::findOrFail( $id ), $request->validated() );
-            return redirect()->route( 'examination.shaklesize.index' );
-        } catch( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+            app(UpdateShakleSizeAction::class)->handle(ShakleSize::findOrFail($id), $request->validated());
+            return redirect()->route('examination.shaklesize.index');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     /**
-    * Remove the specified resource from storage.
-    */
+     * Remove the specified resource from storage.
+     */
 
-    public function destroy( string $id ) {
+    public function destroy(string $id)
+    {
 
         try {
-            ShakleSize::findorfail( $id )->delete();
-            toastr( trans( 'Dashboard/toastr.destroy' ), 'error', trans( 'Dashboard/toastr.deleted' ) );
+            ShakleSize::findorfail($id)->delete();
+            toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return back();
-        } catch( Exception $e ) {
-            return redirect()->back()->withErrors( [ 'error' => $e->getMessage() ] );
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 }

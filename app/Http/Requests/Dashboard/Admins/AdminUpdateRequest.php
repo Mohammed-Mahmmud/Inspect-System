@@ -22,13 +22,14 @@ class AdminUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-           
-                'name'=>['required'],
-                'full_name'=>['nullable'],
-                'email'=>['required'],
-                'password'=>['nullable'],
-                'trash'=>['nullable'],
-            
+
+            'name' => ['required'],
+            'full_name' => ['nullable'],
+            'email' => ['required'],
+            'password' => ['nullable'],
+            'status' => ['nullable'],
+
+
 
         ];
     }

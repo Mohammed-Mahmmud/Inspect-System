@@ -11,9 +11,12 @@ class Search extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $route = null)
+    public $route, $model, $type;
+    public function __construct($route = null, $model = null, $type = null)
     {
+        $this->model = $model->first() ? get_class($model->first()) : redirect()->back();
         $this->route = $route ?? abort(404);
+        $this->type = $type ?? "";
     }
 
     /**

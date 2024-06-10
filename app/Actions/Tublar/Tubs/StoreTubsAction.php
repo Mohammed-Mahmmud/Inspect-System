@@ -29,7 +29,7 @@ class StoreTubsAction
 
         $tubsCount = Tubs::where('order_id', $tubs->order_id)->where('type', $data['type'])->count();
         $tubs->update([
-            'report_num' =>  $tubs->getOrders->number . '-' . strtoupper($tubs->type) . '-' . ($tubsCount),
+            'report_number' =>  $tubs->getOrders->number . '-' . strtoupper($tubs->type) . '-' . ($tubsCount),
         ]);
         toastr(trans('Dashboard/toastr.succes'));
         return $tubs;

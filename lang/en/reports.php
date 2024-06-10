@@ -190,4 +190,8 @@
   'view' => 'View',
   'viewheavyweight' => 'Viewheavyweight',
   'view heavyweight' => 'View heavyweight',
+  'Status' => 'Status',
+  'Password' => 'Password',
+  'Report Number' => 'Report Number',
+  'view drillpipe' => 'View drillpipe',
 );

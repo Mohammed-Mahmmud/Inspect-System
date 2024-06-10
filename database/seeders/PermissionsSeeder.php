@@ -15,7 +15,7 @@ class PermissionsSeeder extends Seeder
      * Run the database seeds.
      */
     private $permissions = [
-        'role.list',
+        'role.view',
         'role.create',
         'role.edit',
         'role.delete',

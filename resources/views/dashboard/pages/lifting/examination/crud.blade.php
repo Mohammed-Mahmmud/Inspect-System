@@ -62,14 +62,14 @@
                                                     @endif
 
                                                     <x-form.input_label class="col-4"
-                                                        value="{{ $examination->exam_date ?? '' }}"
+                                                        value="{{ $examination->date ?? '' }}"
                                                         placeholder="Enter Thorugh Examination Date"
-                                                        label="Thorugh Examination Date :" type="date" name="exam_date"
+                                                        label="Thorugh Examination Date :" type="date" name="date"
                                                         id="exam_date" />
                                                     <x-form.input_label class="col-4" placeholder="Enter Identified Number"
-                                                        value="{{ $examination->identified_number ?? '' }}"
-                                                        label="Identified Number :" type="text" name="identified_number"
-                                                        id="identified_number" />
+                                                        value="{{ $examination->serial ?? '' }}"
+                                                        label="Identified Number :" type="text" name="serial"
+                                                        id="serial" />
                                                     <x-form.input_label class="col-4" placeholder="Enter QTY"
                                                         value="{{ $examination->qty ?? '' }}" label="QTY :" type="text"
                                                         name="qty" id="qty" />

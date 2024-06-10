@@ -21,7 +21,7 @@ class UpdateMudJarAction
         $mudJar->update(array_merge(Arr::except($data, $exceptedItems), $methods));
         $mudjarCount = MudJar::where('order_id', $mudJar->order_id)->where('type', $data['type'])->count();
         $mudJar->update([
-            'report_num' =>  $mudJar->getOrders->number . '-' . strtoupper($mudJar->type) . '-' . ($mudjarCount),
+            'report_number' =>  $mudJar->getOrders->number . '-' . strtoupper($mudJar->type) . '-' . ($mudjarCount),
         ]);
 
         $mudJar->update(array_merge(Arr::except($data, $exceptedItems), $methods));

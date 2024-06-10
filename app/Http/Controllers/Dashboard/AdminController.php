@@ -3,30 +3,34 @@
 namespace App\Http\Controllers\Dashboard;
 
 use Exception;
-use App\Models\Dashboard\Admin;
-use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use App\Actions\Admins\StoreAdminAction;
 use App\Actions\Admins\UpdateAdminAction;
 use App\Http\Requests\Dashboard\Admins\AdminStoreRequest;
 use App\Http\Requests\Dashboard\Admins\AdminUpdateRequest;
-
+use App\Models\User;
 
 class AdminController extends Controller
 {
+    protected $userStatus;
+    public function __construct()
+    {
+        $this->userStatus = User::STATUS;
+    }
+
     /**
      * Display a listing of the resource.
      */
 
     public function index()
     {
-        try{
-            $admins = Admin::where('trash',0)->where('role',1)->paginate(15);
-            return view('dashboard.pages.admins.view',compact('admins')); 
-        }
-        catch(Exception $e){
+        try {
+            $admins = User::paginate(15);
+            $userStatus = $this->userStatus;
+            return view('dashboard.pages.admins.view', compact('admins', 'userStatus'));
+        } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-           }
+        }
     }
 
     /**
@@ -34,30 +38,30 @@ class AdminController extends Controller
      */
     public function create()
     {
-        try{
-         return view('dashboard.pages.admins.view');
+        try {
+            $userStatus = $this->userStatus;
+            return view('dashboard.pages.admins.view', compact('userStatus'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
-    catch(Exception $e){
-        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-       } 
-}
     /**
      * Store a newly created resource in storage.
      */
     public function store(AdminStoreRequest $request)
     {
-       try{
-        app(StoreAdminAction::class)->handle($request->validated());
-        return redirect()->route('admins.index');
-     }catch(Exception $e){
+        try {
+            app(StoreAdminAction::class)->handle($request->validated());
+            return redirect()->route('admins.index');
+        } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-           }
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Admin $admin)
+    public function show($id)
     {
         //
     }
@@ -66,47 +70,41 @@ class AdminController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {       
-      try{
-        $admin = Admin::findorfail($id);
-        return view('dashboard.pages.admins.view',compact('admin'));
-    }
-    catch(Exception $e){
-        return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
-       }
+    {
+        try {
+            $admin = User::FindOrFail($id);
+            $userStatus = $this->userStatus;
+            return view('dashboard.pages.admins.view', compact('admin', 'userStatus'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(AdminUpdateRequest $request, Admin $admin)
-    { 
-        try{
-        app(UpdateAdminAction::class)->handle($admin,$request->validated());
-        return redirect()->route('admins.index');
-    }
-        catch(Exception $e){
+    public function update(AdminUpdateRequest $request, $id)
+    {
+        try {
+            $user = User::FindOrFail($id);
+            app(UpdateAdminAction::class)->handle($user, $request->validated());
+            return redirect()->route('admins.index');
+        } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-           }
+        }
     }
-    
-
     /**
      * Remove the specified resource from storage.
      */
 
-    public function destroy( $id)
+    public function destroy($id)
     {
-        $admin = Admin::findorfail($id);
-
-        try{
-        // $admin->delete();
-        $admin->update([
-            'trash' =>1
-        ]);
-           toastr(trans('Dashboard/toastr.destroy') ,'error',trans('Dashboard/toastr.deleted'));
-          return back();
-        }catch(Exception $e){
+        $admin = User::FindOrFail($id);
+        try {
+            $admin->delete();
+            toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
+            return back();
+        } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-           }
         }
+    }
 }

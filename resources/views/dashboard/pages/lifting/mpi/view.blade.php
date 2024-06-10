@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
-                                                :model="$mpis"></x-dashboard.layouts.delete-selected>
+                                                :model="$data"></x-dashboard.layouts.delete-selected>
                                         </div>
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.download-selected
@@ -76,16 +76,17 @@
                                                 <div class="search-box ms-2">
                                                     @include('dashboard.pages.lifting.mpi.modal.filter')
                                                 </div>
-                                                {{-- filter  --}}
+                                                {{-- end filter  --}}
+
                                                 {{-- search  --}}
                                                 <div class="search-box ms-2">
-                                                    {{-- <x-dashboard.layouts.search></x-dashboard.layouts.search> --}}
+                                                    <x-dashboard.layouts.search :route="route('mpi.reports.index')" :model="$data"
+                                                        :type="'mpi'"></x-dashboard.layouts.search>
                                                 </div>
-                                                {{-- search  --}}
+                                                {{-- end search  --}}
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <x-dashboard.layouts.error-verify
                                     errors="{{ $errors }}"></x-dashboard.layouts.error-verify>
@@ -120,7 +121,7 @@
                                             @php
                                                 $i = 1;
                                             @endphp
-                                            @foreach ($mpis as $item)
+                                            @foreach ($data as $item)
                                                 <tr>
                                                     <th scope="row">
                                                         <div class="form-check">
@@ -230,7 +231,7 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                {{ $mpis->links('pagination::bootstrap-5') }}
+                {{ $data->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div><!-- end card -->

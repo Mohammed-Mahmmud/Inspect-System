@@ -24,11 +24,10 @@ class ExaminationController extends Controller
     public function index(Request $request)
     {
         try {
-            $examinations = Examination::where('type', $request->type)->paginate('20')->withQueryString();
+            $data = session('searchedItems', Examination::where('type', $request->type)->paginate('30')->withQueryString());
+            $type = session('type', $request->type);
             $orders = Order::get();
-            $type = $request->type;
-
-            return view('dashboard.pages.lifting.examination.view', compact('examinations', 'orders', 'type'));
+            return view('dashboard.pages.lifting.examination.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -139,13 +138,11 @@ class ExaminationController extends Controller
         return $pdf->download($examination->report_number . '.pdf');
     }
 
-    public function search(Request $request)
+    public function filter(Request $request)
     {
         try {
-
-
             $examinations = Examination::where('type', $request->type)->where(function ($query) use ($request) {
-                $query->where('order_id', $request->order_id)->orWhere('exam_date', $request->exam_date);
+                $query->where('order_id', $request->order_id)->orWhere('date', $request->date);
             })->paginate(20);
 
             $orders = Order::get();

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dashboard\Order;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class DashboardController extends Controller
 {
@@ -39,5 +41,28 @@ class DashboardController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
         return redirect()->back();
+    }
+    public function search(Request $request)
+    {
+        try {
+            if (isset($request->search) && class_exists($request->model)) {
+                $searchedItems = $request->model::where('type', $request->type)->whereAny(['report_number', 'serial', 'date'], 'LIKE', "%$request->search%")->paginate('30');
+
+                if (!empty($searchedItems->items())) {
+                    toastr($searchedItems->count() . ' ' . "Result Found", 'success', 'Success Search');
+                    return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
+                } else {
+                    $searchedItems = $request->model::where('type', $request->type)->paginate('30');
+                    toastr('Result Not Found', 'error', 'Failed Search');
+                    return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
+                }
+            } else {
+                $searchedItems = $request->model::where('type', $request->type)->paginate('30');
+                toastr('Result Not Found', 'warning', 'Failed Search');
+                return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

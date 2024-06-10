@@ -22,10 +22,12 @@ class AdminStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required'],
-            'full_name'=>['nullable'],
-            'email'=>['required'],
-            'password'=>['required'],
+            'name' => ['required'],
+            'full_name' => ['nullable'],
+            'email' => ['required'],
+            'password' => ['required'],
+            'status' => ['nullable'],
+
         ];
     }
     public function messages()

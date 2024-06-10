@@ -30,7 +30,7 @@ class StoreToolsAction
 
         $toolsCount = Tools::where('order_id', $tools->order_id)->where('type', $data['type'])->count();
         $tools->update([
-            'report_num' =>  $tools->getOrders->number . '-' . strtoupper($tools->type) . '-' . ($toolsCount),
+            'report_number' =>  $tools->getOrders->number . '-' . strtoupper($tools->type) . '-' . ($toolsCount),
         ]);
         toastr(trans('Dashboard/toastr.succes'));
         return $tools;

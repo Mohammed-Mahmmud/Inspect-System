@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
-                                                :model="$examinations"></x-dashboard.layouts.delete-selected>
+                                                :model="$data"></x-dashboard.layouts.delete-selected>
                                         </div>
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.download-selected
@@ -46,13 +46,15 @@
                                         <div class="col-sm">
                                             <div class="d-flex justify-content-sm-end">
                                                 <div class="search-box ms-2">
-                                                    @include('dashboard.pages.lifting.examination.modal.search')
+                                                    @include('dashboard.pages.lifting.examination.modal.filter')
                                                     {{-- <input type="text" class="form-control search" placeholder="Search...">  --}}
                                                 </div>
+                                                {{-- search  --}}
                                                 <div class="search-box ms-2">
-                                                    {{-- <x-dashboard.layouts.search
-                                                        :route="route('mpi.reports.deleteAll')"></x-dashboard.layouts.search> --}}
+                                                    <x-dashboard.layouts.search :route="route('examination.reports.index', ['type' => $type])" :model="$data"
+                                                        :type="$type"></x-dashboard.layouts.search>
                                                 </div>
+                                                {{-- end search  --}}
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +93,7 @@
                                                 @php
                                                     $i = 1;
                                                 @endphp
-                                                @foreach ($examinations as $item)
+                                                @foreach ($data as $item)
                                                     <tr>
                                                         <th scope="row">
                                                             <div class="form-check">
@@ -102,7 +104,7 @@
                                                         </th>
                                                         <td class="id">{{ $i++ }}</td>
                                                         <td class="customer_name ">{{ $item->report_number }}</td>
-                                                        <td class="customer_full_name">{{ $item->exam_date }}</td>
+                                                        <td class="customer_full_name">{{ $item->date }}</td>
                                                         <td class="customer_full_name">{{ $item->getUser->full_name }}</td>
                                                         {{-- <td class="customer_full_name">{{$item->next_exam}}</td> --}}
                                                         @if ($type == 'thorough')
@@ -196,7 +198,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end">
-                                        {{ $examinations->links('pagination::bootstrap-5') }}
+                                        {{ $data->links('pagination::bootstrap-5') }}
                                     </div>
                                 </div>
                             </div><!-- end card -->

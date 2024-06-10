@@ -33,9 +33,9 @@ class MpiController extends Controller
     public function index()
     {
         try {
-            $mpis = Mpi::paginate('15');
+            $data = session('searchedItems', Mpi::paginate('30'));
             $orders = Order::get();
-            return view('dashboard.pages.lifting.mpi.view', compact('mpis', 'orders'));
+            return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -139,22 +139,12 @@ class MpiController extends Controller
     {
         try {
 
-            $mpis = Mpi::where('order_id', $request->order_id)->orWhere('serial', $request->serial)->paginate('100');
+            $dara = Mpi::where('order_id', $request->order_id)->orWhere('serial', $request->serial)->paginate('100');
 
             $orders = Order::get();
-            return view('dashboard.pages.lifting.mpi.view', compact('mpis', 'orders'));
+            return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-    }
-
-    public function search(Request $request)
-    {
-        // dd( $request->all() );
-
-        $mpis = Mpi::whereAny(['report_number', 'serial', 'date'], 'LIKE', "%$request->search%")->paginate('30');
-
-        $orders = Order::get();
-        return view('dashboard.pages.lifting.mpi.view', compact('mpis', 'orders'));
     }
 }

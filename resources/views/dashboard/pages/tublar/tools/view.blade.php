@@ -39,13 +39,19 @@
                                         </div>
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
-                                                :model="$tools"></x-dashboard.layouts.delete-selected>
+                                                :model="$data"></x-dashboard.layouts.delete-selected>
                                         </div>
                                         <div class="col-sm">
                                             <div class="d-flex justify-content-sm-end">
                                                 <div class="search-box ms-2">
-                                                    @include('dashboard.pages.tublar.tools.modal.search')
+                                                    @include('dashboard.pages.tublar.tools.modal.filter')
                                                 </div>
+                                                {{-- search  --}}
+                                                <div class="search-box ms-2">
+                                                    <x-dashboard.layouts.search :route="route('tools.reports.index', ['type' => $type])" :model="$data"
+                                                        :type="$type"></x-dashboard.layouts.search>
+                                                </div>
+                                                {{-- end search  --}}
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +69,7 @@
                                                     </th>
                                                     <th class="" data-sort="customer_id">#</th>
                                                     <th class="" data-sort="">
-                                                        {{ trans('Dashboard/Tublar/tools.report_number') }}</th>
+                                                        {{ TranslationHelper::translate(ucwords('report number')) }}</th>
                                                     <th class="" data-sort="">
                                                         {{ trans('Dashboard/Tublar/tools.report_date') }}</th>
                                                     <th class="" data-sort="">
@@ -85,7 +91,7 @@
                                                 @php
                                                     $i = 1;
                                                 @endphp
-                                                @foreach ($tools as $item)
+                                                @foreach ($data as $item)
                                                     <tr>
                                                         <td scope="row">
                                                             <div class="form-check">
@@ -95,8 +101,8 @@
                                                             </div>
                                                         </td>
                                                         <td class="id">{{ $i++ }}</td>
-                                                        <td class="customer_name ">{{ $item->report_num }}</td>
-                                                        <td class="customer_full_name">{{ $item->st_date }}</td>
+                                                        <td class="customer_name ">{{ $item->report_number }}</td>
+                                                        <td class="customer_full_name">{{ $item->date }}</td>
                                                         <td class="customer_full_name">{{ $item->fin_date }}</td>
                                                         <td class="customer_full_name">{{ $item->getUser->full_name }}</td>
 
@@ -190,7 +196,7 @@
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    {{ trans('Dashboard/Tublar/tools.delete_message') }}<br>{{ $item->report_num }}
+                                                                                    {{ trans('Dashboard/Tublar/tools.delete_message') }}<br>{{ $item->report_number }}
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <div
@@ -219,7 +225,7 @@
                 </div>
 
                 <div class="d-flex justify-content-end">
-                    {{ $tools->links('pagination::bootstrap-5') }}
+                    {{ $data->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div><!-- end card -->

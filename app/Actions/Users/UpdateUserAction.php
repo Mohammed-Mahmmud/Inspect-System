@@ -1,27 +1,21 @@
 <?php
+
 namespace App\Actions\Users;
 
-use Illuminate\Support\Arr;
-use App\Models\Dashboard\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UpdateUserAction
 {
 
-    public function handle(Admin $user , array $data)
+    public function handle(User $user, array $data)
     {
+        $user->update(array_merge($data, [
+            'updated_by' => Auth::user()->id,
 
-        $user->update(array_merge($data,[
-            'role' => 2 ,
-            'updated_by' =>Auth::user()->id,
-            'created_by' =>0,
-            'trash' => 0,
-            ]));
-            toastr(trans('Dashboard/toastr.info'),'info',trans('Dashboard/toastr.updated'));
-            return $user;
-
-
+        ]));
+        toastr(trans('Dashboard/toastr.info'), 'info', trans('Dashboard/toastr.updated'));
+        return $user;
     }
 }

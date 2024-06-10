@@ -22,7 +22,7 @@ class StoreExaminationAction
         $examination = Examination::create(array_merge(Arr::except($data, ['checklist', 'checklist_type']), [
             'user_id' => Auth::user()->id,
             'carried_exam' => isset($data['carried_exam']) ? json_encode($data['carried_exam']) : null,
-            'next_exam' => !is_null($nextExam) ? getNextDate($data['exam_date'], $nextExam) : null,
+            'next_exam' => !is_null($nextExam) ? getNextDate($data['date'], $nextExam) : null,
         ]));
 
         if (isset($data['thorough_type'])) {

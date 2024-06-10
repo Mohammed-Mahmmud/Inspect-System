@@ -35,7 +35,7 @@
             <td class="table1-label">Client:</td>
             <td class="table1-content">{{ $mudjar->getOrders->companies->name }}</td>
             <td class="table1-label">Report No :</td>
-            <td class="table1-content" colspan="2">{{ $mudjar->report_num }}</td>
+            <td class="table1-content" colspan="2">{{ $mudjar->report_number }}</td>
         </tr>
         <tr>
             <td class="table1-label">Location :</td>

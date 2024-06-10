@@ -25,12 +25,10 @@ class ToolsController extends Controller
     public function index(Request $request)
     {
         try {
-
-            $tools = Tools::where('type', $request->type)->paginate('20')->withQueryString();
+            $data = session('searchedItems',  Tools::where('type', $request->type)->paginate('30')->withQueryString());
+            $type = session('type', $request->type);
             $orders = Order::get();
-            $type = $request->type;
-
-            return view('dashboard.pages.tublar.tools.view', compact('tools', 'orders', 'type'));
+            return view('dashboard.pages.tublar.tools.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -142,7 +140,7 @@ class ToolsController extends Controller
         }
     }
 
-    public function search(Request $request)
+    public function filter(Request $request)
     {
         try {
             return view('dashboard.pages.tublar.tools.view', new ToolsSearchModel($request));

@@ -9,7 +9,6 @@ use App\Http\Requests\Dashboard\Tublar\MudJar\MudJarStoreRequest;
 use App\Http\Requests\Dashboard\Tublar\MudJar\MudJarUpdateRequest;
 use App\Models\Dashboard\Order;
 use App\Models\Dashboard\Tublar\MudJar\MudJar;
-use App\Models\Dashboard\Tublar\MudJar\MudJarBody;
 use App\ViewModels\Dashboard\MudJarView\MudJarViewModel;
 use Exception;
 use PDF;
@@ -24,10 +23,10 @@ class MudJarController extends Controller
     public function index(Request $request)
     {
         try {
-            $mudjars = MudJar::where('type', $request->type)->paginate('20')->withQueryString();
+            $data = session('searchedItems', MudJar::where('type', $request->type)->paginate('30')->withQueryString());
+            $type = session('type', $request->type);
             $orders = Order::get();
-            $type = $request->type;
-            return view('dashboard.pages.tublar.mud-jar.view', compact('mudjars', 'orders', 'type'));
+            return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -141,17 +140,17 @@ class MudJarController extends Controller
         }
     }
 
-    public function search(Request $request)
+    public function filter(Request $request)
     {
         try {
 
-            $mudjars = MudJar::where('type', $request->type)->where(function ($query) use ($request) {
+            $data = MudJar::where('type', $request->type)->where(function ($query) use ($request) {
                 $query->where('order_id', $request->order_id)->orWhere('date', $request->date);
             })->paginate(20)->withQueryString();
 
             $orders = Order::get();
             $type = $request->type;
-            return view('dashboard.pages.tublar.mud-jar.view', compact('mudjars', 'orders', 'type'));
+            return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

@@ -20,7 +20,7 @@ class CompanySeeder extends Seeder
             'password' => "DpkGI33461",
         ]);
         DB::table('company')->insert([
-            'name' => "S T",
+            'name' => "ST",
             'full_name' => 'Sinothrow',
             'email' => 'ST@stc-eg.com',
             'password' => "DpkGI33461",
@@ -32,7 +32,7 @@ class CompanySeeder extends Seeder
             'password' => "DpkGI33461",
         ]);
         DB::table('company')->insert([
-            'name' => "Saknafta",
+            'name' => "SAKNAFTA",
             'full_name' => 'Saknafta',
             'email' => 'Saknafta@stc-eg.com',
             'password' => "DpkGI33461",

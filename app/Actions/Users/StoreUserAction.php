@@ -15,8 +15,8 @@ class StoreUserAction
         } else {
             $user = User::create(array_merge($data, [
                 'created_by' => Auth::user()->id,
-
             ]));
+            isset($data['roles']) ? $user->assignRole($data['roles']) : '';
             toastr(trans('Dashboard/toastr.succes'));
             return $user;
         }

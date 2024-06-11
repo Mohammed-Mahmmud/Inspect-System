@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Admins;
+namespace App\Http\Requests\Dashboard\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminStoreRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class AdminStoreRequest extends FormRequest
             'email' => ['required'],
             'password' => ['required'],
             'status' => ['nullable'],
-
+            'roles' => ['required'],
         ];
     }
     public function messages()

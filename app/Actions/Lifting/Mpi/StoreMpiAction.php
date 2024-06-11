@@ -40,7 +40,7 @@ class StoreMpiAction
             'report_number' => $mpi->getOrders->number . '-' . strtoupper($mpi->type) . '-' . $mpiCount
         ]);
 
-        toastr(trans('Dashboard/toastr.succes'));
+
         return $mpi;
     }
 }

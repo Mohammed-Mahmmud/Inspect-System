@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Profile;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,11 +30,12 @@ class RoleController extends Controller
 
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id', 'DESC')->paginate(5);
-        dd($roles);
-        return view('dashboard.pages.roles.index', compact('roles'))
+        $roles = Role::orderBy('id', 'DESC')->paginate(30);
+        $permissions = Permission::get(); // 'id' as key, 'name' as value
+        return view('dashboard.pages.roles.index', compact('roles', 'permissions'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,8 +45,8 @@ class RoleController extends Controller
 
     public function create()
     {
-        $permission = Permission::get();
-        return view('dashboard.pages.roles.create', compact('permission'));
+        $permissions = Permission::pluck('name')->toArray();
+        return view('dashboard.pages.roles.index', compact('permission'));
     }
     /**
      * Store a newly created resource in storage.
@@ -56,13 +57,14 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
         ]);
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
-        return redirect()->route('dashboard.pages.roles.index')
+        return redirect()->route('dashboard.roles.index')
             ->with('success', 'Role created successfully');
     }
     /**
@@ -78,7 +80,7 @@ class RoleController extends Controller
         $rolePermissions = Permission::join('role_has_permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
             ->where('role_has_permissions.role_id', $id)
             ->get();
-        return view('dashboard.pages.roles.show', compact('role', 'rolePermissions'));
+        return view('dashboard.pages.roles.index', compact('role', 'rolePermissions'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -90,11 +92,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-        $permission = Permission::get();
         $rolePermissions = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
-        return view('dashboard.pages.roles.edit', compact('role', 'permission', 'rolePermissions'));
+        return view('dashboard.pages.roles.index', compact('role', 'permission', 'rolePermissions'));
     }
     /**
      * Update the specified resource in storage.
@@ -114,7 +115,7 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->save();
         $role->syncPermissions($request->input('permission'));
-        return redirect()->route('dashboard.pages.roles.index')
+        return redirect()->route('dashboard.roles.index')
             ->with('success', 'Role updated successfully');
     }
     /**
@@ -127,7 +128,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table('roles')->where('id', $id)->delete();
-        return redirect()->route('dashboard.pages.roles.index')
+        return redirect()->route('dashboard.roles.index')
             ->with('success', 'Role deleted successfully');
     }
 }

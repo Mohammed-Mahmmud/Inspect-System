@@ -45,17 +45,17 @@ class DashboardController extends Controller
     {
         try {
             if (isset($request->search) && class_exists($request->model)) {
-                $searchedItems = $request->model::where('type', $request->type)->whereAny(['report_number', 'serial', 'date'], 'LIKE', "%$request->search%")->paginate(1);
+                $searchedItems = $request->model::where('type', $request->type)->whereAny(['report_number', 'serial', 'date'], 'LIKE', "%$request->search%")->paginate(1000);
                 if ($searchedItems->isNotEmpty()) {
                     toastr($searchedItems->count() . ' ' . "Result Found", 'success', 'Success Search');
-                    return redirect()->back()->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
+                    return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
                 } else {
-                    $searchedItems = $request->model::where('type', $request->type)->paginate('30');
+                    $searchedItems = $request->model::where('type', $request->type)->paginate('1000');
                     toastr('Result Not Found', 'error', 'Failed Search');
                     return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
                 }
             } else {
-                $searchedItems = $request->model::where('type', $request->type)->paginate('30');
+                $searchedItems = $request->model::where('type', $request->type)->paginate('1000');
                 toastr('Result Not Found', 'warning', 'Failed Search');
                 return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
             }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Admins;
+namespace App\Http\Requests\Dashboard\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminUpdateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,7 @@ class AdminUpdateRequest extends FormRequest
             'email' => ['required'],
             'password' => ['nullable'],
             'status' => ['nullable'],
-
-
-
+            'roles' => ['required'],
         ];
     }
 }

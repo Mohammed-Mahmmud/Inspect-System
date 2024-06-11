@@ -62,6 +62,7 @@ class MpiController extends Controller
     {
         try {
             app(StoreMpiAction::class)->handle($request->validated());
+            toastr(trans('Dashboard/toastr.succes'));
             return redirect()->route('mpi.reports.create');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -114,6 +115,7 @@ class MpiController extends Controller
         try {
             $mpi = Mpi::FindOrFail($id);
             app(UpdateMpiAction::class)->handle($mpi, $request->validated());
+            toastr(trans('Dashboard/toastr.info'), 'info', trans('Dashboard/toastr.updated'));
             return redirect()->route('mpi.reports.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -124,7 +126,7 @@ class MpiController extends Controller
      * Remove the specified resource from storage.
      */
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
         try {
             Mpi::FindOrFail($id)->delete();

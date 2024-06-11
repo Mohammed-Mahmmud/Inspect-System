@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\Lifting\Mpi;
 
 use DateTime;
@@ -11,37 +12,35 @@ use App\Models\Dashboard\Lifting\Mpi;
 use App\Models\Dashboard\Lifting\Mpi\Equipment;
 
 class UpdateMpiAction
- {
+{
     use ImageHelper;
 
-    public function handle( Mpi $mpi, array $data )
- {
-        $mpiCount = Mpi::where( 'order_id', $mpi->order_id )->count();
-        $mpi->update( array_merge( Arr::except( $data, [
+    public function handle(Mpi $mpi, array $data)
+    {
+        $mpiCount = Mpi::where('order_id', $mpi->order_id)->count();
+        $mpi->update(array_merge(Arr::except($data, [
             'image', 'equipments', 'specification', 'magnetizing_current', 'magnetic_particles', 'surface_condition', 'next_date', 'equipment'
-        ] ), [
+        ]), [
             'updated_by' => Auth::user()->id,
-            'magnetizing_current' =>json_encode( $data[ 'magnetizing_current' ] ),
-            'magnetic_particles' => json_encode( $data[ 'magnetic_particles' ] ),
-            'specification' =>      json_encode( $data[ 'specification' ] ),
-            'surface_condition' =>      json_encode( $data[ 'surface_condition' ] ),
-            'equipment' =>      json_encode( $data[ 'equipment' ] ),
-            'next_date' =>getNextDate( $data[ 'date' ], 6 ),
+            'magnetizing_current' => json_encode($data['magnetizing_current']),
+            'magnetic_particles' => json_encode($data['magnetic_particles']),
+            'specification' =>      json_encode($data['specification']),
+            'surface_condition' =>      json_encode($data['surface_condition']),
+            'equipment' =>      json_encode($data['equipment']),
+            'next_date' => getNextDate($data['date'], 6),
 
-        ] ) );
+        ]));
 
-        $mpi->update( [
-            'report_number' => $mpi->getOrders->number.'-'.strtoupper( $mpi->type ).'-'.$mpiCount
-        ] );
+        $mpi->update([
+            'report_number' => $mpi->getOrders->number . '-' . strtoupper($mpi->type) . '-' . $mpiCount
+        ]);
 
-        if ( !empty( $data[ 'image' ] ) ) {
-            $mpi->clearMediaCollection( $mpi->type );
-            foreach ( $data[ 'image' ] as $image ) {
-                $this->StoreImage( $image, $mpi, $mpi->type );
+        if (!empty($data['image'])) {
+            $mpi->clearMediaCollection($mpi->type);
+            foreach ($data['image'] as $image) {
+                $this->StoreImage($image, $mpi, $mpi->type);
             }
         }
-        toastr( trans( 'Dashboard/toastr.info' ), 'info', trans( 'Dashboard/toastr.updated' ) );
         return $mpi;
-
     }
 }

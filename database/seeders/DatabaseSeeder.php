@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Seeders\PermissionsSeeder;
+use Database\Seeders\RolesSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             // RigSeeder::class,
             // orderSeeder::class,
             // PermissionsSeeder::class,
+            // RolesSeeder::class,
         ]);
     }
 }

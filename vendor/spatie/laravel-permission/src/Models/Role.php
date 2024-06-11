@@ -24,7 +24,6 @@ class Role extends Model implements RoleContract
     use RefreshesPermissionCache;
 
     protected $guarded = [];
-
     public function __construct(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? config('auth.defaults.guard');
@@ -34,12 +33,17 @@ class Role extends Model implements RoleContract
         $this->guarded[] = $this->primaryKey;
         $this->table = config('permission.table_names.roles') ?: parent::getTable();
     }
+    public function getPermissions()
+    {
+        return $this->permissions->pluck('id')->toArray(); // Return IDs as array
+    }
 
     /**
      * @return RoleContract|Role
      *
      * @throws RoleAlreadyExists
      */
+
     public static function create(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? Guard::getDefaultName(static::class);
@@ -101,7 +105,7 @@ class Role extends Model implements RoleContract
 
         $role = static::findByParam(['name' => $name, 'guard_name' => $guardName]);
 
-        if (! $role) {
+        if (!$role) {
             throw RoleDoesNotExist::named($name, $guardName);
         }
 
@@ -113,13 +117,14 @@ class Role extends Model implements RoleContract
      *
      * @return RoleContract|Role
      */
+
     public static function findById(int|string $id, ?string $guardName = null): RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
         $role = static::findByParam([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
 
-        if (! $role) {
+        if (!$role) {
             throw RoleDoesNotExist::withId($id, $guardName);
         }
 
@@ -137,7 +142,7 @@ class Role extends Model implements RoleContract
 
         $role = static::findByParam(['name' => $name, 'guard_name' => $guardName]);
 
-        if (! $role) {
+        if (!$role) {
             return static::query()->create(['name' => $name, 'guard_name' => $guardName] + (app(PermissionRegistrar::class)->teams ? [app(PermissionRegistrar::class)->teamsKey => getPermissionsTeamId()] : []));
         }
 
@@ -156,8 +161,9 @@ class Role extends Model implements RoleContract
         if (app(PermissionRegistrar::class)->teams) {
             $teamsKey = app(PermissionRegistrar::class)->teamsKey;
 
-            $query->where(fn ($q) => $q->whereNull($teamsKey)
-                ->orWhere($teamsKey, $params[$teamsKey] ?? getPermissionsTeamId())
+            $query->where(
+                fn ($q) => $q->whereNull($teamsKey)
+                    ->orWhere($teamsKey, $params[$teamsKey] ?? getPermissionsTeamId())
             );
             unset($params[$teamsKey]);
         }
@@ -184,7 +190,7 @@ class Role extends Model implements RoleContract
 
         $permission = $this->filterPermission($permission, $guardName);
 
-        if (! $this->getGuardNames()->contains($permission->guard_name)) {
+        if (!$this->getGuardNames()->contains($permission->guard_name)) {
             throw GuardDoesNotMatch::create($permission->guard_name, $guardName ?? $this->getGuardNames());
         }
 

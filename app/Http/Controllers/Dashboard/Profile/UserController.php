@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Profile;
 
-use App\Actions\Users\UpdateUserAction;
 use App\Actions\Users\StoreUserAction;
+use App\Actions\Users\UpdateUserAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Admins\AdminStoreRequest;
-use App\Http\Requests\Dashboard\Admins\AdminUpdateRequest;
+use App\Http\Requests\Dashboard\Users\UserStoreRequest;
+use App\Http\Requests\Dashboard\Users\UserUpdateRequest;
 use App\Models\Dashboard\Admin;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\App;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -22,9 +23,10 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::where('status', 'Active')->paginate(15);
+            $users = User::paginate(15);
             $userStatus = $this->userStatus;
-            return view('dashboard.pages.users.view', compact('users', 'userStatus'));
+            $roles = Role::get();
+            return view('dashboard.pages.users.view', compact('users', 'userStatus', 'roles'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -37,9 +39,8 @@ class UserController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function store(AdminStoreRequest $request)
+    public function store(UserStoreRequest $request)
     {
-
         try {
             app(StoreUserAction::class)->handle($request->validated());
             return redirect()->route('users.index');
@@ -51,7 +52,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Admin $admin)
+    public function show(user $user)
     {
         //
     }
@@ -71,7 +72,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AdminUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         try {
             $user = User::FindOrFail($id);
@@ -89,7 +90,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = Admin::FindOrFail($id);
+        $user = User::FindOrFail($id);
         try {
             // $user->delete();
             $user->delete();

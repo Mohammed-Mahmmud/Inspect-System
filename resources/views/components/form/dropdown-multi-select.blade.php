@@ -1,42 +1,11 @@
-<div class="container">
-
-
-<h6>{{ TranslationHelper::translate(ucwords('')) }}</h6>
-		<div class="dropdown">
-			<button class="btn btn-dark dropdown-toggle"
-					type="button"
-					id="multiSelectDropdown"
-					data-bs-toggle="dropdown"
-					aria-expanded="false">
-				{{ ucwords('choose magnetic particles') }}
-			</button>
-			<ul class="dropdown-menu"
-				aria-labelledby="multiSelectDropdown">
-				<li>
-				<label>
-					<input type="checkbox"
-						value="Java">
-						Java
-					</label>
-				</li>
-				<li>
-				<label>
-					<input type="checkbox"
-						value="C++">
-						C++
-					</label>
-				</li>
-				<li>
-				<label>
-					<input type="checkbox"
-						value="Python">
-						Python
-					</label>
-				</li>
-			</ul>
-		</div>
-	</div>
-
-	<script src="{{ asset('dashboard/assets/DropdownMultiSelect/js/script.js') }}">
-
-	</script>
+@props(['data', 'label' => false, 'name', 'span' => false, 'value' => [], 'search' => false])
+<label for="multiSelected" class="form-label">{{ ucfirst($label) ?? '' }}</label>
+{{-- {{ dd($value) }} --}}
+<select name="{{ $name }}[]" multiple multiselect-search="{{ $search ? 'true' : 'false' }}"
+    data-placeholder="Choose an Option" multiselect-select-all="true" id="multiSelected">
+    @foreach ($data as $item)
+        <option value="{{ $item }}" {{ isset($value) && in_array($item, $value) ? 'selected' : '' }}>
+            {{ ucfirst($item) }}
+        </option>
+    @endforeach
+</select>

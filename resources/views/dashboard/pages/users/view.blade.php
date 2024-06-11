@@ -20,11 +20,9 @@
                                     <div class="row g-4 mb-3">
                                         <div class="col-sm-auto">
                                             <div>
-                                                {{-- <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>{{ trans('Dashboard/users.addGrade') }}</button> --}}
                                                 <a class="btn btn-success add-btn" href="{{ route('users.create') }}"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#showModal">{{ trans('Dashboard/users.adduser') }}</a>
-                                                {{-- <button class="btn btn-subtle-danger" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>  --}}
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -43,43 +41,43 @@
                                             <table class="table align-middle mb-0">
                                                 <thead class="table-dark">
                                                     <tr>
-                                                        <th scope="col" style="width: 50px;">
-                                                            <div class="form-check">
-                                                                {{-- <input class="form-check-input" type="checkbox" id="checkAll" value="option">  --}}
-                                                            </div>
-                                                        </th>
-                                                        <th class="sort" data-sort="customer_name">Record ID</th>
-                                                        <th class="sort" data-sort="customer_name">
+                                                        <th data-sort="customer_name">Record ID</th>
+                                                        <th data-sort="customer_name">
                                                             {{ trans('Dashboard/users.name') }}</th>
-                                                        <th class="sort" data-sort="full_name">
+                                                        <th data-sort="full_name">
                                                             {{ trans('Dashboard/users.full_name') }}</th>
-                                                        <th class="sort" data-sort="customer_name">
+                                                        <th data-sort="customer_name">
                                                             {{ TranslationHelper::translate(ucfirst('status')) }}</th>
-                                                        <th class="sort" data-sort="email">
+                                                        <th data-sort="customer_name">
+                                                            {{ TranslationHelper::translate(ucfirst('role')) }}</th>
+                                                        <th data-sort="email">
                                                             {{ trans('Dashboard/users.email') }}</th>
-                                                        <th class="sort" data-sort="date">
+                                                        <th data-sort="date">
                                                             {{ trans('Dashboard/users.joinDate') }}</th>
-                                                        <th class="sort" data-sort="action">
+                                                        <th data-sort="action">
                                                             {{ trans('Dashboard/users.action') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list form-check-all">
                                                     {{-- index fn --}}
                                                     @php
-                                                        // $lan_grade = App::getLocale()."_grade";
                                                         $i = 1;
                                                     @endphp
                                                     @foreach ($users as $key => $item)
                                                         <tr>
-                                                            <th scope="row">
-                                                                <div class="form-check">
-                                                                    {{-- <input class="form-check-input" type="checkbox" name="chk_child" value="option1">  --}}
-                                                                </div>
-                                                            </th>
                                                             <td class="email">{{ 1 + $key++ }}</td>
                                                             <td class="customer_name">{{ $item->name }}</td>
                                                             <td class="customer_full_name">{{ $item->full_name }}</td>
-                                                            <td class="customer_name">{{ $item->status }}</td>
+                                                            <td class="customer_status">
+                                                                <span class="badge bg-pill bg-success">
+                                                                    {{ $item->status }}
+                                                                </span>
+                                                            </td>
+                                                            <td class="customer_role">
+                                                                <span class="badge bg-pill bg-primary-subtle text-primary">
+                                                                    {{ $item->roles->value('name') }}
+                                                                </span>
+                                                            </td>
                                                             <td class="email">{{ $item->email }}</td>
                                                             <td class="date">{{ $item->created_at }}</td>
                                                             <td>
@@ -88,7 +86,6 @@
                                                                         <a class="btn btn-sm btn-info edit-item-btn"
                                                                             href="" data-bs-toggle="modal"
                                                                             data-bs-target="#edit{{ $item->id }}">
-                                                                            {{-- {{ trans('Dashboard/users.edit') }} --}}
                                                                             <i class="fas fa-edit"></i>
                                                                         </a>
                                                                     </div>
@@ -128,18 +125,12 @@
                                                                                     <div class="modal-body">
                                                                                         {{ trans('Dashboard/users.delete_message') . '  ' . $item->name }}
                                                                                     </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <div
-                                                                                            class="hstack gap-2 justify-content-end">
-                                                                                            <button type="button"
-                                                                                                class="btn btn-info"
-                                                                                                data-bs-dismiss="modal">{{ trans('Dashboard/users.close') }}</button>
-
-                                                                                            <button type="submit"
-                                                                                                class="btn btn-danger"
-                                                                                                id="add-btn">{{ trans('Dashboard/users.delete') }}</button>
+                                                                                    <x-form.submit submit="delete"
+                                                                                        color="danger"></x-form.submit>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </form>
-                                                                    <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
                                                                 </div>
                                         </div>
                                 </div>
@@ -161,8 +152,8 @@
                                     <div class="modal-header bg-light p-3">
                                         <h5 class="modal-title" id="exampleModalLabel2">
                                             {{ trans('Dashboard/users.edit') . ' ' . $item->name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close" id="close-modal"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                            id="close-modal"></button>
                                     </div>
                                     <form class="tablelist-form" action="" method="">
                                         <div class="modal-body">
@@ -200,15 +191,26 @@
                                                             class="form-label">{{ trans('Dashboard/admins.updatePassword') }}</label>
                                                         <input type="password" id="password" name="password"
                                                             class="form-control" placeholder="Enter Updated Password"
-                                                            required="">
+                                                            required="" value="{{ $item->password }}">
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xxl-2 col-sm-12">
-                                                    <label class="form-label">Choose Admin Status</label>
+                                                <div class="col-xxl-2 col-sm-6">
+                                                    <label class="form-label">Choose User Role</label>
+                                                    <select class="form-control" id="userRole" data-choices=""
+                                                        data-choices-search-false="" data-choices-removeitem=""
+                                                        name="roles">
+                                                        @foreach ($roles as $role)
+                                                            <option value="{{ $role->name }}"
+                                                                {{ $item->roles->pluck('name')->contains($role->name) ? 'selected' : '' }}>
+                                                                {{ ucfirst($role->name) }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-xxl-2 col-sm-6">
+                                                    <label class="form-label">Choose User Status</label>
                                                     <select class="form-control" id="userStatus" data-choices=""
                                                         data-choices-search-false="" data-choices-removeitem=""
                                                         name="status">
@@ -222,39 +224,35 @@
                                                 </div>
                                             </div><br>
                                         </div>
-
-                                        <div class="modal-footer">
-                                            <div class="hstack gap-2 justify-content-end">
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">{{ trans('Dashboard/users.close') }}</button>
-                                                <button type="submit" class="btn btn-info"
-                                                    id="add-btn">{{ trans('Dashboard/users.update_user') }}</button>
-
-                                    </form>
-                                    <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                                        <x-form.submit></x-form.submit>
                                 </div>
                             </div>
-                    </form>
-                    {{-- end update --}}
-                    @endforeach
-                    </tbody>
-                    </table>
-                    <div class="noresult" style="display: none">
-                        <div class="text-center">
-                            <lord-icon src="../../msoeawqm.json" trigger="loop"
-                                colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
-                            <h5 class="mt-2">Sorry! No Result Found</h5>
-                            <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any orders
-                                for you search.</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-end">
-                    {{ $users->links('pagination::bootstrap-5') }}
+                    </form>
+                    <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
                 </div>
             </div>
-        </div><!-- end card -->
+            </form>
+            {{-- end update --}}
+            @endforeach
+            </tbody>
+            </table>
+            <div class="noresult" style="display: none">
+                <div class="text-center">
+                    <lord-icon src="../../msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a"
+                        style="width:75px;height:75px"></lord-icon>
+                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                    <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any orders
+                        for you search.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            {{ $users->links('pagination::bootstrap-5') }}
+        </div>
+    </div>
+    </div><!-- end card -->
     </div>
     <!-- end col -->
     </div>
@@ -311,8 +309,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xxl-2 col-sm-12">
-                                    <label class="form-label">Choose Admin Status</label>
+                                <div class="col-xxl-2 col-sm-6">
+                                    <label class="form-label">Choose User Role</label>
+                                    <select class="form-control" id="userRole" data-choices=""
+                                        data-choices-search-false="" data-choices-removeitem="" name="roles">
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}">
+                                                {{ ucfirst($role->name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xxl-2 col-sm-6">
+                                    <label class="form-label">Choose User Status</label>
                                     <select class="form-control" id="userStatus" data-choices=""
                                         data-choices-search-false="" data-choices-removeitem="" name="status">
                                         @foreach ($userStatus as $status)
@@ -322,16 +331,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div><br>
+                            </div><br><br>
                         </div>
-                        <div class="modal-footer">
-                            <div class="hstack gap-2 justify-content-end">
-                                <button type="button" class="btn btn-danger"
-                                    data-bs-dismiss="modal">{{ trans('Dashboard/users.close') }}</button>
-                                <button type="submit" class="btn btn-success"
-                                    id="add-btn">{{ trans('Dashboard/users.add') }}</button>
-                            </div>
-                        </div>
+                        <x-form.submit></x-form.submit>
                     </form>
                 </div>
             </div>

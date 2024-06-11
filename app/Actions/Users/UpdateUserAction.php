@@ -5,6 +5,7 @@ namespace App\Actions\Users;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UpdateUserAction
 {
@@ -13,8 +14,9 @@ class UpdateUserAction
     {
         $user->update(array_merge($data, [
             'updated_by' => Auth::user()->id,
-
         ]));
+        DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+        isset($data['roles']) ? $user->assignRole($data['roles']) : '';
         toastr(trans('Dashboard/toastr.info'), 'info', trans('Dashboard/toastr.updated'));
         return $user;
     }

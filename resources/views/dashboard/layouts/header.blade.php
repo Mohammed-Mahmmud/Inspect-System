@@ -1273,9 +1273,10 @@
                                 class="align-middle">Lock screen</span></a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="btn btn-link" type="submit">
+                            <button class="btn" type="submit">
                                 <i class="mdi mdi-logout text-muted fs-lg align-middle me-1"></i>
-                                <span class="align-middle" data-key="t-logout">Logout</span>
+                                <span class="align-middle text-muted fs-lg align-middle me-1"
+                                    data-key="t-logout">Logout</span>
                             </button>
                         </form>
 

@@ -325,4 +325,8 @@
   56 => '56',
   'save' => 'Save',
   'Role' => 'Role',
+  'Not Found' => 'Not Found',
+  'Un Authorized Access' => 'Un Authorized Access',
+  'Unauthorized Access' => 'Unauthorized Access',
+  'Unauthorized access' => 'Unauthorized access',
 );

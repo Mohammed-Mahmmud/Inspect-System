@@ -136,7 +136,7 @@
                                                                             href="{{ route('mud-jar.reports.repeat', $item->id) }}"><i
                                                                                 class=" bx bx-repeat me-1"></i>
                                                                             Repeat</a></li>
-                                                                    @if (auth()->user()->id == $item->user_id)
+                                                                    @if (auth()->user()->id == $item->user_id || auth()->user()->can('editor'))
                                                                         <li><a class="dropdown-item edit-item-btn"
                                                                                 target="_blank"
                                                                                 href="{{ route('mud-jar.reports.edit', $item->id) }}"><i

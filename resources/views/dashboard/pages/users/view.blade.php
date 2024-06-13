@@ -18,13 +18,13 @@
                             <div class="card-body">
                                 <div id="customerList">
                                     <div class="row g-4 mb-3">
-                                        <div class="col-sm-auto">
-                                            <div>
+                                        @can('users.create')
+                                            <div class="col-sm-auto">
                                                 <a class="btn btn-success add-btn" href="{{ route('users.create') }}"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#showModal">{{ trans('Dashboard/users.adduser') }}</a>
                                             </div>
-                                        </div>
+                                        @endcan
                                         <div class="col-sm">
                                             <div class="d-flex justify-content-sm-end">
                                                 <div class="search-box ms-2">
@@ -82,21 +82,24 @@
                                                             <td class="date">{{ $item->created_at }}</td>
                                                             <td>
                                                                 <div class="d-flex gap-2">
-                                                                    <div class="edit">
-                                                                        <a class="btn btn-sm btn-info edit-item-btn"
-                                                                            href="" data-bs-toggle="modal"
-                                                                            data-bs-target="#edit{{ $item->id }}">
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>
-                                                                    </div>
-
-                                                                    <div class="remove">
-                                                                        <a class="btn btn-sm btn-danger remove-item-btn"
-                                                                            href="" data-bs-toggle="modal"
-                                                                            data-bs-target="#delete{{ $item->id }}">
-                                                                            <i class="fas fa-trash"></i>
-                                                                        </a>
-                                                                    </div>
+                                                                    @can('users.edit')
+                                                                        <div class="edit">
+                                                                            <a class="btn btn-sm btn-info edit-item-btn"
+                                                                                href="" data-bs-toggle="modal"
+                                                                                data-bs-target="#edit{{ $item->id }}">
+                                                                                <i class="fas fa-edit"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    @endcan
+                                                                    @can('users.destroy')
+                                                                        <div class="remove">
+                                                                            <a class="btn btn-sm btn-danger remove-item-btn"
+                                                                                href="" data-bs-toggle="modal"
+                                                                                data-bs-target="#delete{{ $item->id }}">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    @endcan
                                                                     <!-- Modal -->
                                                                     <form action="{{ route('users.destroy', $item->id) }}"
                                                                         method="POST">

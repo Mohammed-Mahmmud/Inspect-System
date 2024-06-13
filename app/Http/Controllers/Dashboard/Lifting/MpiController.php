@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Dashboard\Lifting;
 use \DB;
 use App\Actions\Lifting\Mpi\StoreMpiAction;
 use App\Actions\Lifting\Mpi\UpdateMpiAction;
+use App\Events\Dashboard\ReportAuthEvent;
 use App\Helper\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Lifting\Mpi\MpiStoreRequest;
 use App\Http\Requests\Dashboard\Lifting\Mpi\MpiUpdateRequest;
 use App\Models\Dashboard\Lifting\Mpi;
-use App\Models\Dashboard\Order;
 
+use App\Models\Dashboard\Order;
 use App\ViewModels\Dashboard\MpiView\MpiViewModel;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -23,9 +24,6 @@ use PDF;
 class MpiController extends Controller
 {
     use ImageHelper;
-
-    // use ZipArchive;
-
     /**
      * Display a listing of the resource.
      */
@@ -92,6 +90,7 @@ class MpiController extends Controller
     {
         try {
             $mpi = Mpi::FindOrFail($id);
+            event(new ReportAuthEvent($mpi->user_id));
             return view('dashboard.pages.lifting.mpi.crud', new MpiViewModel($mpi));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -129,7 +128,9 @@ class MpiController extends Controller
     public function destroy($id)
     {
         try {
-            Mpi::FindOrFail($id)->delete();
+            $mpi = Mpi::FindOrFail($id);
+            event(new ReportAuthEvent($mpi->user_id));
+            $mpi->delete();
             toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return redirect()->route('mpi.reports.index');
         } catch (Exception $e) {

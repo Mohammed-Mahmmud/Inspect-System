@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2024 at 01:01 PM
+-- Generation Time: Jun 15, 2024 at 11:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -197,6 +197,14 @@ CREATE TABLE `job_ticket` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `end_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `job_ticket`
+--
+
+INSERT INTO `job_ticket` (`id`, `work_number`, `address`, `ispr`, `start_date`, `well_name`, `ref_number`, `job_price`, `approval`, `user_id`, `order_id`, `created_at`, `updated_at`, `end_date`) VALUES
+(38, '391', NULL, 'Expedita', '1986-09-08', 'Noelle Vaughn', '193', '256', 'Daphne Figueroa', 1, 5, '2024-06-12 08:29:45', '2024-06-12 08:29:45', '2019-11-08'),
+(39, '876', NULL, 'Voluptatem quo ut et', '1971-11-23', 'Sharon Swanson', '852', '47', 'Amet suscipit eveni', 43, 15, '2024-06-12 08:30:54', '2024-06-12 08:30:54', '1973-07-21');
 
 -- --------------------------------------------------------
 
@@ -392,7 +400,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (134, '2024_04_28_053035_creare_tubs_table', 109),
 (135, '2024_04_28_053036_creare_tubs_table', 110),
 (136, '2024_06_03_094222_add_drill_pipe_details_to_tubs_table', 111),
-(137, '2024_02_13_100660_create_checklist_table', 112);
+(137, '2024_02_13_100660_create_checklist_table', 112),
+(138, '2024_06_06_111047_add_status_to_users_table', 113),
+(139, '2024_06_06_111048_add_status_to_users_table', 114),
+(140, '2024_06_06_111640_add_status_to_users_table', 115);
 
 -- --------------------------------------------------------
 
@@ -417,6 +428,16 @@ CREATE TABLE `model_has_roles` (
   `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(30, 'User', 43),
+(30, 'User', 44),
+(31, 'User', 1),
+(34, 'User', 42);
 
 -- --------------------------------------------------------
 
@@ -462,7 +483,12 @@ CREATE TABLE `mpi` (
 --
 
 INSERT INTO `mpi` (`id`, `order_id`, `location`, `customer_work_number`, `extent`, `date`, `report_number`, `method`, `type`, `description`, `serial`, `result`, `user_id`, `deleted_at`, `created_at`, `updated_at`, `acceptance`, `first_label`, `first_content`, `created_by`, `updated_by`, `purchase_order_no`, `supervisor`, `note`, `surface_condition`, `specification`, `magnetic_particles`, `magnetizing_current`, `next_date`, `equipment`) VALUES
-(244, 14, 'Non sunt', '3', 'Quasi pe', '1998-08-16', 'STC-10/24-Quincy_Cunningham-Rig5-MPI-2', 'Magnetic Particle Inspection', 'mpi', 'Doloribu', '333', 'Adipisic', 1, NULL, '2024-06-04 07:34:02', '2024-06-04 07:34:02', 0, NULL, NULL, 1, NULL, 'Possimus', 'Shelley Neal', 'Ipsam qu', '[\"Cleaned to Base Metal\",\"Not Cleaned to Base Metal\"]', '{\"select\":[\"api\",\"dsi\",\"astm\",\"asme\",\"aws\"],\"other\":\"Assumend\",\"edition\":\"Laborios\"}', '[\"dry\",\"wet\",\"visibale\",\"flourescent\"]', '[\"ac\",\"dc\"]', '1999-02-15', '{\"ac_yoke\":\"1\",\"ac_yoke_no\":\"764\",\"dc_coil\":\"0\",\"dc_coil_no\":\"438\",\"permanent_magnet\":\"0\",\"permanent_magnet_no\":\"660\",\"uv_light\":\"1\",\"uv_light_no\":\"701\",\"other_name\":\"Quinn Hinton\",\"other_no\":\"551\"}');
+(244, 14, 'Non sunt', '3', 'Quasi pe', '1998-08-16', 'STC-10/24-Quincy_Cunningham-Rig5-MPI-2', 'Magnetic Particle Inspection', 'mpi', 'Doloribu', '333', 'Adipisic', 1, NULL, '2024-06-04 07:34:02', '2024-06-04 07:34:02', 0, NULL, NULL, 1, NULL, 'Possimus', 'Shelley Neal', 'Ipsam qu', '[\"Cleaned to Base Metal\",\"Not Cleaned to Base Metal\"]', '{\"select\":[\"api\",\"dsi\",\"astm\",\"asme\",\"aws\"],\"other\":\"Assumend\",\"edition\":\"Laborios\"}', '[\"dry\",\"wet\",\"visibale\",\"flourescent\"]', '[\"ac\",\"dc\"]', '1999-02-15', '{\"ac_yoke\":\"1\",\"ac_yoke_no\":\"764\",\"dc_coil\":\"0\",\"dc_coil_no\":\"438\",\"permanent_magnet\":\"0\",\"permanent_magnet_no\":\"660\",\"uv_light\":\"1\",\"uv_light_no\":\"701\",\"other_name\":\"Quinn Hinton\",\"other_no\":\"551\"}'),
+(252, 14, 'Non sunt', '3', 'Quasi pe', '1998-08-16', 'STC-10/24-Quincy_Cunningham-Rig5-MPI-2', 'Magnetic Particle Inspection', 'mpi', 'Doloribu', '333', 'Adipisic', 1, NULL, '2024-06-09 23:57:14', '2024-06-09 23:57:14', 1, NULL, NULL, 1, NULL, 'Possimus', 'Shelley Neal', 'Ipsam qu', '[\"Cleaned to Base Metal\",\"Not Cleaned to Base Metal\"]', '{\"select\":[\"api\",\"dsi\",\"astm\",\"asme\",\"aws\"],\"other\":\"Assumend\",\"edition\":\"Laborios\"}', '[\"dry\",\"wet\",\"visibale\",\"flourescent\"]', '[\"ac\",\"dc\"]', '1999-02-15', '{\"ac_yoke\":\"1\",\"ac_yoke_no\":\"764\",\"dc_coil\":\"0\",\"dc_coil_no\":\"438\",\"permanent_magnet\":\"0\",\"permanent_magnet_no\":\"660\",\"uv_light\":\"1\",\"uv_light_no\":\"701\",\"other_name\":\"Quinn Hinton\",\"other_no\":\"551\"}'),
+(255, 18, 'Quod ven', '427', 'Dolor cu', '1992-05-06', 'STC-10/24-S T-Rig15-MPI-1', 'Magnetic Particle Inspection', 'mpi', 'Sunt se', '274', 'Officia', 1, NULL, '2024-06-10 22:02:18', '2024-06-10 22:02:18', 0, NULL, NULL, 1, NULL, 'Molestia', 'Chiquita Stevens', 'Ipsum is', '[\"Cleaned to Base Metal\",\"Not Cleaned to Base Metal\"]', '{\"select\":[\"api\",\"dsi\",\"astm\",\"asme\",\"aws\"],\"other\":\"Velit in\",\"edition\":\"Facere d\"}', '[\"dry\",\"wet\",\"visibale\",\"flourescent\"]', '[\"ac\",\"dc\"]', '1992-11-05', '{\"ac_yoke\":\"0\",\"ac_yoke_no\":\"40\",\"dc_coil\":\"1\",\"dc_coil_no\":\"306\",\"permanent_magnet\":\"1\",\"permanent_magnet_no\":\"386\",\"uv_light\":\"0\",\"uv_light_no\":\"272\",\"other_name\":\"Jermaine Hubbard\",\"other_no\":\"516\"}'),
+(257, 6, 'Non sunt', '3', 'Quasi pe', '1998-08-16', 'STC-9/24-ECDC-Rig10-MPI-1', 'Magnetic Particle Inspection', 'mpi', 'Doloribu', '333', 'Adipisic', 1, NULL, '2024-06-10 22:06:17', '2024-06-10 22:10:35', 0, NULL, NULL, 1, 1, 'Possimus', 'Shelley Neal', 'Ipsam qu', '[\"Cleaned to Base Metal\",\"Not Cleaned to Base Metal\"]', '{\"select\":[\"api\",\"dsi\",\"astm\",\"asme\",\"aws\"],\"other\":\"Assumend\",\"edition\":\"Laborios\"}', '[\"dry\",\"wet\",\"visibale\",\"flourescent\"]', '[\"ac\",\"dc\"]', '1999-02-15', '{\"ac_yoke\":\"1\",\"ac_yoke_no\":\"764\",\"dc_coil\":\"0\",\"dc_coil_no\":\"438\",\"permanent_magnet\":\"0\",\"permanent_magnet_no\":\"660\",\"uv_light\":\"1\",\"uv_light_no\":\"701\",\"other_name\":\"Quinn Hinton\",\"other_no\":\"551\"}'),
+(260, 14, 'Non sunt', '3', 'Quasi pe', '1998-08-16', 'STC-10/24-Quincy_Cunningham-Rig5-MPI-3', 'Magnetic Particle Inspection', 'mpi', 'Doloribu', '333', 'Adipisic', 43, NULL, '2024-06-12 03:11:36', '2024-06-12 03:11:36', 1, NULL, NULL, 43, NULL, 'Possimus', 'Shelley Neal', 'Ipsam qu', '[\"Cleaned to Base Metal\",\"Not Cleaned to Base Metal\"]', '{\"select\":[\"api\",\"dsi\",\"astm\",\"asme\",\"aws\"],\"other\":\"Assumend\",\"edition\":\"Laborios\"}', '[\"dry\",\"wet\",\"visibale\",\"flourescent\"]', '[\"ac\",\"dc\"]', '1999-02-15', '{\"ac_yoke\":\"1\",\"ac_yoke_no\":\"764\",\"dc_coil\":\"0\",\"dc_coil_no\":\"438\",\"permanent_magnet\":\"0\",\"permanent_magnet_no\":\"660\",\"uv_light\":\"1\",\"uv_light_no\":\"701\",\"other_name\":\"Quinn Hinton\",\"other_no\":\"551\"}'),
+(261, 6, 'Non sunt', '3', 'Quasi pe', '1998-08-16', 'STC-9/24-ECDC-Rig10-MPI-2', 'Magnetic Particle Inspection', 'mpi', 'Doloribu', '333', 'Adipisic', 44, NULL, '2024-06-14 20:58:06', '2024-06-14 20:58:07', 0, NULL, NULL, 44, NULL, 'Possimus', 'Shelley Neal', 'Ipsam qu', '[\"Cleaned to Base Metal\",\"Not Cleaned to Base Metal\"]', '{\"select\":[\"api\",\"dsi\",\"astm\",\"asme\",\"aws\"],\"other\":\"Assumend\",\"edition\":\"Laborios\"}', '[\"dry\",\"wet\",\"visibale\",\"flourescent\"]', '[\"ac\",\"dc\"]', '1999-02-15', '{\"ac_yoke\":\"1\",\"ac_yoke_no\":\"764\",\"dc_coil\":\"0\",\"dc_coil_no\":\"438\",\"permanent_magnet\":\"0\",\"permanent_magnet_no\":\"660\",\"uv_light\":\"1\",\"uv_light_no\":\"701\",\"other_name\":\"Quinn Hinton\",\"other_no\":\"551\"}');
 
 -- --------------------------------------------------------
 
@@ -474,7 +500,7 @@ CREATE TABLE `mud_jar` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `tool` varchar(255) DEFAULT NULL,
   `serial` varchar(255) DEFAULT NULL,
-  `report_num` varchar(255) DEFAULT NULL,
+  `report_number` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `inspect_procedure` varchar(255) DEFAULT NULL,
@@ -497,12 +523,13 @@ CREATE TABLE `mud_jar` (
 -- Dumping data for table `mud_jar`
 --
 
-INSERT INTO `mud_jar` (`id`, `tool`, `serial`, `report_num`, `date`, `summary`, `inspect_procedure`, `visual`, `boroscopic`, `dimensional`, `liquid_penetrant`, `mpi`, `ultrasonic`, `eddy_current`, `type`, `accept`, `user_id`, `order_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `mud_jar` (`id`, `tool`, `serial`, `report_number`, `date`, `summary`, `inspect_procedure`, `visual`, `boroscopic`, `dimensional`, `liquid_penetrant`, `mpi`, `ultrasonic`, `eddy_current`, `type`, `accept`, `user_id`, `order_id`, `created_at`, `updated_at`) VALUES
 (25, 'Veniam', 'Nulla ve', 'STC-10/24-Eugenia_Hutchinson-Rig15-JAR-1', '1974-04-15', 'Accusamu', 'Velit e', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', 'jar', 1, 1, 15, '2024-06-05 07:28:07', '2024-06-05 07:28:07'),
 (26, 'Consequa', 'Ratione', 'STC-10/24-Eugenia_Hutchinson-Rig15-JAR-2', '2001-02-05', 'Esse id', 'Qui moll', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', 'jar', 2, 1, 15, '2024-06-05 07:28:17', '2024-06-05 07:28:17'),
 (27, 'Consequa', 'Ratione', 'STC-10/24-Eugenia_Hutchinson-Rig15-JAR-3', '2001-02-05', 'Esse id', 'Qui moll', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', 'jar', 2, 1, 15, '2024-06-05 07:28:31', '2024-06-05 07:28:31'),
 (28, 'Vitae mo', 'Adipisci', 'STC-9/24-S_T-Rig2-MUD-1', '1976-04-23', 'Reiciend', 'Aut dele', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', 'mud', 3, 1, 7, '2024-06-05 07:28:53', '2024-06-05 07:28:53'),
-(29, 'Vitae mo', 'Adipisciffff', 'STC-9/24-S_T-Rig2-MUD-2', '1976-04-23', 'Reiciend', 'Aut dele', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', 'mud', 3, 1, 7, '2024-06-05 07:29:01', '2024-06-05 07:29:31');
+(29, 'Vitae mo', 'Adipisciffff', 'STC-9/24-S_T-Rig2-MUD-2', '1976-04-23', 'Reiciend', 'Aut dele', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', 'mud', 3, 1, 7, '2024-06-05 07:29:01', '2024-06-05 07:29:31'),
+(30, 'Vitae mo', 'Adipisci', 'STC-9/24-S_T-Rig2-MUD-3', '1976-04-23', 'Reiciend', 'Aut dele', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', '{\"conn\":null,\"body\":null}', 'mud', 1, 1, 7, '2024-06-09 07:09:08', '2024-06-09 07:09:08');
 
 -- --------------------------------------------------------
 
@@ -572,7 +599,7 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'role.list', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(1, 'role.view', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (2, 'role.create', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (3, 'role.edit', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (4, 'role.delete', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
@@ -590,7 +617,6 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (16, 'View JobTicket Numbers', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (17, 'View JobTickets', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (18, 'Create JobTicket', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
-(19, 'Admins', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (20, 'Operators', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (21, 'Report Settings', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (22, 'Roles', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
@@ -619,8 +645,6 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (45, 'create mud reports', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (46, 'view jar reports', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (47, 'create jar report', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
-(48, 'view drill pipe', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
-(49, 'create drill pipe', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (50, 'view drill collar', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (51, 'create drill collar', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (52, 'view heavy weight', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
@@ -630,7 +654,17 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (56, 'view box * box', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (57, 'create pin * pin', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
 (58, 'create box * pin', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
-(59, 'create box * box', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02');
+(59, 'create box * box', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(60, 'Users', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(61, 'users.create', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(62, 'users.edit', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(63, 'users.destroy', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(64, 'create companies', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(65, 'edit companies', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(66, 'delete companies', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(87, 'editor', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(88, 'view drill pipe', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02'),
+(89, 'create drill pipe', 'web', '2024-06-06 07:46:02', '2024-06-06 07:46:02');
 
 -- --------------------------------------------------------
 
@@ -695,7 +729,28 @@ INSERT INTO `report_desc` (`id`, `description`, `model_type`, `model_id`, `creat
 (710, '{\"serial\":\"In autem\",\"slot\":\"Commodi\",\"pipe_wt\":\"Reprehen\",\"pipe_od\":\"Dolore c\",\"pipe_emi\":\"Enim iru\",\"pipe_eai\":\"Vel moll\",\"pipe_utea\":\"Ex labor\",\"pipe_corr_in\":\"Iure exe\",\"pipe_corr_ext\":\"Totam ea\",\"pipe_ipc\":\"Est arch\",\"pipe_bent\":\"Doloremq\",\"pin_od\":\"Tenetur\",\"pin_id\":\"Molestia\",\"pin_tong_space\":\"Dolor ma\",\"pin_bevel\":\"Reiciend\",\"pin_seal\":\"Ut possi\",\"pin_length\":\"Dolores\",\"pin_neck\":\"Exercita\",\"pin_cyl\":\"Et aliqu\",\"pin_nose\":\"Laudanti\",\"pin_lead\":\"Officiis\",\"pin_f_repair\":\"Minus ve\",\"pin_reface\":\"Error as\",\"pin_hardbanding\":\"Illo eos\",\"pin_condition\":\"Quae dol\",\"box_od\":\"Est atq\",\"box_tong_space\":\"Est reru\",\"box_bevel\":\"Quasi se\",\"box_seal\":\"Dolore v\",\"box_shldr\":\"Illum o\",\"box_length\":\"Enim aut\",\"box_cbore_dia\":\"Ex duis\",\"box_cbore_length\":\"Tempor e\",\"box_cbore_wall\":\"Elit mi\",\"box_f_repair\":\"Voluptat\",\"box_reface\":\"Eos rati\",\"box_hardbanding\":\"Quia vol\",\"box_condition\":\"In velit\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 19, '2024-06-05 08:30:09', '2024-06-05 08:30:09'),
 (711, '{\"serial\":\"Ad elige\",\"slot\":\"Quaerat\",\"pipe_wt\":\"Beatae s\",\"pipe_od\":\"Consequa\",\"pipe_emi\":\"In odit\",\"pipe_eai\":\"Omnis pa\",\"pipe_utea\":\"Autem la\",\"pipe_corr_in\":\"Vero pla\",\"pipe_corr_ext\":\"Sit sint\",\"pipe_ipc\":\"Quo ut r\",\"pipe_bent\":\"Et volup\",\"pin_od\":\"Sit qui\",\"pin_id\":\"Aliqua\",\"pin_tong_space\":\"Cupidata\",\"pin_bevel\":\"Itaque f\",\"pin_seal\":\"Magna no\",\"pin_length\":\"Quos est\",\"pin_neck\":\"Voluptat\",\"pin_cyl\":\"Reiciend\",\"pin_nose\":\"Reiciend\",\"pin_lead\":\"Beatae s\",\"pin_f_repair\":\"Labore c\",\"pin_reface\":\"Elit pa\",\"pin_hardbanding\":\"Inventor\",\"pin_condition\":\"Aspernat\",\"box_od\":\"Tenetur\",\"box_tong_space\":\"Tempora\",\"box_bevel\":\"Quaerat\",\"box_seal\":\"At volup\",\"box_shldr\":\"Rerum se\",\"box_length\":\"Et disti\",\"box_cbore_dia\":\"Eum face\",\"box_cbore_length\":\"In bland\",\"box_cbore_wall\":\"Itaque s\",\"box_f_repair\":\"Fugiat i\",\"box_reface\":\"Dolore q\",\"box_hardbanding\":\"Obcaecat\",\"box_condition\":\"Soluta q\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 19, '2024-06-05 08:30:09', '2024-06-05 08:30:09'),
 (712, '{\"serial\":\"Perspici\",\"slot\":\"Non anim\",\"pipe_wt\":\"A dolore\",\"pipe_od\":\"Harum at\",\"pipe_emi\":\"Enim ea\",\"pipe_eai\":\"Perferen\",\"pipe_utea\":\"Ipsum e\",\"pipe_corr_in\":\"Et sunt\",\"pipe_corr_ext\":\"Nemo dol\",\"pipe_ipc\":\"Et esse\",\"pipe_bent\":\"Culpa de\",\"pin_od\":\"Vero qui\",\"pin_id\":\"Et dolor\",\"pin_tong_space\":\"Repudian\",\"pin_bevel\":\"Impedit\",\"pin_seal\":\"Eius har\",\"pin_length\":\"Laboris\",\"pin_neck\":\"Culpa de\",\"pin_cyl\":\"Veniam\",\"pin_nose\":\"Aut dele\",\"pin_lead\":\"Anim sit\",\"pin_f_repair\":\"Officia\",\"pin_reface\":\"Veniam\",\"pin_hardbanding\":\"Nisi vol\",\"pin_condition\":\"Dolor en\",\"box_od\":\"Eius asp\",\"box_tong_space\":\"Laboris\",\"box_bevel\":\"Non enim\",\"box_seal\":\"Et conse\",\"box_shldr\":\"Quis lab\",\"box_length\":\"Animi v\",\"box_cbore_dia\":\"Id tenet\",\"box_cbore_length\":\"Odit cor\",\"box_cbore_wall\":\"Omnis am\",\"box_f_repair\":\"Qui quis\",\"box_reface\":\"Nostrum\",\"box_hardbanding\":\"Iste sun\",\"box_condition\":\"Ab beata\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 19, '2024-06-05 08:30:09', '2024-06-05 08:30:09'),
-(713, '{\"serial\":\"Quas ani\",\"slot\":\"Neque qu\",\"pipe_wt\":\"Labore r\",\"pipe_od\":\"Quo volu\",\"pipe_emi\":\"Odio omn\",\"pipe_eai\":\"Voluptat\",\"pipe_utea\":\"Quia acc\",\"pipe_corr_in\":\"Amet qu\",\"pipe_corr_ext\":\"Nulla vo\",\"pipe_ipc\":\"Pariatur\",\"pipe_bent\":\"Id volu\",\"pin_od\":\"Nulla si\",\"pin_id\":\"Totam si\",\"pin_tong_space\":\"Dolores\",\"pin_bevel\":\"Fugit q\",\"pin_seal\":\"Magna re\",\"pin_length\":\"Velit p\",\"pin_neck\":\"Aspernat\",\"pin_cyl\":\"Nisi rep\",\"pin_nose\":\"Incidunt\",\"pin_lead\":\"Odit off\",\"pin_f_repair\":\"In iure\",\"pin_reface\":\"Dolore e\",\"pin_hardbanding\":\"At id ex\",\"pin_condition\":\"Sint al\",\"box_od\":\"Quia nob\",\"box_tong_space\":\"Quisquam\",\"box_bevel\":\"Velit qu\",\"box_seal\":\"Sed esse\",\"box_shldr\":\"Quos pla\",\"box_length\":\"Ut rerum\",\"box_cbore_dia\":\"Eaque an\",\"box_cbore_length\":\"Ullamco\",\"box_cbore_wall\":\"Mollit h\",\"box_f_repair\":\"Perspici\",\"box_reface\":\"Temporib\",\"box_hardbanding\":\"Dolor at\",\"box_condition\":\"Quis rer\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 19, '2024-06-05 08:30:09', '2024-06-05 08:30:09');
+(713, '{\"serial\":\"Quas ani\",\"slot\":\"Neque qu\",\"pipe_wt\":\"Labore r\",\"pipe_od\":\"Quo volu\",\"pipe_emi\":\"Odio omn\",\"pipe_eai\":\"Voluptat\",\"pipe_utea\":\"Quia acc\",\"pipe_corr_in\":\"Amet qu\",\"pipe_corr_ext\":\"Nulla vo\",\"pipe_ipc\":\"Pariatur\",\"pipe_bent\":\"Id volu\",\"pin_od\":\"Nulla si\",\"pin_id\":\"Totam si\",\"pin_tong_space\":\"Dolores\",\"pin_bevel\":\"Fugit q\",\"pin_seal\":\"Magna re\",\"pin_length\":\"Velit p\",\"pin_neck\":\"Aspernat\",\"pin_cyl\":\"Nisi rep\",\"pin_nose\":\"Incidunt\",\"pin_lead\":\"Odit off\",\"pin_f_repair\":\"In iure\",\"pin_reface\":\"Dolore e\",\"pin_hardbanding\":\"At id ex\",\"pin_condition\":\"Sint al\",\"box_od\":\"Quia nob\",\"box_tong_space\":\"Quisquam\",\"box_bevel\":\"Velit qu\",\"box_seal\":\"Sed esse\",\"box_shldr\":\"Quos pla\",\"box_length\":\"Ut rerum\",\"box_cbore_dia\":\"Eaque an\",\"box_cbore_length\":\"Ullamco\",\"box_cbore_wall\":\"Mollit h\",\"box_f_repair\":\"Perspici\",\"box_reface\":\"Temporib\",\"box_hardbanding\":\"Dolor at\",\"box_condition\":\"Quis rer\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 19, '2024-06-05 08:30:09', '2024-06-05 08:30:09'),
+(714, '{\"description\":null,\"serial_no\":null,\"length\":null,\"box_thread\":null,\"box_od\":null,\"box_cond\":null,\"pin_conn\":null,\"pin_id\":null,\"pin_cond\":null,\"body_thread_cond\":null}', 'App\\Models\\Dashboard\\Tublar\\MudJar\\MudJar', 30, '2024-06-09 07:09:08', '2024-06-09 07:09:08'),
+(715, '{\"serial\":\"In sed l\",\"description\":\"Aut dolo\",\"box1_conn\":\"Ipsam la\",\"box2_conn\":\"Qui maio\",\"box1_cond\":null,\"box2_cond\":null,\"body_cond\":null,\"box1_od\":\"Tempora\",\"box1_cb\":\"Voluptas\",\"box1_bb_diameter\":\"A aspern\",\"box1_bb_depth\":\"Dolore t\",\"box1_bevel_diameter\":\"Rerum re\",\"box2_od\":\"Quibusda\",\"box2_cb\":\"Officia\",\"box2_bb_diameter\":\"Sunt par\",\"box2_bb_depth\":\"Ullamco\",\"box2_bevel_diameter\":\"Omnis co\",\"body_fishing_neck\":\"Anim dol\",\"body_length\":\"Culpa co\",\"remarks\":\"Officiis\"}', 'Tools', 39, '2024-06-09 07:12:38', '2024-06-09 07:12:38'),
+(716, '{\"serial\":\"Incidunt\",\"description\":\"Vel ut r\",\"box1_conn\":\"Amet ea\",\"box2_conn\":\"Non mole\",\"box1_cond\":null,\"box2_cond\":null,\"body_cond\":null,\"box1_od\":\"Sapiente\",\"box1_cb\":\"Est numq\",\"box1_bb_diameter\":\"Eligendi\",\"box1_bb_depth\":\"Illo sun\",\"box1_bevel_diameter\":\"Eveniet\",\"box2_od\":\"Minim la\",\"box2_cb\":\"Voluptas\",\"box2_bb_diameter\":\"Est qui\",\"box2_bb_depth\":\"Aut dolo\",\"box2_bevel_diameter\":\"Consequa\",\"body_fishing_neck\":\"Vel est\",\"body_length\":\"Et eu et\",\"remarks\":\"Dolore d\"}', 'Tools', 39, '2024-06-09 07:12:38', '2024-06-09 07:12:38'),
+(717, '{\"serial\":\"Facilis\",\"description\":\"Sit nih\",\"box1_conn\":\"Ad quia\",\"box2_conn\":\"Velit se\",\"box1_cond\":null,\"box2_cond\":null,\"body_cond\":null,\"box1_od\":\"Labore e\",\"box1_cb\":\"Laboris\",\"box1_bb_diameter\":\"Ut id qu\",\"box1_bb_depth\":\"Aut id o\",\"box1_bevel_diameter\":\"Tempor v\",\"box2_od\":\"Blanditi\",\"box2_cb\":\"Pariatur\",\"box2_bb_diameter\":\"Ut corru\",\"box2_bb_depth\":\"Cupidata\",\"box2_bevel_diameter\":\"Eiusmod\",\"body_fishing_neck\":\"Qui ea d\",\"body_length\":\"Consecte\",\"remarks\":\"Voluptat\"}', 'Tools', 39, '2024-06-09 07:12:38', '2024-06-09 07:12:38'),
+(718, '{\"serial\":\"In sed l\",\"description\":\"Aut dolo\",\"box1_conn\":\"Ipsam la\",\"box2_conn\":\"Qui maio\",\"box1_cond\":null,\"box2_cond\":null,\"body_cond\":null,\"box1_od\":\"Tempora\",\"box1_cb\":\"Voluptas\",\"box1_bb_diameter\":\"A aspern\",\"box1_bb_depth\":\"Dolore t\",\"box1_bevel_diameter\":\"Rerum re\",\"box2_od\":\"Quibusda\",\"box2_cb\":\"Officia\",\"box2_bb_diameter\":\"Sunt par\",\"box2_bb_depth\":\"Ullamco\",\"box2_bevel_diameter\":\"Omnis co\",\"body_fishing_neck\":\"Anim dol\",\"body_length\":\"Culpa co\",\"remarks\":\"Officiis\"}', 'Tools', 40, '2024-06-09 07:35:22', '2024-06-09 07:35:22'),
+(719, '{\"serial\":\"Incidunt\",\"description\":\"Vel ut r\",\"box1_conn\":\"Amet ea\",\"box2_conn\":\"Non mole\",\"box1_cond\":null,\"box2_cond\":null,\"body_cond\":null,\"box1_od\":\"Sapiente\",\"box1_cb\":\"Est numq\",\"box1_bb_diameter\":\"Eligendi\",\"box1_bb_depth\":\"Illo sun\",\"box1_bevel_diameter\":\"Eveniet\",\"box2_od\":\"Minim la\",\"box2_cb\":\"Voluptas\",\"box2_bb_diameter\":\"Est qui\",\"box2_bb_depth\":\"Aut dolo\",\"box2_bevel_diameter\":\"Consequa\",\"body_fishing_neck\":\"Vel est\",\"body_length\":\"Et eu et\",\"remarks\":\"Dolore d\"}', 'Tools', 40, '2024-06-09 07:35:22', '2024-06-09 07:35:22'),
+(720, '{\"serial\":\"Facilis\",\"description\":\"Sit nih\",\"box1_conn\":\"Ad quia\",\"box2_conn\":\"Velit se\",\"box1_cond\":null,\"box2_cond\":null,\"body_cond\":null,\"box1_od\":\"Labore e\",\"box1_cb\":\"Laboris\",\"box1_bb_diameter\":\"Ut id qu\",\"box1_bb_depth\":\"Aut id o\",\"box1_bevel_diameter\":\"Tempor v\",\"box2_od\":\"Blanditi\",\"box2_cb\":\"Pariatur\",\"box2_bb_diameter\":\"Ut corru\",\"box2_bb_depth\":\"Cupidata\",\"box2_bevel_diameter\":\"Eiusmod\",\"body_fishing_neck\":\"Qui ea d\",\"body_length\":\"Consecte\",\"remarks\":\"Voluptat\"}', 'Tools', 40, '2024-06-09 07:35:22', '2024-06-09 07:35:22'),
+(721, '{\"serial\":\"Est offi\",\"slot\":\"Mollit c\",\"pipe_wt\":\"Impedit\",\"pipe_od\":\"Sint ut\",\"pipe_emi\":\"Quo aper\",\"pipe_eai\":\"Maxime v\",\"pipe_utea\":\"Ipsum o\",\"pipe_corr_in\":\"Ab eaque\",\"pipe_corr_ext\":\"Neque al\",\"pipe_ipc\":\"Est lib\",\"pipe_bent\":\"Porro mi\",\"pin_od\":\"Velit be\",\"pin_id\":\"Sit sit\",\"pin_tong_space\":\"Quis ver\",\"pin_bevel\":\"Aspernat\",\"pin_seal\":\"Omnis an\",\"pin_length\":\"Beatae e\",\"pin_neck\":\"A beatae\",\"pin_cyl\":\"Ea sint\",\"pin_nose\":\"Tempor v\",\"pin_lead\":\"Dolore q\",\"pin_f_repair\":\"Quae sim\",\"pin_reface\":\"Quis ut\",\"pin_hardbanding\":\"Magni et\",\"pin_condition\":\"Eu ullam\",\"box_od\":\"Necessit\",\"box_tong_space\":\"In aut n\",\"box_bevel\":\"Perferen\",\"box_seal\":\"Eos eos\",\"box_shldr\":\"Omnis qu\",\"box_length\":\"Nostrum\",\"box_cbore_dia\":\"Adipisci\",\"box_cbore_length\":\"Voluptat\",\"box_cbore_wall\":\"Laborios\",\"box_f_repair\":\"Qui id a\",\"box_reface\":\"Proident\",\"box_hardbanding\":\"Voluptat\",\"box_condition\":\"Dolore l\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(722, '{\"serial\":\"Ea qui q\",\"slot\":\"Eum omni\",\"pipe_wt\":\"Accusamu\",\"pipe_od\":\"Esse sin\",\"pipe_emi\":\"Odio dol\",\"pipe_eai\":\"Perferen\",\"pipe_utea\":\"Est magn\",\"pipe_corr_in\":\"Tempor a\",\"pipe_corr_ext\":\"Sit lab\",\"pipe_ipc\":\"Nisi et\",\"pipe_bent\":\"Accusamu\",\"pin_od\":\"Esse des\",\"pin_id\":\"Impedit\",\"pin_tong_space\":\"Porro qu\",\"pin_bevel\":\"Quia est\",\"pin_seal\":\"Dolor si\",\"pin_length\":\"Recusand\",\"pin_neck\":\"Aut in e\",\"pin_cyl\":\"Accusant\",\"pin_nose\":\"Non quis\",\"pin_lead\":\"Esse co\",\"pin_f_repair\":\"Molestia\",\"pin_reface\":\"Fugiat c\",\"pin_hardbanding\":\"Voluptas\",\"pin_condition\":\"Dolor ve\",\"box_od\":\"Qui veri\",\"box_tong_space\":\"Eum simi\",\"box_bevel\":\"Est et o\",\"box_seal\":\"Tenetur\",\"box_shldr\":\"Dolor qu\",\"box_length\":\"Providen\",\"box_cbore_dia\":\"Eiusmod\",\"box_cbore_length\":\"Magni co\",\"box_cbore_wall\":\"Accusamu\",\"box_f_repair\":\"Rerum ut\",\"box_reface\":\"Consequu\",\"box_hardbanding\":\"Rerum ev\",\"box_condition\":\"Voluptat\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(723, '{\"serial\":\"Porro an\",\"slot\":\"Laudanti\",\"pipe_wt\":\"Rerum es\",\"pipe_od\":\"Vel offi\",\"pipe_emi\":\"Est sapi\",\"pipe_eai\":\"Earum ne\",\"pipe_utea\":\"Reprehen\",\"pipe_corr_in\":\"Id simil\",\"pipe_corr_ext\":\"Fugiat\",\"pipe_ipc\":\"Est cons\",\"pipe_bent\":\"Possimus\",\"pin_od\":\"Commodi\",\"pin_id\":\"Aut offi\",\"pin_tong_space\":\"Dolor qu\",\"pin_bevel\":\"Qui repr\",\"pin_seal\":\"At conse\",\"pin_length\":\"Aut nost\",\"pin_neck\":\"Eius par\",\"pin_cyl\":\"Labore q\",\"pin_nose\":\"Laborum\",\"pin_lead\":\"Qui fuga\",\"pin_f_repair\":\"Voluptat\",\"pin_reface\":\"Quam dui\",\"pin_hardbanding\":\"Fugit a\",\"pin_condition\":\"Consecte\",\"box_od\":\"Recusand\",\"box_tong_space\":\"Error of\",\"box_bevel\":\"Duis dol\",\"box_seal\":\"Suscipit\",\"box_shldr\":\"Dolores\",\"box_length\":\"Aut opti\",\"box_cbore_dia\":\"Nostrum\",\"box_cbore_length\":\"Sapiente\",\"box_cbore_wall\":\"Ipsam na\",\"box_f_repair\":\"Nihil do\",\"box_reface\":\"Molestia\",\"box_hardbanding\":\"Sapiente\",\"box_condition\":\"Sunt eu\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(724, '{\"serial\":\"Laudanti\",\"slot\":\"In recus\",\"pipe_wt\":\"Exercita\",\"pipe_od\":\"Neque si\",\"pipe_emi\":\"Vel mole\",\"pipe_eai\":\"Incididu\",\"pipe_utea\":\"Dolorum\",\"pipe_corr_in\":\"Molestia\",\"pipe_corr_ext\":\"Velit co\",\"pipe_ipc\":\"Est mole\",\"pipe_bent\":\"Exercita\",\"pin_od\":\"Et nobis\",\"pin_id\":\"Tenetur\",\"pin_tong_space\":\"Et ipsa\",\"pin_bevel\":\"Ipsam er\",\"pin_seal\":\"Pariatur\",\"pin_length\":\"Sint et\",\"pin_neck\":\"Sapiente\",\"pin_cyl\":\"Exercita\",\"pin_nose\":\"Exceptur\",\"pin_lead\":\"Aut eum\",\"pin_f_repair\":\"Sed obca\",\"pin_reface\":\"Accusamu\",\"pin_hardbanding\":\"Laborum\",\"pin_condition\":\"Quaerat\",\"box_od\":\"Dolores\",\"box_tong_space\":\"Quaerat\",\"box_bevel\":\"Eveniet\",\"box_seal\":\"Repudian\",\"box_shldr\":\"Pariatur\",\"box_length\":\"Laborum\",\"box_cbore_dia\":\"Qui et d\",\"box_cbore_length\":\"Ullamco\",\"box_cbore_wall\":\"Autem ni\",\"box_f_repair\":\"Et conse\",\"box_reface\":\"Animi l\",\"box_hardbanding\":\"Eaque de\",\"box_condition\":\"Dolores\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(725, '{\"serial\":\"Est ad e\",\"slot\":\"Ea est d\",\"pipe_wt\":\"Velit au\",\"pipe_od\":\"Assumend\",\"pipe_emi\":\"Est labo\",\"pipe_eai\":\"Illum v\",\"pipe_utea\":\"Tempor c\",\"pipe_corr_in\":\"Aperiam\",\"pipe_corr_ext\":\"Aperiam\",\"pipe_ipc\":\"Quisquam\",\"pipe_bent\":\"Sit vol\",\"pin_od\":\"Sunt a\",\"pin_id\":\"Alias et\",\"pin_tong_space\":\"Nihil ve\",\"pin_bevel\":\"Commodi\",\"pin_seal\":\"Autem hi\",\"pin_length\":\"Cum impe\",\"pin_neck\":\"Consecte\",\"pin_cyl\":\"Sunt re\",\"pin_nose\":\"Sed plac\",\"pin_lead\":\"Nostrud\",\"pin_f_repair\":\"Rerum qu\",\"pin_reface\":\"Explicab\",\"pin_hardbanding\":\"Minus in\",\"pin_condition\":\"Voluptat\",\"box_od\":\"Adipisci\",\"box_tong_space\":\"Consequu\",\"box_bevel\":\"Occaecat\",\"box_seal\":\"Illum e\",\"box_shldr\":\"Aute bea\",\"box_length\":\"Rerum an\",\"box_cbore_dia\":\"Voluptat\",\"box_cbore_length\":\"Sequi ut\",\"box_cbore_wall\":\"Perspici\",\"box_f_repair\":\"Ut conse\",\"box_reface\":\"Et corpo\",\"box_hardbanding\":\"Quia qui\",\"box_condition\":\"Mollitia\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(726, '{\"serial\":\"Fugit e\",\"slot\":\"Consequa\",\"pipe_wt\":\"Quis sim\",\"pipe_od\":\"Et et do\",\"pipe_emi\":\"Unde et\",\"pipe_eai\":\"Rerum qu\",\"pipe_utea\":\"Ducimus\",\"pipe_corr_in\":\"Asperior\",\"pipe_corr_ext\":\"Et aut e\",\"pipe_ipc\":\"Unde arc\",\"pipe_bent\":\"Fuga Re\",\"pin_od\":\"Aliquip\",\"pin_id\":\"Harum id\",\"pin_tong_space\":\"Exercita\",\"pin_bevel\":\"Quis nob\",\"pin_seal\":\"Dolore i\",\"pin_length\":\"Exceptur\",\"pin_neck\":\"Irure du\",\"pin_cyl\":\"Dignissi\",\"pin_nose\":\"Do paria\",\"pin_lead\":\"Enim non\",\"pin_f_repair\":\"Dolor bl\",\"pin_reface\":\"Quia eni\",\"pin_hardbanding\":\"Officia\",\"pin_condition\":\"Iste mol\",\"box_od\":\"Earum in\",\"box_tong_space\":\"Anim et\",\"box_bevel\":\"Mollit o\",\"box_seal\":\"Ea cupid\",\"box_shldr\":\"Quam tem\",\"box_length\":\"Veniam\",\"box_cbore_dia\":\"Est rep\",\"box_cbore_length\":\"Duis sun\",\"box_cbore_wall\":\"Qui eius\",\"box_f_repair\":\"Sit ita\",\"box_reface\":\"Consequa\",\"box_hardbanding\":\"Sed aut\",\"box_condition\":\"Ipsum in\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(727, '{\"serial\":\"In autem\",\"slot\":\"Commodi\",\"pipe_wt\":\"Reprehen\",\"pipe_od\":\"Dolore c\",\"pipe_emi\":\"Enim iru\",\"pipe_eai\":\"Vel moll\",\"pipe_utea\":\"Ex labor\",\"pipe_corr_in\":\"Iure exe\",\"pipe_corr_ext\":\"Totam ea\",\"pipe_ipc\":\"Est arch\",\"pipe_bent\":\"Doloremq\",\"pin_od\":\"Tenetur\",\"pin_id\":\"Molestia\",\"pin_tong_space\":\"Dolor ma\",\"pin_bevel\":\"Reiciend\",\"pin_seal\":\"Ut possi\",\"pin_length\":\"Dolores\",\"pin_neck\":\"Exercita\",\"pin_cyl\":\"Et aliqu\",\"pin_nose\":\"Laudanti\",\"pin_lead\":\"Officiis\",\"pin_f_repair\":\"Minus ve\",\"pin_reface\":\"Error as\",\"pin_hardbanding\":\"Illo eos\",\"pin_condition\":\"Quae dol\",\"box_od\":\"Est atq\",\"box_tong_space\":\"Est reru\",\"box_bevel\":\"Quasi se\",\"box_seal\":\"Dolore v\",\"box_shldr\":\"Illum o\",\"box_length\":\"Enim aut\",\"box_cbore_dia\":\"Ex duis\",\"box_cbore_length\":\"Tempor e\",\"box_cbore_wall\":\"Elit mi\",\"box_f_repair\":\"Voluptat\",\"box_reface\":\"Eos rati\",\"box_hardbanding\":\"Quia vol\",\"box_condition\":\"In velit\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(728, '{\"serial\":\"Ad elige\",\"slot\":\"Quaerat\",\"pipe_wt\":\"Beatae s\",\"pipe_od\":\"Consequa\",\"pipe_emi\":\"In odit\",\"pipe_eai\":\"Omnis pa\",\"pipe_utea\":\"Autem la\",\"pipe_corr_in\":\"Vero pla\",\"pipe_corr_ext\":\"Sit sint\",\"pipe_ipc\":\"Quo ut r\",\"pipe_bent\":\"Et volup\",\"pin_od\":\"Sit qui\",\"pin_id\":\"Aliqua\",\"pin_tong_space\":\"Cupidata\",\"pin_bevel\":\"Itaque f\",\"pin_seal\":\"Magna no\",\"pin_length\":\"Quos est\",\"pin_neck\":\"Voluptat\",\"pin_cyl\":\"Reiciend\",\"pin_nose\":\"Reiciend\",\"pin_lead\":\"Beatae s\",\"pin_f_repair\":\"Labore c\",\"pin_reface\":\"Elit pa\",\"pin_hardbanding\":\"Inventor\",\"pin_condition\":\"Aspernat\",\"box_od\":\"Tenetur\",\"box_tong_space\":\"Tempora\",\"box_bevel\":\"Quaerat\",\"box_seal\":\"At volup\",\"box_shldr\":\"Rerum se\",\"box_length\":\"Et disti\",\"box_cbore_dia\":\"Eum face\",\"box_cbore_length\":\"In bland\",\"box_cbore_wall\":\"Itaque s\",\"box_f_repair\":\"Fugiat i\",\"box_reface\":\"Dolore q\",\"box_hardbanding\":\"Obcaecat\",\"box_condition\":\"Soluta q\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(729, '{\"serial\":\"Perspici\",\"slot\":\"Non anim\",\"pipe_wt\":\"A dolore\",\"pipe_od\":\"Harum at\",\"pipe_emi\":\"Enim ea\",\"pipe_eai\":\"Perferen\",\"pipe_utea\":\"Ipsum e\",\"pipe_corr_in\":\"Et sunt\",\"pipe_corr_ext\":\"Nemo dol\",\"pipe_ipc\":\"Et esse\",\"pipe_bent\":\"Culpa de\",\"pin_od\":\"Vero qui\",\"pin_id\":\"Et dolor\",\"pin_tong_space\":\"Repudian\",\"pin_bevel\":\"Impedit\",\"pin_seal\":\"Eius har\",\"pin_length\":\"Laboris\",\"pin_neck\":\"Culpa de\",\"pin_cyl\":\"Veniam\",\"pin_nose\":\"Aut dele\",\"pin_lead\":\"Anim sit\",\"pin_f_repair\":\"Officia\",\"pin_reface\":\"Veniam\",\"pin_hardbanding\":\"Nisi vol\",\"pin_condition\":\"Dolor en\",\"box_od\":\"Eius asp\",\"box_tong_space\":\"Laboris\",\"box_bevel\":\"Non enim\",\"box_seal\":\"Et conse\",\"box_shldr\":\"Quis lab\",\"box_length\":\"Animi v\",\"box_cbore_dia\":\"Id tenet\",\"box_cbore_length\":\"Odit cor\",\"box_cbore_wall\":\"Omnis am\",\"box_f_repair\":\"Qui quis\",\"box_reface\":\"Nostrum\",\"box_hardbanding\":\"Iste sun\",\"box_condition\":\"Ab beata\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(730, '{\"serial\":\"Quas ani\",\"slot\":\"Neque qu\",\"pipe_wt\":\"Labore r\",\"pipe_od\":\"Quo volu\",\"pipe_emi\":\"Odio omn\",\"pipe_eai\":\"Voluptat\",\"pipe_utea\":\"Quia acc\",\"pipe_corr_in\":\"Amet qu\",\"pipe_corr_ext\":\"Nulla vo\",\"pipe_ipc\":\"Pariatur\",\"pipe_bent\":\"Id volu\",\"pin_od\":\"Nulla si\",\"pin_id\":\"Totam si\",\"pin_tong_space\":\"Dolores\",\"pin_bevel\":\"Fugit q\",\"pin_seal\":\"Magna re\",\"pin_length\":\"Velit p\",\"pin_neck\":\"Aspernat\",\"pin_cyl\":\"Nisi rep\",\"pin_nose\":\"Incidunt\",\"pin_lead\":\"Odit off\",\"pin_f_repair\":\"In iure\",\"pin_reface\":\"Dolore e\",\"pin_hardbanding\":\"At id ex\",\"pin_condition\":\"Sint al\",\"box_od\":\"Quia nob\",\"box_tong_space\":\"Quisquam\",\"box_bevel\":\"Velit qu\",\"box_seal\":\"Sed esse\",\"box_shldr\":\"Quos pla\",\"box_length\":\"Ut rerum\",\"box_cbore_dia\":\"Eaque an\",\"box_cbore_length\":\"Ullamco\",\"box_cbore_wall\":\"Mollit h\",\"box_f_repair\":\"Perspici\",\"box_reface\":\"Temporib\",\"box_hardbanding\":\"Dolor at\",\"box_condition\":\"Quis rer\"}', 'App\\Models\\Dashboard\\Tublar\\Tubs\\Tubs', 20, '2024-06-10 00:27:46', '2024-06-10 00:27:46'),
+(731, '{\"main_description\":\"Ut et do\",\"description\":\"Dolorem\",\"contract_code\":\"Consecte\",\"quantity\":\"590\",\"od_size\":\"Tempora\",\"range\":\"Neque su\",\"unit_price\":\"154\",\"total_price\":\"282\"}', 'App\\Models\\Dashboard\\JobTicket', 38, '2024-06-12 08:29:45', '2024-06-12 08:29:45'),
+(732, '{\"main_description\":\"Quis cup\",\"description\":\"Natus in\",\"contract_code\":\"Aliquid\",\"quantity\":\"265\",\"od_size\":\"Consequa\",\"range\":\"Voluptat\",\"unit_price\":\"622\",\"total_price\":\"663\"}', 'App\\Models\\Dashboard\\JobTicket', 38, '2024-06-12 08:29:45', '2024-06-12 08:29:45'),
+(733, '{\"main_description\":\"Veniam debitis id s\",\"description\":\"Quas et nemo a ab ut\",\"contract_code\":\"Irure sit fugit odi\",\"quantity\":\"661\",\"od_size\":\"Provident cupidatat\",\"range\":\"Incididunt quis volu\",\"unit_price\":\"671\",\"total_price\":\"944\"}', 'App\\Models\\Dashboard\\JobTicket', 39, '2024-06-12 08:30:54', '2024-06-12 08:30:54'),
+(734, '{\"main_description\":\"Amet neque fugit v\",\"description\":\"Cumque magna quos od\",\"contract_code\":\"Eaque aspernatur mod\",\"quantity\":\"524\",\"od_size\":\"Qui laboriosam quia\",\"range\":\"Magnam delectus ali\",\"unit_price\":\"886\",\"total_price\":\"33\"}', 'App\\Models\\Dashboard\\JobTicket', 39, '2024-06-12 08:30:54', '2024-06-12 08:30:54');
 
 -- --------------------------------------------------------
 
@@ -774,6 +829,15 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(30, 'Operator', 'web', '2024-06-11 04:13:36', '2024-06-11 04:13:36'),
+(31, 'Owner', 'web', '2024-06-11 04:28:05', '2024-06-11 04:28:05'),
+(34, 'admin', 'web', '2024-06-11 04:46:07', '2024-06-11 04:46:07');
+
 -- --------------------------------------------------------
 
 --
@@ -784,6 +848,187 @@ CREATE TABLE `role_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 31),
+(2, 31),
+(3, 31),
+(4, 31),
+(5, 31),
+(5, 34),
+(6, 30),
+(6, 31),
+(6, 34),
+(7, 30),
+(7, 31),
+(7, 34),
+(8, 30),
+(8, 31),
+(8, 34),
+(9, 30),
+(9, 31),
+(9, 34),
+(10, 31),
+(10, 34),
+(11, 31),
+(11, 34),
+(12, 30),
+(12, 31),
+(12, 34),
+(13, 30),
+(13, 31),
+(13, 34),
+(14, 30),
+(14, 31),
+(14, 34),
+(15, 30),
+(15, 31),
+(15, 34),
+(16, 30),
+(16, 31),
+(16, 34),
+(17, 30),
+(17, 31),
+(17, 34),
+(18, 30),
+(18, 31),
+(18, 34),
+(20, 30),
+(20, 31),
+(20, 34),
+(21, 31),
+(22, 31),
+(23, 30),
+(23, 31),
+(23, 34),
+(24, 30),
+(24, 31),
+(24, 34),
+(25, 30),
+(25, 31),
+(25, 34),
+(26, 30),
+(26, 31),
+(26, 34),
+(27, 30),
+(27, 31),
+(27, 34),
+(28, 30),
+(28, 31),
+(28, 34),
+(29, 30),
+(29, 31),
+(29, 34),
+(30, 30),
+(30, 31),
+(30, 34),
+(31, 30),
+(31, 31),
+(31, 34),
+(32, 30),
+(32, 31),
+(32, 34),
+(33, 30),
+(33, 31),
+(33, 34),
+(34, 30),
+(34, 31),
+(34, 34),
+(35, 30),
+(35, 31),
+(35, 34),
+(36, 30),
+(36, 31),
+(36, 34),
+(37, 30),
+(37, 31),
+(37, 34),
+(38, 30),
+(38, 31),
+(38, 34),
+(39, 30),
+(39, 31),
+(39, 34),
+(40, 30),
+(40, 31),
+(40, 34),
+(41, 30),
+(41, 31),
+(41, 34),
+(42, 30),
+(42, 31),
+(42, 34),
+(43, 30),
+(43, 31),
+(43, 34),
+(44, 30),
+(44, 31),
+(44, 34),
+(45, 30),
+(45, 31),
+(45, 34),
+(46, 30),
+(46, 31),
+(46, 34),
+(47, 30),
+(47, 31),
+(47, 34),
+(50, 30),
+(50, 31),
+(50, 34),
+(51, 30),
+(51, 31),
+(51, 34),
+(52, 30),
+(52, 31),
+(52, 34),
+(53, 30),
+(53, 31),
+(53, 34),
+(54, 30),
+(54, 31),
+(54, 34),
+(55, 30),
+(55, 31),
+(55, 34),
+(56, 30),
+(56, 31),
+(56, 34),
+(57, 30),
+(57, 31),
+(57, 34),
+(58, 30),
+(58, 31),
+(58, 34),
+(59, 30),
+(59, 31),
+(59, 34),
+(60, 31),
+(60, 34),
+(61, 31),
+(61, 34),
+(62, 31),
+(62, 34),
+(63, 31),
+(63, 34),
+(64, 31),
+(64, 34),
+(65, 31),
+(65, 34),
+(66, 31),
+(66, 34),
+(87, 31),
+(87, 34),
+(88, 30),
+(88, 31),
+(88, 34),
+(89, 30),
+(89, 31),
+(89, 34);
 
 -- --------------------------------------------------------
 
@@ -858,10 +1103,9 @@ INSERT INTO `sidebar` (`id`, `name`, `route`, `type`, `status`, `order`, `parent
 (18, 'View JobTicket Numbers', 'order.index', NULL, 'Active', 1, 5, NULL, NULL, NULL),
 (19, 'View JobTickets', 'jobTicket.index', NULL, 'Active', 2, 5, NULL, NULL, NULL),
 (20, 'Create JobTicket', 'jobTicket.create', NULL, 'Active', 3, 5, NULL, NULL, NULL),
-(21, 'Admins', 'admins.index', NULL, 'Active', 1, 6, NULL, NULL, NULL),
-(22, 'Operators', 'users.index', NULL, 'Active', 2, 6, NULL, NULL, NULL),
+(22, 'Users', 'users.index', NULL, 'Active', 2, 6, NULL, NULL, NULL),
 (23, 'Report Settings', 'report_settings.index', NULL, 'Active', 3, 6, NULL, NULL, NULL),
-(24, 'Roles', 'roles.index', NULL, 'Active', 4, 6, NULL, NULL, NULL),
+(24, 'Roles', 'dashboard.roles.index', NULL, 'Active', 4, 6, NULL, NULL, NULL),
 (25, 'View MPI Reports', 'mpi.reports.index', NULL, 'Active', 1, 14, NULL, NULL, NULL),
 (26, 'Create MPI Reports', 'mpi.reports.create', NULL, 'Active', 2, 14, NULL, NULL, NULL),
 (27, 'Wire Reports', '', NULL, 'Active', 1, 15, NULL, NULL, NULL),
@@ -887,8 +1131,8 @@ INSERT INTO `sidebar` (`id`, `name`, `route`, `type`, `status`, `order`, `parent
 (47, 'create mud reports', 'mud-jar.reports.create', 'mud', 'Active', 2, 31, NULL, NULL, NULL),
 (48, 'view jar reports', 'mud-jar.reports.index', 'jar', 'Active', 1, 32, NULL, NULL, NULL),
 (49, 'create jar report', 'mud-jar.reports.create', 'jar', 'Active', 2, 32, NULL, NULL, NULL),
-(50, 'view drill pipe ', 'tubs.reports.index', 'drillpipe', 'Active', 1, 33, NULL, NULL, NULL),
-(51, 'create drill pipe ', 'tubs.reports.create', 'drillpipe', 'Active', 2, 33, NULL, NULL, NULL),
+(50, 'view drill pipe', 'tubs.reports.index', 'drillpipe', 'Active', 1, 33, NULL, NULL, NULL),
+(51, 'create drill pipe', 'tubs.reports.create', 'drillpipe', 'Active', 2, 33, NULL, NULL, NULL),
 (52, 'view drill collar', 'tubs.reports.index', 'drillcollar', 'Active', 1, 34, NULL, NULL, NULL),
 (53, 'create drill collar', 'tubs.reports.create', 'drillcollar', 'Active', 2, 34, NULL, NULL, NULL),
 (124, 'view heavy weight', 'tubs.reports.index', 'heavyweight', 'Active', 1, 35, NULL, NULL, NULL),
@@ -908,9 +1152,9 @@ INSERT INTO `sidebar` (`id`, `name`, `route`, `type`, `status`, `order`, `parent
 
 CREATE TABLE `thorough_examination` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `exam_date` date NOT NULL,
+  `date` date NOT NULL,
   `report_number` varchar(255) DEFAULT NULL,
-  `identified_number` varchar(255) DEFAULT NULL,
+  `serial` varchar(255) DEFAULT NULL,
   `qty` varchar(255) DEFAULT NULL,
   `manufature_date` date DEFAULT NULL,
   `swl` varchar(255) DEFAULT NULL,
@@ -953,14 +1197,20 @@ CREATE TABLE `thorough_examination` (
 -- Dumping data for table `thorough_examination`
 --
 
-INSERT INTO `thorough_examination` (`id`, `exam_date`, `report_number`, `identified_number`, `qty`, `manufature_date`, `swl`, `last_exam_date`, `original_cert_number`, `original_cert_date`, `cert_body_name`, `desc_header`, `desc_content`, `diameter`, `length`, `description`, `location`, `type`, `thorough_type`, `first_exam_after`, `carried_out`, `has_equipment`, `defect_note`, `accept`, `danger`, `danger_date`, `next_exam`, `carried_exam`, `carried_note`, `safe_equipment`, `desc_type`, `perfect_note`, `desc_manufature`, `user_id`, `order_id`, `created_at`, `updated_at`, `diameter_unit`, `length_unit`, `shaklesize_id`) VALUES
+INSERT INTO `thorough_examination` (`id`, `date`, `report_number`, `serial`, `qty`, `manufature_date`, `swl`, `last_exam_date`, `original_cert_number`, `original_cert_date`, `cert_body_name`, `desc_header`, `desc_content`, `diameter`, `length`, `description`, `location`, `type`, `thorough_type`, `first_exam_after`, `carried_out`, `has_equipment`, `defect_note`, `accept`, `danger`, `danger_date`, `next_exam`, `carried_exam`, `carried_note`, `safe_equipment`, `desc_type`, `perfect_note`, `desc_manufature`, `user_id`, `order_id`, `created_at`, `updated_at`, `diameter_unit`, `length_unit`, `shaklesize_id`) VALUES
 (11, '1991-11-01', 'STC-6/24-S_T-Rig5-SHAKLE-2', '407', '811', '2015-08-04', NULL, '1984-11-04', '3', '2009-02-25', 'Fiona Maddox', 'Iusto ut sequi alias', NULL, NULL, NULL, NULL, NULL, 'shakle', NULL, 1, 'interval_year', 1, 'r4r4r4r4r', 1, 1, '2024-02-10', '1992-04-30', '[\"visual_inspection\"]', 'vfxrgxzf', 1, 'Ea delectus et ut q', 'vcxvrfgxzvd', 'Odit elit duis volu', 1, 10, '2024-02-07 12:02:56', '2024-02-12 11:48:37', NULL, NULL, 9),
 (14, '2004-07-06', 'STC-3/24-ECDC-Rig5-SHAKLE-2', '329', '612', '2010-11-24', NULL, '2017-11-15', '211', '1978-01-30', 'Lila Kane', 'Quis in amet sed qu', NULL, NULL, NULL, NULL, NULL, 'shakle', NULL, 0, 'interval_year', 0, NULL, 0, 0, NULL, '2005-01-05', '[\"finction_test\"]', NULL, 0, 'Autem distinctio Du', NULL, 'Voluptatibus aliquid', 1, 5, '2024-02-08 10:01:06', '2024-02-08 10:57:54', NULL, NULL, 12),
 (17, '2008-08-09', 'STC-3/24-ECDC-Rig5-WIRE-1', '216', '464', '1989-08-29', 'khater', '1987-07-12', '159', '2007-04-11', 'Alan Ratliff', 'Culpa excepturi repu', 'Ex laboriosam dolor', NULL, NULL, NULL, 'Magnam minima tempor', 'wire', NULL, 1, 'interval_year', 1, 'vcv', 1, 1, '2024-02-21', '2009-02-08', '[\"visual_inspection\"]', 'vcvc', 1, NULL, 'xssds', NULL, 1, 5, '2024-02-12 11:33:02', '2024-05-13 02:50:13', 'Choose Diameter Unit', 'Choose Length Unit', NULL),
 (44, '1975-06-02', 'STC-9/24-ECDC-Rig10-WIRE-1', '970', '388', '2004-06-06', 'Vel ut quae debitis', '2006-05-21', '658', '2007-11-18', 'Breanna Cortez', 'Saepe distinctio Ins', 'Sint in suscipit con', NULL, NULL, NULL, 'Proident iure eum d', 'wire', NULL, 0, 'circumstances', 1, NULL, 0, 1, NULL, '1975-12-01', '[\"visual_inspection\"]', NULL, 1, NULL, NULL, NULL, 1, 6, '2024-03-08 06:26:02', '2024-03-18 05:24:28', 'Choose Diameter Unit', 'Choose Length Unit', NULL),
 (54, '2008-08-09', 'STC-11/24-Test Comapny-Rig15-WIRE-2', '216', '464', '1989-08-29', 'khater', '1987-07-12', '159', '2007-04-11', 'Alan Ratliff', 'Culpa excepturi repu', 'Ex laboriosam dolor', NULL, NULL, NULL, 'Magnam minima tempor', 'wire', NULL, 1, 'interval_year', 1, 'vcv', 1, 1, '2024-02-21', '2009-08-08', '[\"visual_inspection\"]', 'vcvc', 1, NULL, 'xssds', NULL, 1, 19, '2024-05-26 05:05:38', '2024-05-26 05:05:38', 'Choose Diameter Unit', 'Choose Length Unit', NULL),
 (66, '2021-02-21', 'STC-10/24-Quincy_Cunningham-Rig5-EARUM PR-2', '919', '572', '2020-02-24', 'Deserunt', '1979-09-12', '103', '1977-08-23', 'Wilma Wiley', NULL, NULL, NULL, NULL, 'Iste pla', NULL, 'thorough', 'Earum pr', 1, 'interval_year', 1, 'Deserunt', 1, 1, '2003-03-25', '2022-02-20', '[\"visual_inspection\"]', 'Ut id i', 0, NULL, 'Proident', NULL, 1, 14, '2024-06-05 02:30:46', '2024-06-05 02:30:46', NULL, NULL, NULL),
-(67, '2005-03-09', 'STC-9/24-ECDC-Rig12-THOROUGH-0', '252', '493', '1993-09-25', 'Dicta id', '2009-12-02', '269', '2018-02-15', 'Fiona Beck', NULL, NULL, NULL, NULL, 'Facilis', NULL, 'thorough', 'Sit quo', 0, 'interval_year', 1, 'Deserunt', 0, 1, '2003-03-25', '2005-09-08', '[\"visual_inspection\"]', 'Ut id i', 0, NULL, 'Proident', NULL, 1, 13, '2024-06-05 02:31:25', '2024-06-05 02:34:20', NULL, NULL, NULL);
+(67, '2005-03-09', 'STC-9/24-ECDC-Rig12-THOROUGH-0', '252', '493', '1993-09-25', 'Dicta id', '2009-12-02', '269', '2018-02-15', 'Fiona Beck', NULL, NULL, NULL, NULL, 'Facilis', NULL, 'thorough', 'Sit quo', 0, 'interval_year', 1, 'Deserunt', 0, 1, '2003-03-25', '2005-09-08', '[\"visual_inspection\"]', 'Ut id i', 0, NULL, 'Proident', NULL, 1, 13, '2024-06-05 02:31:25', '2024-06-05 02:34:20', NULL, NULL, NULL),
+(69, '2004-07-06', 'STC-3/24-ECDC-Rig5-SHAKLE-2', NULL, '612', '2010-11-24', NULL, '2017-11-15', '211', '1978-01-30', 'Lila Kane', 'Quis in amet sed qu', NULL, NULL, NULL, NULL, NULL, 'shakle', NULL, 0, 'interval_year', 0, NULL, 1, 0, NULL, '2005-07-05', NULL, NULL, 0, 'Autem distinctio Du', NULL, 'Voluptatibus aliquid', 1, 5, '2024-06-09 06:49:21', '2024-06-09 06:49:21', NULL, NULL, 12),
+(70, '2005-03-09', 'STC-9/24-ECDC-Rig12-SIT QUO-2', NULL, '493', '1993-09-25', 'Dicta id', '2009-12-02', '269', '2018-02-15', 'Fiona Beck', NULL, NULL, NULL, NULL, 'Facilis', NULL, 'thorough', 'Sit quo', 0, 'interval_year', 1, 'Deserunt', 1, 1, '2003-03-25', '2006-03-08', '[\"visual_inspection\"]', 'Ut id i', 0, NULL, 'Proident', NULL, 1, 13, '2024-06-09 06:49:52', '2024-06-09 06:49:52', NULL, NULL, NULL),
+(71, '2005-03-09', 'STC-9/24-ECDC-Rig12-SIT QUO-3', NULL, '493', '1993-09-25', 'Dicta id', '2009-12-02', '269', '2018-02-15', 'Fiona Beck', NULL, NULL, NULL, NULL, 'Facilis', NULL, 'thorough', 'Sit quo', 0, 'interval_year', 1, 'Deserunt', 0, 1, '2003-03-25', '2006-03-08', '[\"visual_inspection\"]', 'Ut id i', 0, NULL, 'Proident', NULL, 1, 13, '2024-06-09 06:50:19', '2024-06-09 06:50:19', NULL, NULL, NULL),
+(72, '1975-06-02', 'STC-9/24-ECDC-Rig10-WIRE-2', NULL, '388', '2004-06-06', 'Vel ut quae debitis', '2006-05-21', '658', '2007-11-18', 'Breanna Cortez', 'Saepe distinctio Ins', 'Sint in suscipit con', NULL, NULL, NULL, 'Proident iure eum d', 'wire', NULL, 0, 'circumstances', 1, NULL, 0, 1, NULL, NULL, '[\"visual_inspection\"]', NULL, 1, NULL, NULL, NULL, 43, 6, '2024-06-15 12:25:48', '2024-06-15 12:25:48', 'Choose Diameter Unit', 'Choose Length Unit', NULL),
+(73, '2004-07-06', 'STC-3/24-ECDC-Rig5-SHAKLE-3', NULL, '612', '2010-11-24', NULL, '2017-11-15', '211', '1978-01-30', 'Lila Kane', 'Quis in amet sed qu', NULL, NULL, NULL, NULL, NULL, 'shakle', NULL, 0, 'interval_year', 0, NULL, 0, 0, NULL, '2005-07-05', NULL, NULL, 0, 'Autem distinctio Du', NULL, 'Voluptatibus aliquid', 43, 5, '2024-06-15 12:26:02', '2024-06-15 12:26:03', NULL, NULL, 12),
+(74, '2005-03-09', 'STC-9/24-ECDC-Rig12-SIT QUO-4', NULL, '493', '1993-09-25', 'Dicta id', '2009-12-02', '269', '2018-02-15', 'Fiona Beck', NULL, NULL, NULL, NULL, 'Facilis', NULL, 'thorough', 'Sit quo', 0, 'interval_year', 1, 'Deserunt', 1, 1, '2003-03-25', '2006-03-08', '[\"visual_inspection\"]', 'Ut id i', 0, NULL, 'Proident', NULL, 43, 13, '2024-06-15 12:26:22', '2024-06-15 12:26:22', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -970,10 +1220,10 @@ INSERT INTO `thorough_examination` (`id`, `exam_date`, `report_number`, `identif
 
 CREATE TABLE `tools` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `report_num` varchar(255) DEFAULT NULL,
+  `report_number` varchar(255) DEFAULT NULL,
   `work_order` varchar(255) NOT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `st_date` date DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `fin_date` date DEFAULT NULL,
   `spec` varchar(255) NOT NULL,
   `procedure` varchar(255) NOT NULL,
@@ -981,11 +1231,20 @@ CREATE TABLE `tools` (
   `methods` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`methods`)),
   `summary` varchar(255) NOT NULL,
   `accept` bigint(20) UNSIGNED NOT NULL,
+  `serial` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tools`
+--
+
+INSERT INTO `tools` (`id`, `report_number`, `work_order`, `status`, `date`, `fin_date`, `spec`, `procedure`, `type`, `methods`, `summary`, `accept`, `serial`, `user_id`, `order_id`, `created_at`, `updated_at`) VALUES
+(39, 'STC-10/24-Eugenia_Hutchinson-Rig15-BOX*BOX-1', 'Animi u', 'Tenetur', '1993-05-21', '2008-11-13', 'Est mod', 'Officia', 'box*box', '[\"visual\",\"boroscopic\",\"dimensional\",\"mag particle\",\"eddy current\",\"liquid penet\",\"ultrasonic\"]', 'Voluptat', 2, NULL, 1, 15, '2024-06-09 07:12:38', '2024-06-09 07:12:38'),
+(40, 'STC-10/24-Eugenia_Hutchinson-Rig15-BOX*BOX-2', 'Animi u', 'Tenetur', '1993-05-21', '2008-11-13', 'Est mod', 'Officia', 'box*box', '[\"visual\",\"boroscopic\",\"dimensional\",\"mag particle\",\"eddy current\",\"liquid penet\",\"ultrasonic\"]', 'Voluptat', 2, NULL, 1, 15, '2024-06-09 07:35:22', '2024-06-09 07:35:22');
 
 -- --------------------------------------------------------
 
@@ -1081,7 +1340,7 @@ INSERT INTO `tublar_summary` (`id`, `st_date`, `fin_date`, `contract_num`, `repo
 
 CREATE TABLE `tubs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `report_num` varchar(255) DEFAULT NULL,
+  `report_number` varchar(255) DEFAULT NULL,
   `customer` varchar(255) DEFAULT NULL,
   `order` varchar(255) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
@@ -1102,6 +1361,7 @@ CREATE TABLE `tubs` (
   `conn_inspected` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`conn_inspected`)),
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `accept` bigint(20) UNSIGNED DEFAULT NULL,
+  `serial` varchar(255) DEFAULT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1111,9 +1371,10 @@ CREATE TABLE `tubs` (
 -- Dumping data for table `tubs`
 --
 
-INSERT INTO `tubs` (`id`, `report_num`, `customer`, `order`, `location`, `order_num`, `date`, `remarks`, `type`, `magnetizing`, `drill_pipe_details`, `magnetic_particles`, `other_methods`, `specification`, `equipment`, `tool_desc`, `supervisor`, `pin_conn`, `box_conn`, `conn_inspected`, `user_id`, `accept`, `order_id`, `created_at`, `updated_at`) VALUES
-(18, 'STC-6/24-S_T-Rig5-HEAVYWEIGHT-2', 'Ut volup', 'Deserunt', 'Ea in es', NULL, '2004-07-30', 'Incidunt', 'heavyweight', '{\"ac_yoke\":\"1\",\"permanent\":\"0\",\"dc_coil\":\"1\"}', NULL, '{\"dry\":\"1\",\"wet\":\"0\",\"visible\":\"0\",\"fluorescent\":\"0\"}', '{\"eai\":\"0\",\"vti\":\"1\",\"tgi\":\"0\",\"other\":\"Nesciunt\"}', '{\"api\":\"1\",\"dsi\":\"0\",\"other\":\"Quae sus\",\"edition\":\"Reprehen\"}', '{\"equip_ac_yoke\":\"0\",\"equip_dc_coil\":\"0\",\"equip_permanent_magnet\":\"0\",\"equip_uv_light\":\"1\",\"other\":\"Consecte\",\"ac_ypke_serial\":\"Possimus\",\"dc_coil_serial\":\"Sint qui\",\"permanent_magnet_serial\":\"Eos magn\",\"uv_light_serial\":\"Tempora\",\"other_serial\":\"Perferen\"}', 'Nemo dol', 'Animi d', 'Culpa do', 'Laboris', '{\"total\":\"Esse ess\",\"accepted\":\"Sit vol\",\"defected\":\"Sit anim\",\"repaired\":\"Sed sit\"}', 1, NULL, 10, '2024-06-05 05:37:16', '2024-06-05 05:37:16'),
-(19, 'STC-11/24-Test Comapny-Rig15-DRILLPIPE-1', 'Sint mag', 'Ipsum o', 'Ut error', NULL, '1973-10-23', 'Mollit c', 'drillpipe', '{\"ac_yoke\":\"0\",\"permanent\":\"1\",\"dc_coil\":\"0\",\"emi\":\"0\"}', '{\"grade\":\"Voluptas\",\"range\":\"Culpa e\",\"weight\":\"Sint qua\",\"wt\":\"Dolores\",\"od\":\"Eius ut\",\"id\":\"Voluptat\",\"t\":\"Iure eni\",\"connection\":\"Fugiat a\"}', '{\"dry\":\"0\",\"wet\":\"0\",\"visible\":\"1\",\"fluorescent\":\"1\"}', '{\"eai\":\"0\",\"vti\":\"0\",\"wt\":\"1\",\"tgi\":\"1\",\"other\":\"Beatae i\"}', '{\"api\":\"1\",\"dsi\":\"1\",\"other\":\"Voluptas\",\"edition\":\"Facilis\"}', '{\"equip_ac_yoke\":\"0\",\"equip_dc_coil\":\"0\",\"equip_permanent_magnet\":\"0\",\"equip_uv_light\":\"1\",\"equip_emi\":\"0\",\"equip_wt\":\"1\",\"other\":\"Sint vo\",\"ac_ypke_serial\":\"Qui est\",\"dc_coil_serial\":\"Ipsa so\",\"permanent_magnet_serial\":\"Sit non\",\"uv_light_serial\":\"Nam in n\",\"emi_serial\":\"Cupidita\",\"wt_serial\":\"Sed iure\",\"other_serial\":\"Ut aliqu\"}', 'Qui quia', 'Enim dol', NULL, NULL, NULL, 1, NULL, 19, '2024-06-05 08:30:09', '2024-06-05 08:30:09');
+INSERT INTO `tubs` (`id`, `report_number`, `customer`, `order`, `location`, `order_num`, `date`, `remarks`, `type`, `magnetizing`, `drill_pipe_details`, `magnetic_particles`, `other_methods`, `specification`, `equipment`, `tool_desc`, `supervisor`, `pin_conn`, `box_conn`, `conn_inspected`, `user_id`, `accept`, `serial`, `order_id`, `created_at`, `updated_at`) VALUES
+(18, 'STC-6/24-S_T-Rig5-HEAVYWEIGHT-2', 'Ut volup', 'Deserunt', 'Ea in es', NULL, '2004-07-30', 'Incidunt', 'heavyweight', '{\"ac_yoke\":\"1\",\"permanent\":\"0\",\"dc_coil\":\"1\"}', NULL, '{\"dry\":\"1\",\"wet\":\"0\",\"visible\":\"0\",\"fluorescent\":\"0\"}', '{\"eai\":\"0\",\"vti\":\"1\",\"tgi\":\"0\",\"other\":\"Nesciunt\"}', '{\"api\":\"1\",\"dsi\":\"0\",\"other\":\"Quae sus\",\"edition\":\"Reprehen\"}', '{\"equip_ac_yoke\":\"0\",\"equip_dc_coil\":\"0\",\"equip_permanent_magnet\":\"0\",\"equip_uv_light\":\"1\",\"other\":\"Consecte\",\"ac_ypke_serial\":\"Possimus\",\"dc_coil_serial\":\"Sint qui\",\"permanent_magnet_serial\":\"Eos magn\",\"uv_light_serial\":\"Tempora\",\"other_serial\":\"Perferen\"}', 'Nemo dol', 'Animi d', 'Culpa do', 'Laboris', '{\"total\":\"Esse ess\",\"accepted\":\"Sit vol\",\"defected\":\"Sit anim\",\"repaired\":\"Sed sit\"}', 1, NULL, NULL, 10, '2024-06-05 05:37:16', '2024-06-05 05:37:16'),
+(19, 'STC-11/24-Test Comapny-Rig15-DRILLPIPE-1', 'Sint mag', 'Ipsum o', 'Ut error', NULL, '1973-10-23', 'Mollit c', 'drillpipe', '{\"ac_yoke\":\"0\",\"permanent\":\"1\",\"dc_coil\":\"0\",\"emi\":\"0\"}', '{\"grade\":\"Voluptas\",\"range\":\"Culpa e\",\"weight\":\"Sint qua\",\"wt\":\"Dolores\",\"od\":\"Eius ut\",\"id\":\"Voluptat\",\"t\":\"Iure eni\",\"connection\":\"Fugiat a\"}', '{\"dry\":\"0\",\"wet\":\"0\",\"visible\":\"1\",\"fluorescent\":\"1\"}', '{\"eai\":\"0\",\"vti\":\"0\",\"wt\":\"1\",\"tgi\":\"1\",\"other\":\"Beatae i\"}', '{\"api\":\"1\",\"dsi\":\"1\",\"other\":\"Voluptas\",\"edition\":\"Facilis\"}', '{\"equip_ac_yoke\":\"0\",\"equip_dc_coil\":\"0\",\"equip_permanent_magnet\":\"0\",\"equip_uv_light\":\"1\",\"equip_emi\":\"0\",\"equip_wt\":\"1\",\"other\":\"Sint vo\",\"ac_ypke_serial\":\"Qui est\",\"dc_coil_serial\":\"Ipsa so\",\"permanent_magnet_serial\":\"Sit non\",\"uv_light_serial\":\"Nam in n\",\"emi_serial\":\"Cupidita\",\"wt_serial\":\"Sed iure\",\"other_serial\":\"Ut aliqu\"}', 'Qui quia', 'Enim dol', NULL, NULL, NULL, 1, NULL, NULL, 19, '2024-06-05 08:30:09', '2024-06-05 08:30:09'),
+(20, 'STC-11/24-Test Comapny-Rig15-DRILLPIPE-2', 'Sint mag', 'Ipsum o', 'Ut error', NULL, '1973-10-23', 'Mollit c', 'drillpipe', '{\"ac_yoke\":\"0\",\"permanent\":\"1\",\"dc_coil\":\"0\",\"emi\":\"0\"}', '{\"grade\":\"Voluptas\",\"range\":\"Culpa e\",\"weight\":\"Sint qua\",\"wt\":\"Dolores\",\"od\":\"Eius ut\",\"id\":\"Voluptat\",\"t\":null,\"connection\":\"Fugiat a\"}', '{\"dry\":\"0\",\"wet\":\"0\",\"visible\":\"1\",\"fluorescent\":\"1\"}', '{\"eai\":\"0\",\"vti\":\"0\",\"wt\":\"1\",\"tgi\":\"1\",\"other\":\"Beatae i\"}', '{\"api\":\"1\",\"dsi\":\"1\",\"other\":\"Voluptas\",\"edition\":\"Facilis\"}', '{\"equip_ac_yoke\":\"0\",\"equip_dc_coil\":\"0\",\"equip_permanent_magnet\":\"0\",\"equip_uv_light\":\"1\",\"equip_emi\":\"0\",\"equip_wt\":\"1\",\"other\":\"Sint vo\",\"ac_ypke_serial\":\"Qui est\",\"dc_coil_serial\":\"Ipsa so\",\"permanent_magnet_serial\":\"Sit non\",\"uv_light_serial\":\"Nam in n\",\"emi_serial\":\"Cupidita\",\"wt_serial\":\"Sed iure\",\"other_serial\":\"Ut aliqu\"}', 'Qui quia', 'Enim dol', NULL, NULL, NULL, 1, NULL, NULL, 19, '2024-06-10 00:27:46', '2024-06-10 00:27:46');
 
 -- --------------------------------------------------------
 
@@ -1126,26 +1387,26 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `role` int(11) NOT NULL,
+  `status` enum('Active','Not Active') NOT NULL DEFAULT 'Active',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `created_by` tinyint(4) NOT NULL,
+  `created_by` tinyint(4) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `updated_by` tinyint(4) NOT NULL,
-  `trash` int(11) NOT NULL DEFAULT 0
+  `updated_by` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `full_name`, `email`, `role`, `email_verified_at`, `deleted_at`, `password`, `remember_token`, `created_at`, `created_by`, `updated_at`, `updated_by`, `trash`) VALUES
-(1, 'Admin', 'Mohamed Khater User', 'admin@stc.com', 1, NULL, NULL, '$2y$10$Bf17si1K3dPzSb3miBju0OKot7SYAUjEDCQp20aTJRpOCayh2jz1u', NULL, NULL, 0, '2024-02-06 04:36:04', 1, 0),
-(4, 'Mohamed Khater', '', 'khater@stc.com', 2, NULL, NULL, '$2y$10$3MxPJBipK7dxI28uvaIac.YzvZqSdONOFfwrqiG0fscuDDRNEvHG.', NULL, NULL, 0, '2023-12-04 10:45:00', 0, 1),
-(32, 'user', 'testing user', 'user@stc.com', 2, NULL, NULL, '123456789', NULL, '2024-05-14 02:19:58', 1, '2024-05-14 02:19:58', 0, 0);
+INSERT INTO `users` (`id`, `name`, `full_name`, `email`, `status`, `email_verified_at`, `deleted_at`, `password`, `remember_token`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(1, 'owner', 'mohamed khater', 'owner@stc.com', 'Active', NULL, NULL, '$2y$10$GfX3Z78XRWtbKFV4VDtDjOcLba1tyjIsTWUvKQM15Y2eGsNaSQYhi', NULL, NULL, 0, '2024-06-11 08:38:04', 1),
+(42, 'admin', 'admin', 'admin@stc.com', 'Active', NULL, NULL, '$2y$10$WZFT..nZa5JgeZmei9PqYubZyevaKSjQXOhWRbd8KEI/7cGgZ8Pj2', NULL, '2024-06-11 08:38:27', 1, '2024-06-12 07:25:56', 1),
+(43, 'operator1', 'operator1', 'operator1@stc.com', 'Active', NULL, NULL, '$2y$10$sqzCTWsjgz8cKgU3eF2.ZOLbuo88gsOEruJL9ZV04Ngogdkihqg6O', NULL, '2024-06-11 08:39:04', 1, '2024-06-12 10:40:17', 1),
+(44, 'operator2', 'operator2', 'operator2@stc.com', 'Not Active', NULL, NULL, '$2y$10$sqzCTWsjgz8cKgU3eF2.ZOLbuo88gsOEruJL9ZV04Ngogdkihqg6O', NULL, '2024-06-12 08:18:39', 1, '2024-06-15 12:08:30', 42);
 
 --
 -- Indexes for dumped tables
@@ -1408,7 +1669,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `job_ticket`
 --
 ALTER TABLE `job_ticket`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `media`
@@ -1420,19 +1681,19 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `mpi`
 --
 ALTER TABLE `mpi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
 
 --
 -- AUTO_INCREMENT for table `mud_jar`
 --
 ALTER TABLE `mud_jar`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -1444,7 +1705,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1456,7 +1717,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `report_desc`
 --
 ALTER TABLE `report_desc`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=714;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=736;
 
 --
 -- AUTO_INCREMENT for table `report_settings`
@@ -1474,7 +1735,7 @@ ALTER TABLE `rig`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `shakle_size`
@@ -1492,13 +1753,13 @@ ALTER TABLE `sidebar`
 -- AUTO_INCREMENT for table `thorough_examination`
 --
 ALTER TABLE `thorough_examination`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `tools`
 --
 ALTER TABLE `tools`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tools_extensions`
@@ -1522,13 +1783,13 @@ ALTER TABLE `tublar_summary`
 -- AUTO_INCREMENT for table `tubs`
 --
 ALTER TABLE `tubs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Constraints for dumped tables

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Tublar;
 
 use App\Actions\Tublar\MudJar\StoreMudJarAction;
 use App\Actions\Tublar\MudJar\UpdateMudJarAction;
+use App\Events\Dashboard\ReportAuthEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Tublar\MudJar\MudJarStoreRequest;
 use App\Http\Requests\Dashboard\Tublar\MudJar\MudJarUpdateRequest;
@@ -11,8 +12,8 @@ use App\Models\Dashboard\Order;
 use App\Models\Dashboard\Tublar\MudJar\MudJar;
 use App\ViewModels\Dashboard\MudJarView\MudJarViewModel;
 use Exception;
-use PDF;
 use Illuminate\Http\Request;
+use PDF;
 
 class MudJarController extends Controller
 {
@@ -82,6 +83,7 @@ class MudJarController extends Controller
     {
         try {
             $mudjar = MudJar::FindOrFail($id);
+            event(new ReportAuthEvent($mudjar->user_id));
             return view('dashboard.pages.tublar.mud-jar.crud', new MudJarViewModel($mudjar->type, $mudjar));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/' ;
+    public const HOME = '/';
 
 
 
@@ -30,8 +30,8 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         if (!defined('DASHBOARD')) {
-                define('DASHBOARD', config('app.panel', 'default-value-if-not-set'));
-            }
+            define('DASHBOARD', config('app.panel', 'default-value-if-not-set'));
+        }
 
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
@@ -44,9 +44,9 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
             Route::middleware('web')
                 ->group(base_path('routes/admin.php'));
-
         });
     }
 }

@@ -25,6 +25,7 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
+
         require __DIR__ . '/auth.php';
 
         Route::redirect("register", "login"); //Dashboard Routes
@@ -41,7 +42,8 @@ Route::group(
             });
             Route::resource('settings', Settings::class)->names('report_settings');
             Route::resource('JobTicketNumber', OrderController::class)->names('order');
-            //        Route::resource('checklists', CheckListController::class)->names('checklist');
+            // Route::resource('checklists', CheckListController::class)->names('checklist');
+
             //            role-permission
             Route::resource('roles', RoleController::class)->names('dashboard.roles');
             //            end role-permission

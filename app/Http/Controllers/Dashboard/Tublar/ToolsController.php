@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Tublar;
 use App\Actions\Tublar\Tools\DeleteToolsAction;
 use App\Actions\Tublar\Tools\StoreToolsAction;
 use App\Actions\Tublar\Tools\UpdateToolsAction;
+use App\Events\Dashboard\ReportAuthEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Tublar\Tools\ToolsStoreRequest;
 use App\Http\Requests\Dashboard\Tublar\Tools\ToolsUpdateRequest;
@@ -93,6 +94,7 @@ class ToolsController extends Controller
     {
         try {
             $tools = Tools::FindOrFail($id);
+            event(new ReportAuthEvent($tools->user_id));
             return view('dashboard.pages.tublar.tools.crud', new ToolsViewModel($tools->type, $tools));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

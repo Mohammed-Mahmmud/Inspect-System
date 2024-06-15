@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Dashboard\Lifting;
 
 use App\Actions\Lifting\Examination\StoreExaminationAction;
 use App\Actions\Lifting\Examination\UpdateExaminationAction;
+use App\Events\Dashboard\ReportAuthEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Lifting\Examination\ExaminationStoreRequest;
 use App\Http\Requests\Dashboard\Lifting\Examination\ExaminationUpdateRequest;
+use App\Models\Dashboard\CheckList;
 use App\Models\Dashboard\Lifting\Examination;
 use App\Models\Dashboard\Order;
 use App\ViewModels\Dashboard\ExaminationView\ExaminationViewModel;
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\Dashboard\CheckList;
 use PDF;
 
 class ExaminationController extends Controller
@@ -83,6 +84,7 @@ class ExaminationController extends Controller
     {
         try {
             $examination = Examination::FindOrFail($id);
+            event(new ReportAuthEvent($examination->user_id));
             return view('dashboard.pages.lifting.examination.crud', new ExaminationViewModel($examination->type, $examination));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

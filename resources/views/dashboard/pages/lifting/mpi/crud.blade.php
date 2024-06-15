@@ -64,14 +64,12 @@
                                                         id="order_id" disabledOption="Choose Order" :data="$orders"
                                                         selectedData="{{ optional($mpi->getOrders)->id }}"
                                                         span="{{ trans('Dashboard/orders.order') }}" />
-                                                    <br>
                                                 @else
                                                     <x-form.dropdown class="col-12"
                                                         label="{{ trans('Dashboard/orders.order') }}" name="order_id"
                                                         id="order_id" disabledOption="Choose Order" :data="$orders"
                                                         selectedData="{{ optional($mpi->getOrders)->id }}"
                                                         span="{{ trans('Dashboard/orders.order') }}" />
-                                                    <br>
                                                 @endif
 
                                                 <x-form.input_label class="col-4"

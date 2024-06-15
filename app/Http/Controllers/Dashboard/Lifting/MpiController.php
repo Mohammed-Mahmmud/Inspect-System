@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Dashboard\Lifting;
 
-use \DB;
 use App\Actions\Lifting\Mpi\StoreMpiAction;
 use App\Actions\Lifting\Mpi\UpdateMpiAction;
 use App\Events\Dashboard\ReportAuthEvent;
@@ -11,13 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Lifting\Mpi\MpiStoreRequest;
 use App\Http\Requests\Dashboard\Lifting\Mpi\MpiUpdateRequest;
 use App\Models\Dashboard\Lifting\Mpi;
-
 use App\Models\Dashboard\Order;
 use App\ViewModels\Dashboard\MpiView\MpiViewModel;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -27,7 +22,6 @@ class MpiController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
         try {
@@ -129,7 +123,6 @@ class MpiController extends Controller
     {
         try {
             $mpi = Mpi::FindOrFail($id);
-            event(new ReportAuthEvent($mpi->user_id));
             $mpi->delete();
             toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return redirect()->route('mpi.reports.index');
@@ -143,7 +136,6 @@ class MpiController extends Controller
         try {
 
             $dara = Mpi::where('order_id', $request->order_id)->orWhere('serial', $request->serial)->paginate('100');
-
             $orders = Order::get();
             return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders'));
         } catch (Exception $e) {

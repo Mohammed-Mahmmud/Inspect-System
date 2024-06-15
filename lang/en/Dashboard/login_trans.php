@@ -14,7 +14,7 @@ return [
     */
 
     'Welcome Back' => 'Welcome Back.',
-    "lss" => " Sign in to continue to Inspection System. ",
+    "lss" => " Sign in to Inspection System. ",
     "login as" => "login as",
     "stuff" => "Stuff",
     "companies-view" => "View Companies",
@@ -32,5 +32,5 @@ return [
     "Sign In with" => "Sign In with",
     "Don't have an account ?" => "Don't have an account ?",
     "SignUp" => " SignUp",
-    "Forgot your password?"=> "Forgot your password?",
+    "Forgot your password?" => "Forgot your password?",
 ];

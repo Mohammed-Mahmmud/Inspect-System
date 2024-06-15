@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Actions\JobTicket\StoreJobTicketAction;
 use App\Actions\JobTicket\UpdateJobTicketAction;
+use App\Events\Dashboard\ReportAuthEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\JobTicket\JobTicketStoreRequest;
 use App\Http\Requests\Dashboard\JobTicket\JobTicketUpdateRequest;
 use App\Models\Dashboard\JobTicket;
 use App\ViewModels\Dashboard\JobTicketView\JobTicketViewModel;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class JobTicketController extends Controller
@@ -21,7 +23,11 @@ class JobTicketController extends Controller
     public function index()
     {
         try {
-            $jobTickets = JobTicket::paginate('15');
+            if (Auth::user()->can('editor')) {
+                $jobTickets = JobTicket::paginate('30');
+            } else {
+                $jobTickets = JobTicket::where('user_id', Auth::user()->id)->paginate('30');
+            }
             return view('dashboard.pages.jobTicket.view', compact('jobTickets'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -74,6 +80,7 @@ class JobTicketController extends Controller
     {
         try {
             $jobTicket = JobTicket::FindOrFail($id);
+            event(new ReportAuthEvent($jobTicket->user_id));
             return view('dashboard.pages.jobTicket.crud', new JobTicketViewModel($jobTicket));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

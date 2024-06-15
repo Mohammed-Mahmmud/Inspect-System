@@ -11,7 +11,6 @@ use App\Http\Controllers\Dashboard\Tublar\TubsController;
 use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 
-
 Route::name('reports.')->prefix('Reports')->group(
     function () {
         Route::post('Delete-All', [DashboardController::class, 'deleteAll'])->name('deleteAll');
@@ -59,7 +58,6 @@ Route::name('tubs.')->prefix('Tubs')->group(function () {
     Route::post('Filter', [TubsController::class, 'filter'])->name('reports.filter');
     Route::resource('Reports', TubsController::class)->names('reports');
 });
-
 //     summary reports
 Route::get('Download/Tublar-summary/{id}', [TublarSummaryController::class, 'download'])->name('tools-summary.download');
 Route::post('Search/Tublar-summary/', [TublarSummaryController::class, 'search'])->name('tools-summary.search');

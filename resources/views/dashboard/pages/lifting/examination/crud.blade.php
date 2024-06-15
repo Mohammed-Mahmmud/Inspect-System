@@ -50,7 +50,6 @@
                                                             selectedData="{{ optional($examination->getOrders)->id }}"
                                                             span="{{ trans('Dashboard/orders.order') }}" />
                                                         <hr>
-                                                        <br>
                                                     @else
                                                         <x-form.dropdown class="col-12"
                                                             label="{{ trans('Dashboard/orders.order') }}" name="order_id"
@@ -58,7 +57,6 @@
                                                             selectedData="{{ optional($examination->getOrders)->id }}"
                                                             span="{{ trans('Dashboard/orders.order') }}" />
                                                         <hr>
-                                                        <br>
                                                     @endif
 
                                                     <x-form.input_label class="col-4"

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard\Lifting;
 
 use App\Actions\Lifting\Examination\StoreExaminationAction;
 use App\Actions\Lifting\Examination\UpdateExaminationAction;
-use App\Events\Dashboard\ReportAuthEvent;
+use App\Helper\ReportsTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Lifting\Examination\ExaminationStoreRequest;
 use App\Http\Requests\Dashboard\Lifting\Examination\ExaminationUpdateRequest;
@@ -21,7 +21,7 @@ class ExaminationController extends Controller
     /**
      * Display a listing of the resource.
      */
-
+    use ReportsTrait;
     public function index(Request $request)
     {
         try {
@@ -84,7 +84,7 @@ class ExaminationController extends Controller
     {
         try {
             $examination = Examination::FindOrFail($id);
-            event(new ReportAuthEvent($examination->user_id));
+            $this->reportAuthChecker($examination->user_id);
             return view('dashboard.pages.lifting.examination.crud', new ExaminationViewModel($examination->type, $examination));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

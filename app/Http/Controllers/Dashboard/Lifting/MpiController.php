@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Dashboard\Lifting;
 
 use App\Actions\Lifting\Mpi\StoreMpiAction;
 use App\Actions\Lifting\Mpi\UpdateMpiAction;
-use App\Events\Dashboard\ReportAuthEvent;
 use App\Helper\ImageHelper;
+use App\Helper\ReportsTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Lifting\Mpi\MpiStoreRequest;
 use App\Http\Requests\Dashboard\Lifting\Mpi\MpiUpdateRequest;
@@ -18,7 +18,7 @@ use PDF;
 
 class MpiController extends Controller
 {
-    use ImageHelper;
+    use ImageHelper, ReportsTrait;
     /**
      * Display a listing of the resource.
      */
@@ -84,7 +84,7 @@ class MpiController extends Controller
     {
         try {
             $mpi = Mpi::FindOrFail($id);
-            event(new ReportAuthEvent($mpi->user_id));
+            $this->reportAuthChecker($mpi->user_id);
             return view('dashboard.pages.lifting.mpi.crud', new MpiViewModel($mpi));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard\Tublar;
 
 use App\Actions\Tublar\Summary\StoreSummaryAction;
 use App\Actions\Tublar\Summary\UpdateSummaryAction;
-use App\Events\Dashboard\ReportAuthEvent;
+use App\Helper\ReportsTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Tublar\Summary\SummaryStoreRequest;
 use App\Http\Requests\Dashboard\Tublar\Summary\SummaryUpdateRequest;
@@ -18,6 +18,7 @@ use PDF;
 
 class TublarSummaryController extends Controller
 {
+    use ReportsTrait;
     /**
      * Display a listing of the resource.
      */
@@ -86,7 +87,7 @@ class TublarSummaryController extends Controller
     {
         try {
             $summary = TublarSummary::findorfail($id);
-            event(new ReportAuthEvent($summary->user_id));
+            $this->reportAuthChecker($summary->user_id);
             return view('dashboard.pages.tublar.summary.crud', new SummaryViewModel($summary->type, $summary));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

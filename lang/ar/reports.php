@@ -329,4 +329,7 @@
   'Un Authorized Access' => 'Un Authorized Access',
   'Unauthorized Access' => 'Unauthorized Access',
   'Unauthorized access' => 'Unauthorized access',
+  'Unauthorized Access You Are Not Allowed To Access That Page' => 'Unauthorized Access You Are Not Allowed To Access That Page',
+  'Unauthorized Access : You Are Not Allowed To Access That Page' => 'Unauthorized Access : You Are Not Allowed To Access That Page',
+  'Un Authorized Access : You Are Not Allowed To Access That Page' => 'Un Authorized Access : You Are Not Allowed To Access That Page',
 );

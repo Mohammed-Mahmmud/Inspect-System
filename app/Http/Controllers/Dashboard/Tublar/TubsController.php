@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard\Tublar;
 use App\Actions\Tublar\Tubs\DeleteTubsAction;
 use App\Actions\Tublar\Tubs\StoreTubsAction;
 use App\Actions\Tublar\Tubs\UpdateTubsAction;
-use App\Events\Dashboard\ReportAuthEvent;
+use App\Helper\ReportsTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Tublar\Tubs\TubsStoreRequest;
 use App\Http\Requests\Dashboard\Tublar\Tubs\TubsUpdateRequest;
@@ -18,6 +18,7 @@ use PDF;
 
 class TubsController extends Controller
 {
+    use ReportsTrait;
     /**
      * Display a listing of the resource.
      */
@@ -81,7 +82,7 @@ class TubsController extends Controller
     {
         try {
             $tubs = Tubs::FindOrFail($id);
-            event(new ReportAuthEvent($tubs->user_id));
+            $this->reportAuthChecker($tubs->user_id);
             return view('dashboard.pages.tublar.tubs.crud', new TubsViewModel($tubs->type, $tubs));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

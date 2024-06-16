@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Actions\JobTicket\StoreJobTicketAction;
 use App\Actions\JobTicket\UpdateJobTicketAction;
-use App\Events\Dashboard\ReportAuthEvent;
+use App\Helper\ReportsTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\JobTicket\JobTicketStoreRequest;
 use App\Http\Requests\Dashboard\JobTicket\JobTicketUpdateRequest;
@@ -16,6 +16,7 @@ use PDF;
 
 class JobTicketController extends Controller
 {
+    use ReportsTrait;
     /**
      * Display a listing of the resource.
      */
@@ -80,7 +81,7 @@ class JobTicketController extends Controller
     {
         try {
             $jobTicket = JobTicket::FindOrFail($id);
-            event(new ReportAuthEvent($jobTicket->user_id));
+            $this->reportAuthChecker($jobTicket->user_id);
             return view('dashboard.pages.jobTicket.crud', new JobTicketViewModel($jobTicket));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

@@ -69,7 +69,8 @@
                                                             <td class="customer_name">{{ $item->name }}</td>
                                                             <td class="customer_full_name">{{ $item->full_name }}</td>
                                                             <td class="customer_status">
-                                                                <span class="badge bg-pill bg-success">
+                                                                <span
+                                                                    class="badge bg-pill @if ($item->status === 'Active') bg-success @else bg-danger @endif ">
                                                                     {{ $item->status }}
                                                                 </span>
                                                             </td>

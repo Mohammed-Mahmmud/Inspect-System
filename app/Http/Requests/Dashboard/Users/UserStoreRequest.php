@@ -22,12 +22,12 @@ class UserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'full_name' => ['nullable'],
-            'email' => ['required'],
-            'password' => ['required'],
-            'status' => ['nullable'],
-            'roles' => ['required'],
+            'name' => 'required',
+            'full_name' => 'nullable',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'status' => 'nullable',
+            'roles' => 'required',
         ];
     }
     public function messages()

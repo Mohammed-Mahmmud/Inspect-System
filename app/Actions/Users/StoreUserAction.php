@@ -10,15 +10,11 @@ class StoreUserAction
 {
     public function handle(array $data)
     {
-        if (User::where('email', $data['email'])->exists()) {
-            return redirect()->back()->withErrors($data['email'] . ' ' . trans('Dashboard/user.exists'));
-        } else {
-            $user = User::create(array_merge($data, [
-                'created_by' => Auth::user()->id,
-            ]));
-            isset($data['roles']) ? $user->assignRole($data['roles']) : '';
-            toastr(trans('Dashboard/toastr.succes'));
-            return $user;
-        }
+        $user = User::create(array_merge($data, [
+            'created_by' => Auth::user()->id,
+        ]));
+        isset($data['roles']) ? $user->assignRole($data['roles']) : '';
+        toastr(trans('Dashboard/toastr.succes'));
+        return $user;
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
-use Exception;
-use App\Models\Dashboard\Rig;
-use App\Models\Dashboard\Order;
-use App\Models\Dashboard\Company;
-use App\Http\Controllers\Controller;
+
 use App\Actions\Orders\StoreOrderAction;
 use App\Actions\Orders\UpdateOrderAction;
-use App\Http\Requests\Dashboard\Orders\OrderStoreRequest;
-use App\Http\Requests\Dashboard\Orders\OrderUpdateRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\Orders\OrderRequest;
+use App\Models\Dashboard\Company;
+use App\Models\Dashboard\Order;
+use App\Models\Dashboard\Rig;
+use Exception;
 
 class OrderController extends Controller
 {
@@ -42,10 +42,10 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(OrderStoreRequest $request)
+    public function store(OrderRequest $request)
     {
         try {
-            app(StoreOrderAction::class)->handle($request->validated());
+            app(StoreOrderAction::class)->handle($request->validationStore()->validated());
             return redirect()->route('order.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -58,7 +58,6 @@ class OrderController extends Controller
 
     public function show(string $id)
     {
-
     }
 
     /**
@@ -68,7 +67,7 @@ class OrderController extends Controller
     public function edit(string $id)
     {
         try {
-            $order = Order::findorfail($id);
+            $order = Order::FindOrFail($id);
             return view('dashboard.pages.orders.view', compact('order'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -79,10 +78,10 @@ class OrderController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(OrderUpdateRequest $request, Order $order)
+    public function update(OrderRequest $request, Order $order)
     {
         try {
-            app(UpdateOrderAction::class)->handle($order, $request->validated());
+            app(UpdateOrderAction::class)->handle($order, $request->validationUpdate()->validated());
             return redirect()->route('order.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

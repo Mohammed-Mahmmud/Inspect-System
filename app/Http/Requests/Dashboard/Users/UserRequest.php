@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Dashboard\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
 
-class UserStoreRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,21 +22,30 @@ class UserStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        return [];
+    }
+    public function validationStore()
+    {
+        $request = Request();
+        return Validator::make($request->all(), [
             'name' => 'required',
-            'full_name' => 'nullable',
+            'full_name' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'status' => 'nullable',
             'roles' => 'required',
-        ];
+        ]);
     }
-    public function messages()
+    public function validationUpdate()
     {
-        return [
-            'name.reuired' => trans('Dashboard/validation.required'),
-            'email.required' => trans('Dashboard/validation.required'),
-            'password.required' => trans('Dashboard/validation.required'),
-        ];
+        $request = Request();
+        return Validator::make($request->all(), [
+            'name' => ['required'],
+            'full_name' => ['nullable'],
+            'email' => ['required'],
+            'password' => ['nullable'],
+            'status' => ['nullable'],
+            'roles' => ['required'],
+        ]);
     }
 }

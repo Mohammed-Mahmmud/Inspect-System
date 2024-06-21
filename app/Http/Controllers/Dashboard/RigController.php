@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Actions\Rigs\StoreRigAction;
 use App\Actions\Rigs\UpdateRigAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Rigs\RigStoreRequest;
-use App\Http\Requests\Dashboard\Rigs\RigUpdateRequest;
+use App\Http\Requests\Dashboard\Rigs\RigRequest;
 use App\Models\Dashboard\Company;
 use App\Models\Dashboard\Order;
 use App\Models\Dashboard\Rig;
@@ -19,16 +18,14 @@ class RigController extends Controller
      */
     public function index()
     {
-        
-        try{
-            $rigs = Rig::orderBy('name','desc')->paginate('20');
-            $companies =Company::get();
-            return view('dashboard.pages.rigs.view',compact('rigs','companies')); 
-        }
-        catch(Exception $e){
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-           }
 
+        try {
+            $rigs = Rig::orderBy('name', 'desc')->paginate('20');
+            $companies = Company::get();
+            return view('dashboard.pages.rigs.view', compact('rigs', 'companies'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -36,25 +33,24 @@ class RigController extends Controller
      */
     public function create()
     {
-        try{
+        try {
             return view('dashboard.pages.rigs.view');
-       }
-       catch(Exception $e){
-           return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-          } 
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RigStoreRequest $request)
+    public function store(RigRequest $request)
     {
-        try{
-            app(StoreRigAction::class)->handle($request->validated());
+        try {
+            app(StoreRigAction::class)->handle($request->validationStore()->validated());
             return redirect()->route('rig.index');
-             }catch(Exception $e){
-                return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-               }
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -70,27 +66,25 @@ class RigController extends Controller
      */
     public function edit(string $id)
     {
-        try{
-            $rig = Rig::findorfail($id);
-            return view('dashboard.pages.rigs.view',compact('rig'));
+        try {
+            $rig = Rig::FindOrFail($id);
+            return view('dashboard.pages.rigs.view', compact('rig'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-        catch(Exception $e){
-            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
-           }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(RigUpdateRequest $request, Rig $rig)
+    public function update(RigRequest $request, Rig $rig)
     {
-        try{
-            app(UpdateRigAction::class)->handle($rig,$request->validated());
+        try {
+            app(UpdateRigAction::class)->handle($rig, $request->validationUpdate()->validated());
             return redirect()->route('rig.index');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-            catch(Exception $e){
-                return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-               }
     }
 
     /**
@@ -99,20 +93,18 @@ class RigController extends Controller
     public function destroy(string $id)
     {
         //
-        $order_id = Order::where('rig_id',$id)->pluck('id');
-        if($order_id->count() == 0){
-        try{
-        Rig::findorfail($id)->delete();
-           toastr(trans('Dashboard/toastr.destroy') ,'error',trans('Dashboard/toastr.deleted'));
-          return back();
-        }catch(Exception $e){
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        $order_id = Order::where('rig_id', $id)->pluck('id');
+        if ($order_id->count() == 0) {
+            try {
+                Rig::FindOrFail($id)->delete();
+                toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
+                return back();
+            } catch (Exception $e) {
+                return redirect()->back()->withErrors(['error' => $e->getMessage()]);
             }
-            }else{
-                toastr(trans('Dashboard/toastr.cannotRemove') ,'info',trans('Dashboard/toastr.undeleted'));
-                return redirect()->route('rig.index');
-            }
-
-            
+        } else {
+            toastr(trans('Dashboard/toastr.cannotRemove'), 'info', trans('Dashboard/toastr.undeleted'));
+            return redirect()->route('rig.index');
+        }
     }
 }

@@ -6,8 +6,7 @@ use App\Actions\JobTicket\StoreJobTicketAction;
 use App\Actions\JobTicket\UpdateJobTicketAction;
 use App\Helper\ReportsTrait;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\JobTicket\JobTicketStoreRequest;
-use App\Http\Requests\Dashboard\JobTicket\JobTicketUpdateRequest;
+use App\Http\Requests\Dashboard\JobTicket\JobTicketRequest;
 use App\Models\Dashboard\JobTicket;
 use App\ViewModels\Dashboard\JobTicketView\JobTicketViewModel;
 use Exception;
@@ -52,10 +51,10 @@ class JobTicketController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(JobTicketStoreRequest $request)
+    public function store(JobTicketRequest $request)
     {
         try {
-            app(StoreJobTicketAction::class)->handle($request->validated());
+            app(StoreJobTicketAction::class)->handle($request->validationStore()->validated());
             return redirect()->route('jobTicket.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -92,11 +91,11 @@ class JobTicketController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(JobTicketUpdateRequest $request, $id)
+    public function update(JobTicketRequest $request, $id)
     {
         try {
             $jobTicket = JobTicket::FindOrFail($id);
-            app(UpdateJobTicketAction::class)->handle($jobTicket, $request->validated());
+            app(UpdateJobTicketAction::class)->handle($jobTicket, $request->validationUpdate()->validated());
             return redirect()->route('jobTicket.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

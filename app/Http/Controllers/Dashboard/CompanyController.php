@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Actions\Companies\StoreCompanyAction;
 use App\Actions\Companies\UpdateCompanyAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Companies\CompanyStoreRequest;
-use App\Http\Requests\Dashboard\Companies\CompanyUpdateRequest;
+use App\Http\Requests\Dashboard\Companies\CompanyRequest;
 use App\Models\Dashboard\Company;
 use App\Models\Dashboard\Order;
 use App\Models\Dashboard\Rig;
@@ -17,9 +16,9 @@ class CompanyController extends Controller
     function __construct()
     {
         $this->middleware('permission:companies', ['only' => ['index', 'store']]);
-        $this->middleware('permission:create company', ['only' => ['create', 'store']]);
-        $this->middleware('permission:edit company', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:delete company', ['only' => ['destroy']]);
+        $this->middleware('permission:create companies', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit companies', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete companies', ['only' => ['destroy']]);
     }
     public function index()
     {
@@ -38,10 +37,10 @@ class CompanyController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function store(CompanyStoreRequest $request)
+    public function store(CompanyRequest $request)
     {
         try {
-            app(StoreCompanyAction::class)->handle($request->validated());
+            app(StoreCompanyAction::class)->handle($request->validationStore()->validated());
             return redirect()->route('company.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -62,7 +61,7 @@ class CompanyController extends Controller
     public function edit($id)
     {
         try {
-            $company = Company::findorfail($id);
+            $company = Company::FindOrFail($id);
             return view('dashboard.pages.companies.view', compact('company'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -71,10 +70,10 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CompanyUpdateRequest $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
         try {
-            app(UpdateCompanyAction::class)->handle($company, $request->validated());
+            app(UpdateCompanyAction::class)->handle($company, $request->validationStore()->validated());
             return redirect()->route('company.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -94,7 +93,7 @@ class CompanyController extends Controller
         if ($order_id->count() == 0 && $rig_id->count() == 0) {
 
             try {
-                Company::findorfail($id)->delete();
+                Company::FindOrFail($id)->delete();
                 toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
                 return back();
             } catch (Exception $e) {

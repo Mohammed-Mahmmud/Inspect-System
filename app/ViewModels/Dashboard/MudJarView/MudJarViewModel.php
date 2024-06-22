@@ -10,7 +10,7 @@ use Spatie\ViewModels\ViewModel;
 
 class MudJarViewModel extends ViewModel
 {
-        public $mudjar;
+    public $mudjar;
     public $type;
     public $examType;
 

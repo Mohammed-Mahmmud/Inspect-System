@@ -179,16 +179,8 @@
                                                                                     {{ trans('Dashboard/Lifting/examination.delete_message') }}
                                                                                     <br>{{ $item->report_number }}
                                                                                 </div>
-                                                                                <div class="modal-footer">
-                                                                                    <div
-                                                                                        class="hstack gap-2 justify-content-end">
-                                                                                        <button type="button"
-                                                                                            class="btn btn-info"
-                                                                                            data-bs-dismiss="modal">{{ trans('Dashboard/Lifting/examination.close') }}</button>
-
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-danger"
-                                                                                            id="add-btn">{{ trans('Dashboard/Lifting/examination.remove') }}</button>
+                                                                                <x-form.submit submit="delete"
+                                                                                    color="danger"></x-form.submit>
                                                                 </form>
                                                             </div>
                                                     </tr>

@@ -12,39 +12,28 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">{{ TranslationHelper::translate(ucwords('new role')) }}</h4>
+                                <div class="row g-1 mb-0">
+                                    <div class="col-sm-auto">
+                                        <a class="btn btn-success add-btn" href="{{ route('dashboard.roles.create') }}"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#showModal">{{ TranslationHelper::translate('Create New Role') }}</a>
+                                    </div>
+                                </div>
                             </div><!-- end card header -->
                             <div class="card-body">
                                 <div id="customerList">
-                                    <div class="row g-4 mb-3">
-                                        <div class="col-sm-auto">
-                                            <a class="btn btn-success add-btn" href="{{ route('dashboard.roles.create') }}"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#showModal">{{ TranslationHelper::translate('Create New Role') }}</a>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="d-flex justify-content-sm-end">
-                                                <div class="search-box ms-2">
-                                                    <input type="text" class="form-control search"
-                                                        placeholder="Search...">
-                                                    <i class="ri-search-line search-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <x-dashboard.layouts.error-verify
                                         errors="{{ $errors }}"></x-dashboard.error-verify>
-                                        <div class="table-responsive">
-                                            <table class="table align-middle mb-0">
+                                        <div class="table">
+                                            <table class="table align-middle mb-0" id="table_id">
                                                 <thead class="table-dark">
                                                     <tr>
-
-                                                        <th class="sort" data-sort="customer_name">Record ID</th>
-                                                        <th class="sort" data-sort="customer_name">
+                                                        <th>Record ID</th>
+                                                        <th>
                                                             {{ trans('Dashboard/users.name') }}</th>
-                                                        <th class="sort" data-sort="date">
+                                                        <th>
                                                             {{ trans('Dashboard/users.joinDate') }}</th>
-                                                        <th class="sort" data-sort="action">
+                                                        <th>
                                                             {{ trans('Dashboard/users.action') }}</th>
                                                     </tr>
                                                 </thead>
@@ -75,41 +64,40 @@
                                                                             <i class="fas fa-trash"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <!-- Modal -->
-                                                                    <form
-                                                                        action="{{ route('dashboard.roles.destroy', $item->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <div class="modal fade"
-                                                                            id="delete{{ $item->id }}" tabindex="-1"
-                                                                            role="dialog"
-                                                                            aria-labelledby="exampleModalCenterTitle"
-                                                                            aria-hidden="true">
-                                                                            <div class="modal-dialog modal-dialog-centered"
-                                                                                role="document">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h5 class="modal-title"
-                                                                                            id="exampleModalLongTitle">
-                                                                                            {{ trans('Dashboard/users.remove') }}
-                                                                                            {{ $item->name }}</h5>
-                                                                                        <button type="button"
-                                                                                            class="btn-close"
-                                                                                            data-bs-dismiss="modal"
-                                                                                            aria-label="Close"
-                                                                                            id="close-modal"></button>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        {{ trans('Dashboard/users.delete_message') . '  ' . $item->name }}
-                                                                                    </div>
-                                                                                    <x-form.submit submit="delete"
-                                                                                        color="danger"></x-form.submit>
+                                                                </div>
+                                                                <!-- Modal -->
+                                                                <form
+                                                                    action="{{ route('dashboard.roles.destroy', $item->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <div class="modal fade" id="delete{{ $item->id }}"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="exampleModalCenterTitle"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered"
+                                                                            role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="exampleModalLongTitle">
+                                                                                        {{ trans('Dashboard/users.remove') }}
+                                                                                        {{ $item->name }}</h5>
+                                                                                    <button type="button" class="btn-close"
+                                                                                        data-bs-dismiss="modal"
+                                                                                        aria-label="Close"
+                                                                                        id="close-modal"></button>
+                                                                                    </button>
                                                                                 </div>
+                                                                                <div class="modal-body">
+                                                                                    {{ trans('Dashboard/users.delete_message') . '  ' . $item->name }}
+                                                                                </div>
+                                                                                <x-form.submit submit="delete"
+                                                                                    color="danger"></x-form.submit>
                                                                             </div>
                                                                         </div>
-                                                                    </form>
+                                                                    </div>
+                                                                </form>
                                                             </td>
                                                         </tr>
                                                         <form class="tablelist-form"
@@ -137,8 +125,7 @@
                                                                                     <label for="name"
                                                                                         class="form-label">{{ trans('Dashboard/users.name') }}</label>
                                                                                     <input type="text" id="name"
-                                                                                        name="name"
-                                                                                        class="form-control"
+                                                                                        name="name" class="form-control"
                                                                                         placeholder="Enter user Name"
                                                                                         value="{{ $item->name }}"
                                                                                         required="">

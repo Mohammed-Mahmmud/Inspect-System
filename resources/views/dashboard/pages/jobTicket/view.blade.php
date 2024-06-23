@@ -21,36 +21,28 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">{{ trans('Dashboard/jobTicket.addjobTicket') }}</h4>
+                                <div class="row g-1 mb-0">
+                                    <div class="col-sm-auto">
+                                        <div>
+                                            <a class="btn btn-success add-btn"
+                                                href="{{ route('jobTicket.create') }}">{{ trans('Dashboard/jobTicket.addjobTicket') }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-auto">
+                                        <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
+                                            :model="$jobTickets"></x-dashboard.layouts.delete-selected>
+                                    </div>
+
+                                </div>
                             </div><!-- end card header -->
 
                             <div class="card-body">
                                 <div id="customerList">
-                                    <div class="row g-1 mb-3">
-                                        <div class="col-sm-auto">
-                                            <div>
-                                                <a class="btn btn-success add-btn"
-                                                    href="{{ route('jobTicket.create') }}">{{ trans('Dashboard/jobTicket.addjobTicket') }}</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-auto">
-                                            <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
-                                                :model="$jobTickets"></x-dashboard.layouts.delete-selected>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="d-flex justify-content-sm-end">
-                                                <div class="search-box ms-2">
-                                                    <input type="text" class="form-control search"
-                                                        placeholder="Search...">
-                                                    <i class="ri-search-line search-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <x-dashboard.layouts.error-verify
                                         errors="{{ $errors }}"></x-dashboard.layouts.error-verify>
-                                    <div class="table-responsive">
-                                        <table class="table align-middle mb-0">
+                                    <div class="table">
+                                        <table class="table align-middle mb-0" id="table_id">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col" style="width: 50px;">
@@ -141,9 +133,8 @@
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <div class="modal fade"
-                                                                        id="delete{{ $item->id }}" tabindex="-1"
-                                                                        role="dialog"
+                                                                    <div class="modal fade" id="delete{{ $item->id }}"
+                                                                        tabindex="-1" role="dialog"
                                                                         aria-labelledby="exampleModalCenterTitle"
                                                                         aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered"
@@ -164,7 +155,7 @@
                                                                                 <div class="modal-body">
                                                                                     {{ trans('Dashboard/jobTicket.delete_message') .
                                                                                         '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ' .
                                                                                         $item->name }}
                                                                                 </div>
                                                                                 <div class="modal-footer">

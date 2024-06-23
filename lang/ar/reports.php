@@ -332,4 +332,6 @@
   'Unauthorized Access You Are Not Allowed To Access That Page' => 'Unauthorized Access You Are Not Allowed To Access That Page',
   'Unauthorized Access : You Are Not Allowed To Access That Page' => 'Unauthorized Access : You Are Not Allowed To Access That Page',
   'Un Authorized Access : You Are Not Allowed To Access That Page' => 'Un Authorized Access : You Are Not Allowed To Access That Page',
+  'New Mpi' => 'New Mpi',
+  'Swl' => 'Swl',
 );

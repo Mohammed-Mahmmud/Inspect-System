@@ -1,16 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('title', trans('Dashboard/rigs.title'))
-
 @section('css')
-    {{-- for edit icons --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    {{-- for delete icons --}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    @if (Session::has('message'))
-        <script>
-            toastr.success("{{ Session::get('message') }}");
-        </script>
-    @endif
     <!-- Sweet Alert css-->
     <link href="{{ asset('dashboard') }}/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
@@ -27,14 +17,11 @@
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0"></h4>
-
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);"></a></li>
-                                    <li class="breadcrumb-item active"></li>
                                 </ol>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -44,53 +31,37 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">{{ trans('Dashboard/rigs.addrigs') }}</h4>
+                                <div class="row g-1 mb-0">
+                                    <div class="col-sm-auto">
+                                        <div>
+                                            <a class="btn btn-success add-btn" href="{{ route('rig.create') }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#showModal">{{ trans('Dashboard/rigs.addrig') }}</a>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div><!-- end card header -->
 
                             <div class="card-body">
                                 <div id="customerList">
-                                    <div class="row g-4 mb-3">
-                                        <div class="col-sm-auto">
-                                            <div>
-                                                <a class="btn btn-success add-btn" href="{{ route('rig.create') }}"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#showModal">{{ trans('Dashboard/rigs.addrig') }}</a>
-                                                {{-- <button name="delete_all" id="delete_all" class="btn btn-subtle-danger" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>  --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="d-flex justify-content-sm-end">
-                                                <div class="search-box ms-2">
-                                                    <input type="text" class="form-control search"
-                                                        placeholder="Search...">
-                                                    <i class="ri-search-line search-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <x-dashboard.layouts.error-verify
                                         errors="{{ $errors }}"></x-dashboard.layouts.error-verify>
-                                    <div class="table-responsive">
-                                        <table class="table align-middle mb-0">
+                                    <div class="table">
+                                        <table class="table align-middle mb-0" id="table_id">
                                             <thead class="table-dark">
                                                 <tr>
-                                                    <th scope="col" style="width: 50px;">
-                                                        <div class="form-check">
-                                                            {{-- <input class="form-check-input" name="select_all" id="select-all" type="checkbox" onclick="CheckAll('box1', this)">  --}}
-
-                                                            {{-- <input class="form-check-input" type="checkbox" id="checkAll" value="option"> --}}
-                                                        </div>
-                                                    </th>
-                                                    <th class="sort" data-sort="customer_id">#</th>
-                                                    <th class="sort" data-sort="customer_name">
+                                                    <th data-sort="customer_id">#</th>
+                                                    <th data-sort="customer_name">
                                                         {{ trans('Dashboard/rigs.name') }}</th>
-                                                    <th class="sort" data-sort="customer_full_name">
+                                                    <th data-sort="customer_full_name">
                                                         {{ trans('Dashboard/rigs.location') }}</th>
-                                                    <th class="sort" data-sort="customer_full_name">
+                                                    <th data-sort="customer_full_name">
                                                         {{ trans('Dashboard/rigs.company') }}</th>
-                                                    <th class="sort" data-sort="action">
+                                                    <th data-sort="action">
                                                         {{ trans('Dashboard/rigs.create_date') }}</th>
-                                                    <th class="sort" data-sort="action">
+                                                    <th data-sort="action">
                                                         {{ trans('Dashboard/rigs.action') }}</th>
                                                 </tr>
                                             </thead>
@@ -102,13 +73,6 @@
                                                 @endphp
                                                 @foreach ($rigs as $item)
                                                     <tr>
-                                                        <th scope="row">
-                                                            <div class="form-check">
-                                                                {{-- <input class="form-check-input" type="checkbox"  value="{{ $item->id }}" class="box1"> --}}
-
-                                                                {{-- <input class="form-check-input" type="checkbox" name="chk_child" value="option1"> --}}
-                                                            </div>
-                                                        </th>
                                                         <td class="id">{{ $i++ }}</td>
                                                         <td class="customer_name">{{ $item->name }}</td>
                                                         <td class="customer_full_name">{{ $item->location }}</td>
@@ -120,7 +84,7 @@
                                                                     <a class="btn btn-sm btn-info edit-item-btn"
                                                                         href="" data-bs-toggle="modal"
                                                                         data-bs-target="#edit{{ $item->id }}">
-                                                                        <i class="fas fa-edit"></i>
+                                                                        <i class="bx bxs-edit-alt"></i>
                                                                     </a>
                                                                 </div>
 
@@ -128,7 +92,7 @@
                                                                     <a class="btn btn-sm btn-danger remove-item-btn"
                                                                         href="" data-bs-toggle="modal"
                                                                         data-bs-target="#delete{{ $item->id }}">
-                                                                        <i class="fas fa-trash"></i>
+                                                                        <i class="ph-trash"></i>
                                                                     </a>
                                                                 </div>
                                                                 <!-- Modal -->
@@ -181,8 +145,8 @@
                                     <div class="modal-header bg-light p-3">
                                         <h5 class="modal-title" id="exampleModalLabel2">
                                             {{ trans('Dashboard/rigs.edit') . ' ' . $item->name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close" id="close-modal"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                            id="close-modal"></button>
                                     </div>
                                     <form class="tablelist-form" action="" method="">
                                         <div class="modal-body">

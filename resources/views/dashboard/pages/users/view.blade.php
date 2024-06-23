@@ -12,33 +12,23 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">{{ trans('Dashboard/users.addusers') }}</h4>
+                                <div class="row g-1 mb-0">
+                                    @can('users.create')
+                                        <div class="col-sm-auto">
+                                            <a class="btn btn-success add-btn" href="{{ route('users.create') }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#showModal">{{ trans('Dashboard/users.adduser') }}</a>
+                                        </div>
+                                    @endcan
+                                </div>
                             </div><!-- end card header -->
 
                             <div class="card-body">
                                 <div id="customerList">
-                                    <div class="row g-4 mb-3">
-                                        @can('users.create')
-                                            <div class="col-sm-auto">
-                                                <a class="btn btn-success add-btn" href="{{ route('users.create') }}"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#showModal">{{ trans('Dashboard/users.adduser') }}</a>
-                                            </div>
-                                        @endcan
-                                        <div class="col-sm">
-                                            <div class="d-flex justify-content-sm-end">
-                                                <div class="search-box ms-2">
-                                                    <input type="text" class="form-control search"
-                                                        placeholder="Search...">
-                                                    <i class="ri-search-line search-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <x-dashboard.layouts.error-verify
                                         errors="{{ $errors }}"></x-dashboard.error-verify>
-                                        <div class="table-responsive">
-                                            <table class="table align-middle mb-0">
+                                        <div class="table">
+                                            <table class="table align-middle mb-0" id="table_id">
                                                 <thead class="table-dark">
                                                     <tr>
                                                         <th data-sort="customer_name">Record ID</th>

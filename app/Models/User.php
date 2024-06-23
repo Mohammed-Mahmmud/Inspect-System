@@ -22,10 +22,9 @@ class User extends Authenticatable
         'name',
         'full_name',
         'status',
+        'trash',
         'email',
         'password',
-        'created_by',
-        'updated_by',
     ];
     const STATUS = ['Active', 'Not Active'];
     /**

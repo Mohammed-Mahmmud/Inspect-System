@@ -33,34 +33,29 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">{{ trans('Dashboard/orders.addorders') }}</h4>
+                                <div class="row g-1 mb-0">
+                                    <div class="col-sm-auto">
+                                        <div>
+                                            <a class="btn btn-success add-btn" href="{{ route('order.create') }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#showModal">{{ trans('Dashboard/orders.addorder') }}</a>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <div class="d-flex justify-content-sm-end">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div><!-- end card header -->
 
                             <div class="card-body">
                                 <div id="customerList">
-                                    <div class="row g-4 mb-3">
-                                        <div class="col-sm-auto">
-                                            <div>
-                                                <a class="btn btn-success add-btn" href="{{ route('order.create') }}"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#showModal">{{ trans('Dashboard/orders.addorder') }}</a>
-                                                {{-- <button name="delete_all" id="delete_all" class="btn btn-subtle-danger" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>  --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="d-flex justify-content-sm-end">
-                                                <div class="search-box ms-2">
-                                                    <input type="text" class="form-control search"
-                                                        placeholder="Search...">
-                                                    <i class="ri-search-line search-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <x-dashboard.layouts.error-verify
                                         errors="{{ $errors }}"></x-dashboard.layouts.error-verify>
-                                    <div class="table-responsive">
-                                        <table class="table align-middle mb-0">
+                                    <div class="table">
+                                        <table class="table align-middle mb-0" id="table_id">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th class="sort" data-sort="customer_id">#</th>
@@ -88,7 +83,6 @@
                                                         <td class="customer_company">{{ $item->companies->name }}</td>
                                                         <td class="customer_rig">{{ $item->rigs->name }}</td>
                                                         <td class="date">{{ $item->date }}</td>
-                                                        {{-- @if (auth()->user()->id == $item->user_id) --}}
                                                         <td>
                                                             <div class="d-flex gap-2">
                                                                 <div class="edit">
@@ -159,9 +153,8 @@
                                                         action="{{ route('order.update', $item) }}" method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        <div class="modal fade" id="edit{{ $item->id }}"
-                                                            tabindex="-1" aria-labelledby="exampleModalLabel2"
-                                                            aria-hidden="true">
+                                                        <div class="modal fade" id="edit{{ $item->id }}" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel2" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header bg-light p-3">

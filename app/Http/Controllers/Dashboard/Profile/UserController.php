@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::paginate(15);
+            $users = User::where('trash', 0)->paginate(15);
             $userStatus = $this->userStatus;
             $roles = Role::get();
             return view('dashboard.pages.users.view', compact('users', 'userStatus', 'roles'));
@@ -92,10 +92,11 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::FindOrFail($id);
+        // $user = User::FindOrFail($id);
+
         try {
-            // $user->delete();
-            $user->delete();
+
+            User::FindOrFail($id)->update(['trash' => 1, 'status' => 'Not Active']);
             toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return back();
         } catch (Exception $e) {

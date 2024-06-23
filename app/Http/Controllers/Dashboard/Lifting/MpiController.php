@@ -13,7 +13,6 @@ use App\Models\Dashboard\Lifting\Mpi;
 use App\Models\Dashboard\Order;
 use App\ViewModels\Dashboard\MpiView\MpiViewModel;
 use Exception;
-use Illuminate\Http\Request;
 use PDF;
 
 class MpiController extends Controller
@@ -25,7 +24,7 @@ class MpiController extends Controller
     public function index()
     {
         try {
-            $data = session('searchedItems', Mpi::paginate('30'));
+            $data = Mpi::paginate('50');
             $orders = Order::get();
             return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders'));
         } catch (Exception $e) {
@@ -126,18 +125,6 @@ class MpiController extends Controller
             $mpi->delete();
             toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return redirect()->route('mpi.reports.index');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
-    public function filter(Request $request)
-    {
-        try {
-
-            $dara = Mpi::where('order_id', $request->order_id)->orWhere('serial', $request->serial)->paginate('100');
-            $orders = Order::get();
-            return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

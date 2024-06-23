@@ -437,7 +437,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="table">
                                 <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
                                     <thead class="text-muted table-dark">
                                         <tr>
@@ -1097,6 +1097,6 @@
         <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-    
+
 </div>
 @endsection

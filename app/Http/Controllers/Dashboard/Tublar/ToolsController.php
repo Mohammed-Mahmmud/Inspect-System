@@ -11,7 +11,6 @@ use App\Http\Requests\Dashboard\Tublar\Tools\ToolsStoreRequest;
 use App\Http\Requests\Dashboard\Tublar\Tools\ToolsUpdateRequest;
 use App\Models\Dashboard\Order;
 use App\Models\Dashboard\Tublar\Tools\Tools;
-use App\ViewModels\Dashboard\ToolsView\ToolsSearchModel;
 use App\ViewModels\Dashboard\ToolsView\ToolsViewModel;
 use Exception;
 use Illuminate\Http\Request;
@@ -27,8 +26,8 @@ class ToolsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = session('searchedItems',  Tools::where('type', $request->type)->paginate('30')->withQueryString());
-            $type = session('type', $request->type);
+            $data = Tools::where('type', $request->type)->paginate('30')->withQueryString();
+            $type = $request->type;
             $orders = Order::get();
             return view('dashboard.pages.tublar.tools.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
@@ -138,15 +137,6 @@ class ToolsController extends Controller
             $tools = Tools::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('tools'))->setPaper('a4', 'landscape');
             return $pdf->download($tools->report_num . '.pdf');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
-    public function filter(Request $request)
-    {
-        try {
-            return view('dashboard.pages.tublar.tools.view', new ToolsSearchModel($request));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

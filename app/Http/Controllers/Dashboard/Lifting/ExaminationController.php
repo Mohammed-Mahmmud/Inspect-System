@@ -25,8 +25,8 @@ class ExaminationController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = session('searchedItems', Examination::where('type', $request->type)->paginate('30')->withQueryString());
-            $type = session('type', $request->type);
+            $data = Examination::where('type', $request->type)->paginate('30')->withQueryString();
+            $type = $request->type;
             $orders = Order::get();
             return view('dashboard.pages.lifting.examination.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
@@ -138,20 +138,5 @@ class ExaminationController extends Controller
         $examination = Examination::FindOrFail($id);
         $pdf = PDF::loadView('website.reports.pages.Lifting.Examination.examination', compact('examination'));
         return $pdf->download($examination->report_number . '.pdf');
-    }
-
-    public function filter(Request $request)
-    {
-        try {
-            $examinations = Examination::where('type', $request->type)->where(function ($query) use ($request) {
-                $query->where('order_id', $request->order_id)->orWhere('date', $request->date);
-            })->paginate(20);
-
-            $orders = Order::get();
-            $type = $request->type;
-            return view('dashboard.pages.lifting.examination.view', compact('examinations', 'orders', 'type'));
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
     }
 }

@@ -19,7 +19,7 @@ class ShakleSizeController extends Controller
     public function index()
     {
         try {
-            $shaklesizes  = ShakleSize::paginate(15);
+            $shaklesizes  = ShakleSize::paginate(30);
             return view('dashboard.pages.lifting.ShakleSize.view', compact('shaklesizes'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

@@ -25,8 +25,8 @@ class TubsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = session('searchedItems', Tubs::where('type', $request->type)->paginate(30)->withQueryString());
-            $type = session('type', $request->type);
+            $data = Tubs::where('type', $request->type)->paginate(30)->withQueryString();
+            $type = $request->type;
             $orders = Order::get();
             return view('dashboard.pages.tublar.tubs.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {

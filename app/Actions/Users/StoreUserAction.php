@@ -10,9 +10,7 @@ class StoreUserAction
 {
     public function handle(array $data)
     {
-        $user = User::create(array_merge($data, [
-            'created_by' => Auth::user()->id,
-        ]));
+        $user = User::create(array_merge($data));
         isset($data['roles']) ? $user->assignRole($data['roles']) : '';
         toastr(trans('Dashboard/toastr.succes'));
         return $user;

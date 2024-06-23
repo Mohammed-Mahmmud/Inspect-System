@@ -133,13 +133,4 @@ class TublarSummaryController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-    public function search(Request $request)
-    {
-        try {
-            return view('dashboard.pages.tublar.summary.view', new SummarySearchModel($request));
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
 }

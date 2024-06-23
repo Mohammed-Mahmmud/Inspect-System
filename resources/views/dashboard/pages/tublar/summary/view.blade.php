@@ -33,21 +33,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <div id="customerList">
                                     <div class="row g-4 mb-3">
                                         <div class="col-sm-auto">
                                             <div>
                                                 <a class="btn btn-success add-btn"
                                                     href="{{ route('tools-summary.create', ['type' => $type]) }}">{{ trans('Dashboard/Tublar/summary.add_' . $type) }}</a>
-                                                {{-- <button name="delete_all" id="delete_all" class="btn btn-subtle-danger" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>  --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="d-flex justify-content-sm-end">
-                                                <div class="search-box ms-2">
-                                                    @include('dashboard.pages.tublar.summary.modal.search')
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

@@ -25,8 +25,8 @@ class MudJarController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = session('searchedItems', MudJar::where('type', $request->type)->paginate('30')->withQueryString());
-            $type = session('type', $request->type);
+            $data = MudJar::where('type', $request->type)->paginate('30')->withQueryString();
+            $type = $request->type;
             $orders = Order::get();
             return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
@@ -138,22 +138,6 @@ class MudJarController extends Controller
             $mudjar = MudJar::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.MudJar.mudjar', compact('mudjar'));
             return $pdf->download($mudjar->report_num . '.pdf');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
-    public function filter(Request $request)
-    {
-        try {
-
-            $data = MudJar::where('type', $request->type)->where(function ($query) use ($request) {
-                $query->where('order_id', $request->order_id)->orWhere('date', $request->date);
-            })->paginate(20)->withQueryString();
-
-            $orders = Order::get();
-            $type = $request->type;
-            return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

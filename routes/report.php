@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 Route::name('reports.')->prefix('Reports')->group(
     function () {
         Route::post('Delete-All', [DashboardController::class, 'deleteAll'])->name('deleteAll');
+        Route::post('Download-All', [DashboardController::class, 'downloadAll'])->name('downloadAll');
     }
 );
 // lifting reports 1)MPI
 Route::name('mpi.')->prefix('MPI')->group(function () {
     Route::get('Download/{id}', [MpiController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [MpiController::class, 'repeat'])->name('reports.repeat');
-    Route::post('Download-All', [MpiController::class, 'downloadAll'])->name('reports.downloadAll');
     Route::resource('Reports', MpiController::class)->names('reports');
 });
 
@@ -52,6 +52,6 @@ Route::name('tubs.')->prefix('Tubs')->group(function () {
     Route::get('Repeat/{id}', [TubsController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Reports', TubsController::class)->names('reports');
 });
+
 //     summary reports
-Route::get('Download/Tublar-summary/{id}', [TublarSummaryController::class, 'download'])->name('tools-summary.download');
 Route::resource('Tublar-summary', TublarSummaryController::class)->names('tools-summary');

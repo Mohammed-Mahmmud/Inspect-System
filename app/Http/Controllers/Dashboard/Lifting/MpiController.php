@@ -129,4 +129,14 @@ class MpiController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+    public function download(string $id)
+    {
+        try {
+            $mpi = Mpi::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('mpi'));
+            return $pdf->download($mpi->report_number . '.pdf');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
 }

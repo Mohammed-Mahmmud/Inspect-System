@@ -19,6 +19,7 @@
 
  {{-- yajra data table --}}
  <script src="{{ asset('dashboard/assets/datatables/dataTables.min.js') }}"></script>
+ <script src="{{ asset('dashboard/assets/datatables/tables.js') }}"></script>
 
 
 
@@ -26,12 +27,5 @@
  <script src="{{ asset('dashboard') }}/assets/js/plugins.js"></script>
  <script src="{{ asset('dashboard') }}/assets/libs/list.js/list.min.js"></script>
  <script src="{{ asset('dashboard') }}/assets/js/pages/listjs.init.js"></script>
- <script>
-     $(document).ready(function() {
-         $('#table_id').DataTable({
-             processing: true,
-         });
-     });
- </script>
  @livewireScripts
  @yield('js')

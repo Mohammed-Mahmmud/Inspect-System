@@ -44,9 +44,9 @@
                                                     @endphp
                                                     @foreach ($roles as $key => $item)
                                                         <tr>
-                                                            <td class="email">{{ 1 + $key++ }}</td>
-                                                            <td class="customer_name">{{ $item->name }}</td>
-                                                            <td class="date">{{ $item->created_at }}</td>
+                                                            <td>{{ 1 + $key++ }}</td>
+                                                            <td>{{ $item->name }}</td>
+                                                            <td>{{ $item->created_at }}</td>
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <div class="edit">

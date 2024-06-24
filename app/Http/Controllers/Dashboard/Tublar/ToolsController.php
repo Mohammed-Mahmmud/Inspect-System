@@ -71,7 +71,7 @@ class ToolsController extends Controller
         try {
             $tools = Tools::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('tools'))->setPaper('a4', 'landscape');
-            return $pdf->stream($tools->report_num . '.pdf');
+            return $pdf->stream($tools->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -136,7 +136,7 @@ class ToolsController extends Controller
         try {
             $tools = Tools::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('tools'))->setPaper('a4', 'landscape');
-            return $pdf->download($tools->report_num . '.pdf');
+            return $pdf->download($tools->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

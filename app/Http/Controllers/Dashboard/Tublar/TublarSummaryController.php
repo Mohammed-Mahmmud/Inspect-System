@@ -73,7 +73,7 @@ class TublarSummaryController extends Controller
         try {
             $summary = TublarSummary::findorfail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.Summary.', compact('summary'))->setPaper('a4', 'landscape');
-            return $pdf->stream($summary->report_num . '.pdf');
+            return $pdf->stream($summary->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -128,7 +128,7 @@ class TublarSummaryController extends Controller
         try {
             $summary = TublarSummary::findorfail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.Summary.', compact('summary'))->setPaper('a4', 'landscape');
-            return $pdf->download($summary->report_num . '.pdf');
+            return $pdf->download($summary->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

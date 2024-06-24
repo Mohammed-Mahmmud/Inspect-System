@@ -68,7 +68,7 @@ class TubsController extends Controller
         try {
             $tubs = Tubs::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.report', compact('tubs'))->setPaper('a4', 'landscape');
-            return $pdf->stream($tubs->report_numer . '.pdf');
+            return $pdf->stream($tubs->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -132,7 +132,7 @@ class TubsController extends Controller
         try {
             $tubs = Tubs::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.report', compact('tubs'))->setPaper('a4', 'landscape');
-            return $pdf->download($tubs->report_numer . '.pdf');
+            return $pdf->download($tubs->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

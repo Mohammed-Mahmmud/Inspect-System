@@ -31,20 +31,20 @@
                                             <table class="table align-middle mb-0" id="table_id">
                                                 <thead class="table-dark">
                                                     <tr>
-                                                        <th data-sort="customer_name">Record ID</th>
-                                                        <th data-sort="customer_name">
+                                                        <th>Record ID</th>
+                                                        <th>
                                                             {{ trans('Dashboard/users.name') }}</th>
-                                                        <th data-sort="full_name">
+                                                        <th>
                                                             {{ trans('Dashboard/users.full_name') }}</th>
-                                                        <th data-sort="customer_name">
+                                                        <th>
                                                             {{ TranslationHelper::translate(ucfirst('status')) }}</th>
-                                                        <th data-sort="customer_name">
+                                                        <th>
                                                             {{ TranslationHelper::translate(ucfirst('role')) }}</th>
-                                                        <th data-sort="email">
+                                                        <th>
                                                             {{ trans('Dashboard/users.email') }}</th>
-                                                        <th data-sort="date">
+                                                        <th>
                                                             {{ trans('Dashboard/users.joinDate') }}</th>
-                                                        <th data-sort="action">
+                                                        <th>
                                                             {{ trans('Dashboard/users.action') }}</th>
                                                     </tr>
                                                 </thead>
@@ -55,10 +55,10 @@
                                                     @endphp
                                                     @foreach ($users as $key => $item)
                                                         <tr>
-                                                            <td class="email">{{ 1 + $key++ }}</td>
-                                                            <td class="customer_name">{{ $item->name }}</td>
-                                                            <td class="customer_full_name">{{ $item->full_name }}</td>
-                                                            <td class="customer_status">
+                                                            <td>{{ 1 + $key++ }}</td>
+                                                            <td>{{ $item->name }}</td>
+                                                            <td>{{ $item->full_name }}</td>
+                                                            <td>
                                                                 <span
                                                                     class="badge bg-pill @if ($item->status === 'Active') bg-success @else bg-danger @endif ">
                                                                     {{ $item->status }}

@@ -70,7 +70,7 @@ class MudJarController extends Controller
         try {
             $mudjar = MudJar::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.MudJar.mudjar', compact('mudjar'));
-            return $pdf->stream($mudjar->report_num . '.pdf');
+            return $pdf->stream($mudjar->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -137,7 +137,7 @@ class MudJarController extends Controller
         try {
             $mudjar = MudJar::FindOrFail($id);
             $pdf = PDF::loadView('website.reports.pages.Tublar.MudJar.mudjar', compact('mudjar'));
-            return $pdf->download($mudjar->report_num . '.pdf');
+            return $pdf->download($mudjar->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

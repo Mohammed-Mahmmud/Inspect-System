@@ -104,7 +104,7 @@
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
-                                                                <!-- Modal -->
+                                                                <!-- delete Modal -->
                                                                 <form
                                                                     action="{{ route('report_settings.destroy', $item) }}"
                                                                     method="POST">
@@ -131,99 +131,85 @@
                                                                                 <div class="modal-body">
                                                                                     {{ trans('Dashboard/Report/settings.delete_message') . '  ' . $item->name }}
                                                                                 </div>
-                                                                                <div class="modal-footer">
-                                                                                    <div
-                                                                                        class="hstack gap-2 justify-content-end">
-                                                                                        <button type="button"
-                                                                                            class="btn btn-info"
-                                                                                            data-bs-dismiss="modal">{{ trans('Dashboard/Report/settings.close') }}</button>
-
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-danger"
-                                                                                            id="add-btn">{{ trans('Dashboard/Report/settings.delete') }}</button>
-
-                                                                                    </div>
-                                                                                </div>
+                                                                                <x-form.submit submit="delete"
+                                                                                    color="danger"></x-form.submit>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </form>
-                                                                {{-- end modal --}}
+                                                                {{-- end delete modal --}}
+                                                                {{-- update form --}}
+                                                                <form
+                                                                    action="{{ route('report_settings.update', $item->id) }}"
+                                                                    method="POST" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal fade" id="edit{{ $item->id }}"
+                                                                        tabindex="-1" aria-labelledby="exampleModalLabel2"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header bg-light p-3">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="exampleModalLabel2">
+                                                                                        {{ trans('Dashboard/Report/settings.edit') . ' ' . $item->key }}
+                                                                                    </h5>
+                                                                                    <button type="button"
+                                                                                        class="btn-close"
+                                                                                        data-bs-dismiss="modal"
+                                                                                        aria-label="Close"
+                                                                                        id="close-modal"></button>
+                                                                                </div>
+                                                                                <form class="tablelist-form"
+                                                                                    action="" method="">
+                                                                                    <div class="modal-body">
+                                                                                        <div class="mb-3">
+                                                                                            <div class="row">
+                                                                                                <div class="row">
+                                                                                                    <x-form.input_label
+                                                                                                        value="{{ $item->key }}"
+                                                                                                        class="col-12"
+                                                                                                        placeholder="{{ trans('Dashboard/Report/settings.placeholderName') }}"
+                                                                                                        label="{{ trans('Dashboard/Report/settings.name') }}:"
+                                                                                                        type="text"
+                                                                                                        name="key"
+                                                                                                        id="key" />
+                                                                                                    <x-form.input_label
+                                                                                                        class="col-12"
+                                                                                                        placeholder="{{ trans('Dashboard/Report/settings.placeholderImage') }}"
+                                                                                                        label="{{ trans('Dashboard/Report/settings.image') }}:"
+                                                                                                        type="file"
+                                                                                                        name="image"
+                                                                                                        id="image"
+                                                                                                        value="welcome" />
+                                                                                                    @if (!empty($item->getFirstMediaUrl($item->key)))
+                                                                                                        <img src="{{ asset($item->getFirstMediaUrl($item->key)) }}"
+                                                                                                            alt="{{ $item->key }}"
+                                                                                                            style="width: 100%;height:100px ;">
+                                                                                                        <br>
+                                                                                                    @endif
+                                                                                                    <x-form.textarea_label
+                                                                                                        class="col-12"
+                                                                                                        span="enter job result"
+                                                                                                        placeholder="{{ trans('Dashboard/Report/settings.placeholderDesc') }}"
+                                                                                                        value="{{ $item->value }}"
+                                                                                                        label="{{ trans('Dashboard/Report/settings.description') }} :"
+                                                                                                        name="value"
+                                                                                                        rows='3' />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <x-form.submit submit="update"
+                                                                                            color="info"></x-form.submit>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                </form>
+                                                                {{-- end update --}}
                                                             </div>
                                                         </td>
                                                     </tr>
-
-                                                    {{-- update form --}}
-                                                    <form class=""
-                                                        action="{{ route('report_settings.update', $item) }}"
-                                                        method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="modal fade" id="edit{{ $item->id }}"
-                                                            tabindex="-1" aria-labelledby="exampleModalLabel2"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header bg-light p-3">
-                                                                        <h5 class="modal-title" id="exampleModalLabel2">
-                                                                            {{ trans('Dashboard/Report/settings.edit') . ' ' . $item->key }}
-                                                                        </h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal" aria-label="Close"
-                                                                            id="close-modal"></button>
-                                                                    </div>
-                                                                    <form class="tablelist-form" action=""
-                                                                        method="">
-                                                                        <div class="modal-body">
-                                                                            <div class="mb-3">
-                                                                                <div class="row">
-                                                                                    <div class="row">
-                                                                                        <x-form.input_label
-                                                                                            value="{{ $item->key }}"
-                                                                                            class="col-12"
-                                                                                            placeholder="{{ trans('Dashboard/Report/settings.placeholderName') }}"
-                                                                                            label="{{ trans('Dashboard/Report/settings.name') }}:"
-                                                                                            type="text" name="key"
-                                                                                            id="key" />
-                                                                                        <x-form.input_label class="col-12"
-                                                                                            placeholder="{{ trans('Dashboard/Report/settings.placeholderImage') }}"
-                                                                                            label="{{ trans('Dashboard/Report/settings.image') }}:"
-                                                                                            type="file" name="image"
-                                                                                            id="image"
-                                                                                            value="welcome" />
-                                                                                        @if (!empty($item->getFirstMediaUrl($item->key)))
-                                                                                            <img src="{{ asset($item->getFirstMediaUrl($item->key)) }}"
-                                                                                                alt="{{ $item->key }}"
-                                                                                                style="width: 100%;height:100px ;">
-                                                                                            <br>
-                                                                                        @endif
-                                                                                        <x-form.textarea_label
-                                                                                            class="col-12"
-                                                                                            span="enter job result"
-                                                                                            placeholder="{{ trans('Dashboard/Report/settings.placeholderDesc') }}"
-                                                                                            value="{{ $item->value }}"
-                                                                                            label="{{ trans('Dashboard/Report/settings.description') }} :"
-                                                                                            name="value"
-                                                                                            rows='3' />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="modal-footer">
-                                                                                <div
-                                                                                    class="hstack gap-2 justify-content-end">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-danger"
-                                                                                        data-bs-dismiss="modal">{{ trans('Dashboard/Report/settings.close') }}</button>
-
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-info"
-                                                                                        id="add-btn">{{ trans('Dashboard/Report/settings.update') }}</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                    </form>
-                                                    {{-- end update --}}
                                                 @endforeach
                                             </tbody>
                                         </table>

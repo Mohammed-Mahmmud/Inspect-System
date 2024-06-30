@@ -1,0 +1,93 @@
+.center {
+    text-align: center !important;
+}
+
+.left {
+    text-align: left;
+}
+
+.table-desc {
+    font-size: 68%;
+    width: 100%;
+    margin-top: 0%;
+    overflow-x: auto;
+}
+
+.frameLess-table {
+    position: fixed !important;
+    bottom: 11% !important;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.frameLess-table td {
+    border: none;
+    font-size: 80%;
+    padding: 0;
+}
+
+.table-desc th,
+.table-desc td {
+    width: auto;
+    height: 0px;
+    max-width: 5px;
+    padding: 0px;
+    border: 1px solid black;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.abb {
+    position: fixed !important;
+    font-size: 60%;
+    height: 0px;
+    bottom: 5% !important;
+    text-align: left;
+    padding: 0px;
+    border: 0px solid black;
+}
+
+.abb-tx {
+    width: 1px;
+}
+
+.abb-ty {
+    width: 35px;
+}
+
+.contentTable {
+    font-size: 65%;
+    width: 100%;
+    margin-top: 0%;
+    overflow-x: auto;
+}
+
+.contentTable th {
+    height: 0%;
+    text-transform: capitalize;
+    text-align: center;
+    width: 12%;
+    background-color: azure;
+}
+
+.table-desc .description {
+    font-size: 100%;
+}
+
+.hidden {
+    border: none;
+    border-collapse: collapse;
+}
+
+.reportTable {
+    font-size: 0.4em;
+    width: 100%;
+    margin-top: 0%;
+}
+
+.reportTable th,
+.reportTable td {
+    text-transform: capitalize;
+    text-align: center;
+    width: auto;
+}

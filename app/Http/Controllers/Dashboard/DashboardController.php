@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use PDF;
+use ZipArchive;
+
 
 class DashboardController extends Controller
 {
@@ -22,7 +27,7 @@ class DashboardController extends Controller
     public function deleteAll(Request $request)
     {
         try {
-            $ids = json_decode($request->data[0], true);
+            $ids = json_decode($request->data, true);
             if (isset($ids)) {
                 foreach ($ids as $id) {
                     try {
@@ -40,26 +45,50 @@ class DashboardController extends Controller
         }
         return redirect()->back();
     }
-    public function search(Request $request)
+
+    public function downloadAll(Request $request,)
     {
         try {
-            if (isset($request->search) && class_exists($request->model)) {
-                $searchedItems = $request->model::where('type', $request->type)->whereAny(['report_number', 'serial', 'date'], 'LIKE', "%$request->search%")->paginate(1000);
-                if ($searchedItems->isNotEmpty()) {
-                    toastr($searchedItems->count() . ' ' . "Result Found", 'success', 'Success Search');
-                    return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
+            $ids = json_decode($request->data, true);
+            if (isset($ids)) {
+                $zip = new ZipArchive();
+                $zipFileName = 'Reports.zip';
+                $zipFilePath = storage_path("app/$zipFileName");
+
+                if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+                    foreach ($ids as $id) {
+                        try {
+
+                            // Retrieve the model instance
+                            $data = $request->model::FindOrFail($id);
+
+                            // Load the PDF view with the model data
+                            $pdf = PDF::loadView($request->pdfView, compact('data'));
+
+                            // Define the file name
+                            $fileName = $data->report_number
+                                ? str_replace('/', '-', ucwords($data->report_number)) . '.pdf'
+                                : str_replace('/', '-', ucwords($data->getOrders->name)) . '.pdf';
+                            // Add the PDF file to the ZIP archive
+                            $zip->addFromString($fileName, @$pdf->output());
+                        } catch (ModelNotFoundException $e) {
+                            // Skip the current iteration if the model is not found
+                            continue;
+                        }
+                    }
+                    // Close the ZIP archive
+                    $zip->close();
+
+                    // Return the ZIP file as a download response and delete it after sending
+                    return response()->download($zipFilePath)->deleteFileAfterSend(true);
                 } else {
-                    $searchedItems = $request->model::where('type', $request->type)->paginate('1000');
-                    toastr('Result Not Found', 'error', 'Failed Search');
-                    return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
+                    // Return an error response if the ZIP archive could not be created
+                    return response()->json(['error' => 'Failed to create ZIP file.'], 500);
                 }
-            } else {
-                $searchedItems = $request->model::where('type', $request->type)->paginate('1000');
-                toastr('Result Not Found', 'warning', 'Failed Search');
-                return redirect($request->route)->with(['searchedItems' => $searchedItems, 'type' => $request->type]);
             }
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
+        return redirect()->back();
     }
 }

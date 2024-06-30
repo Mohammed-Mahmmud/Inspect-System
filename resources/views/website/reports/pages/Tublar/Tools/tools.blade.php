@@ -1,8 +1,8 @@
 @extends('website.reports.Layouts.Horizontal.master')
-@section('title', 'STC ' . ucfirst($tools->type) . ' Inspection Reports')
+@section('title', 'STC ' . ucfirst($data->type) . ' Inspection Reports')
 @section('style')
     <link rel="stylesheet" href="{{ public_path('website/assets/pages/tools/css/style.css') }}">
-    @if ($tools->getAccept->value == 2)
+    @if ($data->getAccept->value == 2)
         <style>
             body {
                 margin: 0;
@@ -21,46 +21,46 @@
 @section('reports')
 
     <div class="center">
-        <b>{{ strtoupper($tools->type) . ucwords(' subs Inspection Reports') }}</b>
+        <b>{{ strtoupper($data->type) . ucwords(' subs Inspection Reports') }}</b>
     </div>
     <table class="contentTable">
         <tbody>
             <tr>
                 <th>Client</th>
-                <td>{{ $tools->getOrders->companies->name }}</td>
+                <td>{{ $data->getOrders->companies->name }}</td>
                 <th>Address</th>
-                <td>{{ $tools->getOrders->rigs->name }}</td>
+                <td>{{ $data->getOrders->rigs->name }}</td>
                 <th>location</th>
-                <td>{{ $tools->getOrders->rigs->location }}</td>
+                <td>{{ $data->getOrders->rigs->location }}</td>
             </tr>
             <tr>
                 <th>status</th>
-                <td>{{ $tools->status }}</td>
+                <td>{{ $data->status }}</td>
                 <th>date of inspection</th>
-                <td>{{ $tools->date }}</td>
+                <td>{{ $data->date }}</td>
                 <th>due date insp</th>
-                <td>{{ $tools->fin_date }}</td>
+                <td>{{ $data->fin_date }}</td>
             </tr>
             <tr>
                 <th>Work Order</th>
-                <td>{{ $tools->work_order }}</td>
+                <td>{{ $data->work_order }}</td>
                 <th>report number</th>
-                <td>{{ $tools->report_number }}</td>
+                <td>{{ $data->report_number }}</td>
                 <th>specification</th>
-                <td>{{ $tools->spec }}</td>
+                <td>{{ $data->spec }}</td>
             </tr>
             <tr>
                 <th> insp methods</th>
-                <td colspan="3">{{ $tools->methods }}</td>
+                <td colspan="3">{{ $data->methods }}</td>
                 <th> procedure</th>
-                <td>{{ $tools->procedure }}</td>
+                <td>{{ $data->procedure }}</td>
 
             </tr>
         </tbody>
     </table>
 
     {{-- description table --}}
-    @include('website.reports.pages.Tublar.Tools.desc.' . str_replace('*', '-', $tools->type))
+    @include('website.reports.pages.Tublar.Tools.desc.' . str_replace('*', '-', $data->type))
     {{-- end description table --}}
 
     <table class="contentTable">
@@ -68,7 +68,7 @@
         <tbody class="left">
             <tr>
                 <th class="left">Summary</th>
-                <td class="left" colspan="3">{{ $tools->summary }}</td>
+                <td class="left" colspan="3">{{ $data->summary }}</td>
             </tr>
         </tbody>
     </table>
@@ -80,7 +80,7 @@
                     <div><b>Customer Signuture : </b> </div>
                 </td>
                 <td class="left">
-                    <b>Inspector Signature : </b>{{ $tools->getUser->full_name }}
+                    <b>Inspector Signature : </b>{{ $data->getUser->full_name }}
                 </td>
 
             </tr>

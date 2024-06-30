@@ -39,6 +39,10 @@
                                             <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
                                                 :model="$data"></x-dashboard.layouts.delete-selected>
                                         </div>
+                                        <div class="col-sm-auto">
+                                            <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')" :model="$data"
+                                                :pdfView='$pdfView'></x-dashboard.layouts.download-selected>
+                                        </div>
                                     </div>
                                 </div>
                             </div><!-- end card header -->

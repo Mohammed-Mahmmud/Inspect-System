@@ -8,8 +8,10 @@ use App\Http\Controllers\Dashboard\Tublar\MudJarController;
 use App\Http\Controllers\Dashboard\Tublar\ToolsController;
 use App\Http\Controllers\Dashboard\Tublar\TublarSummaryController;
 use App\Http\Controllers\Dashboard\Tublar\TubsController;
+use App\Http\Controllers\Dashboard\Tublar\TubsSummaryController;
 use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
+
 
 Route::name('reports.')->prefix('Reports')->group(
     function () {
@@ -51,7 +53,6 @@ Route::name('tubs.')->prefix('Tubs')->group(function () {
     Route::get('Download/{id}', [TubsController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [TubsController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Reports', TubsController::class)->names('reports');
+    //     summary reports
+    Route::resource('Summary', TubsSummaryController::class)->names('summary');
 });
-
-//     summary reports
-Route::resource('Tublar-summary', TublarSummaryController::class)->names('tools-summary');

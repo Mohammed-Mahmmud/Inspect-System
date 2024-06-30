@@ -38,35 +38,35 @@
         </tr>
     </thead>
     @php
-        $i=1;
+        $i = 1;
     @endphp
     <tbody>
-        @foreach ($tools->getDesc as $item )
-        <tr class="description">
+        @foreach ($data->getDesc as $item)
+            <tr class="description">
                 <td>{{ $i++ }}</td>
-                 <td>{{ getDecode($item->description)['serial'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['description'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_conn'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_conn'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_cond'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_cond'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['body_cond'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_od'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_id'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_diameter'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_srg'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_length'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin1_bevel'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_od'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_id'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_diameter'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_srg'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_length'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['pin2_bevel'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['body_length'] ?? '' }} </td> 
-                 <td>{{ getDecode($item->description)['remarks'] ?? '' }} </td> 
+                <td>{{ getDecode($item->description)['serial'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['description'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_conn'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_conn'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_cond'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_cond'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['body_cond'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_od'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_id'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_diameter'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_srg'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_length'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin1_bevel'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_od'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_id'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_diameter'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_srg'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_length'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['pin2_bevel'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['body_length'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['remarks'] ?? '' }} </td>
 
-        </tr>
+            </tr>
         @endforeach
     </tbody>
 </table>

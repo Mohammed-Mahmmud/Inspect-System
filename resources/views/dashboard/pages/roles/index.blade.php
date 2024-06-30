@@ -98,64 +98,72 @@
                                                                         </div>
                                                                     </div>
                                                                 </form>
+                                                                <form class="tablelist-form"
+                                                                    action="{{ route('dashboard.roles.update', $item) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal fade" id="edit{{ $item->id }}"
+                                                                        tabindex="-1" aria-labelledby="exampleModalLabel2"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog  modal-dialog-scrollable">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header bg-light p-3">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="exampleModalLabel2">
+                                                                                        {{ trans('Dashboard/users.edit') . ' ' . $item->name }}
+                                                                                    </h5>
+                                                                                    <button type="button" class="btn-close"
+                                                                                        data-bs-dismiss="modal"
+                                                                                        aria-label="Close"
+                                                                                        id="close-modal"></button>
+                                                                                </div>
+                                                                                <div class="modal-body"
+                                                                                    style="height: 1000px">
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-12">
+                                                                                            <label for="name"
+                                                                                                class="form-label">{{ trans('Dashboard/users.name') }}</label>
+                                                                                            <input type="text"
+                                                                                                id="name"
+                                                                                                name="name"
+                                                                                                class="form-control"
+                                                                                                placeholder="Enter user Name"
+                                                                                                value="{{ $item->name }}"
+                                                                                                required="">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <div class="row">
+                                                                                            <div class="col-12">
+                                                                                                <x-form.dropdown-multi-select
+                                                                                                    :value="$item->permissions
+                                                                                                        ->pluck(
+                                                                                                            'name',
+                                                                                                            'id',
+                                                                                                        )
+                                                                                                        ->toArray()"
+                                                                                                    label="{{ TranslationHelper::translate('Choose Permissions:') }}"
+                                                                                                    name="permission"
+                                                                                                    :data="$permissions->pluck(
+                                                                                                        'name',
+                                                                                                        'id',
+                                                                                                    )"
+                                                                                                    span="{{ TranslationHelper::translate('Choose Permissions:') }}" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <x-form.submit></x-form.submit>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </form>
                                                             </td>
                                                         </tr>
-                                                        <form class="tablelist-form"
-                                                            action="{{ route('dashboard.roles.update', $item) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="modal fade" id="edit{{ $item->id }}"
-                                                                tabindex="-1" aria-labelledby="exampleModalLabel2"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog  modal-dialog-scrollable">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header bg-light p-3">
-                                                                            <h5 class="modal-title" id="exampleModalLabel2">
-                                                                                {{ trans('Dashboard/users.edit') . ' ' . $item->name }}
-                                                                            </h5>
-                                                                            <button type="button" class="btn-close"
-                                                                                data-bs-dismiss="modal" aria-label="Close"
-                                                                                id="close-modal"></button>
-                                                                        </div>
-                                                                        <div class="modal-body" style="height: 1000px">
-
-                                                                            <div class="row">
-                                                                                <div class="col-12">
-                                                                                    <label for="name"
-                                                                                        class="form-label">{{ trans('Dashboard/users.name') }}</label>
-                                                                                    <input type="text" id="name"
-                                                                                        name="name" class="form-control"
-                                                                                        placeholder="Enter user Name"
-                                                                                        value="{{ $item->name }}"
-                                                                                        required="">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="mb-3">
-                                                                                <div class="row">
-                                                                                    <div class="col-12">
-                                                                                        <x-form.dropdown-multi-select
-                                                                                            :value="$item->permissions
-                                                                                                ->pluck('name', 'id')
-                                                                                                ->toArray()"
-                                                                                            label="{{ TranslationHelper::translate('Choose Permissions:') }}"
-                                                                                            name="permission"
-                                                                                            :data="$permissions->pluck(
-                                                                                                'name',
-                                                                                                'id',
-                                                                                            )"
-                                                                                            span="{{ TranslationHelper::translate('Choose Permissions:') }}" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <x-form.submit></x-form.submit>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </form>
                                                         {{-- end update --}}
                                                     @endforeach
                                                 </tbody>

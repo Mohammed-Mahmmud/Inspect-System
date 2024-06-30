@@ -1,9 +1,9 @@
  <td class="left">
-     <b style="text-decoration: underline;"> {{ $examination->desc_header }}</b><br>
-     MANUFACTURER : {{ $examination->desc_manufature }}<br>
-     SIZE: {{ $examination->getShakleSize->size }}<br>
-    @if(isset($examination->desc_type))
-     TYPE: {{ $examination->desc_type }} <br>
+     <b style="text-decoration: underline;"> {{ $data->desc_header }}</b><br>
+     MANUFACTURER : {{ $data->desc_manufature }}<br>
+     SIZE: {{ $data->getShakleSize->size }}<br>
+     @if (isset($data->desc_type))
+         TYPE: {{ $data->desc_type }} <br>
      @endif
      <br>
      EXAMINED ACCORDING TO BS EN<br>
@@ -11,5 +11,5 @@
      <br>
 
  </td>
- <td>{{ $examination->manufature_date }}</td>
- <td>{{$examination->getShakleSize->swl}}</td>
+ <td>{{ $data->manufature_date }}</td>
+ <td>{{ $data->getShakleSize->swl }}</td>

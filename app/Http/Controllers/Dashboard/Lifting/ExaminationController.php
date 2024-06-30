@@ -27,8 +27,9 @@ class ExaminationController extends Controller
         try {
             $data = Examination::where('type', $request->type)->paginate('30')->withQueryString();
             $type = $request->type;
+            $pdfView = 'website.reports.pages.Lifting.Examination.examination';
             $orders = Order::get();
-            return view('dashboard.pages.lifting.examination.view', compact('data', 'orders', 'type'));
+            return view('dashboard.pages.lifting.examination.view', compact('data', 'orders', 'type', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -68,9 +69,9 @@ class ExaminationController extends Controller
     public function show($id)
     {
         try {
-            $examination = Examination::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Lifting.Examination.examination', compact('examination'));
-            return $pdf->stream($examination->report_number . '.pdf');
+            $data = Examination::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Lifting.Examination.examination', compact('data'));
+            return $pdf->stream($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -135,8 +136,8 @@ class ExaminationController extends Controller
 
     public function download($id)
     {
-        $examination = Examination::FindOrFail($id);
-        $pdf = PDF::loadView('website.reports.pages.Lifting.Examination.examination', compact('examination'));
-        return $pdf->download($examination->report_number . '.pdf');
+        $data = Examination::FindOrFail($id);
+        $pdf = PDF::loadView('website.reports.pages.Lifting.Examination.examination', compact('data'));
+        return $pdf->download($data->report_number . '.pdf');
     }
 }

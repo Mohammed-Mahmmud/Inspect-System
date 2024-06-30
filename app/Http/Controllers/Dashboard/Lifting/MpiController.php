@@ -26,7 +26,8 @@ class MpiController extends Controller
         try {
             $data = Mpi::paginate('50');
             $orders = Order::get();
-            return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders'));
+            $pdfView = 'website.reports.pages.Lifting.MPI.mpi';
+            return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -67,9 +68,9 @@ class MpiController extends Controller
     public function show(string $id)
     {
         try {
-            $mpi = Mpi::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('mpi'));
-            return $pdf->stream($mpi->report_number . '.pdf');
+            $data = Mpi::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('data'));
+            return $pdf->stream($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -129,12 +130,14 @@ class MpiController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function download(string $id)
+    public function download(string $id = null)
     {
         try {
-            $mpi = Mpi::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('mpi'));
-            return $pdf->download($mpi->report_number . '.pdf');
+            if (isset($id)) {
+                $data = Mpi::FindOrFail($id);
+                $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('data'));
+                return $pdf->download($data->report_number . '.pdf');
+            }
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

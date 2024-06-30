@@ -41,7 +41,7 @@
                 </td>
                 <th>{{ TranslationHelper::translate(ucwords('Report No')) }}
                 </th>
-                <td>{{ $data->report_number ?? '' }}</td>
+                <td>{{ $data->report_num ?? '' }}</td>
             </tr>
         </tbody>
     </table>

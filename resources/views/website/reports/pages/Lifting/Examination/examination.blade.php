@@ -2,7 +2,7 @@
 @section('title', 'STC Thorough Examination')
 @section('style')
     <link rel="stylesheet" href="{{ public_path('website/assets/pages/examination/css/style.css') }}">
-    @if ($examination->accept == 0)
+    @if ($data->accept == 0)
         <style>
             body {
                 margin: 0;
@@ -32,18 +32,18 @@
 
     <table class="info-table1">
         <tr>
-            <td class="table1-label">Date Of Thorough Examination :{{ $examination->date }}</td>
-            <td class="table1-label">Date Of Report :{{ $examination->date }}</td>
-            <td class="table1-label">Report Number :{{ $examination->report_number }}</td>
+            <td class="table1-label">Date Of Thorough Examination :{{ $data->date }}</td>
+            <td class="table1-label">Date Of Report :{{ $data->date }}</td>
+            <td class="table1-label">Report Number :{{ $data->report_number }}</td>
         </tr>
     </table>
 
     <table class="info-table1">
         <tr>
             <td class="table1-label">Name and Address of employer for whom the thorough examination was made
-                : {{ $examination->getOrders->companies->name }}</td>
+                : {{ $data->getOrders->companies->name }}</td>
             <td class="table1-label">Address of premises at which the examination was made
-                :{{ $examination->getOrders->rigs->name }}</td>
+                :{{ $data->getOrders->rigs->name }}</td>
         </tr>
     </table>
 
@@ -58,10 +58,10 @@
             <td style="width:150px;">Date Of Last Examnation</td>
         </tr>
         <tr style="height:30%;">
-            <td>{{ $examination->serial }}</td>
-            <td>{{ $examination->qty }}</td>
-            @include("website.reports.pages.Lifting.Examination.description.$examination->type")
-            <td>{{ $examination->last_exam_date }}</td>
+            <td>{{ $data->serial }}</td>
+            <td>{{ $data->qty }}</td>
+            @include("website.reports.pages.Lifting.Examination.description.$data->type")
+            <td>{{ $data->last_exam_date }}</td>
         </tr>
     </table>
 
@@ -73,9 +73,9 @@
             <td><b>NAME OF CERTIFYING BODY</b></td>
         </tr>
         <tr>
-            <td>{{ $examination->original_cert_number }}</td>
-            <td>{{ $examination->original_cert_date }}</td>
-            <td>{{ $examination->cert_body_name }}</td>
+            <td>{{ $data->original_cert_number }}</td>
+            <td>{{ $data->original_cert_date }}</td>
+            <td>{{ $data->cert_body_name }}</td>
         </tr>
 
     </table>
@@ -94,13 +94,13 @@
             </td>
             <td style="width:20px; height:20px;">YES</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->first_exam_after == 1)
+                @if ($data->first_exam_after == 1)
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:20px; height:20px;">NO</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->first_exam_after == 0)
+                @if ($data->first_exam_after == 0)
                     <span style="font-family: sans-serif; font-weight: bold;">&check;</span>
                 @endif
             </td>
@@ -108,13 +108,13 @@
             <td style="width:100px;" class="no-border left">Within an interval of 6 months?</td>
             <td style="width:20px; height:20px;">YES</td>
             <td style="width:20px; height:20px;   ;">
-                @if ($examination->interval_month == 'interval_month')
+                @if ($data->interval_month == 'interval_month')
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:20px; height:20px;">NO</td>
             <td style="width:20px; height:20px ;  ;">
-                @if ($examination->interval_month != 'interval_month')
+                @if ($data->interval_month != 'interval_month')
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
@@ -124,13 +124,13 @@
             <td style="width:100px" class="no-border left">Within an interval of 12 months?</td>
             <td style="width:20px; height:20px;">YES</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->carried_out == 'interval_year')
+                @if ($data->carried_out == 'interval_year')
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:20px; height:20px;">NO</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->carried_out != 'interval_year')
+                @if ($data->carried_out != 'interval_year')
                     <span style="font-family: DejaVu Sans;  font-weight:bold;">&check;</span>
                 @endif
             </td>
@@ -142,13 +142,13 @@
             </td>
             <td style="width:20px; height:20px;">YES</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->has_equipment == 1)
+                @if ($data->has_equipment == 1)
                     <span style="font-family: DejaVu Sans;  font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:20px; height:20px;">NO</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->has_equipment == 0)
+                @if ($data->has_equipment == 0)
                     <span style="font-family: DejaVu Sans;   font-weight:bold;">&check;</span>
                 @endif
             </td>
@@ -156,13 +156,13 @@
             <td style="width:100px" class="no-border left">In accordance with an examination scheme?</td>
             <td style="width:20px; height:20px;">YES</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->carried_out == 'exam_scheme')
+                @if ($data->carried_out == 'exam_scheme')
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:20px; height:20px;">NO</td>
             <td style="width:20px; height:20px;  ;">
-                @if ($examination->carried_out != 'exam_scheme')
+                @if ($data->carried_out != 'exam_scheme')
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
@@ -173,14 +173,14 @@
             <td style="width:100px" class="no-border left">After the occurrence of exceptional circumstances?</td>
             <td style="width:20px; height:20px;">YES</td>
             <td style="width:20px; height:20px ; ;">
-                @if ($examination->carried_out == 'circumstances')
+                @if ($data->carried_out == 'circumstances')
                     <span style="font-family: DejaVu Sans;  font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:20px; height:20px;">NO</td>
             <td style="width:20px; height:20px ; ;">
 
-                @if ($examination->carried_out != 'circumstances')
+                @if ($data->carried_out != 'circumstances')
                     <span style="font-family: DejaVu Sans;   font-weight:bold;">&check;</span>
                 @endif
             </td>
@@ -194,16 +194,16 @@
     <table class="info-table1">
         <tr>
             <td class="left" style="font-size:12px;">Identification of any part found to have a defect which is or could
-                become a danger to persons and a description of the defect: @unless ($examination->accept)
+                become a danger to persons and a description of the defect: @unless ($data->accept)
                     NONE.
                 @endunless <br>
                 (If none state NONE)
             </td>
         </tr>
-        @if ($examination->defect_note)
+        @if ($data->defect_note)
             <tr>
                 <td class="center" style="font-size:12px;">
-                    {{ $examination->defect_note }}
+                    {{ $data->defect_note }}
                 </td>
             </tr>
         @endif
@@ -215,13 +215,13 @@
             </td>
             <td style="width:5%">YES</td>
             <td style="width:5% ; ;">
-                @if ($examination->danger == 1)
+                @if ($data->danger == 1)
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:5%">NO</td>
             <td style="width:5% ;  ;">
-                @if ($examination->danger == 0)
+                @if ($data->danger == 0)
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
@@ -233,7 +233,7 @@
                 Is the above a defect which is not yet but could become a danger to persons:(If YES state the date by
                 when)
             </td>
-            <td style="width:20%">YES by: {{ $examination->danger_date }}</td>
+            <td style="width:20%">YES by: {{ $data->danger_date }}</td>
         </tr>
     </table>
     <table class="info-table1">
@@ -242,10 +242,10 @@
                 Particulars of any repair, renewal or alteration required to remedy the defect identified above: NONE
             </td>
         </tr>
-        @if ($examination->perfect_note)
+        @if ($data->perfect_note)
             <tr>
                 <td style="width:100%" class="center">
-                    {{ $examination->perfect_note }}
+                    {{ $data->perfect_note }}
                 </td>
             </tr>
         @endif
@@ -255,13 +255,13 @@
         <tr>
             <td style="width:100%" class="left">
                 Particulars of any tests carried out as part of the examination: (If none state NONE):
-                <b>{{ ucfirst(implode(', ', str_replace('_', ' ', json_decode($examination->carried_exam)))) }}</b>
+                <b>{{ ucfirst(implode(', ', str_replace('_', ' ', json_decode($data->carried_exam)))) }}</b>
             </td>
         </tr>
-        @if ($examination->carried_note)
+        @if ($data->carried_note)
             <tr>
                 <td style="width:100%" class="center">
-                    {{ $examination->carried_note }}
+                    {{ $data->carried_note }}
                 </td>
             </tr>
         @endif
@@ -272,13 +272,13 @@
             <td style="width:80%" class="left"><b>IS THIS EQUIPMENT SAFE TO OPERATE?</b></td>
             <td style="width:5%">YES</td>
             <td style="width:5% ; ;">
-                @if ($examination->safe_equipment == 1)
+                @if ($data->safe_equipment == 1)
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
             <td style="width:5%">NO</td>
             <td style="width:5%  ; ;">
-                @if ($examination->safe_equipment == 0)
+                @if ($data->safe_equipment == 0)
                     <span style="font-family: DejaVu Sans;  ; font-weight:bold;">&check;</span>
                 @endif
             </td>
@@ -295,18 +295,18 @@
                 <td>NEXT EXAMINATION</td>
             </tr>
             <tr style=" width: 25% ;">
-                <td style=" height: 8%;">{{ $examination->getUser->full_name }} <br>(LEEA)</td>
+                <td style=" height: 8%;">{{ $data->getUser->full_name }} <br>(LEEA)</td>
                 <td>Abbas Elshref<br>(Technical Manager)</td>
                 <td>&nbsp;</td>
-                <td>{{ $examination->next_exam }}</td>
+                <td>{{ $data->next_exam }}</td>
             </tr>
             <tr>
                 <td colspan=4 class="left">
                     <b> Comments:</b><br>
-                    We hereby certify that on {{ $examination->date }}. The item/s described in this report was/were
+                    We hereby certify that on {{ $data->date }}. The item/s described in this report was/were
                     thoroughly examined so far as accessible, and<br>
                     the above particulars and installation is relevant, the equipment checked and examined is
-                    @if ($examination->accept == 1)
+                    @if ($data->accept == 1)
                         <b>safe</b>
                     @else
                         <b>unsafe</b>
@@ -316,7 +316,7 @@
         </tbody>
     </table>
 
-    @if (isset($examination->jobChecklist[0]->type))
+    @if (isset($data->jobChecklist[0]->type))
         <x-website.reports.vertical.layouts.footer>
         </x-website.reports.vertical.layouts.footer>
         <div class="page_break">
@@ -339,7 +339,7 @@
                     <th>Comments</th>
                 </thead>
                 <tbody>
-                    @foreach ($examination->jobChecklist as $item)
+                    @foreach ($data->jobChecklist as $item)
                         <tr style="font-size:110%">
                             <td style="width: 65%;">{{ $item->question }}</td>
                             <td style="width: 5%;">

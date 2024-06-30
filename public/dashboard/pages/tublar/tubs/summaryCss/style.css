@@ -1,0 +1,111 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px auto;
+}
+
+.center {
+    text-align: center !important;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 5px;
+    /* Adjust padding as needed */
+    text-align: center;
+    width: auto;
+    /* Ensure width is set to auto */
+}
+
+.table-desc {
+    font-size: 80%;
+    width: 100%;
+    margin-top: 1%;
+    overflow-x: auto;
+}
+
+.table-desc th,
+.table-desc td {
+    width: auto;
+    height: 0px;
+    max-width: 5px;
+    padding: 0px;
+    border: 1px solid black;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.frameless-table {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+}
+
+.frameless-table td {
+    border: none;
+    font-size: 80%;
+    padding: 0;
+}
+
+.abb {
+    font-size: 60%;
+    height: 0px;
+    margin-top: 1%;
+    text-align: left;
+    padding: 1px;
+    border: 0px solid black;
+}
+
+.abb-tx {
+    width: 1px !important;
+}
+
+.abb-ty {
+    width: 35px;
+}
+
+.contentTable {
+    font-size: 80%;
+    width: 100%;
+    margin-top: 1%;
+    overflow-x: auto;
+}
+
+.contentTable th {
+    text-transform: capitalize;
+    text-align: center;
+    width: auto !important;
+    background-color: azure;
+}
+
+.contentTable td {
+    text-transform: capitalize;
+    text-align: left;
+    width: auto !important;
+    /* Ensure td width is set to auto */
+}
+
+.table-desc .description {
+    font-size: 100%;
+}
+
+.hidden {
+    border: none;
+    border-collapse: collapse;
+}
+
+.reportTable {
+    font-size: 70%;
+    width: 100%;
+    margin-top: 1%;
+    overflow-x: auto;
+}
+
+.reportTable th,
+.reportTable td {
+    text-transform: capitalize;
+    text-align: left;
+    width: auto !important;
+    /* Ensure th width is set to auto */
+}

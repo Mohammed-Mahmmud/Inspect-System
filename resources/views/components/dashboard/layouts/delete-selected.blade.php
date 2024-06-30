@@ -7,7 +7,7 @@
         <div class="modal-content">
             <form class="" action="{{ $route }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input class="checkedData" type='hidden' name="data[]">
+                <input class="checkedData" type='hidden' name="data">
                 <input type='hidden' name="model" value="{{ $model }}">
                 <div class="modal-body text-center p-5">
                     <i class="bi bi-exclamation-triangle text-danger display-5"></i>

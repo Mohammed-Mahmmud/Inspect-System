@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\Dashboard\Tublar;
 
-use App\Actions\Tublar\Tubs\DeleteTubsAction;
-use App\Actions\Tublar\Tubs\StoreTubsAction;
-use App\Actions\Tublar\Tubs\UpdateTubsAction;
+use App\Actions\Tublar\Tubs\Summary\DeleteSummaryAction;
+use App\Actions\Tublar\Tubs\Summary\StoreSummaryAction;
+use App\Actions\Tublar\Tubs\Summary\UpdateSummaryAction;
 use App\Helper\ReportsTrait;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Tublar\Tubs\TubsStoreRequest;
-use App\Http\Requests\Dashboard\Tublar\Tubs\TubsUpdateRequest;
+use App\Http\Requests\Dashboard\Tublar\Tubs\SummaryRequest;
 use App\Models\Dashboard\Order;
-use App\Models\Dashboard\Tublar\Tubs\Tubs;
-use App\ViewModels\Dashboard\TubsView\TubsViewModel;
+use App\Models\Dashboard\Tublar\Tubs\Summary;
+use App\ViewModels\Dashboard\TubsView\SummaryViewModel;
 use Exception;
 use Illuminate\Http\Request;
 use PDF;
 
-class TubsController extends Controller
+class TubsSummaryController extends Controller
 {
     use ReportsTrait;
     /**
@@ -25,10 +24,11 @@ class TubsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Tubs::where('type', $request->type)->paginate(30)->withQueryString();
+            $data = Summary::where('type', $request->type)->paginate(30)->withQueryString();
             $type = $request->type;
+            $pdfView = 'website.reports.pages.Tublar.Tubs.summary';
             $orders = Order::get();
-            return view('dashboard.pages.tublar.tubs.view', compact('data', 'orders', 'type'));
+            return view('dashboard.pages.tublar.tubs.summary.view', compact('data', 'orders', 'type', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -40,7 +40,7 @@ class TubsController extends Controller
     public function create(Request $request)
     {
         try {
-            return view('dashboard.pages.tublar.tubs.crud', new TubsViewModel($request->type));
+            return view('dashboard.pages.tublar.tubs.summary.crud', new SummaryViewModel($request->type));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -49,11 +49,11 @@ class TubsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TubsStoreRequest $request)
+    public function store(SummaryRequest $request)
     {
         try {
-            app(StoreTubsAction::class)->handle($request->validated());
-            return redirect()->route('tubs.reports.create', ['type' => $request->type]);
+            app(StoreSummaryAction::class)->handle($request->summaryStore()->validated());
+            return redirect()->route('tubs.summary.create', ['type' => $request->type]);
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -66,8 +66,8 @@ class TubsController extends Controller
     public function show(string $id)
     {
         try {
-            $data = Tubs::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.report', compact('data'))->setPaper('a4', 'landscape');
+            $data = Summary::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.summary', compact('data'))->setPaper('a4', 'landscape');
             return $pdf->stream($data->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -81,9 +81,9 @@ class TubsController extends Controller
     public function edit(string $id)
     {
         try {
-            $tubs = Tubs::FindOrFail($id);
-            $this->reportAuthChecker($tubs->user_id);
-            return view('dashboard.pages.tublar.tubs.crud', new TubsViewModel($tubs->type, $tubs));
+            $data = Summary::FindOrFail($id);
+            $this->reportAuthChecker($data->user_id);
+            return view('dashboard.pages.tublar.tubs.summary.crud', new SummaryViewModel($data->type, $data));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -91,8 +91,8 @@ class TubsController extends Controller
     public function repeat(string $id)
     {
         try {
-            $tubs = Tubs::FindOrFail($id);
-            return view('dashboard.pages.tublar.tubs.crud', new TubsViewModel($tubs->type, $tubs));
+            $data = Summary::FindOrFail($id);
+            return view('dashboard.pages.tublar.tubs.summary.crud', new SummaryViewModel($data->type, $data));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -101,12 +101,12 @@ class TubsController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(TubsUpdateRequest $request, string $id)
+    public function update(SummaryRequest $request, string $id)
     {
         try {
-            $tubs = Tubs::FindOrFail($id);
-            app(UpdateTubsAction::class)->handle($tubs, $request->validated());
-            return redirect()->route('tubs.reports.index', ['type' => $tubs->type]);
+            $data = Summary::FindOrFail($id);
+            app(UpdateSummaryAction::class)->handle($data, $request->summaryUpdate()->validated());
+            return redirect()->route('tubs.summary.index', ['type' => $data->type]);
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -119,9 +119,9 @@ class TubsController extends Controller
     public function destroy(string $id)
     {
         try {
-            $tubs = Tubs::FindOrFail($id);
-            app(DeleteTubsAction::class)->handle($tubs);
-            return redirect()->route('tubs.reports.index', ['type' => $tubs->type]);
+            $data = Summary::FindOrFail($id);
+            app(DeleteSummaryAction::class)->handle($data);
+            return redirect()->route('tubs.summary.index', ['type' => $data->type]);
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -130,8 +130,8 @@ class TubsController extends Controller
     public function download($id)
     {
         try {
-            $data = Tubs::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.report', compact('data'))->setPaper('a4', 'landscape');
+            $data = Summary::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.summary', compact('data'))->setPaper('a4', 'landscape');
             return $pdf->download($data->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

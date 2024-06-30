@@ -28,8 +28,9 @@ class ToolsController extends Controller
         try {
             $data = Tools::where('type', $request->type)->paginate('30')->withQueryString();
             $type = $request->type;
+            $pdfView = 'website.reports.pages.Tublar.Tools.tools';
             $orders = Order::get();
-            return view('dashboard.pages.tublar.tools.view', compact('data', 'orders', 'type'));
+            return view('dashboard.pages.tublar.tools.view', compact('data', 'orders', 'type', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -69,9 +70,9 @@ class ToolsController extends Controller
     public function show(string $id)
     {
         try {
-            $tools = Tools::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('tools'))->setPaper('a4', 'landscape');
-            return $pdf->stream($tools->report_number . '.pdf');
+            $data = Tools::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('data'))->setPaper('a4', 'landscape');
+            return $pdf->stream($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -134,9 +135,9 @@ class ToolsController extends Controller
     public function download($id)
     {
         try {
-            $tools = Tools::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('tools'))->setPaper('a4', 'landscape');
-            return $pdf->download($tools->report_number . '.pdf');
+            $data = Tools::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('data'))->setPaper('a4', 'landscape');
+            return $pdf->download($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

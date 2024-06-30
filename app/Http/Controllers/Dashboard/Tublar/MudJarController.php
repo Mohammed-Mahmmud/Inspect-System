@@ -27,8 +27,9 @@ class MudJarController extends Controller
         try {
             $data = MudJar::where('type', $request->type)->paginate('30')->withQueryString();
             $type = $request->type;
+            $pdfView = 'website.reports.pages.Tublar.MudJar.mudjar';
             $orders = Order::get();
-            return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type'));
+            return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -68,9 +69,9 @@ class MudJarController extends Controller
     public function show($id)
     {
         try {
-            $mudjar = MudJar::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.MudJar.mudjar', compact('mudjar'));
-            return $pdf->stream($mudjar->report_number . '.pdf');
+            $data = MudJar::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.MudJar.mudjar', compact('data'));
+            return $pdf->stream($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -135,9 +136,9 @@ class MudJarController extends Controller
     public function download($id)
     {
         try {
-            $mudjar = MudJar::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.MudJar.mudjar', compact('mudjar'));
-            return $pdf->download($mudjar->report_number . '.pdf');
+            $data = MudJar::FindOrFail($id);
+            $pdf = PDF::loadView('website.reports.pages.Tublar.MudJar.mudjar', compact('data'));
+            return $pdf->download($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

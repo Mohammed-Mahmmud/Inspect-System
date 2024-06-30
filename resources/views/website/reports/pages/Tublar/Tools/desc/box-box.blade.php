@@ -37,34 +37,34 @@
         </tr>
     </thead>
     @php
-    $i=1;
+        $i = 1;
     @endphp
     <tbody>
-        @foreach ($tools->getDesc as $item )
-        <tr class="description">
-            <td>{{ $i++ }}</td>
-            <td>{{ getDecode($item->description)['serial'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['description'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box1_conn'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box2_conn'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box1_cond'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box2_cond'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['body_cond'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box1_od'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box1_cb'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box1_bb_diameter'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box1_bb_depth'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box1_bevel_diameter'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box2_od'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box2_cb'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box2_bb_diameter'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box2_bb_depth'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['box2_bevel_diameter'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['body_fishing_neck'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['body_length'] ?? '' }} </td>
-            <td>{{ getDecode($item->description)['remarks'] ?? '' }} </td>
+        @foreach ($data->getDesc as $item)
+            <tr class="description">
+                <td>{{ $i++ }}</td>
+                <td>{{ getDecode($item->description)['serial'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['description'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box1_conn'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box2_conn'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box1_cond'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box2_cond'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['body_cond'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box1_od'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box1_cb'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box1_bb_diameter'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box1_bb_depth'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box1_bevel_diameter'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box2_od'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box2_cb'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box2_bb_diameter'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box2_bb_depth'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['box2_bevel_diameter'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['body_fishing_neck'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['body_length'] ?? '' }} </td>
+                <td>{{ getDecode($item->description)['remarks'] ?? '' }} </td>
 
-        </tr>
+            </tr>
         @endforeach
     </tbody>
 </table>

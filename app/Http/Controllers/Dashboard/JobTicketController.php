@@ -28,7 +28,8 @@ class JobTicketController extends Controller
             } else {
                 $jobTickets = JobTicket::where('user_id', Auth::user()->id)->paginate('30');
             }
-            return view('dashboard.pages.jobTicket.view', compact('jobTickets'));
+            $pdfView = 'website.reports.pages.jobTicket.jobTicket';
+            return view('dashboard.pages.jobTicket.view', compact('jobTickets', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -67,8 +68,8 @@ class JobTicketController extends Controller
 
     public function show(string $id)
     {
-        $jobTicket = JobTicket::FindOrFail($id);
-        $pdf = PDF::loadView('website.reports.pages.jobTicket.jobTicket', compact('jobTicket'));
+        $data = JobTicket::FindOrFail($id);
+        $pdf = PDF::loadView('website.reports.pages.jobTicket.jobTicket', compact('data'));
         return $pdf->stream('JobTicket.pdf');
     }
 
@@ -119,8 +120,8 @@ class JobTicketController extends Controller
 
     public function download(string $id)
     {
-        $jobTicket = JobTicket::FindOrFail($id);
-        $pdf = PDF::loadView('website.reports.pages.jobTicket.jobTicket', compact('jobTicket'));
+        $data = JobTicket::FindOrFail($id);
+        $pdf = PDF::loadView('website.reports.pages.jobTicket.jobTicket', compact('data'));
 
         return $pdf->download('JobTicket.pdf');
     }

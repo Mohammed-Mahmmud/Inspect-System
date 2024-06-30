@@ -1,12 +1,9 @@
+@php
+    use App\Helper\TranslationHelper;
+@endphp
 @extends('dashboard.layouts.master')
-@section('title', trans('Dashboard/Tublar/mudjar.viewTitle'))
+@section('title', ucwords(TranslationHelper::translate('view' . ' ' . $type)))
 @section('css')
-
-    @if (Session::has('message'))
-        <script>
-            toastr.success("{{ Session::get('message') }}");
-        </script>
-    @endif
 @endsection
 @section('content')
     <div class="main-content">
@@ -15,12 +12,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">{{ trans('Dashboard/Tublar/mudjar.' . $type . '_reports') }}</h4>
-                            <div class="page-title-mudjarht">
+                            <h4 class="mb-sm-0">{{ TranslationHelper::translate('' . $type . '_reports') }}</h4>
+                            <div class="page-title-tubsht">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a
-                                            href="javascript: void(0);">{{ trans('Dashboard/Tublar/mudjar.mudjar') }}</a>
-                                    </li>
+                                            href="javascript: void(0);">{{ TranslationHelper::translate('tubs') }}</a></li>
                                     <li class="breadcrumb-item active">{{ $type }}</li>
                                 </ol>
                             </div>
@@ -29,17 +25,16 @@
                     </div>
                 </div>
                 <!-- end page title -->
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <div id="customerList">
-                                    <div class="row g-2 mb-0">
+                                    <div class="row g-1 mb-0">
                                         <div class="col-sm-auto">
                                             <div>
                                                 <a class="btn btn-success add-btn"
-                                                    href="{{ route('mud-jar.reports.create', ['type' => $type]) }}">{{ trans('Dashboard/Tublar/mudjar.add' . $type) }}</a>
+                                                    href="{{ route('tubs.reports.create', ['type' => $type]) }}">{{ TranslationHelper::translate('new' . ' ' . $type) }}</a>
                                             </div>
                                         </div>
                                         <div class="col-sm-auto">
@@ -52,7 +47,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- end card header -->
+                            </div>
                             <div class="card-body">
                                 <x-dashboard.layouts.error-verify
                                     errors="{{ $errors }}"></x-dashboard.layouts.error-verify>
@@ -68,20 +63,23 @@
                                                 </th>
                                                 <th class="" data-sort="customer_id">#</th>
                                                 <th class="" data-sort="">
-                                                    {{ trans('Dashboard/Tublar/mudjar.report_number') }}</th>
+                                                    {{ TranslationHelper::translate('report_number') }}</th>
                                                 <th class="" data-sort="">
-                                                    {{ trans('Dashboard/Tublar/mudjar.report_date') }}</th>
+                                                    {{ TranslationHelper::translate('report_date') }}</th>
                                                 <th class="" data-sort="">
-                                                    {{ trans('Dashboard/Tublar/mudjar.user') }}</th>
-                                                {{-- <th class="" data-sort="">{{ trans('Dashboard/Tublar/mudjar.next_date') }}</th> --}}
+                                                    {{ TranslationHelper::translate('customer') }}</th>
+                                                <th class="" data-sort="">
+                                                    {{ TranslationHelper::translate('user') }}</th>
                                                 @if ($type == 'thorough')
                                                     <th class="" data-sort="">
-                                                        {{ trans('Dashboard/Tublar/mudjar.thorough_type') }}</th>
+                                                        {{ TranslationHelper::translate('thorough_type') }}</th>
+                                                @endif
+                                                @if (isset($item->getAccept->value))
+                                                    <th class="" data-sort="action">
+                                                        {{ TranslationHelper::translate('acceptance') }}</th>
                                                 @endif
                                                 <th class="" data-sort="action">
-                                                    {{ trans('Dashboard/Tublar/mudjar.acceptance') }}</th>
-                                                <th class="" data-sort="action">
-                                                    {{ trans('Dashboard/Tublar/mudjar.action') }}</th>
+                                                    {{ TranslationHelper::translate('action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody class="list form-check-all">
@@ -101,18 +99,19 @@
                                                     <td class="id">{{ $i++ }}</td>
                                                     <td class="customer_name ">{{ $item->report_number }}</td>
                                                     <td class="customer_full_name">{{ $item->date }}</td>
+                                                    <td class="customer_full_name">{{ $item->customer }}</td>
                                                     <td class="customer_full_name">{{ $item->getUser->full_name }}</td>
-                                                    {{-- <td class="customer_full_name">{{$item->next_exam}}</td> --}}
-                                                    @if ($type == 'thorough')
-                                                        <td class="customer_full_name">{{ $item->thorough_type }}</td>
-                                                    @endif
-                                                    @if ($item->getAccept->value == 1)
-                                                        <td class="customer_full_name" style="color: green">Accepted
-                                                        </td>
-                                                    @elseif ($item->getAccept->value == 2)
-                                                        <td class="customer_full_name" style="color: red"> Rejected</td>
-                                                    @elseif ($item->getAccept->value == 3)
-                                                        <td class="customer_full_name" style="color: blue"> Repaire</td>
+                                                    @if (isset($item->getAccept->value))
+                                                        @if ($item->getAccept->value == 1)
+                                                            <td class="customer_full_name" style="color: green">Accepted
+                                                            </td>
+                                                        @elseif ($item->getAccept->value == 2)
+                                                            <td class="customer_full_name" style="color: red"> Rejected
+                                                            </td>
+                                                        @elseif ($item->getAccept->value == 3)
+                                                            <td class="customer_full_name" style="color: blue"> Repaire
+                                                            </td>
+                                                        @endif
                                                     @endif
                                                     <td>
                                                         <div class="dropdown position-static">
@@ -123,17 +122,17 @@
                                                             </button>
                                                             <ul class="dropdown-menu dropdown-menu-end">
                                                                 <li><a class="dropdown-item" target="_blank"
-                                                                        href="{{ route('mud-jar.reports.show', $item->id) }}"><i
+                                                                        href="{{ route('tubs.reports.show', $item->id) }}"><i
                                                                             class="ph-eye align-middle me-1"></i>
                                                                         View</a></li>
                                                                 <li><a class="dropdown-item" target="_blank"
-                                                                        href="{{ route('mud-jar.reports.repeat', $item->id) }}"><i
+                                                                        href="{{ route('tubs.reports.repeat', $item->id) }}"><i
                                                                             class=" bx bx-repeat me-1"></i>
                                                                         Repeat</a></li>
                                                                 @if (auth()->user()->id == $item->user_id || auth()->user()->can('editor'))
                                                                     <li><a class="dropdown-item edit-item-btn"
                                                                             target="_blank"
-                                                                            href="{{ route('mud-jar.reports.edit', $item->id) }}"><i
+                                                                            href="{{ route('tubs.reports.edit', $item->id) }}"><i
                                                                                 class=" ph-pencil align-middle me-1"></i>
                                                                             Edit</a></li>
                                                                     <li><a class="dropdown-item remove-item-btn"
@@ -144,13 +143,12 @@
                                                                 @endif
                                                                 <li><a class="dropdown-item download-item-btn"
                                                                         target="_blank"
-                                                                        href="{{ route('mud-jar.reports.download', $item->id) }}"><i
+                                                                        href="{{ route('tubs.reports.download', $item->id) }}"><i
                                                                             class="bx bx-download align-middle me-1"></i>
                                                                         Download</a></li>
                                                             </ul>
                                                             <!-- Modal -->
-                                                            <form
-                                                                action="{{ route('mud-jar.reports.destroy', $item->id) }}"
+                                                            <form action="{{ route('tubs.reports.destroy', $item->id) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -164,7 +162,7 @@
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
                                                                                     id="exampleModalLongTitle">
-                                                                                    {{ trans('Dashboard/Tublar/mudjar.remove') }}
+                                                                                    {{ TranslationHelper::translate('remove') }}
                                                                                     {{ $item->name }}</h5>
                                                                                 <button type="button" class="btn-close"
                                                                                     data-bs-dismiss="modal"
@@ -173,18 +171,18 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                {{ trans('Dashboard/Tublar/mudjar.delete_message') }}<br>{{ $item->report_num }}
+                                                                                {{ TranslationHelper::translate('delete_message') }}<br>{{ $item->report_number }}
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div
                                                                                     class="hstack gap-2 justify-content-end">
                                                                                     <button type="button"
                                                                                         class="btn btn-info"
-                                                                                        data-bs-dismiss="modal">{{ trans('Dashboard/Tublar/mudjar.close') }}</button>
+                                                                                        data-bs-dismiss="modal">{{ TranslationHelper::translate('close') }}</button>
 
                                                                                     <button type="submit"
                                                                                         class="btn btn-danger"
-                                                                                        id="add-btn">{{ trans('Dashboard/Tublar/mudjar.remove') }}</button>
+                                                                                        id="add-btn">{{ TranslationHelper::translate('remove') }}</button>
                                                             </form>
                                                         </div>
                                 </div>
@@ -200,7 +198,6 @@
                 </tbody>
                 </table>
             </div>
-
             <div class="d-flex justify-content-end">
                 {{ $data->links('pagination::bootstrap-5') }}
             </div>

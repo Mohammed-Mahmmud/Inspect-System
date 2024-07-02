@@ -1,18 +1,18 @@
 @props([
     'number' => '',
-    'label_position' => 'top',
-    'labelPosition' => 'top',
-    'icon_position' => 'left',
-    'iconPosition' => 'left',
-    'currency_position' => 'left',
-    'currencyPosition' => 'left',
+    'label_position' => config('bladewind.statistic.label_position', 'top'),
+    'labelPosition' => config('bladewind.statistic.label_position', 'top'),
+    'icon_position' => config('bladewind.statistic.icon_position', 'left'),
+    'iconPosition' => config('bladewind.statistic.icon_position', 'left'),
+    'currency_position' => config('bladewind.statistic.currency_position', 'left'),
+    'currencyPosition' => config('bladewind.statistic.currency_position', 'left'),
     'label' => '',
     'icon' => '',
-    'currency' => '',
+    'currency' => config('bladewind.statistic.currency', ''),
     'show_spinner' => false,
     'showSpinner' => false,
-    'has_shadow' => true,
-    'hasShadow' => true,
+    'has_shadow' => config('bladewind.statistic.has_shadow', true),
+    'hasShadow' => config('bladewind.statistic.has_shadow', true),
     'class' => '',
     'number_css' => '',
 ])
@@ -29,7 +29,7 @@
     if (!$hasShadow) $has_shadow = $hasShadow;
 @endphp
 
-<div class="bw-statistic bg-white dark:bg-slate-800 dark:border dark:border-slate-700/50 p-6 rounded-md relative @if($has_shadow)shadow shadow-gray-200/40 dark:shadow-slate-900 @endif {{$class}}">
+<div class="bw-statistic bg-white dark:bg-dark-800/30 border border-gray-100/80 dark:border-dark-600/60 focus:outline-none p-6 rounded-md relative @if($has_shadow) drop-shadow-sm shadow-sm shadow-slate-200 dark:shadow-dark-800/70 @endif {{$class}}">
     <div class="flex space-x-4">
         @if($icon !== '' && $icon_position=='left')
             <div class="grow-0 icon">{!! $icon !!}</div>

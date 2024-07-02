@@ -1,9 +1,9 @@
 @props([
     'name' => uniqid('bw-dropmenu-'),
-    'trigger' => 'ellipsis-horizontal-icon',
+    'trigger' => config('bladewind.dropmenu.trigger', 'ellipsis-horizontal-icon'),
     'trigger_css' => '',
-    'trigger_on' => 'click',
-    'divided' => false,
+    'trigger_on' => config('bladewind.dropmenu.trigger_on', 'click'),
+    'divided' => config('bladewind.dropmenu.divided', false),
     'scrollable' => false,
     'height' => 200,
     'hide_after_click' => true,
@@ -11,7 +11,7 @@
     'class' => '',
     'modular' => false, // append type="module" to script tags
     'pickerColour' => 'pink',
-    'icon_right' => false,
+    'icon_right' => config('bladewind.dropmenu.icon_right', false),
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -41,9 +41,8 @@
     </div>
     <div class="opacity-0 hidden bw-dropmenu-items !z-20 animate__animated animate__fadeIn animate__faster"
          data-open="0">
-        <div class="absolute bg-white dark:bg-dark-700 @if($position=='right') -right-1  @endif mt-1 rounded-md {{$class}} drop-shadow whitespace-nowrap
-             p-2 border border-transparent dark:border-dark-700 bw-items-list ring-1 ring-slate-800 ring-opacity-5 @if($divided) divide-y divide-slate-100 dark:divide-dark-600/90 @endif"
-             {{--        border-slate-200/80--}}
+        <div class="absolute bg-white dark:bg-dark-700 @if($position=='right') -right-1  @endif mt-1 rounded-md {{$class}} shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70 whitespace-nowrap
+             p-2 border border-transparent dark:border-dark-800/20 bw-items-list ring-1 ring-slate-800 ring-opacity-5 @if($divided) divide-y divide-slate-100 dark:divide-dark-600/90 @endif"
              @if($scrollable)
                  style="height: {{$height}}px; overflow-y: scroll"
                 @endif>

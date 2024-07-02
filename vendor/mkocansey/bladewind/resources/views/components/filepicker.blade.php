@@ -6,23 +6,23 @@
     'placeholder' => 'Select a file',
     // by default all file audo, video, image and pdf file types can be selected
     // either restrict or allow more file types by modifying this value
-    'accepted_file_types' => 'audio/*,video/*,image/*, .pdf',
-    'acceptedFileTypes' => 'audio/*,video/*,image/*, .pdf',
+    'accepted_file_types' => config('bladewind.filepicker.accepted_file_types', 'audio/*,video/*,image/*, .pdf'),
+    'acceptedFileTypes' => config('bladewind.filepicker.accepted_file_types', 'audio/*,video/*,image/*, .pdf'),
     // should the user be forced to select a file. used in conjunction with validation scripts
     // default is false.
     'required' => false,
     // maximum allowed filezie in MB
-    'max_file_size' => 5,
-    'maxFileSize'   => 5,
+    'max_file_size' => config('bladewind.filepicker.max_file_size', 5),
+    'maxFileSize'   => config('bladewind.filepicker.max_file_size', 5),
     // adds margin after the input box
-    'add_clearing' => true,
-    'addClearing' => true,
+    'add_clearing' => config('bladewind.filepicker.max_file_size', true),
+    'addClearing' => config('bladewind.filepicker.max_file_size', true),
     // display a selected value by default
     'selected_value' => '',
     'selectedValue' => '',
     // the css to apply to the selected value
-    'selected_value_class' => 'h-52',
-    'selectedValueClass' => 'h-52',
+    'selected_value_class' => config('bladewind.filepicker.selected_value_class', 'h-52'),
+    'selectedValueClass' => config('bladewind.filepicker.selected_value_class', 'h-52'),
     // file to display in edit mode
     'url' => '',
 ])
@@ -40,8 +40,8 @@
     $image_file_types = [ "png", "jpg", "jpeg", "gif", "svg" ];
 @endphp
 <div class="border-gray-500"></div>
-<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-dark-300 dark:border-dark-600
-    dark:bg-dark-800 hover:dark:border-dark-700 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
+<div class="relative px-2 py-3 border-2 border-dotted border-gray-300 hover:border-gray-400 dark:text-dark-300 dark:border-dark-600
+    dark:bg-transparent hover:dark:border-dark-500 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
     <x-bladewind::icon name="document-text"
                        class="h-6 w-6 absolute z-20 left-4 rtl:!right-4 rtl:!left-[unset] text-gray-300 dark:text-dark-500"/>
     <x-bladewind::icon name="x-circle"

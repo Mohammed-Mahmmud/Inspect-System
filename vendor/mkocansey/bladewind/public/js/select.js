@@ -11,6 +11,7 @@ class BladewindSelect {
     toFilter;
     selectedValue;
     canClear;
+    enabled;
 
 
     constructor(name, placeholder, required) {
@@ -27,6 +28,7 @@ class BladewindSelect {
         dom_el(this.displayArea).style.maxWidth = `${(dom_el(this.rootElement).offsetWidth - 40)}px`;
         this.maxSelection = -1;
         this.canClear = false;
+        this.enabled = true;
     }
 
     activate = () => {
@@ -87,6 +89,19 @@ class BladewindSelect {
         });
     }
 
+    moveLabel = (direction = 'up') => {
+        let placeholderElement = domEl(`${this.rootElement} .placeholder`);
+        let labelElement = domEl(`${this.rootElement} .placeholder .form-label`);
+        if (labelElement) {
+            if (direction === 'up') {
+                changeCss(labelElement, '!top-4', 'remove', true);
+            } else {
+                changeCss(labelElement, '!top-4', 'add', true);
+            }
+            unhide(placeholderElement, true);
+        }
+    }
+
     setValue = (item) => {
         this.selectedValue = item.getAttribute('data-value');
         // let selectedValue = item.getAttribute('data-value');
@@ -106,6 +121,7 @@ class BladewindSelect {
             dom_el(this.displayArea).innerText = selectedLabel;
             input.value = this.selectedValue;
             unhide(svg, true);
+            this.moveLabel();
             if (this.canClear) {
                 unhide(`${this.clickArea} .reset`);
                 dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
@@ -125,11 +141,12 @@ class BladewindSelect {
                 } else {
                     showNotification('', this.maxSelectionError, 'error');
                 }
+                this.moveLabel();
             }
             this.scrollbars();
         }
         stripComma(input);
-        changeCss(`${this.clickArea}`, '!border-error-400', 'remove');
+        changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
     }
 
     unsetValue = (item) => {
@@ -146,6 +163,7 @@ class BladewindSelect {
                 input.value = '';
                 hide(this.displayArea);
                 hide(`${this.clickArea} .reset`);
+                this.moveLabel('down');
             } else {
                 if (dom_el(`${this.displayArea} span.bw-sp-${this.selectedValue}`)) {
                     let keyword = `(,?)${this.selectedValue}`;
@@ -155,6 +173,7 @@ class BladewindSelect {
                     if (dom_el(this.displayArea).innerText === '') {
                         unhide(`${this.rootElement} .placeholder`);
                         hide(this.displayArea);
+                        this.moveLabel('down');
                     }
                 }
             }
@@ -217,11 +236,13 @@ class BladewindSelect {
     }
 
     reset = () => {
-        dom_els(this.selectItems).forEach((el) => {
-            this.unsetValue(el);
-        });
-        hide(this.displayArea);
-        unhide(this.placeholder);
+        if (this.enabled) {
+            dom_els(this.selectItems).forEach((el) => {
+                this.unsetValue(el);
+            });
+            hide(this.displayArea);
+            unhide(this.placeholder);
+        }
     }
 
     disable = () => {
@@ -231,6 +252,7 @@ class BladewindSelect {
         dom_el(this.clickArea).addEventListener('click', () => {
             hide(this.itemsContainer);
         });
+        this.enabled = false;
     }
 
     enable = () => {
@@ -239,6 +261,7 @@ class BladewindSelect {
         dom_el(this.clickArea).addEventListener('click', (e) => {
             unhide(this.itemsContainer);
         });
+        this.enabled = true;
     }
 
     callUserFunction = (item) => {

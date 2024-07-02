@@ -11,7 +11,7 @@
 
     // date format.. default is yyyy-mm-dd
     // accepted formats are yyyy-mm-dd, mm-dd-yyyy, dd-mm-yyyy, D d M, Y
-    'format' => 'yyyy-mm-dd',
+    'format' => config('bladewind.datepicker.format', 'yyyy-mm-dd'),
 
     // text to display in the label that identifies the input field
     'label' => '',
@@ -23,13 +23,13 @@
     'required' => false,
 
     // should the datepicker include a timepicker. The timepicker is hidden by default
-    'with_time' => false,
-    'withTime' => false,
+    'with_time' => config('bladewind.datepicker.with_time', false),
+    'withTime' => config('bladewind.datepicker.with_time', false),
 
-    // when timepicker is included, what should the time hours be displayed as. Default is 12 hour format
+    // when timepicker is included, what should the time hours be displayed as. Default is 12-hour format
     // available options are 12, 24
-    'hours_as' => '12',
-    'hoursAs' => '12',
+    'hours_as' => config('bladewind.datepicker.hours_as', 12),
+    'hoursAs' => config('bladewind.datepicker.hours_as', 12),
 
     // what format should the time be displayed in
     'time_format' => 'hh:mm',
@@ -91,6 +91,9 @@
 
     // show the range pickers be stacked vertically
     'stacked' => false,
+
+    // size of the input field
+    'size' => 'medium'
 ])
 @php
     // reset variables for Laravel 8 support
@@ -139,26 +142,28 @@
                     {{-- class="bw-datepicker bw-input block w-full peer {{$name}}" --}}
                     class="bw-datepicker {{$class}}"
                     x-on:click="showDatepicker = !showDatepicker;"
-                    x-model="datepickerValue"
                     x-on:keydown.escape="showDatepicker = false"
+                    x-model="datepickerValue"
                     type="text"
                     id="dtp-{{ $name }}"
                     max_date="today"
                     name="{{$name}}"
+                    x-ref="{{$name}}"
                     label="{{ ($use_placeholder) ? '' : $label }}"
                     placeholder="{{ $placeholder }}"
                     onblur="{!! $onblur !!}"
                     tabindex="{!! $tabindex !!}"
+                    size="{{$size}}"
                     suffix="calendar-days"
                     suffix_is_icon="true"
                     suffix_icon_div_css="rtl:!right-[unset] rtl:!left-0"
                     suffix_icon_css="text-slate-300"
                     required="{{$required}}"/>
 
-            <div class="bg-white dark:bg-dark-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md rounded-lg"
+            <div class="bg-white dark:bg-dark-700 mt-12 p-4 absolute top-0 left-0 z-50 drop-shadow-md dark:border dark:border-dark-600/70 rounded-lg"
                  style="width: 17rem"
                  x-show.transition="showDatepicker" @click.away="showDatepicker = false">
-                <div class="flex justify-between items-center bg-primary-500 p-4 !-mx-4 !-mt-4 mb-4 rounded-tl-lg rounded-tr-lg">
+                <div class="flex justify-between items-center bg-primary-500 dark:bg-dark-800/50 p-4 !-mx-4 !-mt-4 mb-4 rounded-tl-lg rounded-tr-lg">
                     <div>
                         <button type="button"
                                 class="focus:outline-none focus:shadow-outline transition ease-in-out duration-100 inline-flex cursor-pointer py-1 pr-1 !-ml-1"
@@ -167,7 +172,7 @@
                     month = 12;
                 } month--; getNoOfDays()">
                             <x-bladewind::icon name="arrow-left"
-                                               class="h-5 w-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
+                                               class="size-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
                         </button>
                     </div>
                     <div class="text-lg text-white/90 dark:text-gray-100 cursor-default">
@@ -184,7 +189,7 @@
                     month++;
                 } getNoOfDays()">
                             <x-bladewind::icon name="arrow-right"
-                                               class="h-5 w-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
+                                               class="size-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
                         </button>
                     </div>
                 </div>
@@ -207,9 +212,9 @@
                             <div @click="getDateValue(date, '{{$format}}')" x-text="date"
                                  class="cursor-pointer text-center text-sm leading-8 rounded-md transition ease-in-out duration-100"
                                  :class="{
-                            'bg-primary-100 dark:bg-dark-700': isToday(date) == true,
-                            'text-gray-600 dark:text-gray-100 hover:bg-blue-200 hover:dark:bg-dark-500': isToday(date) == false && isSelectedDate(date) == false,
-                            'bg-primary-500 dark:bg-dark-700 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
+                            'bg-primary-100 dark:bg-dark-800': isToday(date) == true,
+                            'text-gray-600 dark:text-gray-100 hover:bg-primary-200 hover:dark:bg-dark-500': isToday(date) == false && isSelectedDate(date) == false,
+                            'bg-primary-600 dark:bg-dark-900 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
                             </div>
                         </div>
                     </template>
@@ -232,6 +237,7 @@
                     week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     class="{{$class}}"
+                    size="{{$size}}"
                     format="{{$format}}"/>
         </div>
         <div>
@@ -247,6 +253,7 @@
                     week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     class="{{$class}}"
+                    size="{{$size}}"
                     format="{{$format}}"/>
         </div>
         <div class="text-red-500 text-sm -mt-2 mb-3 col-span-2 error-{{ $date_from_name.$date_to_name }}"></div>

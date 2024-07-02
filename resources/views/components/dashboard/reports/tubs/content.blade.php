@@ -2,7 +2,8 @@
 <div class="card ribbon-box border shadow-none mb-lg-0">
     <div class="card-body">
         <div class="ribbon-content mt-4 text-muted">
-            <x-dashboard.reports.layouts.header reportTitle="{{ ucwords('tublar inspection system') }}" />
+            <x-dashboard.reports.layouts.header
+                reportTitle="{{ ucwords('tublar inspection system') }}"></x-dashboard.reports.layouts.header>
             <div class="center">
                 <b>{{ strtoupper($examType) . ucwords(' subs Inspection Reports') }}</b><br>
                 <img src="{{ asset('dashboard/pages/tublar/tubs/' . $examType . '.png') }}" width="50%">

@@ -5,17 +5,18 @@
                 <img src="{{ $image }}" alt="headerImage" height="70" width="65%">
             </td>
             <td>
-                <h4>{{ ucwords($title) }}
+                <h4>{{ ucwords($header['title']) }}
                     <br>
                     @yield('customHeader')
                 </h4>
             </td>
             <td style="font-size: 70% " width="auto">
-                <div> {{ ucwords($address) }}- Phone: {{ $phone1 }}, </div>
-                <div>{{ $phone2 }} - Emails: khaled.soliman@stc-eg.com, abbas@stc-eg.com</div>
-                <div>Website: www.stc-eg.com - Commercial Registration No: 76451</div>
-                <div>Fax: +20225175939 - EGPC Registration No:122 / Dec 2022</div>
-                <div> Tax ID Number: 479-427-860 - Ref.No:</div>
+                <div> {{ ucwords($header['address']) }}- Phone: {{ $header['phone1'] }}, </div>
+                <div>{{ $header['phone2'] }} - Emails: {{ $header['email1'] }}, {{ $header['email2'] }}</div>
+                <div>Website: {{ $header['website'] }} - Commercial Registration No:
+                    {{ $header['Commercial Registration No'] }}</div>
+                <div>Fax: {{ $header['fax'] }} - EGPC Registration No:{{ $header['EGPC Registration No'] }}</div>
+                <div> Tax ID Number: {{ $header['Tax ID Number'] }} - Ref.No:</div>
             </td>
         </tr>
     </tbody>

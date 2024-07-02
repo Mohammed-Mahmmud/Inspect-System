@@ -1,28 +1,28 @@
 <table style="margin-top:-30px;">
     <tr>
         <td style="text-align: center;">
-            <img src="{{ public_path('/storage/Images/Website/Logo/stc.png') }}" alt="" height="80" width="100%">
+            <img src="{{ $image }}" alt="" height="80" width="100%">
         </td>
         <td>
-            <h5>Skills for Technology and Coring STC
+            <h5>{{ ucwords($header['title']) }}
                 <br>
                 @yield('customHeader')
             </h5>
         </td>
         <td class="center">
             <div class="center" style="font-size: 60%;">
-                5H/6 Al Nasr Street, New Maadi, Cairo, Egypt, Phone: +201007666103 ,+201006617985
-                <br>Email:- khaled.soliman@stc-eg.com , abbas@stc-eg.com
+                {{ ucwords($header['address']) }}, Phone: {{ $header['phone1'] }} ,{{ $header['phone2'] }}
+                <br>Email:- {{ $header['email1'] }}, {{ $header['email2'] }}
                 <br>
-                Fax:- +20225175939 Website:- www.stc-eg.com,
+                Fax:- {{ $header['fax'] }} Website:- {{ $header['website'] }},
             </div>
             <div class="center" style="font-size: 62%;">
-                Commercial Registration No: 76451
+                Commercial Registration No: {{ $header['Commercial Registration No'] }}
                 <br>
-                EGPC Registration No:122 / Dec 2022
+                EGPC Registration No:{{ $header['EGPC Registration No'] }}
                 <br>
                 Doc Ref : &nbsp;&nbsp;&nbsp;&nbsp;
-                Tax ID Number: 479-427-860
+                Tax ID Number: {{ $header['Tax ID Number'] }}
             </div>
         </td>
     </tr>

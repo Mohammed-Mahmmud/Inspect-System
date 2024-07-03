@@ -12,7 +12,7 @@
         class="auth-page-wrapper py-5 position-relative d-flex align-items-center justify-content-center min-vh-100"style="background-image: url('{{ asset('dashboard/images/background/login.jpg') }}'); background-size: cover; background-position: center;">
         <div class="container">
             <div class="row justify-content-center">
-                <div class=" col-lg-11" style="width:50%;">
+                <div class=" col-lg-11" style="width:auto">
                     <div class="card mb-0">
                         <div class="row g-0 align-items-center">
                             <div class="col-xxl-10 mx-auto" style="position: relative; z-index: 1;">

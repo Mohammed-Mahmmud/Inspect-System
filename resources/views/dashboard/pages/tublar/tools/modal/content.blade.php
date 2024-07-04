@@ -18,8 +18,8 @@
      <br>
      <x-form.input_label class="col-6" placeholder="Enter Work Order" value="{{ $tools->work_order ?? '' }}"
          label="Work Order :" type="text" name="work_order" id="work_order" />
-     <x-form.input_label class="col-6" placeholder="Enter Status " value="{{ $tools->status ?? '' }}" label="Status :"
-         type="text" name="status" id="reportStatus" />
+     <x-form.input_label class="col-6" placeholder="Enter Status " value="{{ $tools->tools_status ?? '' }}"
+         label="Status :" type="text" name="tools_status" id="reportStatus" />
      <x-form.input_label class="col-12" placeholder="Enter Procedure" value="{{ $tools->procedure ?? '' }}"
          label="Procedure :" type="text" name="procedure" id="procedure" />
      <x-form.input_label class="col-8" placeholder="Enter Specification" value="{{ $tools->spec ?? '' }}"

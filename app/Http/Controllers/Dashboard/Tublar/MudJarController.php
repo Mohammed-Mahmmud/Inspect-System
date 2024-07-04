@@ -25,7 +25,8 @@ class MudJarController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = MudJar::where('type', $request->type)->paginate('30')->withQueryString();
+            $data = MudJar::where(['type' => $request->type])->paginate('30')->withQueryString();
+            $data = $this->reportStatus($data);
             $type = $request->type;
             $pdfView = 'website.reports.pages.Tublar.MudJar.mudjar';
             $orders = Order::get();

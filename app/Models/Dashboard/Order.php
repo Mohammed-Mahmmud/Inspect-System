@@ -15,7 +15,7 @@ class Order extends Model
     protected $table = 'orders';
     protected $guarded = [];
     public $timestamps = true;
-
+    const STATUS = ['Closed', 'Open'];
     public function getDesc()
     {
         return $this->morphMany(ReportDescription::class, 'model');

@@ -25,6 +25,7 @@ class MpiController extends Controller
     {
         try {
             $data = Mpi::paginate('50');
+            $data = $this->reportStatus($data);
             $orders = Order::get();
             $pdfView = 'website.reports.pages.Lifting.MPI.mpi';
             return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders', 'pdfView'));

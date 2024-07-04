@@ -25,7 +25,11 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::where('trash', 0)->paginate(15);
+            if (auth()->user()->hasRole('Owner')) {
+                $users = User::get();
+            } else {
+                $users = User::where('trash', 0)->paginate(50);
+            }
             $userStatus = $this->userStatus;
             $roles = Role::get();
             return view('dashboard.pages.users.view', compact('users', 'userStatus', 'roles'));

@@ -25,7 +25,7 @@ class ToolsStoreRequest extends FormRequest
     {
         return [
             'order_id' => ['required'],
-            'status' => ['nullable'],
+            'tools_status' => ['nullable'],
             'methods' => ['required'],
             'date' => ['required'],
             'fin_date' => ['required'],

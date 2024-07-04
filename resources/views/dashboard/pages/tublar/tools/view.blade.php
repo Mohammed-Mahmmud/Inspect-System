@@ -35,13 +35,19 @@
                                                     href="{{ route('tools.reports.create', ['type' => $type]) }}">{{ trans('Dashboard/Tublar/tools.add' . $type) }}</a>
                                             </div>
                                         </div>
-                                        <div class="col-sm-auto">
-                                            <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
-                                                :model="$data"></x-dashboard.layouts.delete-selected>
-                                        </div>
+                                        @if (auth()->user()->can('editor'))
+                                            <div class="col-sm-auto">
+                                                <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
+                                                    :model="$data"></x-dashboard.layouts.delete-selected>
+                                            </div>
+                                        @endif
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')" :model="$data"
                                                 :pdfView='$pdfView'></x-dashboard.layouts.download-selected>
+                                        </div>
+                                        <div class="col-sm-auto">
+                                            <x-dashboard.layouts.submit :model="$data"
+                                                :orders="$orders"></x-dashboard.layouts.submit>
                                         </div>
                                     </div>
                                 </div>
@@ -64,6 +70,7 @@
                                                     {{ TranslationHelper::translate(ucwords('report number')) }}</th>
                                                 <th class="" data-sort="">
                                                     {{ trans('Dashboard/Tublar/tools.report_date') }}</th>
+                                                <th class="" data-sort="">Job Status</th>
                                                 <th class="" data-sort="">
                                                     {{ trans('Dashboard/Tublar/tools.fin_date') }}</th>
                                                 <th class="" data-sort="">
@@ -95,6 +102,12 @@
                                                     <td class="id">{{ $i++ }}</td>
                                                     <td class="customer_name ">{{ $item->report_number }}</td>
                                                     <td class="customer_full_name">{{ $item->date }}</td>
+                                                    <td class="status">
+                                                        <span
+                                                            class="badge bg-pill @if ($item->status === 'Open') bg-success @else bg-danger @endif ">
+                                                            {{ $item->status }}
+                                                        </span>
+                                                    </td>
                                                     <td class="customer_full_name">{{ $item->fin_date }}</td>
                                                     <td class="customer_full_name">{{ $item->getUser->full_name }}</td>
 
@@ -122,7 +135,7 @@
                                                                         href="{{ route('tools.reports.repeat', $item->id) }}"><i
                                                                             class=" bx bx-repeat me-1"></i>
                                                                         Repeat</a></li>
-                                                                @if (auth()->user()->id == $item->user_id || auth()->user()->can('editor'))
+                                                                @if ((auth()->user()->id == $item->user_id && $item->status == 'Open') || auth()->user()->can('editor'))
                                                                     <li><a class="dropdown-item edit-item-btn"
                                                                             target="_blank"
                                                                             href="{{ route('tools.reports.edit', $item->id) }}"><i
@@ -140,27 +153,6 @@
                                                                             class="bx bx-download align-middle me-1"></i>
                                                                         Download</a></li>
                                                             </ul>
-                                                            {{--                                                <div class="d-flex gap-2"> --}}
-                                                            {{--                                                    <div class="edit"> --}}
-                                                            {{--                                                        <a class="btn btn-sm btn-info edit-item-btn" href="{{ route('tools.reports.edit', $item->id) }}"> --}}
-                                                            {{--                                                            <i class="fas fa-edit"></i> --}}
-                                                            {{--                                                        </a> --}}
-                                                            {{--                                                    </div> --}}
-
-                                                            {{--                                                    <div class="remove"> --}}
-                                                            {{--                                                        <a class="btn btn-sm btn-danger remove-item-btn" href="" data-bs-toggle="modal" data-bs-target="#delete{{ $item->id }}"> --}}
-                                                            {{--                                                            <i class="fas fa-trash"></i> --}}
-                                                            {{--                                                        </a> --}}
-                                                            {{--                                                    </div> --}}
-                                                            {{--                                                    <div class="show"> --}}
-                                                            {{--                                                        <a class="btn btn-sm btn-success show-item-btn" target="_blank" href="{{ route('tools.reports.show', $item->id) }}"> --}}
-                                                            {{--                                                            <i class="fas fa-clipboard"></i> --}}
-                                                            {{--                                                        </a> --}}
-                                                            {{--                                                    </div> --}}
-                                                            {{--                                                    <div class="download"> --}}
-                                                            {{--                                                        <a class="btn btn-sm btn-warning download-item-btn" target="_blank" href="{{ route('tools.reports.download',$item->id) }}"> --}}
-                                                            {{--                                                            <i class="fas fa-download"></i> </a> --}}
-                                                            {{--                                                    </div> --}}
                                                             <!-- Modal -->
                                                             <form action="{{ route('tools.reports.destroy', $item->id) }}"
                                                                 method="POST">
@@ -213,9 +205,9 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-end">
+            {{-- <div class="d-flex justify-content-end">
                 {{ $data->links('pagination::bootstrap-5') }}
-            </div>
+            </div> --}}
         </div>
     </div><!-- end card -->
     </div>

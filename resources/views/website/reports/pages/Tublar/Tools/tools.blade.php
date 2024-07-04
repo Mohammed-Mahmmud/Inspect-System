@@ -34,8 +34,8 @@
                 <td>{{ $data->getOrders->rigs->location }}</td>
             </tr>
             <tr>
-                <th>status</th>
-                <td>{{ $data->status }}</td>
+                <th>Tools Status</th>
+                <td>{{ $data->tools_status }}</td>
                 <th>date of inspection</th>
                 <td>{{ $data->date }}</td>
                 <th>due date insp</th>

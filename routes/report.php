@@ -6,7 +6,6 @@ use App\Http\Controllers\Dashboard\Lifting\MpiController;
 use App\Http\Controllers\Dashboard\Lifting\ShakleSizeController;
 use App\Http\Controllers\Dashboard\Tublar\MudJarController;
 use App\Http\Controllers\Dashboard\Tublar\ToolsController;
-use App\Http\Controllers\Dashboard\Tublar\TublarSummaryController;
 use App\Http\Controllers\Dashboard\Tublar\TubsController;
 use App\Http\Controllers\Dashboard\Tublar\TubsSummaryController;
 use FontLib\Table\Type\name;
@@ -17,6 +16,7 @@ Route::name('reports.')->prefix('Reports')->group(
     function () {
         Route::post('Delete-All', [DashboardController::class, 'deleteAll'])->name('deleteAll');
         Route::post('Download-All', [DashboardController::class, 'downloadAll'])->name('downloadAll');
+        Route::post('Submit-Job', [DashboardController::class, 'submitAll'])->name('submitAll');
     }
 );
 // lifting reports 1)MPI

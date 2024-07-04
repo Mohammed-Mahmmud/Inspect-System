@@ -25,10 +25,12 @@ class TubsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Tubs::where('type', $request->type)->paginate(30)->withQueryString();
+            $data = Tubs::where(['type' => $request->type])->paginate(30)->withQueryString();
+            $data = $this->reportStatus($data);
             $type = $request->type;
             $orders = Order::get();
-            return view('dashboard.pages.tublar.tubs.view', compact('data', 'orders', 'type'));
+            $pdfView = 'website.reports.pages.Tublar.Tubs.report';
+            return view('dashboard.pages.tublar.tubs.view', compact('data', 'orders', 'type', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

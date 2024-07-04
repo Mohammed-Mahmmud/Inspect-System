@@ -42,13 +42,19 @@
                                                     href="{{ route('mud-jar.reports.create', ['type' => $type]) }}">{{ trans('Dashboard/Tublar/mudjar.add' . $type) }}</a>
                                             </div>
                                         </div>
-                                        <div class="col-sm-auto">
-                                            <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
-                                                :model="$data"></x-dashboard.layouts.delete-selected>
-                                        </div>
+                                        @if (auth()->user()->can('editor'))
+                                            <div class="col-sm-auto">
+                                                <x-dashboard.layouts.delete-selected :route="route('reports.deleteAll')"
+                                                    :model="$data"></x-dashboard.layouts.delete-selected>
+                                            </div>
+                                        @endif
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')" :model="$data"
                                                 :pdfView='$pdfView'></x-dashboard.layouts.download-selected>
+                                        </div>
+                                        <div class="col-sm-auto">
+                                            <x-dashboard.layouts.submit :model="$data"
+                                                :orders="$orders"></x-dashboard.layouts.submit>
                                         </div>
                                     </div>
                                 </div>
@@ -71,6 +77,7 @@
                                                     {{ trans('Dashboard/Tublar/mudjar.report_number') }}</th>
                                                 <th class="" data-sort="">
                                                     {{ trans('Dashboard/Tublar/mudjar.report_date') }}</th>
+                                                <th class="" data-sort="">Job Status</th>
                                                 <th class="" data-sort="">
                                                     {{ trans('Dashboard/Tublar/mudjar.user') }}</th>
                                                 {{-- <th class="" data-sort="">{{ trans('Dashboard/Tublar/mudjar.next_date') }}</th> --}}
@@ -101,8 +108,13 @@
                                                     <td class="id">{{ $i++ }}</td>
                                                     <td class="customer_name ">{{ $item->report_number }}</td>
                                                     <td class="customer_full_name">{{ $item->date }}</td>
+                                                    <td class="status">
+                                                        <span
+                                                            class="badge bg-pill @if ($item->status === 'Open') bg-success @else bg-danger @endif ">
+                                                            {{ $item->status }}
+                                                        </span>
+                                                    </td>
                                                     <td class="customer_full_name">{{ $item->getUser->full_name }}</td>
-                                                    {{-- <td class="customer_full_name">{{$item->next_exam}}</td> --}}
                                                     @if ($type == 'thorough')
                                                         <td class="customer_full_name">{{ $item->thorough_type }}</td>
                                                     @endif
@@ -130,7 +142,7 @@
                                                                         href="{{ route('mud-jar.reports.repeat', $item->id) }}"><i
                                                                             class=" bx bx-repeat me-1"></i>
                                                                         Repeat</a></li>
-                                                                @if (auth()->user()->id == $item->user_id || auth()->user()->can('editor'))
+                                                                @if ((auth()->user()->id == $item->user_id && $item->status == 'Open') || auth()->user()->can('editor'))
                                                                     <li><a class="dropdown-item edit-item-btn"
                                                                             target="_blank"
                                                                             href="{{ route('mud-jar.reports.edit', $item->id) }}"><i
@@ -201,9 +213,9 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-end">
+            {{-- <div class="d-flex justify-content-end">
                 {{ $data->links('pagination::bootstrap-5') }}
-            </div>
+            </div> --}}
         </div>
     </div><!-- end card -->
     </div>

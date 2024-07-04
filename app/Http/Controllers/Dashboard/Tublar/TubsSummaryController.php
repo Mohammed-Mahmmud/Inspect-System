@@ -24,7 +24,8 @@ class TubsSummaryController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Summary::where('type', $request->type)->paginate(30)->withQueryString();
+            $data = Summary::where(['type' => $request->type])->paginate(30)->withQueryString();
+            $data = $this->reportStatus($data);
             $type = $request->type;
             $pdfView = 'website.reports.pages.Tublar.Tubs.summary';
             $orders = Order::get();

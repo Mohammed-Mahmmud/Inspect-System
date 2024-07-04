@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use PDF;
 use ZipArchive;
 
@@ -85,6 +83,22 @@ class DashboardController extends Controller
                     // Return an error response if the ZIP archive could not be created
                     return response()->json(['error' => 'Failed to create ZIP file.'], 500);
                 }
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+        return redirect()->back();
+    }
+    public function submitAll(Request $request)
+    {
+        try {
+            if (auth()->user()->can('editor')) {
+                $reports =  $request->model::where(['order_id' => $request->order_id])->get();
+            } else {
+                $reports =  $request->model::where(['user_id' => auth()->user()->id, 'order_id' => $request->order_id])->get();
+            }
+            foreach ($reports as $report) {
+                $report->update(['status' => $request->status]);
             }
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

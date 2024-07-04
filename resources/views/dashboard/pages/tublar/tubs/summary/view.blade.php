@@ -45,6 +45,10 @@
                                             <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')" :model="$data"
                                                 :pdfView='$pdfView'></x-dashboard.layouts.download-selected>
                                         </div>
+                                        <div class="col-sm-auto">
+                                            <x-dashboard.layouts.submit :model="$data"
+                                                :orders="$orders"></x-dashboard.layouts.submit>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -66,6 +70,7 @@
                                                     {{ TranslationHelper::translate('report_number') }}</th>
                                                 <th class="" data-sort="">
                                                     {{ TranslationHelper::translate('report_date') }}</th>
+                                                <th class="" data-sort="">Job Status</th>
                                                 <th class="" data-sort="">
                                                     {{ TranslationHelper::translate('customer') }}</th>
                                                 <th class="" data-sort="">
@@ -99,6 +104,12 @@
                                                     <td class="id">{{ $i++ }}</td>
                                                     <td class="customer_name ">{{ $item->report_number }}</td>
                                                     <td class="customer_full_name">{{ $item->date }}</td>
+                                                    <td class="status">
+                                                        <span
+                                                            class="badge bg-pill @if ($item->status === 'Open') bg-success @else bg-danger @endif ">
+                                                            {{ $item->status }}
+                                                        </span>
+                                                    </td>
                                                     <td class="customer_full_name">{{ $item->customer }}</td>
                                                     <td class="customer_full_name">{{ $item->getUser->full_name }}</td>
                                                     @if (isset($item->getAccept->value))
@@ -129,7 +140,7 @@
                                                                         href="{{ route('tubs.reports.repeat', $item->id) }}"><i
                                                                             class=" bx bx-repeat me-1"></i>
                                                                         Repeat</a></li>
-                                                                @if (auth()->user()->id == $item->user_id || auth()->user()->can('editor'))
+                                                                @if ((auth()->user()->id == $item->user_id && $item->status == 'Open') || auth()->user()->can('editor'))
                                                                     <li><a class="dropdown-item edit-item-btn"
                                                                             target="_blank"
                                                                             href="{{ route('tubs.reports.edit', $item->id) }}"><i
@@ -198,9 +209,9 @@
                 </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-end">
+            {{-- <div class="d-flex justify-content-end">
                 {{ $data->links('pagination::bootstrap-5') }}
-            </div>
+            </div> --}}
         </div>
     </div><!-- end card -->
     </div>

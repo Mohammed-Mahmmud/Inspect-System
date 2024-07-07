@@ -81,10 +81,10 @@
 
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="remember_me"
+                                        <input class="form-check-input" type="checkbox" value="1" id="remember_me"
                                             name="remember">
                                         <label class="form-check-label"
-                                            for="auth-remember-check">{{ trans('Dashboard/login_trans.Remember me') }}
+                                            for="remember_me">{{ trans('Dashboard/login_trans.Remember me') }}
                                         </label>
                                     </div>
                                     <br>

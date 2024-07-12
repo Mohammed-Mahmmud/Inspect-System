@@ -63,6 +63,20 @@ return [
             ]) : [],
         ],
 
+        'mysql_online' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_ONLINE', 'server.missionservers.com'),
+            'port' => env('DB_PORT_ONLINE', '3306'),
+            'database' => env('DB_DATABASE_ONLINE', 'stceg_inspection_db'),
+            'username' => env('DB_USERNAME_ONLINE', 'stceg_khater'),
+            'password' => env('DB_PASSWORD_ONLINE', 'Aa@112233@aA'),
+            'unix_socket' => env('DB_SOCKET_ONLINE', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
@@ -125,7 +139,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

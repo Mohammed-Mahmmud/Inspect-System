@@ -47,7 +47,11 @@ Route::group(
             //            role-permission
             Route::resource('roles', RoleController::class)->names('dashboard.roles');
             //            end role-permission
-
+	
+	 // online database
+        Route::post('/sync-databases', [DatabaseSyncController::class, 'sync'])->name('sync.databases');
+        
+        
         });
     }
 );

@@ -12,7 +12,6 @@ class UpdateUserAction
     use ImageHelper;
     public function handle(User $user, array $data)
     {
-        // dd($data);
         $user->update(array_merge($data));
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
         isset($data['roles']) ? $user->assignRole($data['roles']) : '';

@@ -4,12 +4,14 @@ use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\JobTicketController;
 use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\Profile\RoleController;
 use App\Http\Controllers\Dashboard\Profile\UserController;
 use App\Http\Controllers\Dashboard\RigController;
-use App\Http\Controllers\Dashboard\Profile\RoleController;
+use App\Http\Controllers\DatabaseSyncController;
 use App\Http\Controllers\Report\Settings;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 
 
@@ -47,11 +49,9 @@ Route::group(
             //            role-permission
             Route::resource('roles', RoleController::class)->names('dashboard.roles');
             //            end role-permission
-	
-	 // online database
-        Route::post('/sync-databases', [DatabaseSyncController::class, 'sync'])->name('sync.databases');
-        
-        
+
+            // online database
+            Route::post('/sync-databases', [DatabaseSyncController::class, 'sync'])->name('sync.databases');
         });
     }
 );

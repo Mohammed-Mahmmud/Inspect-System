@@ -11,7 +11,7 @@ class DatabaseSyncController extends Controller
     {
         // Run the sync command
         Artisan::call('sync:databases');
-
+        $output = Artisan::output();
         return redirect()->back()->with('status', 'Database synchronization completed.');
     }
 }

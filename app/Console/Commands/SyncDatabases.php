@@ -27,6 +27,7 @@ class SyncDatabases extends Command
     public function __construct()
     {
         parent::__construct();
+        // dd('welcome');
     }
 
     /**
@@ -46,11 +47,10 @@ class SyncDatabases extends Command
     protected function syncAllTables()
     {
         // List of tables you want to sync
-        $tables = ['companies'];
+        $tables = ['company'];
 
         // Switch to local database
         DB::setDefaultConnection('mysql');
-
         foreach ($tables as $table) {
             $this->uploadLocalData($table);
             $this->pullOnlineData($table);

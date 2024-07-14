@@ -96,11 +96,13 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        // $user = User::FindOrFail($id);
-
         try {
-
-            User::FindOrFail($id)->update(['trash' => 1, 'status' => 'Not Active']);
+            $user = User::FindOrFail($id);
+            if (auth()->user()->hasRole('Owner')) {
+                $user->delete();
+            } else {
+                $user->update(['trash' => 1, 'status' => 'Not Active']);
+            }
             toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return back();
         } catch (Exception $e) {

@@ -34,6 +34,7 @@ class UserRequest extends FormRequest
             'password' => 'required',
             'status' => 'nullable',
             'roles' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
     }
     public function validationUpdate()
@@ -46,6 +47,8 @@ class UserRequest extends FormRequest
             'password' => ['nullable'],
             'status' => ['nullable'],
             'roles' => ['required'],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'trash' => 'nullable',
         ]);
     }
 }

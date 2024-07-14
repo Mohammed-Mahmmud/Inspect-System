@@ -20,7 +20,7 @@ class RigController extends Controller
     {
 
         try {
-            $rigs = Rig::orderBy('name', 'desc')->paginate('20');
+            $rigs = Rig::orderBy('id', 'desc')->paginate('20');
             $companies = Company::get();
             return view('dashboard.pages.rigs.view', compact('rigs', 'companies'));
         } catch (Exception $e) {

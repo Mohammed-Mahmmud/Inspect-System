@@ -20,7 +20,7 @@ class OrderController extends Controller
     public function index()
     {
         try {
-            $orders = Order::paginate('15');
+            $orders = Order::orderBy('id', 'desc')->paginate('15');
             $companies = Company::get();
             $rigs = Rig::get();
             return view('dashboard.pages.orders.view', compact('rigs', 'companies', 'orders'));

@@ -25,7 +25,7 @@ class ExaminationController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Examination::where(['type' => $request->type])->paginate('30')->withQueryString();
+            $data = Examination::orderBy('id', 'desc')->where(['type' => $request->type])->paginate('30')->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
             $pdfView = 'website.reports.pages.Lifting.Examination.examination';

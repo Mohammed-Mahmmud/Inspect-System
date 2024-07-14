@@ -23,7 +23,7 @@ class CompanyController extends Controller
     public function index()
     {
         try {
-            $companies = Company::paginate(15);
+            $companies = Company::orderBy('id', 'desc')->paginate(15);
             return view('dashboard.pages.companies.view', compact('companies'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

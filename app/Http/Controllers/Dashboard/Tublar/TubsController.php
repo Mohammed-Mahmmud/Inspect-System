@@ -25,7 +25,7 @@ class TubsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Tubs::where(['type' => $request->type])->paginate(30)->withQueryString();
+            $data = Tubs::orderBy('id', 'desc')->where(['type' => $request->type])->paginate(30)->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
             $orders = Order::get();

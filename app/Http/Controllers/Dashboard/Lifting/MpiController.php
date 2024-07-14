@@ -24,7 +24,7 @@ class MpiController extends Controller
     public function index()
     {
         try {
-            $data = Mpi::paginate('50');
+            $data = Mpi::orderBy('id', 'desc')->paginate('50');
             $data = $this->reportStatus($data);
             $orders = Order::get();
             $pdfView = 'website.reports.pages.Lifting.MPI.mpi';

@@ -26,7 +26,7 @@ class ToolsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Tools::where(['type' => $request->type])->paginate('30')->withQueryString();
+            $data = Tools::orderBy('id', 'desc')->where(['type' => $request->type])->paginate('30')->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
             $pdfView = 'website.reports.pages.Tublar.Tools.tools';

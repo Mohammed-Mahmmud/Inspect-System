@@ -24,9 +24,9 @@ class JobTicketController extends Controller
     {
         try {
             if (Auth::user()->can('editor')) {
-                $jobTickets = JobTicket::paginate('30');
+                $jobTickets = JobTicket::orderBy('id', 'desc')->paginate('30');
             } else {
-                $jobTickets = JobTicket::where('user_id', Auth::user()->id)->paginate('30');
+                $jobTickets = JobTicket::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->paginate('30');
             }
             $pdfView = 'website.reports.pages.jobTicket.jobTicket';
             return view('dashboard.pages.jobTicket.view', compact('jobTickets', 'pdfView'));

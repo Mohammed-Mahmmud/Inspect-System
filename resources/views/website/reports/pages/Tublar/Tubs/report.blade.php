@@ -3,11 +3,17 @@
 @section('style')
     <link rel="stylesheet" href="{{ public_path('dashboard/pages/tublar/tubs/css/frontStyle.css') }}">
 @endsection
+@section('customHeader')
+    <div>
+        {{ strtoupper($data->type) . ucwords(' subs Inspection Reports') }}
+        {{-- <img src="{{ public_path('dashboard/pages/tublar/tubs/' . $data->type . '.png') }}" height=20px> --}}
+    </div>
+@endsection
 @section('customHeader', 'Tublar Inspection Services')
 @section('reports')
     {{-- conent --}}
     <div class="center">
-        <b>{{ strtoupper($data->type) . ucwords(' subs Inspection Reports') }}</b><br>
+        {{-- <b>{{ strtoupper($data->type) . ucwords(' subs Inspection Reports') }}</b><br> --}}
         <img src="{{ public_path('dashboard/pages/tublar/tubs/' . $data->type . '.png') }}" height="30px"><br>
     </div>
     <table class="contentTable">
@@ -342,8 +348,13 @@
                     {{ $data->supervisor ?? '' }}
                 </td>
                 <td class="right">
-                    <b>{{ TranslationHelper::translate(ucwords('Inspector :')) }}
-                    </b>{{ $data->getUser->full_name ?? '' }}
+                    <div><b>{{ TranslationHelper::translate(ucwords('Inspector :')) }}
+                        </b>{{ $data->getUser->full_name ?? '' }}</div>
+                </td>
+                <td class="left">
+                    <div style="display: inline-block">
+                        <x-website.reports.layouts.signature :user="$data->getUser->id" height="20px" />
+                    </div>
                 </td>
             </tr>
         </tbody>

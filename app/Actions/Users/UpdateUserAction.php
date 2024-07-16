@@ -19,10 +19,7 @@ class UpdateUserAction
             if (!empty($user->getFirstMedia($user->name))) {
                 $user->clearMediaCollection($user->name);
             }
-
-            foreach ($data['image'] as $image) {
-                $this->StoreImage($image, $user, $user->name);
-            }
+            $this->StoreImage($data['image'], $user, $user->name);
         }
         toastr(trans('Dashboard/toastr.info'), 'info', trans('Dashboard/toastr.updated'));
         return $user;

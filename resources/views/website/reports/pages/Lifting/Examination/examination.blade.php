@@ -295,7 +295,16 @@
                 <td>NEXT EXAMINATION</td>
             </tr>
             <tr style=" width: 25% ;">
-                <td style=" height: 8%;">{{ $data->getUser->full_name }} <br>(LEEA)</td>
+                <td style=" height: 8%;">
+                    <div>
+                        <div>
+                            {{ $data->getUser->full_name }} <br>(LEEA)
+                        </div>
+                        <div>
+                            <x-website.reports.layouts.signature :user="$data->getUser->id" />
+                        </div>
+                    </div>
+                </td>
                 <td>Abbas Elshref<br>(Technical Manager)</td>
                 <td>&nbsp;</td>
                 <td>{{ $data->next_exam }}</td>
@@ -317,11 +326,11 @@
     </table>
 
     @if (isset($data->jobChecklist[0]->type))
-        <x-website.reports.vertical.layouts.footer>
-        </x-website.reports.vertical.layouts.footer>
+        <x-website.reports.layouts.vertical-footer>
+        </x-website.reports.layouts.vertical-footer>
         <div class="page_break">
-            <x-website.reports.vertical.layouts.header>
-            </x-website.reports.vertical.layouts.header>
+            <x-website.reports.layouts.vertical-header>
+            </x-website.reports.layouts.vertical-header>
             <div style="text-align: center;">
                 <b>CERTIFICATE OF THOROUGH EXAMINATION OF LIFTING EQUIPMENT</b><br>
                 <span style="font-size:12px;">

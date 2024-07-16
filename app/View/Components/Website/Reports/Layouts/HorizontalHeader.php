@@ -1,13 +1,14 @@
 <?php
 
-namespace App\View\Components\Website\Reports\Horizontal\Layouts;
+namespace App\View\Components\Website\Reports\Layouts;
 
-use App\Models\Report\ReportSettings;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\Report\ReportSettings;
 
-class Header extends Component
+
+class HorizontalHeader extends Component
 {
     /**
      * Create a new component instance.
@@ -25,6 +26,6 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.website.reports.horizontal.layouts.header');
+        return view('components.website.reports.layouts.horizontal-header');
     }
 }

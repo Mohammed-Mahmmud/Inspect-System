@@ -70,11 +70,10 @@
                                                             </td>
                                                             <td class="email">{{ $item->email }}</td>
                                                             <td class="image">
-                                                                {{-- {{ dd($item->getFirstMediaUrl($item->name)) }} --}}
-                                                                {{-- @if ($item->getFirstMediaUrl($item->name)) --}}
-                                                                <img src="{{ $item->getFirstMediaUrl($item->name) }}"
-                                                                    class="w-100 rounded object-cover" height="80">
-                                                                {{-- @endif --}}
+                                                                @if ($item->getFirstMediaUrl($item->name))
+                                                                    <img src="{{ $item->getFirstMediaUrl($item->name) }}"
+                                                                        class="w-100 rounded object-cover" height="80">
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex gap-2">

@@ -9,11 +9,11 @@
 
 <body>
     <!-- Begin page -->
-    <x-website.reports.vertical.layouts.header>
-    </x-website.reports.vertical.layouts.header>
+    <x-website.reports.layouts.vertical-header></x-website.reports.layouts.vertical-header>
+
     @yield('reports')
-    <x-website.reports.vertical.layouts.footer>
-    </x-website.reports.vertical.layouts.footer>
+    <x-website.reports.layouts.vertical-footer></x-website.reports.layouts.vertical-footer>
+
 
 </body>
 

@@ -159,6 +159,7 @@
                 <tr style="font-size:110%;">
                     <td class="left">
                         <b>Inspector:</b> {{ $data->getUser->full_name }}
+                        <x-website.reports.layouts.signature :user="$data->getUser->id" />
                     </td>
                     <td class="right">
                         <b>Date:</b> {{ $data->date }}

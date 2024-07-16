@@ -115,7 +115,7 @@
                                                             {{ $item->status }}
                                                         </span>
                                                     </td>
-                                                    <td class="customer_full_name">{{ $item->getUser->name }}</td>
+                                                    <td class="customer_full_name">{{ $item->getUser->full_name }}</td>
                                                     <td class="customer_full_name">{{ $item->serial }}</td>
                                                     @if ($item->acceptance == 1)
                                                         <td class="customer_full_name" style="color: green">Accepted</td>

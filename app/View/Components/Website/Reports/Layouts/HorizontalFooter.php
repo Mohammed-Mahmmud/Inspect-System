@@ -1,23 +1,21 @@
 <?php
 
-namespace App\View\Components\Website\Reports\Vertical\Layouts;
+namespace App\View\Components\Website\Reports\Layouts;
 
 use App\Models\Report\ReportSettings;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Header extends Component
+class HorizontalFooter extends Component
 {
     /**
      * Create a new component instance.
      */
     public $image;
-    public $header;
     public function __construct()
     {
-        $this->header = ReportSettings::pluck('value', 'key')->toArray();
-        $this->image = ReportSettings::where('key', 'headerImage')->get()->first()->getFirstMediaPath('headerImage');
+        $this->image = ReportSettings::where('key', 'footerImage')->first()->getFirstMediaPath('footerImage') ?? null;
     }
 
     /**
@@ -25,6 +23,6 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.website.reports.vertical.layouts.header');
+        return view('components.website.reports.layouts.horizontal-footer');
     }
 }

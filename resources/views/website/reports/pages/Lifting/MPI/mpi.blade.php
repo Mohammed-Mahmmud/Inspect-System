@@ -303,19 +303,20 @@ dd($data->photos->url);
 
 
 
-    <table class="info-table1 frameless-table" style="height: 20px;">
+    <table class="info-table1 frameless-table">
         <tbody>
             @if (isset($data->getDeCode($data->equipment)['other_name']))
-                <br><br>
+                <br>
             @endif
             <tr>
                 {{-- operator  --}}
                 <td style="width:auto; text-align:left">
                     <div><b>Inspector : </b> {{ $data->getUser->full_name }}</div>
-                    <br>
                     <div><b>Qualification : </b> ASNT II</div>
                     <br>
-                    <div><b>Signature : </b> {{ $data->getUser->full_name }}</div>
+                    <div>
+                        <x-website.reports.layouts.signature :user="$data->getUser->id" />
+                    </div>
                 </td>
 
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\View\Components\Website\Reports\Vertical\Layouts;
+namespace App\View\Components\Website\Reports\Layouts;
 
 use App\Models\Report\ReportSettings;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Footer extends Component
+class VerticalFooter extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class Footer extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.website.reports.vertical.layouts.footer',['image' => $this->image]);
+        return view('components.website.reports.layouts.vertical-footer');
     }
 }

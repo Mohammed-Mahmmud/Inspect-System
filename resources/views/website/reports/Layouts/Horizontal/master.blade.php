@@ -7,9 +7,9 @@
 
 <body>
     <!-- Begin page -->
-    <x-website.reports.horizontal.layouts.header/>
+    <x-website.reports.layouts.horizontal-header />
     @yield('reports')
-    <x-website.reports.horizontal.layouts.footer/>
+    <x-website.reports.layouts.horizontal-footer />
     @include('website.reports.Layouts.Vertical.scripts')
 
 </body>

@@ -80,7 +80,10 @@
                     <div><b>Customer Signuture : </b> </div>
                 </td>
                 <td class="left">
-                    <b>Inspector Signature : </b>{{ $data->getUser->full_name }}
+                    <div><b>Inspector Signature : </b>{{ $data->getUser->full_name }}</div>
+                    <div class="center">
+                        <x-website.reports.layouts.signature :user="$data->getUser->id" />
+                    </div>
                 </td>
 
             </tr>

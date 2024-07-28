@@ -39,5 +39,7 @@
     <link href="{{ asset('dashboard/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css">
     <!-- Bootstrap Css -->
 @endif
+{{-- sync Database --}}
+<link rel="stylesheet" href="{{ asset('dashboard/assets/css/syncDatabases.css') }}">
 @livewireStyles
 @yield('css')

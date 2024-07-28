@@ -21,7 +21,8 @@
  <script src="{{ asset('dashboard/assets/datatables/dataTables.min.js') }}"></script>
  <script src="{{ asset('dashboard/assets/datatables/tables.js') }}"></script>
 
-
+ {{-- sync Database --}}
+ <script src="{{ asset('dashboard') }}/assets/js/syncDatabases.js"></script>
 
  <script src="{{ asset('dashboard/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
  <script src="{{ asset('dashboard') }}/assets/js/plugins.js"></script>

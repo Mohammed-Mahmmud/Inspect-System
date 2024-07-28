@@ -31,16 +31,34 @@ class SyncDatabases extends Command
 
     protected function syncAllTables()
     {
-        $tables = [
-            'acceptance', 'checklist', 'company', 'failed_jobs', 'job_ticket', 'media',
-            'migrations', 'model_has_permissions', 'model_has_roles', 'mpi', 'mud_jar', 'orders', 'password_reset_tokens',
-            'permissions', 'personal_access_tokens', 'report_desc', 'report_settings', 'rig', 'roles', 'role_has_permissions',
-            'shakle_size', 'sidebar', 'thorough_examination', 'tools', 'tools_extensions', 'translation_keys', 'tublar_summary',
+        $pullTables = [
+            'acceptance', 'checklist', 'company',  'job_ticket', 'media',
+            'model_has_roles', 'mpi', 'mud_jar', 'orders',
+            'permissions', 'report_desc', 'report_settings', 'rig', 'roles', 'role_has_permissions',
+            'shakle_size', 'thorough_examination', 'tools', 'tools_extensions', 'tublar_summary',
             'tubs', 'tubs_summary', 'users'
         ];
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('Owner')) {
+            $uploadTables = [
+                'acceptance', 'checklist', 'company',  'job_ticket', 'media',
+                'model_has_roles', 'mpi', 'mud_jar', 'orders',
+                'permissions', 'report_desc', 'report_settings', 'rig', 'roles', 'role_has_permissions',
+                'shakle_size', 'thorough_examination', 'tools', 'tools_extensions', 'tublar_summary',
+                'tubs', 'tubs_summary', 'users'
+            ];
+        } else {
+            $uploadTables = [
+                'media', 'rig', 'orders', 'checklist', 'job_ticket', 'mpi', 'mud_jar',
+                'report_desc', 'shakle_size', 'thorough_examination', 'tools',
+                'tools_extensions', 'tublar_summary', 'tubs', 'tubs_summary'
+            ];
+        }
         DB::setDefaultConnection('mysql');
-        foreach ($tables as $table) {
+
+        foreach ($uploadTables as $table) {
             $this->uploadLocalData($table);
+        }
+        foreach ($pullTables as $table) {
             $this->pullOnlineData($table);
         }
         DB::setDefaultConnection('mysql');
@@ -49,25 +67,60 @@ class SyncDatabases extends Command
     protected function uploadLocalData($table)
     {
         DB::setDefaultConnection('mysql');
-        $localData = DB::table($table)->get();
+
+        // Fetch local data excluding the 'id' column
+        $localData = DB::table($table)->get()->map(function ($item) use ($table) {
+            $primaryKey = DB::getSchemaBuilder()->getColumnListing($table)[0];
+            return collect($item)->except($primaryKey);
+        });
+
         DB::setDefaultConnection('mysql_online');
+
         foreach ($localData as $data) {
-            $primaryKey = DB::table($table)->getConnection()->getSchemaBuilder()->getColumnListing($table)[0];
-            $exceptIdData = collect((array) $data)->except($primaryKey)->toArray();
-            DB::table($table)->updateOrInsert([$primaryKey => $data->{$primaryKey}], $exceptIdData);
+            try {
+                // Check if a record with the same unique key exists
+                $existingRecord = DB::table($table)->where($data->toArray())->first();
+                if ($existingRecord) {
+                    // Update existing record
+                    DB::table($table)->where($existingRecord->id)->update($data->toArray());
+                } else {
+                    // Insert new record
+                    DB::table($table)->insert($data->toArray());
+                }
+            } catch (\Exception $e) {
+                Log::error("Error during uploadLocalData for table $table: " . $e->getMessage());
+            }
         }
+
         DB::setDefaultConnection('mysql');
     }
 
     protected function pullOnlineData($table)
     {
         DB::setDefaultConnection('mysql_online');
-        $onlineData = DB::table($table)->get();
+
+        // Fetch online data excluding the 'id' column
+        $onlineData = DB::table($table)->get()->map(function ($item) use ($table) {
+            $primaryKey = DB::getSchemaBuilder()->getColumnListing($table)[0];
+            return collect($item)->except($primaryKey);
+        });
+
         DB::setDefaultConnection('mysql');
+
         foreach ($onlineData as $data) {
-            $primaryKey = DB::table($table)->getConnection()->getSchemaBuilder()->getColumnListing($table)[0];
-            $exceptIdData = collect((array) $data)->except($primaryKey)->toArray();
-            DB::table($table)->updateOrInsert([$primaryKey => $data->{$primaryKey}], $exceptIdData);
+            try {
+                // Check if a record with the same unique key exists
+                $existingRecord = DB::table($table)->where($data->toArray())->first();
+                if ($existingRecord) {
+                    // Update existing record
+                    DB::table($table)->where($existingRecord->id)->update($data->toArray());
+                } else {
+                    // Insert new record
+                    DB::table($table)->insert($data->toArray());
+                }
+            } catch (\Exception $e) {
+                Log::error("Error during pullOnlineData for table $table: " . $e->getMessage());
+            }
         }
     }
 }

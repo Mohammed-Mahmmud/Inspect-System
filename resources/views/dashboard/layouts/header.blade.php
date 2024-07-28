@@ -36,14 +36,17 @@
                         <span></span>
                     </span>
                 </button>
-
-                <form class="app-search d-none d-md-inline-flex">
+                <div class="app-search d-none d-md-inline-flex">
                     <div class="position-relative">
-                        <div>
-                            <form action="{{ route('sync.databases') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger">Sync Online</button>
-                            </form>
+                        <div class="status-sync-container">
+                            <div>
+                                <form action="{{ route('sync.databases') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" id="syncButton" class="btn btn-success hideBTN">Sync
+                                        Data</button>
+                                </form>
+                            </div>
+                            <div id="connectionStatus" class="status"></div>
                         </div>
                     </div>
                     <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
@@ -94,7 +97,8 @@
                                     class="ri-arrow-right-line ms-1"></i></a>
                         </div>
                     </div>
-                </form>
+                </div>
+
             </div>
 
             <div class="d-flex align-items-center">

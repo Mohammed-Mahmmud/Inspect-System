@@ -6,22 +6,22 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="{{ route('mainDashboard.index') }}" class="logo logo-dark">
+                    <a href="<?php echo e(route('mainDashboard.index')); ?>" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ asset('dashboard') }}/assets/images/logo-sm.png" alt="" height="22">
+                            <img src="<?php echo e(asset('dashboard')); ?>/assets/images/logo-sm.png" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('dashboard') }}/assets/images/logo-dark.png" alt=""
+                            <img src="<?php echo e(asset('dashboard')); ?>/assets/images/logo-dark.png" alt=""
                                 height="22">
                         </span>
                     </a>
 
-                    <a href="{{ route('mainDashboard.index') }}" class="logo logo-light">
+                    <a href="<?php echo e(route('mainDashboard.index')); ?>" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ asset('dashboard') }}/assets/images/logo-sm.png" alt="" height="22">
+                            <img src="<?php echo e(asset('dashboard')); ?>/assets/images/logo-sm.png" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('dashboard') }}/assets/images/logo-light.png" alt=""
+                            <img src="<?php echo e(asset('dashboard')); ?>/assets/images/logo-light.png" alt=""
                                 height="22">
                         </span>
                     </a>
@@ -40,8 +40,8 @@
                 <form class="app-search d-none d-md-inline-flex">
                     <div class="position-relative">
                         <div>
-                            <form action="{{ route('sync.databases') }}" method="POST">
-                                @csrf
+                            <form action="<?php echo e(route('sync.databases')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
                                 <button type="submit" class="btn btn-outline-danger">Sync Online</button>
                             </form>
                         </div>
@@ -227,7 +227,7 @@
                                                 <input id="customizer-theme01" name="data-theme" type="radio"
                                                     value="default" class="form-check-input">
                                                 <label class="form-check-label p-0" for="customizer-theme01">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/custom-theme/light-mode.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/light-mode.png"
                                                         alt="" class="img-fluid">
                                                 </label>
                                             </div>
@@ -238,7 +238,7 @@
                                                 <input id="customizer-theme02" name="data-theme" type="radio"
                                                     value="material" class="form-check-input">
                                                 <label class="form-check-label p-0" for="customizer-theme02">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/custom-theme/material.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/material.png"
                                                         alt="" class="img-fluid">
                                                 </label>
                                             </div>
@@ -249,7 +249,7 @@
                                                 <input id="customizer-theme03" name="data-theme" type="radio"
                                                     value="creative" class="form-check-input">
                                                 <label class="form-check-label p-0" for="customizer-theme03">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/custom-theme/creative.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/creative.png"
                                                         alt="" class="img-fluid">
                                                 </label>
                                             </div>
@@ -260,7 +260,7 @@
                                                 <input id="customizer-theme04" name="data-theme" type="radio"
                                                     value="minimal" class="form-check-input">
                                                 <label class="form-check-label p-0" for="customizer-theme04">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/custom-theme/minimal.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/minimal.png"
                                                         alt="" class="img-fluid">
                                                 </label>
                                             </div>
@@ -271,7 +271,7 @@
                                                 <input id="customizer-theme05" name="data-theme" type="radio"
                                                     value="modern" class="form-check-input">
                                                 <label class="form-check-label p-0" for="customizer-theme05">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/custom-theme/modern.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/modern.png"
                                                         alt="" class="img-fluid">
                                                 </label>
                                             </div>
@@ -283,7 +283,7 @@
                                                 <input id="customizer-theme06" name="data-theme" type="radio"
                                                     value="interaction" class="form-check-input">
                                                 <label class="form-check-label p-0" for="customizer-theme06">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/custom-theme/interaction.png"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/interaction.png"
                                                         alt="" class="img-fluid">
                                                 </label>
                                             </div>
@@ -302,7 +302,7 @@
                                                         name="data-bs-theme" id="layout-mode-light" value="light">
                                                     <label class="form-check-label p-0 bg-transparent"
                                                         for="layout-mode-light">
-                                                        <img src="{{ asset('dashboard') }}/assets/images/custom-theme/light-mode.png"
+                                                        <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/light-mode.png"
                                                             alt="" class="img-fluid">
                                                     </label>
                                                 </div>
@@ -315,7 +315,7 @@
                                                         name="data-bs-theme" id="layout-mode-dark" value="dark">
                                                     <label class="form-check-label p-0 bg-transparent"
                                                         for="layout-mode-dark">
-                                                        <img src="{{ asset('dashboard') }}/assets/images/custom-theme/dark-mode.png"
+                                                        <img src="<?php echo e(asset('dashboard')); ?>/assets/images/custom-theme/dark-mode.png"
                                                             alt="" class="img-fluid">
                                                     </label>
                                                 </div>
@@ -866,7 +866,7 @@
                                                     name="data-sidebar-image" id="sidebarimg-01" value="img-1">
                                                 <label class="form-check-label p-0 avatar-sm h-auto"
                                                     for="sidebarimg-01">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/sidebar/img-sm-1.jpg"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/sidebar/img-sm-1.jpg"
                                                         alt="" class="avatar-md w-auto object-cover">
                                                 </label>
                                             </div>
@@ -876,7 +876,7 @@
                                                     name="data-sidebar-image" id="sidebarimg-02" value="img-2">
                                                 <label class="form-check-label p-0 avatar-sm h-auto"
                                                     for="sidebarimg-02">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/sidebar/img-sm-2.jpg"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/sidebar/img-sm-2.jpg"
                                                         alt="" class="avatar-md w-auto object-cover">
                                                 </label>
                                             </div>
@@ -885,7 +885,7 @@
                                                     name="data-sidebar-image" id="sidebarimg-03" value="img-3">
                                                 <label class="form-check-label p-0 avatar-sm h-auto"
                                                     for="sidebarimg-03">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/sidebar/img-sm-3.jpg"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/sidebar/img-sm-3.jpg"
                                                         alt="" class="avatar-md w-auto object-cover">
                                                 </label>
                                             </div>
@@ -894,7 +894,7 @@
                                                     name="data-sidebar-image" id="sidebarimg-04" value="img-4">
                                                 <label class="form-check-label p-0 avatar-sm h-auto"
                                                     for="sidebarimg-04">
-                                                    <img src="{{ asset('dashboard') }}/assets/images/sidebar/img-sm-4.jpg"
+                                                    <img src="<?php echo e(asset('dashboard')); ?>/assets/images/sidebar/img-sm-4.jpg"
                                                         alt="" class="avatar-md w-auto object-cover">
                                                 </label>
                                             </div>
@@ -1000,37 +1000,38 @@
                 <div class="dropdown ms-1 topbar-head-dropdown header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if (App::getLocale() == 'ar')
-                            <img id="header-lang-imgs" src="{{ asset('dashboard') }}/assets/images/flags/ae.svg"
-                                alt="{{ App::getLocale() }} Header Page" height="20" class="rounded">
-                        @elseif (App::getLocale() == 'en')
-                            <img id="header-lang-imgs" src="{{ asset('dashboard') }}/assets/images/flags/us.svg"
-                                alt="{{ App::getLocale() }} Header Page" height="20" class="rounded">
-                        @else
-                            <img id="header-lang-imgs" src="{{ asset('dashboard') }}/assets/images/flags/us.svg"
-                                alt="{{ App::getLocale() }} Header Page" height="20" class="rounded">
-                        @endif
+                        <?php if(App::getLocale() == 'ar'): ?>
+                            <img id="header-lang-imgs" src="<?php echo e(asset('dashboard')); ?>/assets/images/flags/ae.svg"
+                                alt="<?php echo e(App::getLocale()); ?> Header Page" height="20" class="rounded">
+                        <?php elseif(App::getLocale() == 'en'): ?>
+                            <img id="header-lang-imgs" src="<?php echo e(asset('dashboard')); ?>/assets/images/flags/us.svg"
+                                alt="<?php echo e(App::getLocale()); ?> Header Page" height="20" class="rounded">
+                        <?php else: ?>
+                            <img id="header-lang-imgs" src="<?php echo e(asset('dashboard')); ?>/assets/images/flags/us.svg"
+                                alt="<?php echo e(App::getLocale()); ?> Header Page" height="20" class="rounded">
+                        <?php endif; ?>
                     </button>
 
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
-                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
-                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                @if ($properties['native'] == 'English')
+                        <?php $__currentLoopData = LaravelLocalization::getSupportedLocales(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $localeCode => $properties): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <a class="dropdown-item" rel="alternate" hreflang="<?php echo e($localeCode); ?>"
+                                href="<?php echo e(LaravelLocalization::getLocalizedURL($localeCode, null, [], true)); ?>">
+                                <?php if($properties['native'] == 'English'): ?>
                                     <i class="flag-icon flag-icon-us"></i>
                                     <img id="header-lang-imgs"
-                                        src="{{ asset('dashboard') }}/assets/images/flags/us.svg"
-                                        alt="{{ App::getLocale() }} Sub Header Page" height="20" class="rounded">
-                                @elseif($properties['native'] == 'العربية')
+                                        src="<?php echo e(asset('dashboard')); ?>/assets/images/flags/us.svg"
+                                        alt="<?php echo e(App::getLocale()); ?> Sub Header Page" height="20" class="rounded">
+                                <?php elseif($properties['native'] == 'العربية'): ?>
                                     <i class="flag-icon flag-icon-eg"></i>
                                     <img id="header-lang-imgs"
-                                        src="{{ asset('dashboard') }}/assets/images/flags/ae.svg"
-                                        alt="{{ App::getLocale() }} Sub Header Page" height="20" class="rounded">
-                                @endif
-                                {{ $properties['native'] }}
+                                        src="<?php echo e(asset('dashboard')); ?>/assets/images/flags/ae.svg"
+                                        alt="<?php echo e(App::getLocale()); ?> Sub Header Page" height="20" class="rounded">
+                                <?php endif; ?>
+                                <?php echo e($properties['native']); ?>
+
                             </a>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
 
@@ -1130,7 +1131,7 @@
                                     class="text-reset notification-item d-block dropdown-item position-relative unread-message">
                                     <div class="d-flex">
                                         <div class="position-relative me-3 flex-shrink-0">
-                                            <img src="{{ asset('dashboard') }}/assets/images/users/32/avatar-2.jpg"
+                                            <img src="<?php echo e(asset('dashboard')); ?>/assets/images/users/32/avatar-2.jpg"
                                                 class="rounded-circle avatar-xs" alt="user-pic">
                                             <span
                                                 class="active-badge position-absolute start-100 translate-middle p-1 bg-success rounded-circle">
@@ -1197,7 +1198,7 @@
                                     <div class="d-flex">
 
                                         <div class="position-relative me-3 flex-shrink-0">
-                                            <img src="{{ asset('dashboard') }}/assets/images/users/32/avatar-8.jpg"
+                                            <img src="<?php echo e(asset('dashboard')); ?>/assets/images/users/32/avatar-8.jpg"
                                                 class="rounded-circle avatar-xs" alt="user-pic">
                                             <span
                                                 class="active-badge position-absolute start-100 translate-middle p-1 bg-warning rounded-circle">
@@ -1244,27 +1245,27 @@
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
                             <img class="rounded-circle header-profile-user"
-                                src="{{ asset('dashboard') }}/assets/images/users/32/avatar-1.jpg"
+                                src="<?php echo e(asset('dashboard')); ?>/assets/images/users/32/avatar-1.jpg"
                                 alt="Header Avatar">
                             <span class="text-start ms-xl-2">
                                 <span
-                                    class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ Auth::user()->email }}</span>
+                                    class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo e(Auth::user()->email); ?></span>
                                 <span
-                                    class="d-none d-xl-block ms-1 fs-sm user-name-sub-text">{{ Auth::user()->name }}</span>
+                                    class="d-none d-xl-block ms-1 fs-sm user-name-sub-text"><?php echo e(Auth::user()->name); ?></span>
                             </span>
                         </span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
-                        <h6 class="dropdown-header">Welcome {{ Auth::user()->name }}!</h6>
+                        <h6 class="dropdown-header">Welcome <?php echo e(Auth::user()->name); ?>!</h6>
                         <a class="dropdown-item" href="pages-profile.html"><i
                                 class="mdi mdi-account-circle text-muted fs-lg align-middle me-1"></i> <span
                                 class="align-middle">Profile</span></a>
-                        {{--  <a class="dropdown-item" href="apps-chat.html"><i class="mdi mdi-message-text-outline text-muted fs-lg align-middle me-1"></i> <span class="align-middle">Messages</span></a>  --}}
-                        {{--  <a class="dropdown-item" href="apps-tickets-overview.html"><i class="mdi mdi-calendar-check-outline text-muted fs-lg align-middle me-1"></i> <span class="align-middle">Taskboard</span></a>  --}}
-                        {{--  <a class="dropdown-item" href="pages-faqs.html"><i class="mdi mdi-lifebuoy text-muted fs-lg align-middle me-1"></i> <span class="align-middle">Help</span></a>  --}}
+                        
+                        
+                        
                         <div class="dropdown-divider"></div>
-                        {{--  <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-lg align-middle me-1"></i> <span class="align-middle">Balance : <b>$8451.36</b></span></a>  --}}
+                        
                         <a class="dropdown-item" href="pages-profile-settings.html"><span
                                 class="badge bg-success-subtle text-success mt-1 float-end">New</span><i
                                 class="mdi mdi-cog-outline text-muted fs-lg align-middle me-1"></i> <span
@@ -1272,8 +1273,8 @@
                         <a class="dropdown-item" href="auth-lockscreen.html"><i
                                 class="mdi mdi-lock text-muted fs-lg align-middle me-1"></i> <span
                                 class="align-middle">Lock screen</span></a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                             <button class="btn" type="submit">
                                 <i class="mdi mdi-logout text-muted fs-lg align-middle me-1"></i>
                                 <span class="align-middle text-muted fs-lg align-middle me-1"
@@ -1345,3 +1346,4 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<?php /**PATH /home/mohamed-khater/Documents/projects/stc/inspection-system/resources/views/dashboard/layouts/header.blade.php ENDPATH**/ ?>

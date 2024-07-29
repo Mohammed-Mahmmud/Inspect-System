@@ -70,10 +70,11 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CompanyRequest $request, Company $company)
+    public function update(CompanyRequest $request, string $id)
     {
         try {
-            app(UpdateCompanyAction::class)->handle($company, $request->validationStore()->validated());
+            $company = Company::FindOrFail($id);
+            app(UpdateCompanyAction::class)->handle($company, $request->validationUpdate()->validated());
             return redirect()->route('company.index');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

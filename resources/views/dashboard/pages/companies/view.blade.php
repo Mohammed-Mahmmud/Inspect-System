@@ -44,7 +44,8 @@
                                                         {{ trans('Dashboard/company.email') }}</th>
                                                     <th data-sort="customer_password">
                                                         {{ trans('Dashboard/company.password') }}</th>
-                                                    {{-- <th  data-sort="action">{{ trans('Dashboard/company.location') }}</th> --}}
+                                                    <th>
+                                                        {{ TranslationHelper::translate(ucfirst('status')) }}</th>
                                                     <th data-sort="action">
                                                         {{ trans('Dashboard/company.action') }}</th>
                                                 </tr>
@@ -61,7 +62,12 @@
                                                         {{-- <td class="customer_full_name">{{$item->full_name}}</td> --}}
                                                         <td class="email">{{ $item->email }}</td>
                                                         <td class="customer_password">{{ $item->password }}</td>
-                                                        {{-- <td class="date">{{ $item->location }}</td> --}}
+                                                        <td>
+                                                            <span
+                                                                class="badge bg-pill @if ($item->status === 'Active') bg-success @else bg-danger @endif ">
+                                                                {{ $item->status }}
+                                                            </span>
+                                                        </td>
                                                         <td>
                                                             <div class="d-flex gap-2">
                                                                 <div class="edit">
@@ -126,8 +132,7 @@
                         </form>
                         {{-- end modal --}}
                     </div>
-                    </td>
-                    </tr>
+
                     {{-- update --}}
                     <form class="tablelist-form" action="{{ route('company.update', $item) }}" method="POST">
                         @csrf
@@ -142,10 +147,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                             id=""></button>
                                     </div>
-                                    <form class="tablelist-form" action="" method="">
+                                    <div class="tablelist-form">
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <div class="row">
+                                                <div class="row g-3">
                                                     <div class="col-6">
                                                         <label for="name"
                                                             class="form-label">{{ trans('Dashboard/company.name') }}</label>
@@ -178,12 +183,26 @@
                                                             value="{{ $item->password }}" required="">
                                                     </div>
 
-                                                    <div class="col-12">
+                                                    <div class="col-6">
                                                         <label for="location"
                                                             class="form-label">{{ trans('Dashboard/company.location') }}</label>
                                                         <input type="location" name="location" class="form-control"
                                                             placeholder=" {{ trans('Dashboard/company.location') }}"
                                                             value="{{ $item->location }}" required="">
+                                                    </div>
+                                                    <div class="col-xxl-2 col-sm-6">
+                                                        <label class="form-label">Choose
+                                                            Company Status</label>
+                                                        <select class="form-control" id="staus" data-choices=""
+                                                            data-choices-search-false="" data-choices-removeitem=""
+                                                            name="status">
+                                                            @foreach (App\Models\Dashboard\Company::STATUS as $status)
+                                                                <option value="{{ $status }}"
+                                                                    {{ $item->status == $status ? 'selected' : '' }}>
+                                                                    {{ ucfirst($status) }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,20 +214,26 @@
 
                                                     <button type="submit" class="btn btn-info"
                                                         id="add-btn">{{ trans('Dashboard/company.update_company') }}</button>
-                                    </form>
-                                    <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                                                </div>
+                                                <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
                     </form>
                     {{-- end update --}}
                     @endforeach
+                    </td>
+                    </tr>
                     </tbody>
                     </table>
                 </div>
 
-                <div class="d-flex justify-content-end">
+                {{-- <div class="d-flex justify-content-end">
                     {{ $companies->links('pagination::bootstrap-5') }}
-                </div>
+                </div> --}}
             </div>
         </div><!-- end card -->
     </div>
@@ -234,7 +259,7 @@
                     <form class="tablelist-form" action="" method="">
                         <div class="modal-body">
                             <div class="mb-3">
-                                <div class="row">
+                                <div class="row g-3">
                                     <div class="col-6">
                                         <label for="name"
                                             class="form-label">{{ trans('Dashboard/company.name') }}</label>
@@ -251,11 +276,23 @@
                             </div>
                             <div class="mb-3">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <label for="location"
                                             class="form-label">{{ trans('Dashboard/company.location') }}</label>
                                         <input type="location" name="location" class="form-control"
                                             placeholder=" {{ trans('Dashboard/company.location') }}" required="">
+                                    </div>
+                                    <div class="col-xxl-2 col-sm-6">
+                                        <label class="form-label">Choose
+                                            Company Status</label>
+                                        <select class="form-control" id="staus" data-choices=""
+                                            data-choices-search-false="" data-choices-removeitem="" name="status">
+                                            @foreach (App\Models\Dashboard\Company::STATUS as $status)
+                                                <option value="{{ $status }}">
+                                                    {{ ucfirst($status) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +305,6 @@
                                 <button type="submit" class="btn btn-success"
                                     id="add-btn">{{ trans('Dashboard/company.create_company') }}</button>
                     </form>
-                    <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
                 </div>
             </div>
     </form>

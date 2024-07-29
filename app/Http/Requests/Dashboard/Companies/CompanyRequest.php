@@ -36,17 +36,19 @@ class CompanyRequest extends FormRequest
             'email' => 'required|email|unique:company',
             'password' => ['nullable'],
             'location' => ['nullable'],
+            'status' => ['nullable'],
         ]);
     }
     public function validationUpdate()
     {
         $request = Request();
         return Validator::make($request->all(), [
-            'name' => 'required|unique:company',
+            'name' => 'required',
             'full_name' => ['nullable'],
-            'email' => 'required|email|unique:company',
+            'email' => 'required',
             'password' => ['required'],
             'location' => ['nullable'],
+            'status' => ['nullable'],
         ]);
     }
 }

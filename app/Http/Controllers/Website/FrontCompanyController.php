@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class FrontCompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('website.company.view');
+        dd('welcome');
+        // return view('website.company.view');
+        return view('website.auth.login');
     }
 
     /**
@@ -20,7 +22,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        dd('welcome');
     }
 
     /**
@@ -28,15 +30,15 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('welcome');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        //
+        dd('front company controller');
     }
 
     /**
@@ -44,7 +46,7 @@ class CompanyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        dd('welcome');
     }
 
     /**
@@ -52,7 +54,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd('welcome');
     }
 
     /**
@@ -60,6 +62,6 @@ class CompanyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd('welcome');
     }
 }

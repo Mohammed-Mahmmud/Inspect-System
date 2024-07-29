@@ -31,6 +31,7 @@ class SyncDatabases extends Command
 
     protected function syncAllTables()
     {
+        $user = auth()->user();
         $pullTables = [
             'acceptance', 'checklist', 'company',  'job_ticket', 'media',
             'model_has_roles', 'mpi', 'mud_jar', 'orders',
@@ -38,7 +39,7 @@ class SyncDatabases extends Command
             'shakle_size', 'thorough_examination', 'tools', 'tools_extensions', 'tublar_summary',
             'tubs', 'tubs_summary', 'users'
         ];
-        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('Owner')) {
+        if ($user->hasRole('admin') || $user->hasRole('Owner')) {
             $uploadTables = [
                 'acceptance', 'checklist', 'company',  'job_ticket', 'media',
                 'model_has_roles', 'mpi', 'mud_jar', 'orders',

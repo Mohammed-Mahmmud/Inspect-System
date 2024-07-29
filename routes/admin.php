@@ -23,7 +23,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
     [
-        'prefix' => LaravelLocalization::setLocale(),
+        'prefix' => LaravelLocalization::setLocale() . '/' . env("PANEL"),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
@@ -31,7 +31,7 @@ Route::group(
         require __DIR__ . '/auth.php';
 
         Route::redirect("register", "login"); //Dashboard Routes
-        Route::prefix(env("PANEL"))->middleware('auth')->group(function () {
+        Route::middleware('auth')->group(function () {
 
             require __DIR__ . '/report.php';
             Route::resource('/', DashboardController::class)->names('mainDashboard');

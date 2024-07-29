@@ -2,21 +2,23 @@
 
 namespace App\Models\Dashboard;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Company extends Authenticatable
 {
-    use HasFactory;
-    protected $table = 'company';
-    protected $guarded = [];
-    public $timestamps = true;
+	use HasFactory;
 
-    public static function generateRandomPassword($length)
+	protected $table = 'company';
+	protected $guarded = [];
+	public $timestamps = true;
+	const STATUS = ['Active', 'Not Active'];
+	public static function generateRandomPassword($length)
 	{
 		$numbers = '0123456789';
 		$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-		$charts= '!@#$%_^&*+=-?/';
+		$charts = '!@#$%_^&*+=-?/';
 		$randString = '';
 		for ($i = 0; $i < $length / 2; $i++) {
 			$randString .= $characters[rand(0, strlen($characters) - 1)];
@@ -30,5 +32,4 @@ class Company extends Model
 
 		return $randString;
 	}
-
 }

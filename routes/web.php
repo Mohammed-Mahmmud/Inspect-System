@@ -32,10 +32,15 @@ use Illuminate\Support\Facades\Route;
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-Route::redirect('/', '/login');
+// Route::redirect('/', '/login');
 // Route::middleware(['auth' => 'client'])->group(function () {
 
 Route::get('login', [FrontLoginController::class, 'create']);
 Route::post('login', [FrontLoginController::class, 'store'])->name('frontend.login');
-Route::post('/companies', [FrontCompanyController::class, 'show'])->name('frontend.company');
-// });
+Route::group(
+    ['middleware' => ['auth:client']],
+    function () {
+        // Route::get('/', [FrontCompanyController::class, 'show'])->name('frontend.company');
+        Route::post('/{id?}', [FrontCompanyController::class, 'show'])->middleware('auth:company')->name('frontend.company');
+    }
+);

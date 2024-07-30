@@ -32,4 +32,7 @@ class Company extends Authenticatable
 
 		return $randString;
 	}
+	protected $hidden = [
+		'password', 'remember_token',
+	];
 }

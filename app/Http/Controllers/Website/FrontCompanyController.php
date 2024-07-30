@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Dashboard\Company;
 
 class FrontCompanyController extends Controller
 {
@@ -36,9 +37,17 @@ class FrontCompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id)
+    public function show(Request $request)
     {
-        dd('front company controller');
+        dd($request);
+        // if (!isset($request->company)) {
+        //     return redirect('/login')->withErrors(['company' => 'The provided credentials do not match our records.']);
+        // }
+        $company = Company::where([
+            'name' => $request->company,
+            'status' => 'Active'
+        ])->first();
+        return view('website.company.view', ['company' => $company]);
     }
 
     /**

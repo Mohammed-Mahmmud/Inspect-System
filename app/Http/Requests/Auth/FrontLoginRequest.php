@@ -30,24 +30,17 @@ class FrontLoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $credentials = $this->only('email', 'password');
+        $company = Company::where([
+            'email' => $credentials['email'],
+            'password' => $credentials['password'],
+            'status' => 'Active'
+        ])->first();
 
-        if (Company::where('email', $credentials['email'])->exists()) {
-            if (Company::where('email', $credentials['email'])->value('password') === $credentials['password']) {
-
-                $company = Company::where(['email' => $credentials['email'], 'password' => $credentials['password']])->first();
-                if ($company->status == 'Active') {
-                    // dd($company->id);
-                    return redirect()->route('frontend.company', ['company' => $company]);
-                } else {
-                    return redirect()->back()->with(['email' => trans('auth.failed')]);
-                }
-            }
-        } else {
-            RateLimiter::hit($this->throttleKey());
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
-        }
+        RateLimiter::hit($this->throttleKey());
+        throw ValidationException::withMessages([
+            'email' => trans('auth.failed'),
+        ]);
+        // }
     }
 
     public function ensureIsNotRateLimited(): void

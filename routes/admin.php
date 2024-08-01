@@ -29,7 +29,6 @@ Route::group(
     function () {
 
         require __DIR__ . '/auth.php';
-
         Route::redirect("register", "login"); //Dashboard Routes
         Route::middleware('auth')->group(function () {
 

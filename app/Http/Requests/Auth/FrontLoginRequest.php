@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Models\Dashboard\Company;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -25,22 +25,28 @@ class FrontLoginRequest extends FormRequest
         ];
     }
 
-    public function authenticate()
+    public function authenticate($guard = 'web')
     {
         $this->ensureIsNotRateLimited();
 
         $credentials = $this->only('email', 'password');
-        $company = Company::where([
-            'email' => $credentials['email'],
-            'password' => $credentials['password'],
-            'status' => 'Active'
-        ])->first();
+        if (auth()->guard($guard)->attempt($credentials, $this->boolean('remember'))) {
+            $client = auth()->guard($guard)->user();
+            if ($client && $client->status !== 'Active') {
+                auth()->guard($guard)->logout();
+                RateLimiter::hit($this->throttleKey());
 
-        RateLimiter::hit($this->throttleKey());
-        throw ValidationException::withMessages([
-            'email' => trans('auth.failed'),
-        ]);
-        // }
+                throw ValidationException::withMessages([
+                    'email' => 'Your account is not active.',
+                ]);
+            }
+            RateLimiter::clear($this->throttleKey());
+        } else {
+            RateLimiter::hit($this->throttleKey());
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
     }
 
     public function ensureIsNotRateLimited(): void

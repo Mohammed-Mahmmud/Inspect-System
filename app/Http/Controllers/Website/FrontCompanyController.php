@@ -39,7 +39,7 @@ class FrontCompanyController extends Controller
      */
     public function show(Request $request)
     {
-        dd($request);
+        dd('welcome to show method');
         // if (!isset($request->company)) {
         //     return redirect('/login')->withErrors(['company' => 'The provided credentials do not match our records.']);
         // }

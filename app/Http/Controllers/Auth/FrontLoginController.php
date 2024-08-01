@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\FrontLoginRequest;
-use App\Models\Dashboard\Company;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class FrontLoginController extends Controller
 {
-    protected $redirectTo = '/';
+    protected $redirectTo = '/client';
     /**
      * Display the login view.
      */
@@ -26,29 +26,9 @@ class FrontLoginController extends Controller
      */
     public function store(FrontLoginRequest $request)
     {
-        // // $request->authenticate();
-        // $company = Company::where([
-        //     'email' => $request->email,
-        //     'password' => $request->password,
-        //     'status' => 'Active'
-        // ])->first();
-        // $request->session()->regenerate();
-        // if (!is_null($company)) {
-        //     return redirect()->route('frontend.company', ['company' => $company->name]);
-        // } else {
-        //     return redirect('/login')->withErrors(['email' => 'The provided credentials do not match our records.']);
-        // }
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
-
-        if (Auth::guard('client')->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'Active'], $request->remember)) {
-            dd('company');
-            return redirect()->intended(route('frontend.company'));
-        }
-
-        return back()->withInput($request->only('email', 'remember'));
+        $request->authenticate('client');
+        $request->session()->regenerate();
+        return redirect()->route('frontend.company');        // $this->validate($request, [
     }
     /**
      * Destroy an authenticated session.
@@ -61,6 +41,6 @@ class FrontLoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('frontend.login');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

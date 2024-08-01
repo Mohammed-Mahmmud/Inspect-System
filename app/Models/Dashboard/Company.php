@@ -2,16 +2,20 @@
 
 namespace App\Models\Dashboard;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class Company extends Authenticatable
 {
-	use HasFactory;
+	use HasFactory, HasApiTokens, Notifiable, HasRoles;
 
 	protected $table = 'company';
 	protected $guarded = [];
-	public $timestamps = true;
+	public    $timestamps = true;
 	const STATUS = ['Active', 'Not Active'];
 	public static function generateRandomPassword($length)
 	{
@@ -32,6 +36,16 @@ class Company extends Authenticatable
 		return $randString;
 	}
 	protected $hidden = [
-		'password', 'remember_token',
+		'password',
+		'remember_token',
+	];
+
+	/**
+	 * The attributes that should be cast.
+	 *
+	 * @var array<string, string>
+	 */
+	protected $casts = [
+		'email_verified_at' => 'datetime',
 	];
 }

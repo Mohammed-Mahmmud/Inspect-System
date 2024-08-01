@@ -61,7 +61,7 @@
                                                         <td class="customer_name">{{ $item->name }}</td>
                                                         {{-- <td class="customer_full_name">{{$item->full_name}}</td> --}}
                                                         <td class="email">{{ $item->email }}</td>
-                                                        <td class="customer_password">{{ $item->password }}</td>
+                                                        <td class="customer_password">{{ $item->pass }}</td>
                                                         <td>
                                                             <span
                                                                 class="badge bg-pill @if ($item->status === 'Active') bg-success @else bg-danger @endif ">

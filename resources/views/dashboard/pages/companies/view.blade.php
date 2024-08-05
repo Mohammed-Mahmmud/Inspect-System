@@ -180,7 +180,7 @@
                                                             class="form-label">{{ trans('Dashboard/company.password') }}</label>
                                                         <input type="password" name="password" class="form-control"
                                                             placeholder=" {{ trans('Dashboard/company.placeholderPassword') }}"
-                                                            value="{{ $item->password }}" required="">
+                                                            value="{{ $item->pass }}" required="">
                                                     </div>
 
                                                     <div class="col-6">

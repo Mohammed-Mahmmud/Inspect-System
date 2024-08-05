@@ -99,13 +99,13 @@
                                             @endphp
                                             @foreach ($data as $item)
                                                 <tr>
-                                                    <th scope="row">
+                                                    <td scope="row">
                                                         <div class="form-check">
                                                             <input class="form-check-input chk_child" type="checkbox"
                                                                 id="chk_child_{{ $item->id }}" name="chk_child[]"
                                                                 value="{{ $item->id }}">
                                                         </div>
-                                                    </th>
+                                                    </td>
                                                     <td class="id">{{ $i++ }}</td>
                                                     <td class="customer_full_name">{{ $item->report_number }}</td>
                                                     <td class="customer_full_name">{{ $item->date }}</td>

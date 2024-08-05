@@ -7,10 +7,9 @@
 body {
     font-family: Helvetica;
     -webkit-font-smoothing: antialiased;
-    /* position: absolute; */
-    /* Ensure the body is positioned relative for the pseudo-element */
     overflow: hidden;
-    /* Prevent scrollbars if the pseudo-element extends outside the body */
+    margin: 0;
+    /* Ensure no margin on the body */
 }
 
 body::before {
@@ -23,10 +22,8 @@ body::before {
     background-image: url("/website/assets/pages/company/background.webp");
     background-size: cover;
     background-position: center;
-    filter: blur(5px);
-    /* Adjust the blur value as needed */
+    filter: blur(4px);
     z-index: -1;
-    /* Ensure the pseudo-element is behind the content of the body */
 }
 
 h1 {
@@ -34,16 +31,28 @@ h1 {
     font-size: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: white;
-
+    color: white !important;
     padding: 30px 0;
 }
 
 /* Table Styles */
+.table {
+    background-color: #f7f7f9;
+    border-radius: 5px;
+    margin: 0 auto;
+    /* Center the table horizontally */
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 70, 0.2);
+}
 
 .table-wrapper {
-    margin: 10px 70px 70px;
-    box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.808);
+    width: 100%;
+    /* Ensure the wrapper takes full width */
+    overflow-x: auto;
+    /* Allow horizontal scrolling if needed */
+    box-shadow: 0px 35px 50px rgb(0, 0, 0);
+    padding: 10px 0;
+    /* Added padding to ensure spacing */
 }
 
 .fl-table {
@@ -56,6 +65,8 @@ h1 {
     max-width: 100%;
     white-space: nowrap;
     background-color: white;
+    text-align: center;
+    color: black;
 }
 
 .fl-table td,
@@ -84,7 +95,6 @@ h1 {
 }
 
 /* Responsive */
-
 @media (max-width: 767px) {
     .fl-table {
         display: block;

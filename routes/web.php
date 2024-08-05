@@ -23,10 +23,11 @@ Route::middleware('guest:client')->group(function () {
     Route::get('login', [FrontLoginController::class, 'create']);
     Route::post('login', [FrontLoginController::class, 'store'])->name('frontend.login');
 });
+Route::middleware('auth:client')->post('logout', [FrontLoginController::class, 'destroy'])->name('frontend.logout');
 
 Route::prefix('client')
     ->name('frontend.')
     ->middleware('isClient')
     ->group(function () {
-        Route::get('/', [FrontCompanyController::class, 'show'])->name('company');
+        Route::get('/', [FrontCompanyController::class, 'index'])->name('company');
     });

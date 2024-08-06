@@ -190,6 +190,21 @@
                                                             placeholder=" {{ trans('Dashboard/company.location') }}"
                                                             value="{{ $item->location }}" required="">
                                                     </div>
+                                                    <br>
+                                                    {{-- <div class="col-6">
+                                                        <label class="form-label">Choose
+                                                            company role</label>
+                                                        <select class="form-control" id="companyRole" data-choices=""
+                                                            data-choices-search-false="" data-choices-removeitem=""
+                                                            name="roles">
+                                                            @foreach ($roles as $role)
+                                                                <option value="{{ $role->name }}"
+                                                                    {{ $item->roles->pluck('name')->contains($role->name) ? 'selected' : '' }}>
+                                                                    {{ ucfirst($role->name) }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div> --}}
                                                     <div class="col-xxl-2 col-sm-6">
                                                         <label class="form-label">Choose
                                                             Company Status</label>
@@ -281,7 +296,18 @@
                                             class="form-label">{{ trans('Dashboard/company.location') }}</label>
                                         <input type="location" name="location" class="form-control"
                                             placeholder=" {{ trans('Dashboard/company.location') }}" required="">
-                                    </div>
+                                    </div><br>
+                                    {{-- <div class="col-xxl-2 col-sm-6">
+                                        <label class="form-label">Choose company role</label>
+                                        <select class="form-control" id="companyRole" data-choices=""
+                                            data-choices-search-false="" data-choices-removeitem="" name="roles">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->name }}">
+                                                    {{ ucfirst($role->name) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div> --}}
                                     <div class="col-xxl-2 col-sm-6">
                                         <label class="form-label">Choose
                                             Company Status</label>

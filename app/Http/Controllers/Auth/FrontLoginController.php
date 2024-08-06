@@ -28,7 +28,7 @@ class FrontLoginController extends Controller
     {
         $request->authenticate('client');
         $request->session()->regenerate();
-        return redirect()->route('frontend.company');        // $this->validate($request, [
+        return redirect(RouteServiceProvider::HOME);        // $this->validate($request, [
     }
     /**
      * Destroy an authenticated session.

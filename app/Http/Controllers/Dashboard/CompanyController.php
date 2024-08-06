@@ -10,6 +10,7 @@ use App\Models\Dashboard\Company;
 use App\Models\Dashboard\Order;
 use App\Models\Dashboard\Rig;
 use Exception;
+use Spatie\Permission\Models\Role;
 
 class CompanyController extends Controller
 {
@@ -23,8 +24,9 @@ class CompanyController extends Controller
     public function index()
     {
         try {
-            $companies = Company::orderBy('id', 'desc')->paginate(15);
-            return view('dashboard.pages.companies.view', compact('companies'));
+            $roles = Role::get();
+            $companies = Company::orderBy('id', 'desc')->get();
+            return view('dashboard.pages.companies.view', compact('companies', 'roles'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

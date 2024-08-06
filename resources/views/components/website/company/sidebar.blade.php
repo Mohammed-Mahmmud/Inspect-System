@@ -20,11 +20,60 @@
             <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav" style="font-weight: bold;">
                 <li class="menu-title"><span data-key="t-menu">{{ ucfirst('reports') }}</span></li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('mpi') }}</a>
-                </li>
+                <ul class="nav nav-sm flex-column">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('mpi reports') }}</a>
+                    </li>
+                </ul>
 
-                {{-- @foreach ($parent as $item)
+                <li class="menu-title"><span data-key="t-menu">{{ ucfirst('lifting') }}</span></li>
+                <ul class="nav nav-sm flex-column">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('wire reports') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('shakle reports') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"
+                            data-key="t-detached">{{ ucwords('throught examination reports') }}</a>
+                    </li>
+                </ul>
+
+                <li class="menu-title"><span data-key="t-menu">{{ ucfirst('Tublar') }}</span></li>
+                <ul class="nav nav-sm flex-column">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('tools reports') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('mud reports') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('jar reports') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"
+                            data-key="t-detached">{{ ucwords('drill pipe reports') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"
+                            data-key="t-detached">{{ ucwords('drill collar reports') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"
+                            data-key="t-detached">{{ ucwords('heavy weight reports') }}</a>
+                    </li>
+                </ul>
+
+                <li class="menu-title"><span data-key="t-menu">{{ ucfirst('job ticket') }}</span></li>
+                <ul class="nav nav-sm flex-column">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="t-detached">{{ ucwords('jobticket') }}</a>
+                    </li>
+                </ul>
+                <br>
+            </ul>
+            {{-- @foreach ($parent as $item)
                 <link rel="stylesheet" href="{{ asset('dashboard/layouts/components/sidebar/css/style.css') }}">
                 <li class="nav-item">
                     @if (!empty($item->route))

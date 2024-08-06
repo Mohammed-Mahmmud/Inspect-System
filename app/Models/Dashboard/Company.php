@@ -2,16 +2,17 @@
 
 namespace App\Models\Dashboard;
 
+use App\Models\Dashboard\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class Company extends Authenticatable
 {
-	use HasFactory, HasApiTokens, Notifiable, HasRoles;
+	use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
 	protected $table = 'company';
 	protected $guarded = [];
@@ -40,6 +41,10 @@ class Company extends Authenticatable
 		'remember_token',
 	];
 
+	public function orders()
+	{
+		return $this->hasMany(Order::class, 'company_id');
+	}
 	/**
 	 * The attributes that should be cast.
 	 *

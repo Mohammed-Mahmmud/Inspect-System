@@ -17,7 +17,7 @@ class Sidebar extends Component
         $client = auth()->guard('client')->user();
         $orders = Order::where('company_id', $client->id)->get();
         foreach ($orders as $order) {
-            // dd($order->mpis);
+            // dd($client->orders->first()->mpis);
         }
 
         // dd(!empty($orders->tubs->toArray()));

@@ -38,7 +38,7 @@ class PermissionController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:permissions,name',
         ]);
-        Permission::create(['name' => $request->input('name'), 'guard_name' => 'web']);
+        Permission::create(['name' => $request->input('name')]);
         return redirect()->route('dashboard.roles.index')
             ->with('success', 'Role created successfully');
     }
@@ -64,7 +64,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $permission = Permission::find($id)->update(['name' => $request->input('name'), 'guard_name' => 'web']);
+        $permission = Permission::find($id)->update(['name' => $request->input('name')]);
         return redirect()->route('dashboard.roles.index')
             ->with('success', 'Role updated successfully');
     }

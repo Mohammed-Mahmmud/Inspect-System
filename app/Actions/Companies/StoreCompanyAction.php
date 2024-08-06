@@ -17,7 +17,6 @@ class StoreCompanyAction
             'pass' => $password,
             'password' => Hash::make($password),
         ]));
-
         toastr(trans('Dashboard/toastr.succes'));
         return $company;
     }

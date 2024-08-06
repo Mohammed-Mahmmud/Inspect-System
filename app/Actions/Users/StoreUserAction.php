@@ -11,7 +11,6 @@ class StoreUserAction
     use ImageHelper;
     public function handle(array $data)
     {
-        // dd($data);
         $user = User::create(array_merge($data));
         if (isset($data['image'])) {
             foreach ($data['image'] as $image) {

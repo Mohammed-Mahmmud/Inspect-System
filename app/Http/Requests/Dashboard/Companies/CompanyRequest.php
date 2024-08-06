@@ -37,6 +37,7 @@ class CompanyRequest extends FormRequest
             'password' => ['nullable'],
             'location' => ['nullable'],
             'status' => ['nullable'],
+            'roles' => ['required'],
         ]);
     }
     public function validationUpdate()
@@ -49,6 +50,7 @@ class CompanyRequest extends FormRequest
             'password' => ['required'],
             'location' => ['nullable'],
             'status' => ['nullable'],
+            'roles' => ['required'],
         ]);
     }
 }

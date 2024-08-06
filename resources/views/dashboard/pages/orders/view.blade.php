@@ -55,7 +55,7 @@
                                     <x-dashboard.layouts.error-verify
                                         errors="{{ $errors }}"></x-dashboard.layouts.error-verify>
                                     <div class="table">
-                                        <table class="table align-middle mb-0" id="table_id">
+                                        <table class="table align-middle mb-0 table_id">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th class="sort" data-sort="customer_id">#</th>

@@ -29,5 +29,5 @@ Route::prefix('client')
     ->name('frontend.')
     ->middleware('isClient')
     ->group(function () {
-        Route::get('/', [FrontCompanyController::class, 'index'])->name('company');
+        Route::resource('/', FrontCompanyController::class)->names('company');
     });

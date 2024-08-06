@@ -18,7 +18,7 @@ class Settings extends Controller
     {
 
         try {
-            $settings = ReportSettings::orderBy('id', 'desc')->paginate('20');
+            $settings = ReportSettings::orderBy('id', 'desc')->get();
             return view('dashboard.pages.settings.view', compact('settings'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

@@ -2,12 +2,18 @@
 
 namespace App\Models\Dashboard;
 
-use App\Models\User;
-use App\Models\Dashboard\Rig;
 use App\Models\Dashboard\Company;
+use App\Models\Dashboard\JobTicket;
+use App\Models\Dashboard\Lifting\Examination;
+use App\Models\Dashboard\Lifting\Mpi;
 use App\Models\Dashboard\ReportType;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Dashboard\Rig;
+use App\Models\Dashboard\Tublar\MudJar\MudJar;
+use App\Models\Dashboard\Tublar\Tools\Tools;
+use App\Models\Dashboard\Tublar\Tubs\Tubs;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
@@ -42,10 +48,7 @@ class Order extends Model
     {
         return $this->belongsTo(Rig::class, 'rig_id');
     }
-    // public function ReportType()
-    // {
-    //     return $this->belongsTo(ReportType::class, 'report_id');
-    // }
+
     public function userStatus($id)
     {
         $user = User::where('id', $id)->first();
@@ -54,5 +57,31 @@ class Order extends Model
             return $user->name . " ( Deleted )";
         }
         return $user->name;
+    }
+
+    // reports data
+    public function mpis()
+    {
+        return $this->hasMany(Mpi::class, 'order_id');
+    }
+    public function examinations()
+    {
+        return $this->hasMany(Examination::class, 'order_id');
+    }
+    public function mudjars()
+    {
+        return $this->hasMany(MudJar::class, 'order_id');
+    }
+    public function tools()
+    {
+        return $this->hasMany(Tools::class, 'order_id');
+    }
+    public function tubs()
+    {
+        return $this->hasMany(Tubs::class, 'order_id');
+    }
+    public function jobtickets()
+    {
+        return $this->hasMany(JobTicket::class, 'order_id');
     }
 }

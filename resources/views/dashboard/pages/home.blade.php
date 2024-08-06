@@ -233,7 +233,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table align-middle mb-0">
+                                    <table class="table align-middle mb-0 table_id">
                                         <thead class="table-active">
                                             <tr>
                                                 <th class="sort cursor-pointer" data-sort="browsers">

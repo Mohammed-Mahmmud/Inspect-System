@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\JobTicketController;
 use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\Profile\PermissionController;
 use App\Http\Controllers\Dashboard\Profile\RoleController;
 use App\Http\Controllers\Dashboard\Profile\UserController;
 use App\Http\Controllers\Dashboard\RigController;
@@ -47,6 +48,7 @@ Route::group(
 
             //            role-permission
             Route::resource('roles', RoleController::class)->names('dashboard.roles');
+            Route::resource('permissions', PermissionController::class)->names('dashboard.permissions');
             //            end role-permission
 
             // online database

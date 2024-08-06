@@ -42,7 +42,7 @@
                                     <x-dashboard.layouts.error-verify
                                         errors="{{ $errors }}"></x-dashboard.error-verify>
                                         <div class="table-responsive">
-                                            <table class="table align-middle mb-0">
+                                            <table class="table align-middle mb-0 table_id">
                                                 <thead class="table-dark">
                                                     <tr>
                                                         <th scope="col" style="width: 50px;">

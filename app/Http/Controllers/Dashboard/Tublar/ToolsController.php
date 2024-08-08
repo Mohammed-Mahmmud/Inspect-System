@@ -29,7 +29,7 @@ class ToolsController extends Controller
             $data = Tools::orderBy('id', 'desc')->where(['type' => $request->type])->paginate('30')->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
-            $pdfView = 'website.reports.pages.Tublar.Tools.tools';
+            $pdfView = $data::PDFVIEW;
             $orders = Order::get();
             return view('dashboard.pages.tublar.tools.view', compact('data', 'orders', 'type', 'pdfView'));
         } catch (Exception $e) {
@@ -72,7 +72,7 @@ class ToolsController extends Controller
     {
         try {
             $data = Tools::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('data'))->setPaper('a4', 'landscape');
+            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
             return $pdf->stream($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -137,7 +137,7 @@ class ToolsController extends Controller
     {
         try {
             $data = Tools::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tools.tools', compact('data'))->setPaper('a4', 'landscape');
+            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
             return $pdf->download($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

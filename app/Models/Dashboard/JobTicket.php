@@ -12,7 +12,8 @@ class JobTicket extends Model
     protected $table = 'job_ticket';
     protected $guarded = [];
     public $timestamps = true;
-
+    const PDFVIEW = 'website.reports.pages.jobTicket.jobTicket';
+    const PDFPAPER = 'portrait';
     public function getDesc()
     {
         return $this->morphMany(ReportDescription::class, 'model');

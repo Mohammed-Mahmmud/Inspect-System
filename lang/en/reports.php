@@ -336,4 +336,13 @@
   'Swl' => 'Swl',
   'Create New Permission' => 'Create New Permission',
   'New Permission' => 'New Permission',
+  'serial' => 'Serial',
+  'rig' => 'Rig',
+  'date' => 'Date',
+  'report number' => 'Report number',
+  'viewjobTicket' => 'ViewjobTicket',
+  'jobTicket' => 'JobTicket',
+  'ECDC' => 'ECDC',
+  'Egyptian Chinese Development Company' => 'Egyptian Chinese Development Company',
+  'ECDC@stc-eg.com' => 'ECDC@stc-eg.com',
 );

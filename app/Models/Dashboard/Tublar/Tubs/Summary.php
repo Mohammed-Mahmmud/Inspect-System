@@ -17,6 +17,8 @@ class Summary extends Model
     protected $table = 'tubs_summary';
     protected $guarded = [];
     public $timestamps = true;
+    const PDFVIEW = 'website.reports.pages.Tublar.Tubs.summary';
+    const PDFPAPER = 'landscape';
     public function getDesc()
     {
         return $this->morphMany(ReportDescription::class, 'model');

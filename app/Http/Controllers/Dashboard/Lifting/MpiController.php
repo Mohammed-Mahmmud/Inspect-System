@@ -68,13 +68,6 @@ class MpiController extends Controller
 
     public function show(string $id)
     {
-        try {
-            $data = Mpi::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('data'));
-            return $pdf->stream($data->report_number . '.pdf');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
     }
 
     /**
@@ -127,18 +120,6 @@ class MpiController extends Controller
             $mpi->delete();
             toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return redirect()->route('mpi.reports.index');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-    public function download(string $id = null)
-    {
-        try {
-            if (isset($id)) {
-                $data = Mpi::FindOrFail($id);
-                $pdf = PDF::loadView('website.reports.pages.Lifting.MPI.mpi', compact('data'));
-                return $pdf->download($data->report_number . '.pdf');
-            }
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

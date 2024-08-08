@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dashboard\Lifting\Mpi;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -15,9 +16,34 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $model;
+    public function __constract($model)
+    {
+        $this->model = $model;
+    }
     public function index()
     {
         return view('dashboard.pages.home');
+    }
+    public function show(Request $request)
+    {
+        try {
+            $data = $request->model::FindOrFail($request->id);
+            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
+            return $pdf->stream($data->report_number . '.pdf');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+    public function download(Request $request)
+    {
+        try {
+            $data = $request->model::FindOrFail($request->id);
+            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
+            return $pdf->download($data->report_number . '.pdf');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
     /**
      * Show the form for creating a new resource.

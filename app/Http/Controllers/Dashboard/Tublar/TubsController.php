@@ -29,7 +29,7 @@ class TubsController extends Controller
             $data = $this->reportStatus($data);
             $type = $request->type;
             $orders = Order::get();
-            $pdfView = 'website.reports.pages.Tublar.Tubs.report';
+            $pdfView = $data::PDFVIEW;
             return view('dashboard.pages.tublar.tubs.view', compact('data', 'orders', 'type', 'pdfView'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -69,7 +69,7 @@ class TubsController extends Controller
     {
         try {
             $data = Tubs::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.report', compact('data'))->setPaper('a4', 'landscape');
+            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
             return $pdf->stream($data->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -133,7 +133,7 @@ class TubsController extends Controller
     {
         try {
             $data = Tubs::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Tublar.Tubs.report', compact('data'))->setPaper('a4', 'landscape');
+            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
             return $pdf->download($data->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

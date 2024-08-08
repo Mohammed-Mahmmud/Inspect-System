@@ -67,15 +67,9 @@ class ExaminationController extends Controller
      * Display the specified resource.
      */
 
-    public function show($id)
+    public function show()
     {
-        try {
-            $data = Examination::FindOrFail($id);
-            $pdf = PDF::loadView('website.reports.pages.Lifting.Examination.examination', compact('data'));
-            return $pdf->stream($data->report_number . '.pdf');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+        //
     }
 
     /**
@@ -133,12 +127,5 @@ class ExaminationController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-    }
-
-    public function download($id)
-    {
-        $data = Examination::FindOrFail($id);
-        $pdf = PDF::loadView('website.reports.pages.Lifting.Examination.examination', compact('data'));
-        return $pdf->download($data->report_number . '.pdf');
     }
 }

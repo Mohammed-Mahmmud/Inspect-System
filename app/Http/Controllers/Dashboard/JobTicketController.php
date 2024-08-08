@@ -69,7 +69,7 @@ class JobTicketController extends Controller
     public function show(string $id)
     {
         $data = JobTicket::FindOrFail($id);
-        $pdf = PDF::loadView('website.reports.pages.jobTicket.jobTicket', compact('data'));
+        $pdf = PDF::loadView($data::PDFVIEW, compact('data'));
         return $pdf->stream('JobTicket.pdf');
     }
 
@@ -121,7 +121,7 @@ class JobTicketController extends Controller
     public function download(string $id)
     {
         $data = JobTicket::FindOrFail($id);
-        $pdf = PDF::loadView('website.reports.pages.jobTicket.jobTicket', compact('data'));
+        $pdf = PDF::loadView($data::PDFVIEW, compact('data'));
 
         return $pdf->download('JobTicket.pdf');
     }

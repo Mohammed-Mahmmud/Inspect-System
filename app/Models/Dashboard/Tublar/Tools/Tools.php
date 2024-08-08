@@ -15,7 +15,8 @@ class Tools extends Model
     protected $table = 'tools';
     protected $guarded = [];
     public $timestamps = true;
-
+    const PDFVIEW = 'website.reports.pages.Tublar.Tools.tools';
+    const PDFPAPER = 'landscape';
     public function getDesc()
     {
         return $this->morphMany(ReportDescription::class, 'model');

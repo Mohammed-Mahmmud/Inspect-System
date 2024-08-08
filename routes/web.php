@@ -25,9 +25,10 @@ Route::middleware('guest:client')->group(function () {
 });
 Route::middleware('auth:client')->post('logout', [FrontLoginController::class, 'destroy'])->name('frontend.logout');
 
-Route::prefix('client')
-    ->name('frontend.')
+Route::name('frontend.')
     ->middleware('isClient')
     ->group(function () {
-        Route::resource('/', FrontCompanyController::class)->names('company');
+        Route::resource('/client', FrontCompanyController::class)->names('client');
+        Route::get('/show/{id}', [FrontCompanyController::class, 'show'])->name('report.view');
+        Route::get('/download/{id}', [FrontCompanyController::class, 'download'])->name('report.download');
     });

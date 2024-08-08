@@ -14,13 +14,16 @@ use Illuminate\Support\Facades\Route;
 Route::name('reports.')->prefix('Reports')->group(
     function () {
         Route::post('Delete-All', [DashboardController::class, 'deleteAll'])->name('deleteAll');
-        Route::post('Download-All', [DashboardController::class, 'downloadAll'])->name('downloadAll');
+        Route::withoutMiddleware('auth')->group(function () {
+            Route::post('Show', [DashboardController::class, 'show'])->name('show');
+            Route::post('Download', [DashboardController::class, 'download'])->name('download');
+            Route::post('Download-All', [DashboardController::class, 'downloadAll'])->name('downloadAll');
+        });
         Route::post('Submit-Job', [DashboardController::class, 'submitAll'])->name('submitAll');
     }
 );
 // lifting reports 1)MPI
 Route::name('mpi.')->prefix('MPI')->group(function () {
-    Route::get('Download/{id}', [MpiController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [MpiController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Reports', MpiController::class)->names('reports');
 });

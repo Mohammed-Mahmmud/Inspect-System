@@ -16,7 +16,8 @@ class MudJar extends Model
     protected $table = 'mud_jar';
     protected $guarded = [];
     public $timestamps = true;
-
+    const PDFVIEW = 'website.reports.pages.Tublar.MudJar.mudjar';
+    const PDFPAPER = 'portrait';
     public function getDesc()
     {
         return $this->morphMany(ReportDescription::class, 'model');

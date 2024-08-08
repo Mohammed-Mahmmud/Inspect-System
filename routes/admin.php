@@ -44,7 +44,6 @@ Route::group(
             });
             Route::resource('settings', Settings::class)->names('report_settings');
             Route::resource('JobTicketNumber', OrderController::class)->names('order');
-            // Route::resource('checklists', CheckListController::class)->names('checklist');
 
             //            role-permission
             Route::resource('roles', RoleController::class)->names('dashboard.roles');

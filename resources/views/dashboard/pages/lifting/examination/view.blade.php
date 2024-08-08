@@ -32,8 +32,8 @@
                                             </div>
                                         @endif
                                         <div class="col-sm-auto">
-                                            <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')" :model="$data"
-                                                :pdfView='$pdfView'></x-dashboard.layouts.download-selected>
+                                            <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')"
+                                                :model="$data"></x-dashboard.layouts.download-selected>
                                         </div>
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.submit :model="$data"

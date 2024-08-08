@@ -42,8 +42,8 @@
                                                 :model="$data"></x-dashboard.layouts.delete-selected>
                                         </div>
                                         <div class="col-sm-auto">
-                                            <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')" :model="$data"
-                                                :pdfView='$pdfView'></x-dashboard.layouts.download-selected>
+                                            <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')"
+                                                :model="$data"></x-dashboard.layouts.download-selected>
                                         </div>
                                         <div class="col-sm-auto">
                                             <x-dashboard.layouts.submit :model="$data"
@@ -132,10 +132,20 @@
                                                                 <i class="bi bi-three-dots-vertical"></i>
                                                             </button>
                                                             <ul class="dropdown-menu dropdown-menu-end">
-                                                                <li><a class="dropdown-item" target="_blank"
-                                                                        href="{{ route('tubs.reports.show', $item->id) }}"><i
-                                                                            class="ph-eye align-middle me-1"></i>
-                                                                        View</a></li>
+                                                                <li>
+                                                                    <form action="{{ route('reports.show') }}"
+                                                                        method="POST" target="_blank">
+                                                                        @csrf
+                                                                        <input type="hidden" name="model"
+                                                                            value="{{ get_class($item) }}">
+                                                                        <input type="hidden" name="id"
+                                                                            value="{{ $item->id }}">
+                                                                        <button type="submit" class="dropdown-item">
+                                                                            <i class="ph-eye align-middle me-1"></i>
+                                                                            View
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
                                                                 <li><a class="dropdown-item" target="_blank"
                                                                         href="{{ route('tubs.reports.repeat', $item->id) }}"><i
                                                                             class=" bx bx-repeat me-1"></i>
@@ -152,11 +162,21 @@
                                                                                 class="ph-trash align-middle me-1"></i>
                                                                             Remove</a></li>
                                                                 @endif
-                                                                <li><a class="dropdown-item download-item-btn"
-                                                                        target="_blank"
-                                                                        href="{{ route('tubs.reports.download', $item->id) }}"><i
-                                                                            class="bx bx-download align-middle me-1"></i>
-                                                                        Download</a></li>
+                                                                <li>
+                                                                    <form action="{{ route('reports.download') }}"
+                                                                        method="POST" target="_blank">
+                                                                        @csrf
+                                                                        <input type="hidden" name="model"
+                                                                            value="{{ get_class($item) }}">
+                                                                        <input type="hidden" name="id"
+                                                                            value="{{ $item->id }}">
+                                                                        <button type="submit" class="dropdown-item">
+                                                                            <i
+                                                                                class="bx bx-download align-middle me-1"></i>
+                                                                            Download
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
                                                             </ul>
                                                             <!-- Modal -->
                                                             <form action="{{ route('tubs.reports.destroy', $item->id) }}"

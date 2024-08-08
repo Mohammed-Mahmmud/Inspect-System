@@ -24,11 +24,11 @@ class MpiController extends Controller
     public function index()
     {
         try {
-            $data = Mpi::orderBy('id', 'desc')->paginate('50');
+            $data = Mpi::orderBy('id', 'desc')->get();
             $data = $this->reportStatus($data);
             $orders = Order::get();
-            $pdfView = 'website.reports.pages.Lifting.MPI.mpi';
-            return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders', 'pdfView'));
+
+            return view('dashboard.pages.lifting.mpi.view', compact('data', 'orders'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

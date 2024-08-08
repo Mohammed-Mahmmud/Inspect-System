@@ -35,8 +35,8 @@
                                         </div>
                                     @endif
                                     <div class="col-sm-auto">
-                                        <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')" :model="$jobTickets"
-                                            :pdfView='$pdfView'></x-dashboard.layouts.download-selected>
+                                        <x-dashboard.layouts.download-selected :route="route('reports.downloadAll')"
+                                            :model="$jobTickets"></x-dashboard.layouts.download-selected>
                                     </div>
                                 </div>
                             </div><!-- end card header -->
@@ -111,10 +111,20 @@
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                                    <li><a class="dropdown-item" target="_blank"
-                                                                            href="{{ route('jobTicket.show', $item->id) }}"><i
-                                                                                class="ph-eye align-middle me-1"></i>
-                                                                            View</a></li>
+                                                                    <li>
+                                                                        <form action="{{ route('reports.show') }}"
+                                                                            method="POST" target="_blank">
+                                                                            @csrf
+                                                                            <input type="hidden" name="model"
+                                                                                value="{{ get_class($item) }}">
+                                                                            <input type="hidden" name="id"
+                                                                                value="{{ $item->id }}">
+                                                                            <button type="submit" class="dropdown-item">
+                                                                                <i class="ph-eye align-middle me-1"></i>
+                                                                                View
+                                                                            </button>
+                                                                        </form>
+                                                                    </li>
                                                                     @if (auth()->user()->id == $item->user_id || auth()->user()->can('editor'))
                                                                         <li><a class="dropdown-item edit-item-btn"
                                                                                 target="_blank"
@@ -127,19 +137,30 @@
                                                                                     class="ph-trash align-middle me-1"></i>
                                                                                 Remove</a></li>
                                                                     @endif
-                                                                    <li><a class="dropdown-item download-item-btn"
-                                                                            target="_blank"
-                                                                            href="{{ route('jobTicket.download', $item->id) }}"><i
-                                                                                class="bx bx-download align-middle me-1"></i>
-                                                                            Download</a></li>
+                                                                    <li>
+                                                                        <form action="{{ route('reports.download') }}"
+                                                                            method="POST" target="_blank">
+                                                                            @csrf
+                                                                            <input type="hidden" name="model"
+                                                                                value="{{ get_class($item) }}">
+                                                                            <input type="hidden" name="id"
+                                                                                value="{{ $item->id }}">
+                                                                            <button type="submit" class="dropdown-item">
+                                                                                <i
+                                                                                    class="bx bx-download align-middle me-1"></i>
+                                                                                Download
+                                                                            </button>
+                                                                        </form>
+                                                                    </li>
                                                                 </ul>
                                                                 <!-- Modal -->
                                                                 <form action="{{ route('jobTicket.destroy', $item->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <div class="modal fade" id="delete{{ $item->id }}"
-                                                                        tabindex="-1" role="dialog"
+                                                                    <div class="modal fade"
+                                                                        id="delete{{ $item->id }}" tabindex="-1"
+                                                                        role="dialog"
                                                                         aria-labelledby="exampleModalCenterTitle"
                                                                         aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered"
@@ -160,7 +181,7 @@
                                                                                 <div class="modal-body">
                                                                                     {{ trans('Dashboard/jobTicket.delete_message') .
                                                                                         '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
                                                                                         $item->name }}
                                                                                 </div>
                                                                                 <div class="modal-footer">
@@ -189,9 +210,6 @@
                                     </table>
                                 </div>
 
-                                <div class="d-flex justify-content-end">
-                                    {{ $jobTickets->links('pagination::bootstrap-5') }}
-                                </div>
                             </div>
                         </div><!-- end card -->
                     </div>

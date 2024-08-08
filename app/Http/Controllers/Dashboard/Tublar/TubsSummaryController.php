@@ -24,12 +24,14 @@ class TubsSummaryController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Summary::orderBy('id', 'desc')->where(['type' => $request->type])->paginate(30)->withQueryString();
+            $data = Summary::orderBy('id', 'desc')
+                ->where(['type' => $request->type])
+                ->paginate(50)
+                ->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
-            $pdfView = $data::PDFVIEW;
             $orders = Order::get();
-            return view('dashboard.pages.tublar.tubs.summary.view', compact('data', 'orders', 'type', 'pdfView'));
+            return view('dashboard.pages.tublar.tubs.summary.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -66,13 +68,7 @@ class TubsSummaryController extends Controller
 
     public function show(string $id)
     {
-        try {
-            $data = Summary::FindOrFail($id);
-            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
-            return $pdf->stream($data->report_number  . '.pdf');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+        //
     }
 
     /**
@@ -123,17 +119,6 @@ class TubsSummaryController extends Controller
             $data = Summary::FindOrFail($id);
             app(DeleteSummaryAction::class)->handle($data);
             return redirect()->route('tubs.summary.index', ['type' => $data->type]);
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
-    public function download($id)
-    {
-        try {
-            $data = Summary::FindOrFail($id);
-            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
-            return $pdf->download($data->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

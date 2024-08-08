@@ -25,12 +25,14 @@ class MudJarController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = MudJar::where(['type' => $request->type])->paginate('30')->withQueryString();
+            $data = MudJar::where(['type' => $request->type])
+                ->paginate(50)
+                ->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
-            $pdfView = $data::PDFVIEW;
+
             $orders = Order::get();
-            return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type', 'pdfView'));
+            return view('dashboard.pages.tublar.mud-jar.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -69,13 +71,7 @@ class MudJarController extends Controller
 
     public function show($id)
     {
-        try {
-            $data = MudJar::FindOrFail($id);
-            $pdf = PDF::loadView($data::PDFVIEW, compact('data'));
-            return $pdf->stream($data->report_number . '.pdf');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+        //
     }
 
     /**
@@ -129,17 +125,6 @@ class MudJarController extends Controller
             $mudjar->delete();
             toastr(trans('Dashboard/toastr.destroy'), 'error', trans('Dashboard/toastr.deleted'));
             return redirect()->route('mud-jar.reports.index', ['type' => $type]);
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
-    public function download($id)
-    {
-        try {
-            $data = MudJar::FindOrFail($id);
-            $pdf = PDF::loadView($data::PDFVIEW, compact('data'));
-            return $pdf->download($data->report_number . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

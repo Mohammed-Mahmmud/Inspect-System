@@ -16,11 +16,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    protected $model;
-    public function __constract($model)
-    {
-        $this->model = $model;
-    }
+
     public function index()
     {
         return view('dashboard.pages.home');
@@ -85,9 +81,8 @@ class DashboardController extends Controller
 
                             // Retrieve the model instance
                             $data = $request->model::FindOrFail($id);
-
                             // Load the PDF view with the model data
-                            $pdf = PDF::loadView($request->pdfView, compact('data'));
+                            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
 
                             // Define the file name
                             $fileName = $data->report_number

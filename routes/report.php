@@ -30,7 +30,6 @@ Route::name('mpi.')->prefix('MPI')->group(function () {
 
 // Examination
 Route::name('examination.')->prefix('Thorough-Examination')->group(function () {
-    Route::get('Download/{id}', [ExaminationController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [ExaminationController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Shakle-Size', ShakleSizeController::class)->names('shaklesize');
     Route::resource('Reports', ExaminationController::class)->names('reports');
@@ -38,21 +37,18 @@ Route::name('examination.')->prefix('Thorough-Examination')->group(function () {
 
 //   mud jar
 Route::name('mud-jar.')->prefix('Mud-Jar')->group(function () {
-    Route::get('Download/{id}', [MudJarController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [MudJarController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Reports', MudJarController::class)->names('reports');
 });
 
 // tools (pin*pin || box*pin || box*box)
 Route::name('tools.')->prefix('Tools')->group(function () {
-    Route::get('Download/{id}', [ToolsController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [ToolsController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Reports', ToolsController::class)->names('reports');
 });
 
 //Tubs (heavy-weight + drill collar + Drill pipe)
 Route::name('tubs.')->prefix('Tubs')->group(function () {
-    Route::get('Download/{id}', [TubsController::class, 'download'])->name('reports.download');
     Route::get('Repeat/{id}', [TubsController::class, 'repeat'])->name('reports.repeat');
     Route::resource('Reports', TubsController::class)->names('reports');
     //     summary reports

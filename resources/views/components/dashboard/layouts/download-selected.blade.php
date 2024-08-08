@@ -8,7 +8,6 @@
                 @csrf
                 <input class="checkedData" type='hidden' name="data">
                 <input type='hidden' name="model" value="{{ $model }}">
-                <input type='hidden' name="pdfView" value="{{ $pdfView }}">
                 <div class="modal-body text-center p-5">
                     <i class=" bx bxs-cloud-download text-primary display-1"></i>
                     <div class="mt-4">

@@ -25,12 +25,14 @@ class ExaminationController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Examination::orderBy('id', 'desc')->where(['type' => $request->type])->paginate('30')->withQueryString();
+            $data = Examination::orderBy('id', 'desc')
+                ->where(['type' => $request->type])
+                ->paginate(50)
+                ->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
-            $pdfView = 'website.reports.pages.Lifting.Examination.examination';
             $orders = Order::get();
-            return view('dashboard.pages.lifting.examination.view', compact('data', 'orders', 'type', 'pdfView'));
+            return view('dashboard.pages.lifting.examination.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

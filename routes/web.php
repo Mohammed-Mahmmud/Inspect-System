@@ -29,6 +29,4 @@ Route::name('frontend.')
     ->middleware('isClient')
     ->group(function () {
         Route::resource('/client', FrontCompanyController::class)->names('client');
-        Route::get('/show/{id}', [FrontCompanyController::class, 'show'])->name('report.view');
-        Route::get('/download/{id}', [FrontCompanyController::class, 'download'])->name('report.download');
     });

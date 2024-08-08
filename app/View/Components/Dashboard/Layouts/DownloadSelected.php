@@ -12,13 +12,10 @@ class DownloadSelected extends Component
      * Create a new component instance.
      */
     public $route, $model, $pdfView;
-    public function __construct($route = null, $pdfView = null, $model = null)
+    public function __construct($route = null, $model = null)
     {
-        $this->pdfView = $pdfView;
         $this->route = $route ?? abort(404);
         $this->model = $model->first() ? get_class($model->first()) : redirect()->back();
-        // $this->model = $model->first() ? $model->first()->getTable() : redirect()->back();
-
     }
 
     /**

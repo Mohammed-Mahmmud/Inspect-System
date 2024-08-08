@@ -25,12 +25,15 @@ class TubsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = Tubs::orderBy('id', 'desc')->where(['type' => $request->type])->paginate(30)->withQueryString();
+            $data = Tubs::orderBy('id', 'desc')
+                ->where(['type' => $request->type])
+                ->paginate(50)
+                ->withQueryString();
             $data = $this->reportStatus($data);
             $type = $request->type;
             $orders = Order::get();
-            $pdfView = $data::PDFVIEW;
-            return view('dashboard.pages.tublar.tubs.view', compact('data', 'orders', 'type', 'pdfView'));
+
+            return view('dashboard.pages.tublar.tubs.view', compact('data', 'orders', 'type'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -67,13 +70,7 @@ class TubsController extends Controller
 
     public function show(string $id)
     {
-        try {
-            $data = Tubs::FindOrFail($id);
-            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
-            return $pdf->stream($data->report_number  . '.pdf');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+        //
     }
 
     /**
@@ -124,17 +121,6 @@ class TubsController extends Controller
             $tubs = Tubs::FindOrFail($id);
             app(DeleteTubsAction::class)->handle($tubs);
             return redirect()->route('tubs.reports.index', ['type' => $tubs->type]);
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
-    public function download($id)
-    {
-        try {
-            $data = Tubs::FindOrFail($id);
-            $pdf = PDF::loadView($data::PDFVIEW, compact('data'))->setPaper('a4', $data::PDFPAPER);
-            return $pdf->download($data->report_number  . '.pdf');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

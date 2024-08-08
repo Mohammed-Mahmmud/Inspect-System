@@ -24,12 +24,11 @@ class JobTicketController extends Controller
     {
         try {
             if (Auth::user()->can('editor')) {
-                $jobTickets = JobTicket::orderBy('id', 'desc')->paginate('30');
+                $jobTickets = JobTicket::orderBy('id', 'desc')->get();
             } else {
-                $jobTickets = JobTicket::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->paginate('30');
+                $jobTickets = JobTicket::orderBy('id', 'desc')->where('user_id', Auth::user()->id)->get();
             }
-            $pdfView = 'website.reports.pages.jobTicket.jobTicket';
-            return view('dashboard.pages.jobTicket.view', compact('jobTickets', 'pdfView'));
+            return view('dashboard.pages.jobTicket.view', compact('jobTickets'));
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
